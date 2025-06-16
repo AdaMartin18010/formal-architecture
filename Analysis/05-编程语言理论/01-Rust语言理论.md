@@ -28,6 +28,7 @@ Rust语言是一个七元组 $\mathcal{R} = (\mathcal{T}, \mathcal{O}, \mathcal{
 
 **公理 1.1.1 (Rust语言公理)**
 对于任意Rust程序 $P$：
+
 1. $\forall t \in \mathcal{T} \cdot \text{TypeSafe}(t)$
 2. $\forall o \in \mathcal{O} \cdot \text{OwnershipSafe}(o)$
 3. $\forall b \in \mathcal{B} \cdot \text{BorrowSafe}(b)$
@@ -95,6 +96,7 @@ $$\text{TypeSafe}(P) \Leftrightarrow \forall e \in P \cdot \exists \tau \cdot \e
 
 **公理 1.3.1 (所有权公理)**
 对于任意所有权 $\text{Own}(v, t, l)$：
+
 1. 每个值只有一个所有者
 2. 当所有者离开作用域时，值被释放
 3. 所有权可以转移但不能共享
@@ -131,6 +133,7 @@ $$\text{Transfer}(v_1, v_2) \Leftrightarrow \text{Own}(v_1, t, l) \land \text{Mo
 
 **公理 1.4.1 (借用公理)**
 对于任意借用 $\text{Borrow}(v, t, l, m)$：
+
 1. 借用不能超过所有者的生命周期
 2. 同时只能有一个可变借用或多个不可变借用
 3. 可变借用和不可变借用不能同时存在
@@ -166,6 +169,7 @@ $$\text{BorrowCheck}(P) = \forall \text{Borrow}(v, t, l, m) \in P \cdot \text{Va
 
 **公理 1.5.1 (生命周期公理)**
 对于任意生命周期 $\text{Lifetime}(l, s, e)$：
+
 1. $s \leq e$
 2. 生命周期是静态确定的
 3. 生命周期不能超过其引用的生命周期
@@ -203,6 +207,7 @@ Rust并发模型是一个四元组 $\mathcal{CM} = (\mathcal{T}, \mathcal{S}, \m
 
 **公理 1.6.1 (并发公理)**
 对于任意并发程序：
+
 1. 线程间通过消息传递通信
 2. 共享状态通过同步机制保护
 3. 不存在数据竞争
@@ -240,6 +245,7 @@ $$\text{MemorySafe}(P) \Leftrightarrow \neg \text{UseAfterFree}(P) \land \neg \t
 
 **公理 1.7.1 (内存安全公理)**
 对于任意内存安全程序：
+
 1. 不会访问已释放的内存
 2. 不会重复释放同一块内存
 3. 不会解引用空指针
@@ -426,4 +432,4 @@ fn check_immutable_borrow_rule(checker: &BorrowChecker) -> bool {
 2. Jung, R., et al. (2018). Iris from the ground up: A modular foundation for higher-order concurrent separation logic. *Journal of Functional Programming*, 28, e20.
 3. Jung, R., et al. (2017). The future is ours: Prophecy variables in separation logic. *Proceedings of the 43rd Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages*, 123-136.
 4. Reed, E. (2015). Patina: A formalization of the Rust programming language. *University of Washington Technical Report*, UW-CSE-15-03-02.
-5. The Rust Programming Language. (2021). *The Rust Reference*. https://doc.rust-lang.org/reference/ 
+5. The Rust Programming Language. (2021). *The Rust Reference*. <https://doc.rust-lang.org/reference/>
