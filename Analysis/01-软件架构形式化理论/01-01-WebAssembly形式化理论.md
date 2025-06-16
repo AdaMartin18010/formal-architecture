@@ -55,6 +55,7 @@ $$\llbracket i \rrbracket : \mathcal{S} \rightarrow \mathcal{S}$$
 **示例 1.2.1 (i32.add指令)**
 $$\llbracket \text{i32.add} \rrbracket(s) = s'$$
 其中 $s = (vs, fs, mem, glob, tab)$，$vs = [v_2, v_1, \ldots]$，且：
+
 - $v_1, v_2$ 是 i32 类型值
 - $s' = (vs', fs, mem, glob, tab)$
 - $vs' = [v_1 + v_2, \ldots]$
@@ -82,6 +83,7 @@ WebAssembly的语义域定义为：
 $$\mathcal{D} = \mathcal{V} \times \mathcal{F} \times \mathcal{M} \times \mathcal{G} \times \mathcal{T}$$
 
 其中：
+
 - $\mathcal{V}$ 是值域
 - $\mathcal{F}$ 是函数域
 - $\mathcal{M}$ 是内存域
@@ -175,6 +177,7 @@ $$\text{check\_bounds}(\text{addr}, \text{size}, \text{mem}) = \text{addr} + \te
 如果WebAssembly模块通过验证，则它是内存安全的。
 
 **证明：** 通过验证器的性质：
+
 1. 所有内存访问都有边界检查
 2. 类型系统防止越界访问
 3. 沙箱环境限制内存范围
@@ -189,6 +192,7 @@ $$\forall s, s' \in \mathcal{S} \cdot s \xrightarrow{m} s' \Rightarrow \text{typ
 如果 $\Gamma \vdash m : \tau$，则 $m$ 是类型安全的。
 
 **证明：** 通过类型系统的性质：
+
 1. 静态类型检查
 2. 运行时类型验证
 3. 类型保持性
@@ -289,4 +293,4 @@ WebAssembly形式化理论提供了一个严格的数学基础，确保：
 3. **性能保证**：通过优化的编译策略实现接近原生性能
 4. **可移植性**：通过标准化的二进制格式实现跨平台部署
 
-该理论为WebAssembly的实际应用提供了坚实的理论基础，支持从理论到实践的完整开发流程。 
+该理论为WebAssembly的实际应用提供了坚实的理论基础，支持从理论到实践的完整开发流程。
