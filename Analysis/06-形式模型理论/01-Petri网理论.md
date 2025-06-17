@@ -28,6 +28,7 @@ Petri网是一个四元组 $N = (P, T, F, M_0)$，其中：
 
 **定义 1.1.3 (前集和后集)**
 对于节点 $x \in P \cup T$：
+
 - 前集：$^\bullet x = \{y \mid (y, x) \in F\}$
 - 后集：$x^\bullet = \{y \mid (x, y) \in F\}$
 
@@ -311,13 +312,15 @@ $$R(N) = \{M \mid M_0 \xrightarrow{*} M\}$$
 
 **定义 3.1.3 (可达性图)**
 可达性图是一个有向图 $G = (V, E)$，其中：
+
 - $V = R(N)$ 是可达标识集合
 - $E = \{(M, M') \mid \exists t \in T: M[t>M'\}$ 是发射关系
 
 ### 3.2 可达性算法
 
 **算法 3.2.1 (可达性分析算法)**
-```
+
+```latex
 function ReachabilityAnalysis(N):
     R = {M₀}
     W = {M₀}
@@ -333,7 +336,8 @@ function ReachabilityAnalysis(N):
 ```
 
 **算法 3.2.2 (覆盖性分析)**
-```
+
+```latex
 function CoverabilityAnalysis(N):
     R = {M₀}
     W = {M₀}
@@ -505,6 +509,7 @@ Petri网是死锁自由的，如果从任何可达标识都可以发射某个变
 ### 4.2 死锁检测算法
 
 **算法 4.2.1 (死锁检测算法)**
+
 ```
 function DeadlockDetection(N):
     deadlocks = ∅
@@ -515,6 +520,7 @@ function DeadlockDetection(N):
 ```
 
 **算法 4.2.2 (死锁预防)**
+
 ```
 function DeadlockPrevention(N):
     for each M ∈ R(N) do
@@ -645,6 +651,7 @@ $$\sum_{t \in T} J(t) \cdot \#(t, \sigma) = 0$$
 ### 5.2 不变性计算
 
 **算法 5.2.1 (P-不变性计算)**
+
 ```
 function PInvariants(N):
     A = incidence_matrix(N)
@@ -653,6 +660,7 @@ function PInvariants(N):
 ```
 
 **算法 5.2.2 (T-不变性计算)**
+
 ```
 function TInvariants(N):
     A = incidence_matrix(N)
@@ -994,11 +1002,13 @@ func (ps *PetriNetSimulator) updateStatistics(transitionID string, firingTime fl
 
 **定义 7.1.1 (时间Petri网)**
 时间Petri网是一个六元组 $N = (P, T, F, M_0, I, D)$，其中：
+
 - $I: T \to \mathbb{R}^+ \times \mathbb{R}^+$ 是时间间隔函数
 - $D: T \to \mathbb{R}^+$ 是延迟函数
 
 **定义 7.1.2 (时间发射)**
 变迁 $t$ 在时间 $\tau$ 发射，如果：
+
 1. $t$ 在标识 $M$ 下使能
 2. $\tau \in [\text{earliest}(t), \text{latest}(t)]$
 
@@ -1006,6 +1016,7 @@ func (ps *PetriNetSimulator) updateStatistics(transitionID string, firingTime fl
 
 **定义 7.2.1 (着色Petri网)**
 着色Petri网是一个七元组 $N = (P, T, F, M_0, C, G, E)$，其中：
+
 - $C: P \cup T \to \text{ColorSet}$ 是颜色集函数
 - $G: T \to \text{Guard}$ 是守卫函数
 - $E: F \to \text{Expression}$ 是表达式函数
@@ -1216,6 +1227,7 @@ impl ColoredPetriNet {
 
 **应用 8.1.1 (工作流Petri网)**
 工作流Petri网用于建模业务流程：
+
 1. **活动建模**：将业务活动建模为变迁
 2. **状态建模**：将业务状态建模为库所
 3. **流程控制**：使用Petri网控制流程执行
@@ -1224,6 +1236,7 @@ impl ColoredPetriNet {
 
 **应用 8.2.1 (并发控制)**
 Petri网用于分析并发系统：
+
 1. **死锁检测**：检测并发系统中的死锁
 2. **资源管理**：管理共享资源
 3. **同步分析**：分析进程同步
@@ -1232,6 +1245,7 @@ Petri网用于分析并发系统：
 
 **应用 8.3.1 (系统性能)**
 Petri网用于评估系统性能：
+
 1. **吞吐量分析**：分析系统吞吐量
 2. **响应时间分析**：分析系统响应时间
 3. **资源利用率分析**：分析资源利用情况
@@ -1241,6 +1255,7 @@ Petri网用于评估系统性能：
 Petri网理论为并发系统建模和分析提供了强大的数学工具。
 
 **关键要点**：
+
 1. **基础概念**：库所、变迁、标识、发射
 2. **结构分析**：纯网、简单网、自由选择网
 3. **可达性分析**：可达集、可达性图
@@ -1250,7 +1265,8 @@ Petri网理论为并发系统建模和分析提供了强大的数学工具。
 7. **高级扩展**：时间Petri网、着色Petri网、层次Petri网
 
 **下一步工作**：
+
 1. 完善更多Petri网类型
 2. 增加性能优化算法
 3. 开发更多实践工具
-4. 建立完整的测试体系 
+4. 建立完整的测试体系
