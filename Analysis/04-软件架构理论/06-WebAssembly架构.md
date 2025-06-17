@@ -83,7 +83,7 @@ $$\mathcal{CI} = \{\text{block}, \text{loop}, \text{if}, \text{br}, \text{br\_if
 
 **产生式 2.1.1 (基本产生式)**:
 
-```
+```latex
 S → module
 module → (module section*)
 section → type_section | func_section | memory_section | export_section
@@ -110,7 +110,7 @@ result → (result val_type*)
 - $S$ 是操作数栈
 - $I$ 是指令序列
 
-**规则 2.2.1 (数值指令语义)**
+**规则 2.2.1 (数值指令语义)**:
 
 $$\frac{v \in \text{Values}}{\text{const}(v) :: S \rightarrow v :: S}$$
 
@@ -159,18 +159,18 @@ impl StackVirtualMachine {
     pub fn execute(&mut self, module: &Module) -> Result<Value, ExecutionError> {
         // 初始化执行环境
         self.initialize_execution_environment(module);
-        
+
         // 开始执行
         while self.instruction_pointer < self.current_function().code.len() {
             let instruction = &self.current_function().code[self.instruction_pointer];
             self.execute_instruction(instruction)?;
             self.instruction_pointer += 1;
         }
-        
+
         // 返回栈顶值
         self.operand_stack.pop().ok_or(ExecutionError::StackUnderflow)
     }
-    
+
     fn execute_instruction(&mut self, instruction: &Instruction) -> Result<(), ExecutionError> {
         match instruction {
             Instruction::Const(value) => {
@@ -262,7 +262,7 @@ impl StackVirtualMachine {
         }
         Ok(())
     }
-    
+
     fn add_values(&self, a: Value, b: Value) -> Result<Value, ExecutionError> {
         match (a, b) {
             (Value::I32(x), Value::I32(y)) => Ok(Value::I32(x.wrapping_add(y))),
@@ -272,20 +272,20 @@ impl StackVirtualMachine {
             _ => Err(ExecutionError::TypeMismatch),
         }
     }
-    
+
     fn call_function(&mut self, function_index: u32) -> Result<(), ExecutionError> {
         let function = self.get_function(function_index)?;
-        
+
         // 创建新的函数帧
         let frame = FunctionFrame {
             function_index,
             return_address: self.instruction_pointer,
             locals: vec![Value::I32(0); function.local_count as usize],
         };
-        
+
         self.function_stack.push(frame);
         self.instruction_pointer = 0;
-        
+
         Ok(())
     }
 }
@@ -310,25 +310,25 @@ type RegisterAllocator struct {
 func (ra *RegisterAllocator) AllocateRegisters(function *Function) *RegisterMapping {
     // 构建干扰图
     ra.buildInterferenceGraph(function)
-    
+
     // 简化图
     ra.simplify()
-    
+
     // 选择寄存器
     ra.selectRegisters()
-    
+
     // 处理溢出
     ra.handleSpills()
-    
+
     return ra.createMapping()
 }
 
 func (ra *RegisterAllocator) buildInterferenceGraph(function *Function) {
     ra.interferenceGraph = NewInterferenceGraph()
-    
+
     // 分析活跃变量
     liveRanges := ra.analyzeLiveRanges(function)
-    
+
     // 构建干扰边
     for i, range1 := range liveRanges {
         for j, range2 := range liveRanges {
@@ -341,7 +341,7 @@ func (ra *RegisterAllocator) buildInterferenceGraph(function *Function) {
 
 func (ra *RegisterAllocator) simplify() {
     stack := make([]string, 0)
-    
+
     for ra.interferenceGraph.NodeCount() > 0 {
         // 找到度数小于寄存器数量的节点
         node := ra.findLowDegreeNode()
@@ -355,19 +355,19 @@ func (ra *RegisterAllocator) simplify() {
             ra.interferenceGraph.RemoveNode(node)
         }
     }
-    
+
     ra.simplificationStack = stack
 }
 
 func (ra *RegisterAllocator) selectRegisters() {
     ra.registerMapping = make(map[string]Register)
-    
+
     for i := len(ra.simplificationStack) - 1; i >= 0; i-- {
         node := ra.simplificationStack[i]
-        
+
         // 找到可用的寄存器
         availableRegisters := ra.findAvailableRegisters(node)
-        
+
         if len(availableRegisters) > 0 {
             ra.registerMapping[node] = availableRegisters[0]
         } else {
@@ -432,7 +432,7 @@ impl MemoryManager {
     pub fn new(initial_pages: usize) -> Self {
         let page_size = 64 * 1024; // 64KB
         let memory_size = initial_pages * page_size;
-        
+
         Self {
             memory: vec![0; memory_size],
             page_size,
@@ -440,35 +440,35 @@ impl MemoryManager {
             free_pages: VecDeque::new(),
         }
     }
-    
+
     pub fn grow_memory(&mut self, pages: usize) -> Result<usize, MemoryError> {
         let current_pages = self.memory.len() / self.page_size;
         let new_pages = current_pages + pages;
-        
+
         // 检查最大页数限制
         if new_pages > 65536 { // 4GB
             return Err(MemoryError::ExceedsMaximum);
         }
-        
+
         // 扩展内存
         let new_size = new_pages * self.page_size;
         self.memory.resize(new_size, 0);
-        
+
         // 添加新页到空闲页列表
         for page in current_pages..new_pages {
             self.free_pages.push_back(page);
         }
-        
+
         Ok(current_pages)
     }
-    
+
     pub fn allocate(&mut self, size: usize) -> Result<usize, MemoryError> {
         let pages_needed = (size + self.page_size - 1) / self.page_size;
-        
+
         if self.free_pages.len() < pages_needed {
             return Err(MemoryError::InsufficientMemory);
         }
-        
+
         let mut allocated_pages = Vec::new();
         for _ in 0..pages_needed {
             if let Some(page) = self.free_pages.pop_front() {
@@ -478,36 +478,36 @@ impl MemoryManager {
                 return Err(MemoryError::InsufficientMemory);
             }
         }
-        
+
         Ok(allocated_pages[0] * self.page_size)
     }
-    
+
     pub fn deallocate(&mut self, address: usize) -> Result<(), MemoryError> {
         let page = address / self.page_size;
-        
+
         if !self.allocated_pages.contains(&page) {
             return Err(MemoryError::InvalidAddress);
         }
-        
+
         self.allocated_pages.remove(&page);
         self.free_pages.push_back(page);
-        
+
         Ok(())
     }
-    
+
     pub fn read(&self, address: usize, size: usize) -> Result<&[u8], MemoryError> {
         if address + size > self.memory.len() {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         Ok(&self.memory[address..address + size])
     }
-    
+
     pub fn write(&mut self, address: usize, data: &[u8]) -> Result<(), MemoryError> {
         if address + data.len() > self.memory.len() {
             return Err(MemoryError::OutOfBounds);
         }
-        
+
         self.memory[address..address + data.len()].copy_from_slice(data);
         Ok(())
     }
@@ -560,14 +560,14 @@ func (cl *ComponentLinker) LinkComponents(componentList []string) (*Component, e
         }
         cl.components[componentName] = component
     }
-    
+
     // 解析接口
     for _, component := range cl.components {
         for _, iface := range component.Interfaces {
             cl.interfaces[iface.Name] = iface
         }
     }
-    
+
     // 创建适配器
     for _, component := range cl.components {
         for _, import_ := range component.Imports {
@@ -576,10 +576,10 @@ func (cl *ComponentLinker) LinkComponents(componentList []string) (*Component, e
             }
         }
     }
-    
+
     // 生成链接代码
     linkedComponent := cl.generateLinkedComponent()
-    
+
     return linkedComponent, nil
 }
 
@@ -608,20 +608,20 @@ func (cl *ComponentLinker) generateLinkedComponent() *Component {
         Globals:   make([]*Global, 0),
         Exports:   make([]*Export, 0),
     }
-    
+
     // 合并所有组件的函数
     for _, component := range cl.components {
         for _, function := range component.Functions {
             linkedComponent.Functions = append(linkedComponent.Functions, function)
         }
     }
-    
+
     // 生成适配器代码
     for _, adapter := range cl.adapters {
         adapterCode := cl.generateAdapterCode(adapter)
         linkedComponent.Functions = append(linkedComponent.Functions, adapterCode...)
     }
-    
+
     return linkedComponent
 }
 ```
@@ -666,30 +666,30 @@ impl PermissionSystem {
     pub fn check_permission(&self, operation: &Operation, context: &Context) -> bool {
         // 获取操作所需的权限
         let required_permissions = self.get_required_permissions(operation);
-        
+
         // 检查上下文中的权限
         for permission in required_permissions {
             if !self.has_permission(context, &permission) {
                 return false;
             }
         }
-        
+
         // 检查策略约束
         for policy in &self.policies {
             if !policy.evaluate(operation, context) {
                 return false;
             }
         }
-        
+
         true
     }
-    
+
     fn has_permission(&self, context: &Context, permission: &Permission) -> bool {
         // 检查直接权限
         if context.permissions.contains(&permission.name) {
             return true;
         }
-        
+
         // 检查继承权限
         for role in &context.roles {
             if let Some(capabilities) = self.capabilities.get(role) {
@@ -698,35 +698,35 @@ impl PermissionSystem {
                 }
             }
         }
-        
+
         false
     }
-    
+
     pub fn grant_permission(&mut self, subject: &str, permission: &str) -> Result<(), SecurityError> {
         // 检查授权权限
         if !self.can_grant_permission(subject, permission) {
             return Err(SecurityError::InsufficientPrivileges);
         }
-        
+
         // 授予权限
         self.capabilities.entry(subject.to_string())
             .or_insert_with(Vec::new)
             .push(permission.to_string());
-        
+
         Ok(())
     }
-    
+
     pub fn revoke_permission(&mut self, subject: &str, permission: &str) -> Result<(), SecurityError> {
         // 检查撤销权限
         if !self.can_revoke_permission(subject, permission) {
             return Err(SecurityError::InsufficientPrivileges);
         }
-        
+
         // 撤销权限
         if let Some(capabilities) = self.capabilities.get_mut(subject) {
             capabilities.retain(|p| p != permission);
         }
-        
+
         Ok(())
     }
 }
@@ -770,7 +770,7 @@ func (cfo *ConstantFoldingOptimizer) canFoldConstants(instructions []Instruction
     if len(instructions) < 2 {
         return false
     }
-    
+
     // 检查是否是常量操作序列
     switch instructions[0].(type) {
     case *ConstInstruction:
@@ -781,14 +781,14 @@ func (cfo *ConstantFoldingOptimizer) canFoldConstants(instructions []Instruction
             return true
         }
     }
-    
+
     return false
 }
 
 func (cfo *ConstantFoldingOptimizer) foldConstants(instructions []Instruction) Instruction {
     const1 := instructions[0].(*ConstInstruction)
     binary := instructions[1].(*BinaryInstruction)
-    
+
     var result Value
     switch binary.Op {
     case Add:
@@ -800,7 +800,7 @@ func (cfo *ConstantFoldingOptimizer) foldConstants(instructions []Instruction) I
     case Div:
         result = cfo.divideValues(const1.Value, binary.Operand2)
     }
-    
+
     return &ConstInstruction{Value: result}
 }
 ```
@@ -818,59 +818,59 @@ impl MemoryLayoutOptimizer {
     pub fn optimize(&mut self) {
         // 优化全局变量布局
         self.optimize_global_layout();
-        
+
         // 优化函数局部变量布局
         self.optimize_local_layout();
-        
+
         // 优化内存访问模式
         self.optimize_memory_access();
     }
-    
+
     fn optimize_global_layout(&mut self) {
         let mut globals = self.module.globals.clone();
-        
+
         // 按大小排序
         globals.sort_by(|a, b| {
             let size_a = self.get_type_size(&a.typ);
             let size_b = self.get_type_size(&b.typ);
             size_b.cmp(&size_a) // 大对象在前
         });
-        
+
         // 重新分配偏移量
         let mut offset = 0;
         for global in &mut globals {
             let size = self.get_type_size(&global.typ);
             let alignment = self.get_type_alignment(&global.typ);
-            
+
             // 对齐偏移量
             offset = (offset + alignment - 1) & !(alignment - 1);
             global.offset = offset;
             offset += size;
         }
-        
+
         self.module.globals = globals;
     }
-    
+
     fn optimize_local_layout(&mut self) {
         for function in &mut self.module.functions {
             let mut locals = function.locals.clone();
-            
+
             // 按大小排序
             locals.sort_by(|a, b| {
                 let size_a = self.get_type_size(&a.typ);
                 let size_b = self.get_type_size(&b.typ);
                 size_b.cmp(&size_a)
             });
-            
+
             // 重新分配索引
             for (i, local) in locals.iter_mut().enumerate() {
                 local.index = i as u32;
             }
-            
+
             function.locals = locals;
         }
     }
-    
+
     fn optimize_memory_access(&mut self) {
         for function in &mut self.module.functions {
             for instruction in &mut function.code {
@@ -881,7 +881,7 @@ impl MemoryLayoutOptimizer {
             }
         }
     }
-    
+
     fn get_type_size(&self, typ: &ValueType) -> usize {
         match typ {
             ValueType::I32 => 4,
@@ -891,7 +891,7 @@ impl MemoryLayoutOptimizer {
             ValueType::V128 => 16,
         }
     }
-    
+
     fn get_type_alignment(&self, typ: &ValueType) -> usize {
         match typ {
             ValueType::I32 => 4,
@@ -916,13 +916,13 @@ graph TB
     B --> C[WebAssembly引擎]
     C --> D[字节码解释器]
     C --> E[即时编译器]
-    
+
     D --> F[栈式虚拟机]
     E --> G[优化代码]
-    
+
     F --> H[内存管理器]
     G --> H
-    
+
     H --> I[系统API]
     I --> J[操作系统]
 ```
@@ -937,23 +937,23 @@ class WebAssemblyRuntime {
         this.table = null;
         this.exports = null;
     }
-    
+
     async loadModule(wasmBytes) {
         try {
             // 编译WebAssembly模块
             const module = await WebAssembly.compile(wasmBytes);
-            
+
             // 创建内存和表
             const memory = new WebAssembly.Memory({
                 initial: 256, // 16MB
                 maximum: 65536 // 4GB
             });
-            
+
             const table = new WebAssembly.Table({
                 initial: 0,
                 element: 'anyfunc'
             });
-            
+
             // 实例化模块
             const instance = await WebAssembly.instantiate(module, {
                 env: {
@@ -968,23 +968,23 @@ class WebAssemblyRuntime {
                     console: console
                 }
             });
-            
+
             this.memory = memory;
             this.table = table;
             this.exports = instance.exports;
-            
+
             return instance;
         } catch (error) {
             console.error('Failed to load WebAssembly module:', error);
             throw error;
         }
     }
-    
+
     callFunction(name, ...args) {
         if (!this.exports || !this.exports[name]) {
             throw new Error(`Function ${name} not found`);
         }
-        
+
         try {
             return this.exports[name](...args);
         } catch (error) {
@@ -992,30 +992,30 @@ class WebAssemblyRuntime {
             throw error;
         }
     }
-    
+
     getMemoryView(offset, length) {
         if (!this.memory) {
             throw new Error('Memory not initialized');
         }
-        
+
         return new Uint8Array(this.memory.buffer, offset, length);
     }
-    
+
     setMemoryView(offset, data) {
         if (!this.memory) {
             throw new Error('Memory not initialized');
         }
-        
+
         const view = new Uint8Array(this.memory.buffer, offset, data.length);
         view.set(data);
     }
-    
+
     // 导入函数实现
     abort(msg, file, line, column) {
         console.error(`Abort: ${msg} at ${file}:${line}:${column}`);
         throw new Error(`WebAssembly abort: ${msg}`);
     }
-    
+
     seed() {
         return Math.random();
     }
@@ -1024,20 +1024,20 @@ class WebAssemblyRuntime {
 // 使用示例
 async function runWebAssemblyExample() {
     const runtime = new WebAssemblyRuntime();
-    
+
     // 加载WebAssembly模块
     const response = await fetch('example.wasm');
     const wasmBytes = await response.arrayBuffer();
     await runtime.loadModule(wasmBytes);
-    
+
     // 调用函数
     const result = runtime.callFunction('add', 5, 3);
     console.log('Result:', result);
-    
+
     // 内存操作
     const data = new Uint8Array([1, 2, 3, 4]);
     runtime.setMemoryView(0, data);
-    
+
     const retrieved = runtime.getMemoryView(0, 4);
     console.log('Retrieved:', Array.from(retrieved));
 }
@@ -1061,35 +1061,35 @@ class ServerWebAssemblyRuntime {
             }
         });
     }
-    
+
     async loadModule(wasmPath) {
         try {
             // 读取WebAssembly文件
             const wasmBytes = fs.readFileSync(wasmPath);
-            
+
             // 编译模块
             const module = await WebAssembly.compile(wasmBytes);
-            
+
             // 创建实例
             const instance = await WebAssembly.instantiate(module, {
                 wasi_snapshot_preview1: this.wasi.wasiImport
             });
-            
+
             // 启动WASI
             this.wasi.start(instance);
-            
+
             return instance;
         } catch (error) {
             console.error('Failed to load WebAssembly module:', error);
             throw error;
         }
     }
-    
+
     async executeFunction(instance, functionName, ...args) {
         if (!instance.exports[functionName]) {
             throw new Error(`Function ${functionName} not found`);
         }
-        
+
         try {
             return await instance.exports[functionName](...args);
         } catch (error) {
@@ -1102,19 +1102,19 @@ class ServerWebAssemblyRuntime {
 // 使用示例
 async function runServerWebAssembly() {
     const runtime = new ServerWebAssemblyRuntime();
-    
+
     try {
         // 加载WebAssembly模块
         const instance = await runtime.loadModule('./server-module.wasm');
-        
+
         // 执行函数
         const result = await runtime.executeFunction(instance, 'processData', 'input data');
         console.log('Processing result:', result);
-        
+
         // 文件操作
         const fileContent = await runtime.executeFunction(instance, 'readFile', '/path/to/file.txt');
         console.log('File content:', fileContent);
-        
+
     } catch (error) {
         console.error('WebAssembly execution failed:', error);
     }
@@ -1151,7 +1151,7 @@ func (ewr *EdgeWasmRuntime) LoadModule(name string, wasmBytes []byte) error {
     if err != nil {
         return fmt.Errorf("failed to compile module: %w", err)
     }
-    
+
     ewr.modules[name] = module
     return nil
 }
@@ -1161,13 +1161,13 @@ func (ewr *EdgeWasmRuntime) CreateInstance(name string, imports map[string]inter
     if !exists {
         return fmt.Errorf("module %s not found", name)
     }
-    
+
     // 创建实例
     instance, err := module.Instantiate(imports)
     if err != nil {
         return fmt.Errorf("failed to instantiate module: %w", err)
     }
-    
+
     ewr.instances[name] = instance
     return nil
 }
@@ -1177,35 +1177,35 @@ func (ewr *EdgeWasmRuntime) ExecuteFunction(instanceName, functionName string, a
     if !exists {
         return nil, fmt.Errorf("instance %s not found", instanceName)
     }
-    
+
     // 执行函数
     result, err := instance.CallFunction(functionName, args...)
     if err != nil {
         return nil, fmt.Errorf("failed to execute function: %w", err)
     }
-    
+
     return result, nil
 }
 
 func (ewr *EdgeWasmRuntime) HandleRequest(request *Request) (*Response, error) {
     // 根据请求类型选择处理模块
     moduleName := ewr.selectModule(request)
-    
+
     // 创建或获取实例
     instanceName := fmt.Sprintf("%s_%d", moduleName, time.Now().Unix())
     if err := ewr.CreateInstance(moduleName, ewr.getImports()); err != nil {
         return nil, err
     }
-    
+
     // 执行处理函数
     result, err := ewr.ExecuteFunction(instanceName, "handleRequest", request)
     if err != nil {
         return nil, err
     }
-    
+
     // 清理实例
     delete(ewr.instances, instanceName)
-    
+
     return result.(*Response), nil
 }
 
@@ -1255,4 +1255,4 @@ func (ewr *EdgeWasmRuntime) getImports() map[string]interface{} {
 - **跨平台性**：支持多种运行环境
 - **可扩展性好**：支持组件化开发和组合
 
-下一步将继续完善其他理论模块，建立完整的应用体系。 
+下一步将继续完善其他理论模块，建立完整的应用体系。
