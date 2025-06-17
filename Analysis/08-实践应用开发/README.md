@@ -2,7 +2,7 @@
 
 ## 目录结构
 
-```
+```text
 08-实践应用开发/
 ├── README.md                    # 本文件
 ├── 01-Rust形式化工具/           # Rust实现的形式化验证工具
@@ -159,7 +159,8 @@ cargo run --bin model-checker --model system.pnml --property safety.ltl
 ### 提交规范
 
 1. **提交信息格式**
-   ```
+
+   ```latex
    type(scope): description
    
    [optional body]
@@ -177,4 +178,4 @@ cargo run --bin model-checker --model system.pnml --property safety.ltl
 
 ## 许可证
 
-本项目采用MIT许可证，详见LICENSE文件。 
+本项目采用MIT许可证，详见LICENSE文件。
