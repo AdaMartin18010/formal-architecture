@@ -48,6 +48,7 @@ Item ::= fn Name(Params) -> Type { Expr }
 
 **定义 1.2.2 (表达式)**
 表达式的基本形式：
+
 ```
 Expr ::= Literal
        | Variable
@@ -101,6 +102,7 @@ let y = x;    // y获得值5的副本，x仍然有效
 
 **定义 2.3.2 (Copy trait)**
 实现Copy trait的类型具有复制语义：
+
 ```rust
 trait Copy: Clone { }
 ```
@@ -118,6 +120,7 @@ let y = &x;    // y借用x的值
 ```
 
 **公理 3.1.1 (借用规则)**
+
 1. 在任意给定时刻，只能有一个可变引用或多个不可变引用
 2. 引用必须总是有效的
 
@@ -146,11 +149,11 @@ impl BorrowChecker {
         if self.has_mutable_borrow(owner) {
             return Err(Error::MultipleMutableBorrows);
         }
-        
+
         if self.has_conflicting_borrows(owner) {
             return Err(Error::ConflictingBorrows);
         }
-        
+
         // 记录借用
         self.record_borrow(borrower, owner);
         Ok(())
@@ -193,13 +196,13 @@ impl LifetimeInferrer {
     fn infer_lifetimes(&mut self, function: &Function) -> Result<(), Error> {
         // 收集生命周期约束
         self.collect_constraints(function);
-        
+
         // 求解约束
         self.solve_constraints()?;
-        
+
         // 验证解的有效性
         self.validate_solution()?;
-        
+
         Ok(())
     }
 }
@@ -488,7 +491,7 @@ macro_rules! vec {
 过程宏是编译时执行的函数：
 
 ```rust
-#[proc_macro_derive(HelloMacro)]
+# [proc_macro_derive(HelloMacro)]
 pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
     // 生成代码
 }
@@ -549,4 +552,4 @@ Rust的类型系统保证类型安全。
 8. **错误处理**：Result、Option类型
 9. **宏系统**：声明宏、过程宏
 
-该理论体系为系统编程、并发编程、内存安全等领域提供了坚实的理论基础。 
+该理论体系为系统编程、并发编程、内存安全等领域提供了坚实的理论基础。
