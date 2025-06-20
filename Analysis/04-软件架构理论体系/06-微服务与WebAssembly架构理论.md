@@ -21,16 +21,22 @@
     - [4.2 融合架构的优势](#42-融合架构的优势)
   - [5. 实现技术](#5-实现技术)
     - [5.1 微服务框架（Rust）](#51-微服务框架rust)
-    - [5.2 WebAssembly模块实现](#52-webassembly模块实现)
-    - [5.3 WASM微服务运行时](#53-wasm微服务运行时)
-  - [6. 架构模式与应用场景](#6-架构模式与应用场景)
-    - [6.1 微服务WASM网关模式](#61-微服务wasm网关模式)
-    - [6.2 WASM微前端架构](#62-wasm微前端架构)
-    - [6.3 边缘计算微服务](#63-边缘计算微服务)
-  - [7. 演化路径与未来展望](#7-演化路径与未来展望)
-    - [7.1 渐进式采用路径](#71-渐进式采用路径)
-    - [7.2 未来研究方向](#72-未来研究方向)
-  - [8. 结论](#8-结论)
+    - [5.2 WebAssembly运行时（Rust）](#52-webassembly运行时rust)
+    - [5.3 WASM微服务实现](#53-wasm微服务实现)
+  - [6. 架构模式](#6-架构模式)
+    - [6.1 边缘计算与WebAssembly](#61-边缘计算与webassembly)
+    - [6.2 WebAssembly服务网格](#62-webassembly服务网格)
+    - [6.3 多语言微服务集成](#63-多语言微服务集成)
+  - [7. 行业应用](#7-行业应用)
+    - [7.1 企业级应用](#71-企业级应用)
+    - [7.2 云边协同计算](#72-云边协同计算)
+    - [7.3 性能关键系统](#73-性能关键系统)
+  - [8. 发展趋势](#8-发展趋势)
+    - [8.1 智能化微服务与WASM](#81-智能化微服务与wasm)
+    - [8.2 WebAssembly系统接口（WASI）](#82-webassembly系统接口wasi)
+    - [8.3 新兴融合模式](#83-新兴融合模式)
+  - [9. 交叉引用](#9-交叉引用)
+  - [10. 结论](#10-结论)
 
 ## 1. 理论基础
 
@@ -224,28 +230,6 @@ pub struct Microservice {
     pub dependencies: Vec<String>,
     pub data_store: Option<DataStore>,
     pub status: ServiceStatus,
-    pub wasm_module: Option<WasmModuleInfo>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct WasmModuleInfo {
-    pub module_path: String,
-    pub memory_limit_mb: u32,
-    pub allowed_imports: Vec<String>,
-    pub exports: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Endpoint {
-    pub path: String,
-    pub method: HttpMethod,
-    pub handler: String,
-    pub version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum HttpMethod {
-    GET, POST, PUT, DELETE, PATCH
 }
 
 /// 微服务注册中心
@@ -272,174 +256,260 @@ impl ServiceRegistry {
 }
 ```
 
-### 5.2 WebAssembly模块实现
+### 5.2 WebAssembly运行时（Rust）
 
 ```rust
-// WebAssembly模块的基本结构
-pub struct WebAssemblyModule {
-    pub name: String,
-    pub version: String,
-    pub types: Vec<FunctionType>,
-    pub functions: Vec<Function>,
-    pub tables: Vec<Table>,
-    pub memories: Vec<Memory>,
-    pub globals: Vec<Global>,
-    pub exports: Vec<Export>,
-    pub imports: Vec<Import>,
+// WebAssembly运行时
+pub struct WASMRuntime {
+    pub modules: HashMap<String, WebAssemblyModule>,
+    pub instances: HashMap<String, ModuleInstance>,
+    pub memory_manager: MemoryManager,
+    pub execution_engine: ExecutionEngine,
 }
 
-// 函数类型定义
-pub struct FunctionType {
-    pub parameters: Vec<ValueType>,
-    pub results: Vec<ValueType>,
+// 模块实例
+pub struct ModuleInstance {
+    pub module_id: String,
+    pub exports: HashMap<String, ExportValue>,
+    pub memory: Option<MemoryInstance>,
+    pub tables: Vec<TableInstance>,
+    pub globals: Vec<GlobalInstance>,
 }
 
-// 值类型
-pub enum ValueType {
-    I32,
-    I64,
-    F32,
-    F64,
-}
-```
-
-### 5.3 WASM微服务运行时
-
-```rust
-/// WebAssembly微服务运行时
-pub struct WasmMicroserviceRuntime {
-    pub store: Store<HostState>,
-    pub instance_cache: HashMap<String, Instance>,
-    pub module_cache: HashMap<String, Module>,
-    pub linker: Linker<HostState>,
-}
-
-impl WasmMicroserviceRuntime {
-    pub fn new() -> Self {
-        let engine = Engine::new(&Config::default()).unwrap();
-        let mut linker = Linker::new(&engine);
-        let mut store = Store::new(&engine, HostState::default());
-        
-        // 注册宿主函数
-        Self::register_host_functions(&mut linker);
-        
-        Self {
-            store,
-            instance_cache: HashMap::new(),
-            module_cache: HashMap::new(),
-            linker,
-        }
+impl WASMRuntime {
+    pub fn instantiate(&mut self, module: WebAssemblyModule) -> Result<ModuleInstance, RuntimeError> {
+        // 实例化WASM模块
+        todo!("实现WASM模块实例化")
     }
     
-    pub fn load_service(&mut self, service: &Microservice) -> Result<(), Error> {
-        if let Some(wasm_info) = &service.wasm_module {
-            let module_bytes = std::fs::read(&wasm_info.module_path)?;
-            let module = Module::new(self.store.engine(), &module_bytes)?;
-            
-            // 缓存模块
-            self.module_cache.insert(service.id.clone(), module.clone());
-            
-            // 实例化模块
-            let instance = self.linker.instantiate(&mut self.store, &module)?;
-            self.instance_cache.insert(service.id.clone(), instance);
-            
-            Ok(())
-        } else {
-            Err(Error::NoWasmModule)
-        }
-    }
-    
-    pub async fn call_endpoint(&mut self, 
-                         service_id: &str, 
-                         endpoint: &str, 
-                         params: &[Value]) -> Result<Vec<Value>, Error> {
-        if let Some(instance) = self.instance_cache.get(service_id) {
-            let func = instance.get_func(&mut self.store, endpoint)
-                .ok_or(Error::FunctionNotFound)?;
-                
-            let mut results = vec![Value::null(); func.result_arity(&self.store)];
-            func.call_async(&mut self.store, params, &mut results).await?;
-            
-            Ok(results)
-        } else {
-            Err(Error::ServiceNotLoaded)
-        }
-    }
-    
-    fn register_host_functions(linker: &mut Linker<HostState>) {
-        // 注册HTTP相关函数
-        linker.func_wrap("http", "fetch", |ctx: Caller<'_, HostState>, url_ptr: i32, url_len: i32| {
-            let memory = ctx.get_export("memory").unwrap().into_memory().unwrap();
-            let url = read_string_from_memory(&memory, &ctx, url_ptr, url_len);
-            // 实现HTTP请求逻辑
-            0 // 返回响应句柄
-        }).unwrap();
-        
-        // 注册数据库相关函数
-        linker.func_wrap("db", "query", |ctx: Caller<'_, HostState>, query_ptr: i32, query_len: i32| {
-            let memory = ctx.get_export("memory").unwrap().into_memory().unwrap();
-            let query = read_string_from_memory(&memory, &ctx, query_ptr, query_len);
-            // 实现数据库查询逻辑
-            0 // 返回结果句柄
-        }).unwrap();
+    pub fn call_function(&self, instance_id: &str, function_name: &str, params: &[Value]) 
+        -> Result<Vec<Value>, RuntimeError> {
+        // 调用模块导出函数
+        todo!("实现函数调用")
     }
 }
 ```
 
-## 6. 架构模式与应用场景
+### 5.3 WASM微服务实现
 
-### 6.1 微服务WASM网关模式
+```rust
+/// WebAssembly微服务
+pub struct WASMMicroservice {
+    pub base_service: Microservice,
+    pub wasm_module: WebAssemblyModule,
+    pub runtime: Arc<WASMRuntime>,
+    pub instance_id: String,
+    pub api_mappings: HashMap<String, String>,
+}
 
-**定义**：使用WebAssembly实现API网关功能，通过编译到WebAssembly的路由、转换、聚合逻辑处理微服务请求。
+impl WASMMicroservice {
+    pub fn new(service: Microservice, module: WebAssemblyModule, runtime: Arc<WASMRuntime>) 
+        -> Result<Self, ServiceError> {
+        // 创建实例
+        let instance = runtime.instantiate(module.clone())?;
+        
+        let service = Self {
+            base_service: service,
+            wasm_module: module,
+            runtime: runtime.clone(),
+            instance_id: instance.module_id.clone(),
+            api_mappings: HashMap::new(),
+        };
+        
+        // 映射API端点到WASM函数
+        for endpoint in &service.base_service.endpoints {
+            service.api_mappings.insert(endpoint.path.clone(), format!("handle_{}", endpoint.path));
+        }
+        
+        Ok(service)
+    }
+    
+    pub async fn handle_request(&self, path: &str, request: &Request) -> Result<Response, ServiceError> {
+        // 通过WASM模块处理请求
+        if let Some(function_name) = self.api_mappings.get(path) {
+            // 序列化请求
+            let request_data = serde_json::to_string(request)?;
+            
+            // 调用WASM函数处理请求
+            let result = self.runtime.call_function(
+                &self.instance_id, 
+                function_name, 
+                &[Value::String(request_data)]
+            )?;
+            
+            // 反序列化响应
+            if let Some(Value::String(response_data)) = result.first() {
+                let response: Response = serde_json::from_str(response_data)?;
+                Ok(response)
+            } else {
+                Err(ServiceError::InvalidResponse)
+            }
+        } else {
+            Err(ServiceError::EndpointNotFound)
+        }
+    }
+}
+```
 
-**优势**：
+## 6. 架构模式
 
-- 高性能路由和转换
-- 动态部署网关逻辑
-- 跨平台兼容性
-- 安全隔离
+### 6.1 边缘计算与WebAssembly
 
-### 6.2 WASM微前端架构
+WebAssembly微服务特别适合边缘计算场景，在资源受限的边缘设备上运行高性能服务，形成以下架构模式：
 
-**定义**：将微前端应用编译为WebAssembly模块，通过微服务架构管理多个前端模块的集成。
+```mermaid
+graph TD
+    A[云中心] --> B[区域边缘节点]
+    B --> C[本地边缘节点]
+    
+    subgraph "云中心"
+        D[控制平面]
+        E[管理服务]
+    end
+    
+    subgraph "边缘节点"
+        F[WASM运行时]
+        G[WASM微服务1]
+        H[WASM微服务2]
+        F --> G
+        F --> H
+    end
+    
+    C --> F
+```
 
-**优势**：
+### 6.2 WebAssembly服务网格
 
-- 前端组件独立部署
-- 技术栈无关性
-- 加载性能优化
-- 与后端微服务一致的架构风格
+通过WebAssembly扩展服务网格，实现自定义路由、认证和策略：
 
-### 6.3 边缘计算微服务
+```mermaid
+graph TB
+    A[入口网关] --> B[服务A]
+    A --> C[服务B]
+    
+    subgraph "服务网格"
+        D[Sidecar代理<br>+WASM扩展]
+        E[控制平面]
+    end
+    
+    B --> D
+    C --> D
+    D --> E
+```
 
-**定义**：将WebAssembly微服务部署到边缘计算节点，实现低延迟、高性能的边缘处理。
+### 6.3 多语言微服务集成
 
-**优势**：
+WebAssembly作为多语言集成层，统一不同语言编写的微服务：
 
-- 轻量级部署
-- 跨设备兼容性
-- 动态更新能力
-- 有限资源环境适配性
+```rust
+pub struct PolyglotService {
+    pub rust_components: Vec<RustComponent>,
+    pub cpp_components: Vec<CppComponent>,
+    pub go_components: Vec<GoComponent>,
+    pub wasm_integration_layer: WASMIntegrationLayer,
+}
 
-## 7. 演化路径与未来展望
+pub struct WASMIntegrationLayer {
+    pub runtime: WASMRuntime,
+    pub adapters: HashMap<String, ModuleAdapter>,
+    pub shared_memory: SharedMemory,
+}
+```
 
-### 7.1 渐进式采用路径
+## 7. 行业应用
 
-1. **微服务容器化**：将现有微服务容器化，建立基础微服务架构
-2. **WebAssembly集成**：为特定场景引入WebAssembly模块，如高性能计算、前端组件
-3. **混合架构**：同时运行容器化微服务和WebAssembly微服务
-4. **全面融合**：建立统一的微服务WebAssembly平台
+### 7.1 企业级应用
 
-### 7.2 未来研究方向
+在企业级应用中，WebAssembly微服务架构可以应用于：
 
-1. **WebAssembly组件模型**：基于组件模型重新设计微服务通信
-2. **WebAssembly系统接口（WASI）**：利用WASI标准化微服务与系统的交互
-3. **分布式WebAssembly**：研究WebAssembly模块在分布式环境中的协作
-4. **AI驱动的WASM微服务优化**：利用AI自动优化WebAssembly微服务性能与资源配置
+- **前端：** 高性能的浏览器端业务逻辑处理
+- **中台：** 多语言业务规则引擎
+- **后端：** 轻量级、可移植的业务微服务
 
-## 8. 结论
+### 7.2 云边协同计算
 
-微服务与WebAssembly架构的融合代表了软件架构的重要创新方向，将微服务的灵活性、可扩展性与WebAssembly的高性能、跨平台、安全特性相结合。这种融合架构特别适用于对性能要求高、需要跨平台部署、资源受限的场景，如边缘计算、IoT应用、高性能Web应用等。随着WebAssembly技术的成熟和微服务实践的深化，两种架构的融合将为现代软件系统提供更强大、更灵活的设计选择。
+WebAssembly微服务在云边协同场景的应用：
+
+- **云端编排：** 在云端管理和编排WASM微服务
+- **边缘执行：** 在边缘设备高效执行WASM微服务
+- **动态更新：** 无需重启设备实现服务更新
+
+### 7.3 性能关键系统
+
+在性能关键系统中的应用：
+
+- **实时数据处理：** 使用WASM微服务处理实时数据流
+- **多媒体处理：** 音视频编解码和处理
+- **科学计算：** 高性能数值计算和模拟
+
+## 8. 发展趋势
+
+### 8.1 智能化微服务与WASM
+
+AI与WebAssembly微服务的结合：
+
+```rust
+pub struct AIEnhancedWASMService {
+    pub base_service: WASMMicroservice,
+    pub ml_models: Vec<WASMCompiledModel>,
+    pub inference_engine: WASMInferenceEngine,
+    pub adaptive_scaling: AdaptiveScaler,
+}
+
+impl AIEnhancedWASMService {
+    pub fn predict_load(&self, time_window: Duration) -> Result<LoadPrediction, PredictionError> {
+        // 使用WASM编译的ML模型预测负载
+        todo!("实现负载预测")
+    }
+    
+    pub fn optimize_resources(&self) -> Result<ResourceAllocation, OptimizationError> {
+        // 优化资源分配
+        todo!("实现资源优化")
+    }
+}
+```
+
+### 8.2 WebAssembly系统接口（WASI）
+
+WASI标准化将使WebAssembly微服务能够安全访问系统资源：
+
+```rust
+pub struct WASIEnabled<'a> {
+    pub filesystem: PreopenedDir<'a>,
+    pub network: NetworkInterface<'a>,
+    pub time: TimeInterface,
+    pub random: RandomInterface,
+    pub environment: Environment,
+}
+
+pub struct WASIMicroservice {
+    pub base_service: WASMMicroservice,
+    pub wasi_context: WASICtx,
+    pub capabilities: Vec<WASICapability>,
+}
+```
+
+### 8.3 新兴融合模式
+
+WebAssembly与微服务新兴的融合模式：
+
+1. **Component Model**：标准化的WASM组件模型，简化微服务组合
+2. **WASM网络函数**：在5G/6G网络中部署WebAssembly网络功能
+3. **Serverless WASM**：基于WebAssembly的超轻量级函数计算
+
+## 9. 交叉引用
+
+本理论与以下理论体系相关：
+
+- [04-分层与云原生架构理论](04-分层与云原生架构理论.md)
+- [05-分布式架构理论](05-分布式架构理论.md)
+- [软件架构理论统一总论](00-软件架构理论统一总论.md)
+
+## 10. 结论
+
+微服务与WebAssembly架构的融合代表了软件架构的重要发展方向，兼具微服务的灵活性和WebAssembly的高性能、跨平台特性。这一融合架构为构建下一代分布式系统提供了新的思路和技术路径，对云原生、边缘计算等领域具有重要意义。
+
+随着技术的不断演进，微服务与WebAssembly架构的结合将进一步深化，通过统一的组件模型、安全的系统接口和智能化的运行时，实现更为高效、灵活的软件架构范式。
 
 ```mermaid
 graph LR
