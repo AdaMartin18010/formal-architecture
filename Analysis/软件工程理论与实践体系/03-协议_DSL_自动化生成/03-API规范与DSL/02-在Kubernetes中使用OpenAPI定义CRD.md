@@ -76,10 +76,10 @@ spec:
 
 当用户尝试创建或更新一个`MyCRD`资源时，Kubernetes API Server会使用上面定义的`openAPIV3Schema`来验证提交的YAML/JSON对象：
 
--   **类型检查**: 确保`spec.replicas`是一个整数，`spec.image`是一个字符串。
--   **必需字段**: 检查`spec.image`和`spec.replicas`字段是否存在。
--   **值约束**: 验证`spec.replicas`的值是否大于等于1（`minimum: 1`）。
--   **结构完整性**: 确保只有在`spec`和`status`中定义的字段才被接受（除非配置了`x-kubernetes-preserve-unknown-fields`）。
+- **类型检查**: 确保`spec.replicas`是一个整数，`spec.image`是一个字符串。
+- **必需字段**: 检查`spec.image`和`spec.replicas`字段是否存在。
+- **值约束**: 验证`spec.replicas`的值是否大于等于1（`minimum: 1`）。
+- **结构完整性**: 确保只有在`spec`和`status`中定义的字段才被接受（除非配置了`x-kubernetes-preserve-unknown-fields`）。
 
 如果验证失败，API Server将拒绝该请求并返回一个描述错误的详细信息。
 
@@ -112,9 +112,10 @@ spec:
 ```
 
 在这个例子中：
--   Kubernetes API Server 会同时提供`v1alpha1`和`v1`两个版本的API端点。
--   所有`MyCRD`对象都将以`v1`版本的schema格式存储在etcd中（因为`storage: true`）。
--   当用户向`v1alpha1`端点写入数据时，可以通过一个**Conversion Webhook**自动将`v1alpha1`格式的对象转换为`v1`格式再进行存储。
--   当用户从`v1alpha1`端点读取数据时，Webhook会将存储的`v1`对象转换回`v1alpha1`格式再返回给用户。
 
-这种机制充分利用了OpenAPI Schema的强大能力，为分布式系统的API提供了健壮的验证、清晰的文档和灵活的演进路径。 
+- Kubernetes API Server 会同时提供`v1alpha1`和`v1`两个版本的API端点。
+- 所有`MyCRD`对象都将以`v1`版本的schema格式存储在etcd中（因为`storage: true`）。
+- 当用户向`v1alpha1`端点写入数据时，可以通过一个**Conversion Webhook**自动将`v1alpha1`格式的对象转换为`v1`格式再进行存储。
+- 当用户从`v1alpha1`端点读取数据时，Webhook会将存储的`v1`对象转换回`v1alpha1`格式再返回给用户。
+
+这种机制充分利用了OpenAPI Schema的强大能力，为分布式系统的API提供了健壮的验证、清晰的文档和灵活的演进路径。
