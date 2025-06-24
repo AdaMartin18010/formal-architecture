@@ -21,6 +21,8 @@
   - *内容：提供在Rust和Go这两种高性能语言中集成OpenTelemetry的具体代码示例和场景分析。*
 - [Java工作流观测实践](./02-OpenTelemetry实践/03-Java工作流观测实践.md)
   - *内容：展示如何在Java应用中，特别是在工作流引擎的场景下，实现完整的可观测性。*
+- [工作流与OpenTelemetry的范畴论分析(Rust)](./02-OpenTelemetry实践/04-工作流与OpenTelemetry的范畴论分析(Rust).md)
+  - *内容：一篇深度技术分析，利用范畴论对工作流和OpenTelemetry进行形式化建模，并提供了Rust实现来探讨两者之间的同构、等价和组合关系。*
 
 ### 03-AI辅助与创新
 
