@@ -58,6 +58,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 这个脚本会调用 `prost_build`，它会解析 `user_service.proto` 文件，并在 `OUT_DIR` 环境变量所指向的目录中生成一个名为 `user_service.rs` 的Rust文件。
 
 ## 4. 在应用中使用生成的代码
@@ -101,4 +102,5 @@ fn main() {
     assert_eq!(user, decoded_user);
 }
 ```
-这个流程利用了Cargo的构建脚本能力，实现了从IDL（`.proto`文件）到可执行代码的无缝、自动化转换，是"规范驱动开发"的典范。 
+
+这个流程利用了Cargo的构建脚本能力，实现了从IDL（`.proto`文件）到可执行代码的无缝、自动化转换，是"规范驱动开发"的典范。

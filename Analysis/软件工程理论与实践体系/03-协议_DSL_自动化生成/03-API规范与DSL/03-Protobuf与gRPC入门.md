@@ -116,6 +116,7 @@ message HealthCheckResponse {
 }
 // ... 其他消息定义 ...
 ```
+
 在Rust中，`tonic-build` 库可以读取这个文件，并为 `NodeService` 生成客户端存根（Client Stub）和服务端骨架（Server Trait），开发者只需要实现该骨架定义的业务逻辑即可。
 
-通过 `.proto` 文件作为单一事实来源，Protobuf 和 gRPC 极大地简化了跨语言、跨平台的分布式系统开发。 
+通过 `.proto` 文件作为单一事实来源，Protobuf 和 gRPC 极大地简化了跨语言、跨平台的分布式系统开发。

@@ -36,4 +36,4 @@
 - [基于OpenAPI的Rust代码生成器设计](./04-自动化代码生成/01-基于OpenAPI的Rust代码生成器设计.md)
   - *内容：阐述一个模块化、可扩展的Rust代码生成器的设计思想，它可以从OpenAPI规范生成完整的应用骨架。*
 - [使用Prost从Protobuf生成Rust代码](./04-自动化代码生成/02-使用Prost从Protobuf生成Rust代码.md)
-  - *内容：展示在Rust项目中，如何利用`prost`和`build.rs`构建脚本，将`.proto`文件自动编译成Rust代码的完整流程。* 
+  - *内容：展示在Rust项目中，如何利用`prost`和`build.rs`构建脚本，将`.proto`文件自动编译成Rust代码的完整流程。*
