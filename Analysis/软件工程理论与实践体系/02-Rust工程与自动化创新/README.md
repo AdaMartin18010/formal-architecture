@@ -35,4 +35,4 @@
 ### 05-外部函数接口FFI
 
 - [Rust FFI实践：安全包装libsqlite3](./05-外部函数接口FFI/01-SQLite的FFI实践.md)
-  - *内容：通过为C库`libsqlite3`创建一个安全的Rust包装器，完整演示了FFI的声明、`unsafe`封装和资源管理。* 
+  - *内容：通过为C库`libsqlite3`创建一个安全的Rust包装器，完整演示了FFI的声明、`unsafe`封装和资源管理。*

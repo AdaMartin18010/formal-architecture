@@ -7,6 +7,7 @@
 本示例将创建一个自定义Lint规则，用于在代码中检测到`.unwrap()`的使用，并发出警告。
 
 **前置条件:**
+
 - 这需要使用不稳定的Rust Nightly工具链，因为它依赖于`rustc`的内部API。
 
 ```rust
@@ -62,13 +63,15 @@ impl<'tcx> LateLintPass<'tcx> for UnwrapChecker {
 
 ## 在项目中使用自定义Lint
 
-1.  **编译Lint插件**: 将上述代码编译成一个动态库（`.so`或`.dll`）。
-2.  **配置Cargo**: 告诉Cargo在哪里可以找到你的自定义Lint插件。
+1. **编译Lint插件**: 将上述代码编译成一个动态库（`.so`或`.dll`）。
+2. **配置Cargo**: 告诉Cargo在哪里可以找到你的自定义Lint插件。
+
     ```shell
     # 编译时通过RUSTFLAGS传递
     RUSTFLAGS="-Z extra-plugins=/path/to/your/lint/library.so" cargo clippy
     ```
-3.  **查看结果**: 当Clippy运行时，它会加载你的插件，并在代码中找到`.unwrap()`时报告警告。
+
+3. **查看结果**: 当Clippy运行时，它会加载你的插件，并在代码中找到`.unwrap()`时报告警告。
 
 ```rust
 // 在应用此Lint的项目中
@@ -92,4 +95,4 @@ fn main() {
 
 ```
 
-通过自定义Lint，团队可以自动化地实施编码标准，捕获领域特定的bug，并显著提升代码库的整体质量和健壮性。 
+通过自定义Lint，团队可以自动化地实施编码标准，捕获领域特定的bug，并显著提升代码库的整体质量和健壮性。

@@ -137,4 +137,4 @@ dependencies = [
 - **cargo-nextest**: 测试运行器
 - **cargo-deny**: 依赖审核
 - **sccache**: 编译缓存
-- **cross**: 跨平台编译 
+- **cross**: 跨平台编译
