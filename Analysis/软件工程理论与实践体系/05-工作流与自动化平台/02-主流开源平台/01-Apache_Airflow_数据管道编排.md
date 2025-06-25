@@ -8,7 +8,8 @@
 4. 适用场景与局限性
 5. Python代码示例：定义一个DAG
 6. Mermaid图解Airflow架构
-7. 参考文献
+7. 监控与可观测性
+8. 参考文献
 
 ---
 
@@ -29,6 +30,31 @@ Apache Airflow是一个由Airbnb公司在2014年发起，并于后来捐赠给Ap
   - **Operator**: DAG中任务的模板，定义了一个任务具体要做什么。Airflow内置了大量Operator（如`BashOperator`, `PythonOperator`, `DockerOperator`），并且有庞大的社区贡献的Provider包，用于与AWS, GCP, Snowflake等外部系统交互。
   - **Task**: Operator的一个实例化对象，代表DAG中的一个节点。
   - **XComs (Cross-communications)**: 一个允许任务间传递少量元数据的机制，例如将一个下载任务的文件路径传递给一个处理任务。
+
+## 2.5 深度解析：分布式执行与Celery执行器
+
+当单个节点的计算能力无法满足大规模任务处理的需求时，Airflow可以通过切换执行器（Executor）来实现分布式执行。**CeleryExecutor** 是最常用和最成熟的选择之一，它将Airflow与强大的分布式任务队列系统Celery相结合。
+
+### Celery架构组件
+
+集成了Celery后，Airflow的架构增加了两个关键组件：
+
+- **消息代理 (Message Broker)**: 如 `RabbitMQ` 或 `Redis`。调度器将需要执行的任务作为消息发送到消息代理中。
+- **Celery工作节点 (Celery Workers)**: 这些是独立的进程，可以部署在多台机器上。它们从消息代理中获取任务，并执行它们。
+
+### 工作流程
+
+1. **任务分发**: Airflow调度器不再自己执行任务，而是将任务打包后发送到消息代理的特定队列中。
+2. **任务领取**: 在分布式集群中的Celery工作节点持续监听队列。一旦有新任务，空闲的工作节点就会领取它。
+3. **任务执行**: 工作节点在本地环境中执行任务逻辑。
+4. **状态回报**: 工作节点执行完成后，会将任务的最终状态（成功、失败等）写回Airflow的元数据数据库。
+5. **结果后端 (Result Backend)**: （可选）Celery可以配置一个结果后端（如Redis或数据库），用于存储任务的返回值，这可以与Airflow的XComs机制配合使用。
+
+这种架构的优势在于：
+
+- **高可扩展性**: 可以通过简单地增加Celery工作节点的数量来水平扩展计算能力。
+- **高可用性**: 即使某个工作节点失败，任务也可以被其他节点接管。调度器和Web服务器也可以配置多实例运行。
+- **资源隔离**: 可以通过将工作节点分配到不同的队列来隔离资源，例如为高CPU任务和高IO任务分配不同的工作节点池。
 
 ## 3. 主要特点与优势
 
@@ -115,7 +141,38 @@ graph TD
     F -- Read/Write State --> C
 ```
 
-## 7. 参考文献
+## 7. 监控与可观测性
+
+在生产环境中，对工作流进行有效的监控是保证其可靠运行的关键。Airflow提供了一套多层次的可观测性方案。
+
+### 7.1 内置UI监控
+
+Airflow的Web UI是监控DAG和任务状态的首选工具。它提供了：
+
+- **DAG视图**: 可视化地展示DAG的结构、任务依赖和当前每个任务实例的状态（成功、运行中、失败、重试等）。
+- **任务日志**: 可以直接在UI中查看每个任务实例的实时和历史日志。
+- **图表视图**: 展示任务执行时长、SLA达成情况等统计信息。
+- **审计日志**: 记录用户操作和系统事件。
+
+### 7.2 日志系统
+
+Airflow支持将任务日志发送到远程存储，以便进行集中管理和长期归档。常见的配置包括：
+
+- **本地文件系统**: 默认配置。
+- **云存储**: 如 Amazon S3, Google Cloud Storage, Azure Blob Storage。
+- **分布式日志系统**: 如 Elasticsearch, Loki。
+
+### 7.3 指标暴露 (Metrics)
+
+Airflow能够通过`StatsD`协议暴露大量的内部指标，可以非常方便地与`Prometheus`等现代监控系统集成。关键指标包括：
+
+- **调度器指标**: DAG解析时间、调度延迟、心跳等。
+- **执行器指标**: 任务队列长度（对于CeleryExecutor）、运行中/排队中的任务数量。
+- **任务级指标**: 任务成功/失败次数、执行时长。
+
+通过这些指标，可以配置强大的告警规则，例如"当某个DAG连续失败3次时告警"或"当任务队列积压超过100个时告警"。
+
+## 8. 参考文献
 
 - [Apache Airflow Documentation](https://airflow.apache.org/docs/)
 - [Astronomer Registry (Discoverable Airflow Providers)](https://registry.astronomer.io/)
