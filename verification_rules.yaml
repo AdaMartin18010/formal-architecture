@@ -1,0 +1,6 @@
+  - rule_id: "RULE-003"
+    name: "运行时契约检查"
+    description: "在模型运行时监控其行为是否违反指定契约"
+    algorithm: "RuntimeVerification"
+    parameters:
+      contract_name: "NoZeroDivisor"
