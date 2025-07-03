@@ -5,6 +5,7 @@
 ## 目录
 
 - [1.1.3.1 Go项目的CI/CD与DevOps实践](#1131-go项目的cicd与devops实践)
+  - [目录](#目录)
   - [1.1.3.1.1 引言与定义](#11311-引言与定义)
   - [1.1.3.1.2 CI/CD核心概念](#11312-cicd核心概念)
     - [1.1.3.1.2.1 持续集成 (Continuous Integration)](#113121-持续集成-continuous-integration)
@@ -14,17 +15,17 @@
     - [1.1.3.1.3.1 阶段一：代码检查 (Lint)](#113131-阶段一代码检查-lint)
     - [1.1.3.1.3.2 阶段二：测试 (Test)](#113132-阶段二测试-test)
     - [1.1.3.1.3.3 阶段三：构建 (Build)](#113133-阶段三构建-build)
-    - [1.1.3.1.3.4 阶段四：打包与推送 (Package & Push)](#113134-阶段四打包与推送-package--push)
+    - [1.1.3.1.3.4 阶段四：打包与推送 (Package \& Push)](#113134-阶段四打包与推送-package--push)
     - [1.1.3.1.3.5 阶段五：部署 (Deploy)](#113135-阶段五部署-deploy)
   - [1.1.3.1.4 自动化平台与工具](#11314-自动化平台与工具)
     - [1.1.3.1.4.1 GitHub Actions](#113141-github-actions)
     - [1.1.3.1.4.2 GitLab CI/CD](#113142-gitlab-cicd)
-    - [1.1.3.1.4.3 Docker & Kubernetes](#113143-docker--kubernetes)
+    - [1.1.3.1.4.3 Docker \& Kubernetes](#113143-docker--kubernetes)
   - [1.1.3.1.5 配置示例](#11315-配置示例)
     - [1.1.3.1.5.1 GitHub Actions工作流 (`.github/workflows/ci.yml`)](#113151-github-actions工作流-githubworkflowsciyml)
   - [1.1.3.1.6 行业应用案例](#11316-行业应用案例)
-  - [1.1.3.1.7 Mermaid图表：Go CI/CD流水线](#11317-mermaid图表go-cicd流水线)
-  - [1.1.3.1.8 参考文献](#11318-参考文献)
+  - [7. Mermaid图表：Go CI/CD流水线](#7-mermaid图表go-cicd流水线)
+  - [8. 参考文献](#8-参考文献)
 
 ---
 
