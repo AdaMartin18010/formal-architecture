@@ -2,26 +2,28 @@
 
 ## 目录
 
-- [1. 引言与定义](#1-引言与定义)
-- [2. 核心概念](#2-核心概念)
-  - [2.1 OpenAPI规范 (OAS)](#21-openapi规范-oas)
-  - [2.2 Swagger工具集](#22-swagger工具集)
-  - [2.3 设计优先 vs 代码优先](#23-设计优先-vs-代码优先)
-- [3. 自动化工作流](#3-自动化工作流)
-  - [3.1 代码生成](#31-代码生成)
-  - [3.2 文档生成](#32-文档生成)
-  - [3.3 Mock服务器](#33-mock服务器)
-  - [3.4 契约测试](#34-契约测试)
-- [4. 核心工具与实践](#4-核心工具与实践)
-  - [4.1 `swagger-codegen` / `openapi-generator`](#41-swagger-codegen--openapi-generator)
-  - [4.2 `Swagger UI` & `ReDoc`](#42-swagger-ui--redoc)
-  - [4.3 `Prism`](#43-prism)
-- [5. 配置/代码示例](#5-配置代码示例)
-  - [5.1 OpenAPI 3.0定义示例 (`openapi.yaml`)](#51-openapi-30定义示例-openapiyaml)
-  - [5.2 `openapi-generator`使用示例](#52-openapi-generator使用示例)
-- [6. 行业应用案例](#6-行业应用案例)
-- [7. Mermaid图表：OpenAPI自动化工作流](#7-mermaid图表-openapi自动化工作流)
-- [8. 参考文献](#8-参考文献)
+- [1.1 OpenAPI与Swagger：自动化实践](#11-openapi与swagger自动化实践)
+  - [目录](#目录)
+  - [1. 引言与定义](#1-引言与定义)
+  - [2. 核心概念](#2-核心概念)
+    - [2.1 OpenAPI规范 (OAS)](#21-openapi规范-oas)
+    - [2.2 Swagger工具集](#22-swagger工具集)
+    - [2.3 设计优先 vs 代码优先](#23-设计优先-vs-代码优先)
+  - [3. 自动化工作流](#3-自动化工作流)
+    - [3.1 代码生成](#31-代码生成)
+    - [3.2 文档生成](#32-文档生成)
+    - [3.3 Mock服务器](#33-mock服务器)
+    - [3.4 契约测试](#34-契约测试)
+  - [4. 核心工具与实践](#4-核心工具与实践)
+    - [4.1 `swagger-codegen` / `openapi-generator`](#41-swagger-codegen--openapi-generator)
+    - [4.2 `Swagger UI` \& `ReDoc`](#42-swagger-ui--redoc)
+    - [4.3 `Prism`](#43-prism)
+  - [5. 配置/代码示例](#5-配置代码示例)
+    - [5.1 OpenAPI 3.0定义示例 (`openapi.yaml`)](#51-openapi-30定义示例-openapiyaml)
+    - [5.2 `openapi-generator`使用示例](#52-openapi-generator使用示例)
+  - [6. 行业应用案例](#6-行业应用案例)
+  - [7. Mermaid图表：OpenAPI自动化工作流](#7-mermaid图表openapi自动化工作流)
+  - [8. 参考文献](#8-参考文献)
 
 ---
 
@@ -36,6 +38,7 @@
 ### 2.1 OpenAPI规范 (OAS)
 
 OAS使用YAML或JSON格式来描述API的方方面面，包括：
+
 - **端点（Endpoints）**: API的路径，如`/users/{id}`。
 - **操作（Operations）**: 每个端点支持的HTTP方法，如`GET`, `POST`, `DELETE`。
 - **参数（Parameters）**: 操作所需的输入，如路径参数、查询参数、请求头。
@@ -46,6 +49,7 @@ OAS使用YAML或JSON格式来描述API的方方面面，包括：
 ### 2.2 Swagger工具集
 
 Swagger提供了支持API整个生命周期的工具，主要包括：
+
 - **Swagger Editor**: 用于编写和验证OAS文件的浏览器编辑器。
 - **Swagger UI**: 将OAS文件渲染成一个交互式的、美观的API文档页面。
 - **Swagger Codegen**: 根据OAS文件为多种语言和框架（超过40种）自动生成客户端SDK、服务器存根（stub）和API文档。
@@ -62,6 +66,7 @@ Swagger提供了支持API整个生命周期的工具，主要包括：
 ### 3.1 代码生成
 
 根据OAS文件，自动为Go, Rust, Java, Python, TypeScript等多种语言生成：
+
 - **客户端SDK**: 封装了所有API调用，包含正确的类型定义、请求序列化和响应反序列化，使前端和客户端开发者无需关心HTTP细节。
 - **服务器存根**: 生成API接口定义（如Go的interface, Java的Interface）和数据模型，后端开发者只需填充业务逻辑即可。
 
@@ -179,4 +184,4 @@ graph TD
 - [Swagger Tools](https://swagger.io/tools/)
 - [OpenAPI Generator](https://openapi-generator.tech/)
 - [Stoplight Prism](https://stoplight.io/open-source/prism)
-- [Introduction to Design-First APIs](https://www.apisyouwonthate.com/blog/api-design-first-vs-code-first) 
+- [Introduction to Design-First APIs](https://www.apisyouwonthate.com/blog/api-design-first-vs-code-first)
