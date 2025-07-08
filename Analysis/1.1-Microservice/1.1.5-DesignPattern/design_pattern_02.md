@@ -103,7 +103,7 @@
 
 ### 1.1.5.2.3.1 Rust实现
 
-**用户注册Saga模式**
+**用户注册Saga模式**:
 
 ```rust
 use async_trait::async_trait;
@@ -274,7 +274,7 @@ async fn register_user() -> Result<(), String> {
 }
 ```
 
-**订单处理状态模式**
+**订单处理状态模式**:
 
 ```rust
 use std::collections::HashMap;
@@ -379,7 +379,7 @@ impl OrderStateMachine {
 
 ### 1.1.5.2.3.2 Haskell实现
 
-**函数式支付处理**
+**函数式支付处理**:
 
 ```haskell
 -- 支付类型
@@ -503,7 +503,7 @@ main = do
 
 ### 1.1.5.2.3.3 Go实现
 
-**微服务通信模式**
+**微服务通信模式**:
 
 ```go
 package main

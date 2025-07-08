@@ -40,20 +40,20 @@ OpenTelemetry是一个开源的可观测性框架，为微服务架构提供了�
 
 ### 1.1.4.1.2.1 三大支柱
 
-**Tracing（追踪）**
+**Tracing（追踪）**:
 
 - **Span**：表示一个工作单元，包含开始时间、结束时间和元数据
 - **Trace**：由多个Span组成的有向无环图，表示完整的请求路径
 - **Context**：在服务间传递的上下文信息
 
-**Metrics（指标）**
+**Metrics（指标）**:
 
 - **Counter**：单调递增的计数器
 - **Gauge**：可增可减的仪表盘
 - **Histogram**：统计分布直方图
 - **Summary**：分位数统计
 
-**Logs（日志）**
+**Logs（日志）**:
 
 - **结构化日志**：包含键值对的日志记录
 - **日志级别**：DEBUG、INFO、WARN、ERROR等
@@ -61,7 +61,7 @@ OpenTelemetry是一个开源的可观测性框架，为微服务架构提供了�
 
 ### 1.1.4.1.2.2 核心组件
 
-**Tracer**
+**Tracer**:
 
 ```rust
 use opentelemetry::{global, trace::{Span, Tracer}};
@@ -82,7 +82,7 @@ impl TracingService {
 }
 ```
 
-**Meter**
+**Meter**:
 
 ```rust
 use opentelemetry::{global, metrics::{Counter, Histogram, Meter}};
@@ -116,7 +116,7 @@ impl MetricsService {
 
 ### 1.1.4.1.3.1 初始化配置
 
-**全局初始化**
+**全局初始化**:
 
 ```rust
 use opentelemetry::{global, sdk::trace::config};
@@ -142,7 +142,7 @@ async fn init_opentelemetry() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-**中间件集成**
+**中间件集成**:
 
 ```rust
 use actix_web::{dev::ServiceRequest, dev::ServiceResponse, Error};
@@ -184,7 +184,7 @@ async fn tracing_middleware(
 
 ### 1.1.4.1.3.2 分布式追踪
 
-**服务间追踪**
+**服务间追踪**:
 
 ```rust
 use opentelemetry::{global, trace::Tracer};
@@ -227,7 +227,7 @@ impl HttpClient {
 }
 ```
 
-**数据库追踪**
+**数据库追踪**:
 
 ```rust
 use sqlx::{Connection, Executor};
@@ -474,7 +474,7 @@ fn init_logging() {
 
 ### 1.1.4.1.5.1 性能优化
 
-**采样策略**
+**采样策略**:
 
 ```rust
 use opentelemetry::sdk::trace::{Sampler, SamplingDecision, SamplingResult};
@@ -523,7 +523,7 @@ impl Sampler for CustomSampler {
 }
 ```
 
-**批量导出**
+**批量导出**:
 
 ```rust
 use opentelemetry::sdk::trace::config;
@@ -549,7 +549,7 @@ fn configure_batch_export() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 1.1.4.1.5.2 安全考虑
 
-**敏感数据过滤**
+**敏感数据过滤**:
 
 ```rust
 use opentelemetry::trace::Span;
@@ -582,7 +582,7 @@ impl SecureSpan {
 
 ### 1.1.4.1.5.3 监控告警
 
-**自定义告警规则**
+**自定义告警规则**:
 
 ```rust
 use prometheus::{Counter, Histogram, Registry};
