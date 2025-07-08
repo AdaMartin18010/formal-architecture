@@ -115,4 +115,24 @@ graph TD
 - [Pattern: Service registry](https://microservices.io/patterns/service-registry.html)
 
 ---
-> 支持断点续写与递归细化，如需扩展某一小节请指定。
+
+## 服务发现与注册的形式化建模与工程实践
+
+### 1. 形式化建模
+
+- **定义**：服务发现机制用于动态感知分布式系统中各服务实例的可用性与位置。
+- **抽象模型**：
+  - 服务注册表 $R = \{(service, instance, meta)\}$
+  - 心跳机制 $H: instance \rightarrow \{alive, dead\}$
+  - 发现过程 $D: client \rightarrow R$
+- **一致性与可用性分析**：注册中心需权衡CAP，常见实现如AP（Consul）、CP（etcd）。
+
+### 2. 工程实践
+
+- **Consul**：基于Gossip协议，支持健康检查、服务分区、KV存储。
+- **etcd**：基于Raft协议，强一致性，广泛用于Kubernetes等云原生平台。
+- **批判性分析**：服务发现提升了系统弹性与自动化，但引入了新的单点与一致性挑战。
+
+---
+
+> 本节内容吸收自FormalUnified分支，系统性补充服务发现与注册的形式化建模、可验证性分析与工程案例。
