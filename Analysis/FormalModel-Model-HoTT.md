@@ -1,6 +1,6 @@
-> **重定向声明**: 本文档内容已合并至 [04-形式模型理论体系/00-形式模型理论统一总论.md](04-形式模型理论体系/00-形式模型理论统一总论.md)，请参考主权威文件获取最新内容。
-
 # FormalModel-Model-HoTT
+
+> **重定向声明**: 本文档内容已合并至 [04-形式模型理论体系/00-形式模型理论统一总论.md](04-形式模型理论体系/00-形式模型理论统一总论.md)，请参考主权威文件获取最新内容。
 
 [TOC]
 
@@ -23,11 +23,14 @@
 - **恒等类型(Identity Type)**：
   对于任意类型$A$及$a, b : A$，存在恒等类型$Id_A(a, b)$，记作$a =_A b$。
   - 自反性引入：
+
     ```math
     \Gamma \vdash a : A \\
     \Rightarrow \Gamma \vdash refl_a : a =_A a
     ```
+
   - 消去规则（J消去）：
+
     ```math
     \Gamma \vdash p : a =_A b \\
     \Gamma \vdash P(x) : Type~(x : A) \\
@@ -36,18 +39,22 @@
     ```
 
 - **单价性公理(Univalence Axiom)**：
+
   ```math
   UA : \Pi(A,B:Type). (A \simeq B) \simeq (A =_{Type} B)
   ```
+
   其中$\simeq$表示类型等价。单价性公理是HoTT的核心创新，主张结构等价即类型等价。
 
 ### 3.8.1.3 高阶归纳类型与结构示例
 
 - **高阶归纳类型（Higher Inductive Types）**：
   以圆环$S^1$为例：
+
   ```math
   data~S^1 : Type~where~base : S^1~loop : base =_{S^1} base
   ```
+
   允许直接定义空间对象及其路径结构。
 
 ### 3.8.1.4 依赖类型与多层次结构
@@ -57,6 +64,7 @@
 - **依赖和类型($\Sigma$-type)**：
   $\Sigma(x:A).B(x)$ 表示存在$A$中的$x$使$B(x)$成立。
 - **同伦层次结构（h-level）**：
+
   ```math
   h\text{-}level~0:~\text{收缩类型}~(\text{至多一个元素}) \\
   h\text{-}level~1:~\text{命题}~(\text{所有元素等价}) \\
@@ -126,9 +134,11 @@
 ### 3.8.3.1 单价性公理的证明结构与多维表征
 
 - 单价性公理（Univalence Axiom）是HoTT的核心创新，主张"类型等价即类型相等"，其严格形式化为：
+
   ```math
   UA : \forall A, B : Type, (A \simeq B) \simeq (A = B)
   ```
+
 - 类型等价$A \simeq B$定义为存在双射（等价函数）及其逆，满足同伦条件。
 - 单价性公理的证明在标准HoTT中作为公理引入，但在Cubical Type Theory中可被构造性证明，具体依赖于区间类型$I$与Glue类型等新结构。
 - 单价性公理的多维表征：
@@ -140,9 +150,11 @@
 ### 3.8.3.2 高阶归纳类型与构造性证明
 
 - 高阶归纳类型（Higher Inductive Types, HITs）允许直接定义空间对象及其路径结构，如圆环$S^1$：
+
   ```math
   data~S^1 : Type~where~base : S^1~loop : base =_{S^1} base
   ```
+
 - HITs 支持空间、拓扑、代数等复杂结构的形式化建模，极大拓展了类型论的表达力。
 - 典型应用：基本群、同调、拓扑空间的形式化证明。
 
