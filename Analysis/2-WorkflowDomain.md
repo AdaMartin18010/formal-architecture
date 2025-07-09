@@ -5,14 +5,9 @@
 
 ## 目录
 
-- [2 WorkflowDomain 全局主题综述](#2-workflowdomain-全局主题综述)
-  - [2.1 理论基础](./2.1-WorkflowDomain-理论基础.md)
-  - [2.2 建模与表达](./2.2-WorkflowDomain-建模与表达.md)
-  - [2.3 主流平台](./2.3-WorkflowDomain-主流平台.md)
-  - [2.4 微服务集成](./2.4-WorkflowDomain-微服务集成.md)
-  - [2.5 Rust/Go实践](./2.5-WorkflowDomain-RustGo实践.md)
-  - [2.6 图表与分析](./2.6-WorkflowDomain-图表与分析.md)
-  - [2.7 参考文献与延伸阅读](./2.7-WorkflowDomain-参考文献.md)
+- [2-WorkflowDomain](#2-workflowdomain)
+  - [目录](#目录)
+  - [2.7 参考文献与延伸阅读](#27-参考文献与延伸阅读)
 
 ---
 
