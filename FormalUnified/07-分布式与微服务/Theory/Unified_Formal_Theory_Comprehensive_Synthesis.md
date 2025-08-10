@@ -39,7 +39,7 @@ Read file: /c:/_src/github/FormalScience/docs/Theory/Advanced_Type_Theory_Synthe
 
 ## 2. 统一形式理论综合（示例片段）
 
-**Unified_Formal_Theory_Synthesis.md**
+**Unified_Formal_Theory_Synthesis.md**:
 
 ### 1. 形式理论统一框架
 

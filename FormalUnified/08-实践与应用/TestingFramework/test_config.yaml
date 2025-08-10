@@ -1,0 +1,285 @@
+# 综合测试框架配置文件
+# 定义测试参数、环境配置和测试策略
+
+# 测试环境配置
+environment:
+  # 开发环境
+  development:
+    base_url: "http://localhost:8080"
+    database_url: "postgresql://user:password@localhost:5432/dev_db"
+    redis_url: "redis://localhost:6379"
+    timeout: 30
+    retry_count: 3
+    
+  # 测试环境
+  testing:
+    base_url: "http://test-server:8080"
+    database_url: "postgresql://user:password@test-db:5432/test_db"
+    redis_url: "redis://test-redis:6379"
+    timeout: 60
+    retry_count: 5
+    
+  # 生产环境
+  production:
+    base_url: "https://api.production.com"
+    database_url: "postgresql://user:password@prod-db:5432/prod_db"
+    redis_url: "redis://prod-redis:6379"
+    timeout: 120
+    retry_count: 10
+
+# 测试策略配置
+test_strategy:
+  # 单元测试配置
+  unit_tests:
+    enabled: true
+    parallel: true
+    max_workers: 4
+    timeout: 30
+    coverage_threshold: 80
+    
+  # 集成测试配置
+  integration_tests:
+    enabled: true
+    parallel: false  # 集成测试通常需要串行执行
+    timeout: 120
+    cleanup_after_test: true
+    database_reset: true
+    
+  # 性能测试配置
+  performance_tests:
+    enabled: true
+    parallel: true
+    max_workers: 2
+    timeout: 300
+    load_test_duration: 600  # 10分钟
+    ramp_up_time: 120        # 2分钟爬升
+    target_users: 100
+    performance_thresholds:
+      response_time_p95: 500    # 95%请求响应时间 < 500ms
+      response_time_p99: 1000   # 99%请求响应时间 < 1000ms
+      throughput_min: 100        # 最小吞吐量 100 req/s
+      error_rate_max: 0.01      # 最大错误率 1%
+      
+  # 端到端测试配置
+  e2e_tests:
+    enabled: true
+    parallel: false
+    timeout: 600
+    browser: "chrome"
+    headless: true
+    screenshot_on_failure: true
+    video_recording: false
+
+# 测试数据配置
+test_data:
+  # 用户测试数据
+  users:
+    - username: "test_user_1"
+      email: "test1@example.com"
+      password: "TestPassword123!"
+      role: "user"
+    - username: "test_user_2"
+      email: "test2@example.com"
+      password: "TestPassword123!"
+      role: "admin"
+    - username: "test_user_3"
+      email: "test3@example.com"
+      password: "TestPassword123!"
+      role: "moderator"
+      
+  # 商品测试数据
+  products:
+    - name: "测试商品1"
+      description: "这是一个测试商品"
+      price: 99.99
+      category: "电子产品"
+      stock: 100
+    - name: "测试商品2"
+      description: "这是另一个测试商品"
+      price: 199.99
+      category: "服装"
+      stock: 50
+      
+  # 订单测试数据
+  orders:
+    - user_id: "test_user_1"
+      items:
+        - product_id: "test_product_1"
+          quantity: 2
+          price: 99.99
+      total_amount: 199.98
+      status: "pending"
+
+# 测试工具配置
+test_tools:
+  # 数据库工具
+  database:
+    type: "postgresql"
+    migration_dir: "./migrations"
+    seed_data_dir: "./seed_data"
+    cleanup_scripts: ["./scripts/cleanup.sql"]
+    
+  # 缓存工具
+  cache:
+    type: "redis"
+    flush_on_startup: true
+    flush_after_test: true
+    
+  # 消息队列工具
+  message_queue:
+    type: "rabbitmq"
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+    vhost: "/"
+    
+  # 文件存储工具
+  file_storage:
+    type: "local"
+    base_path: "./test_files"
+    cleanup_after_test: true
+
+# 报告配置
+reporting:
+  # 测试报告
+  test_reports:
+    format: ["json", "html", "xml"]
+    output_dir: "./test_reports"
+    include_screenshots: true
+    include_logs: true
+    
+  # 性能报告
+  performance_reports:
+    format: ["json", "html", "csv"]
+    output_dir: "./performance_reports"
+    include_graphs: true
+    include_metrics: true
+    
+  # 覆盖率报告
+  coverage_reports:
+    format: ["html", "xml", "lcov"]
+    output_dir: "./coverage_reports"
+    threshold: 80
+    
+  # 通知配置
+  notifications:
+    email:
+      enabled: false
+      smtp_server: "smtp.gmail.com"
+      smtp_port: 587
+      username: "test@example.com"
+      password: "password"
+      recipients: ["team@example.com"]
+    slack:
+      enabled: false
+      webhook_url: "https://hooks.slack.com/services/..."
+      channel: "#test-results"
+
+# 监控配置
+monitoring:
+  # 系统监控
+  system_metrics:
+    enabled: true
+    collect_interval: 10  # 秒
+    metrics:
+      - cpu_usage
+      - memory_usage
+      - disk_io
+      - network_throughput
+      
+  # 应用监控
+  application_metrics:
+    enabled: true
+    collect_interval: 5   # 秒
+    metrics:
+      - request_rate
+      - response_time
+      - error_rate
+      - active_connections
+      
+  # 日志收集
+  logging:
+    level: "INFO"
+    format: "json"
+    output: ["file", "console"]
+    log_file: "./test_execution.log"
+    max_file_size: "100MB"
+    backup_count: 5
+
+# 安全配置
+security:
+  # 认证配置
+  authentication:
+    enabled: true
+    type: "jwt"
+    secret_key: "your-secret-key"
+    token_expiry: 3600  # 1小时
+    
+  # 授权配置
+  authorization:
+    enabled: true
+    roles: ["user", "admin", "moderator"]
+    permissions:
+      user: ["read", "create"]
+      admin: ["read", "create", "update", "delete"]
+      moderator: ["read", "create", "update"]
+      
+  # 数据加密
+  encryption:
+    enabled: true
+    algorithm: "AES-256-GCM"
+    key_rotation: true
+    rotation_interval: 86400  # 24小时
+
+# 性能基准配置
+performance_benchmarks:
+  # 响应时间基准
+  response_time:
+    fast: 100      # < 100ms 为快速
+    normal: 300    # < 300ms 为正常
+    slow: 500      # < 500ms 为慢
+    unacceptable: 1000  # > 1000ms 为不可接受
+    
+  # 吞吐量基准
+  throughput:
+    low: 10        # < 10 req/s 为低
+    medium: 100    # < 100 req/s 为中
+    high: 1000     # < 1000 req/s 为高
+    excellent: 10000  # > 10000 req/s 为优秀
+    
+  # 资源使用基准
+  resource_usage:
+    cpu_max: 80    # CPU使用率最大80%
+    memory_max: 85 # 内存使用率最大85%
+    disk_max: 90   # 磁盘使用率最大90%
+
+# 测试执行配置
+execution:
+  # 并行执行
+  parallel:
+    enabled: true
+    max_workers: 4
+    strategy: "process"  # process 或 thread
+    
+  # 重试机制
+  retry:
+    enabled: true
+    max_attempts: 3
+    delay: 1  # 秒
+    backoff_multiplier: 2
+    
+  # 超时配置
+  timeout:
+    default: 30
+    unit_test: 10
+    integration_test: 60
+    performance_test: 300
+    e2e_test: 600
+    
+  # 清理配置
+  cleanup:
+    after_each_test: true
+    after_test_suite: true
+    after_all_tests: true
+    preserve_failures: true  # 保留失败测试的临时文件 

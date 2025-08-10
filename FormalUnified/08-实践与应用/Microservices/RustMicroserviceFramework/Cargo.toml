@@ -1,0 +1,38 @@
+[package]
+name = "rust-microservice-framework"
+version = "0.1.0"
+edition = "2021"
+authors = ["形式化架构团队"]
+description = "基于Rust的微服务框架，实现服务注册、发现、负载均衡等核心功能"
+license = "MIT"
+
+[dependencies]
+actix-web = "4.4"
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4"] }
+env_logger = "0.10"
+log = "0.4"
+rand = "0.8"
+
+[dev-dependencies]
+actix-rt = "2.9"
+
+[features]
+default = []
+test-utils = []
+
+[[bin]]
+name = "rust-microservice-framework"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+debug = true 
