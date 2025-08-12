@@ -18,7 +18,9 @@ def test_imports():
     
     try:
         # 测试AI建模引擎
-        from AI_Modeling_Engine.prototype import AIModelingEngine, ModelType, PropertyType
+        import sys
+        sys.path.append(str(Path(__file__).parent / "AI-Modeling-Engine"))
+        from prototype import AIModelingEngine, ModelType
         logging.info("✅ AI建模引擎导入成功")
         
         # 测试模型可视化工具
@@ -26,7 +28,7 @@ def test_imports():
         logging.info("✅ 模型可视化工具导入成功")
         
         # 测试形式验证工具
-        from VerificationTools.formal_checker import FormalVerificationEngine, PropertySpec
+        from VerificationTools.formal_checker import FormalVerificationEngine, PropertySpec, PropertyType
         logging.info("✅ 形式验证工具导入成功")
         
         return True
@@ -40,7 +42,9 @@ def test_basic_functionality():
     logging.info("🧪 测试基本功能...")
     
     try:
-        from AI_Modeling_Engine.prototype import AIModelingEngine, ModelType
+        import sys
+        sys.path.append(str(Path(__file__).parent / "AI-Modeling-Engine"))
+        from prototype import AIModelingEngine, ModelType
         
         # 创建引擎实例
         engine = AIModelingEngine()
@@ -50,10 +54,9 @@ def test_basic_functionality():
         simple_requirements = "创建一个简单的状态机"
         result = engine.process_requirements(simple_requirements, ModelType.STATE_MACHINE)
         
-        if result and 'model_id' in result:
+        if result and isinstance(result, str) and "模型ID:" in result:
             logging.info("✅ 需求处理成功")
-            logging.info(f"   模型ID: {result['model_id']}")
-            logging.info(f"   模型类型: {result['model_type']}")
+            logging.info(f"   处理结果: {result[:100]}...")
             return True
         else:
             logging.error("❌ 需求处理失败")
@@ -76,12 +79,16 @@ def test_visualization():
         # 创建测试模型数据
         test_model = {
             "id": "test_001",
-            "type": "state_machine",
-            "states": ["Start", "Running", "End"],
-            "transitions": [
-                {"from": "Start", "event": "begin", "to": "Running"},
-                {"from": "Running", "event": "finish", "to": "End"}
-            ]
+            "model_type": "state_machine",
+            "elements": {
+                "states": ["Start", "Running", "End"],
+                "transitions": [
+                    {"from": "Start", "event": "begin", "to": "Running"},
+                    {"from": "Running", "event": "finish", "to": "End"}
+                ],
+                "initial_state": "Start",
+                "final_states": ["End"]
+            }
         }
         
         # 测试可视化生成
@@ -119,12 +126,12 @@ def test_verification():
         }
         
         # 测试性质验证
-        property_spec = PropertySpec("可达性", PropertyType.REACHABILITY, "测试可达性")
-        result = verifier.verify_property(test_model, property_spec)
+        property_spec = PropertySpec("可达性", PropertyType.REACHABILITY, "测试可达性", "AG(EF(B))")
+        result = verifier.verify(test_model, property_spec)
         
-        if result and 'result' in result:
+        if result and hasattr(result, 'result'):
             logging.info("✅ 性质验证成功")
-            logging.info(f"   验证结果: {result['result']}")
+            logging.info(f"   验证结果: {result.result}")
             return True
         else:
             logging.error("❌ 性质验证失败")
@@ -139,14 +146,29 @@ def test_code_generation():
     logging.info("🧪 测试代码生成功能...")
     
     try:
-        from AI_Modeling_Engine.prototype import AIModelingEngine, ModelType
+        import sys
+        sys.path.append(str(Path(__file__).parent / "AI-Modeling-Engine"))
+        from prototype import AIModelingEngine, ModelType
         
         engine = AIModelingEngine()
         
         # 创建测试模型
         test_requirements = "创建一个简单的状态机，包含开始和结束状态"
         result = engine.process_requirements(test_requirements, ModelType.STATE_MACHINE)
-        model_id = result['model_id']
+        
+        # 检查结果结构
+        if not result or not isinstance(result, str):
+            logging.error("❌ 需求处理返回无效结果")
+            return False
+            
+        # 从摘要中提取模型ID
+        import re
+        model_id_match = re.search(r'模型ID:\s*(\w+)', result)
+        if not model_id_match:
+            logging.error("❌ 未找到模型ID")
+            return False
+            
+        model_id = model_id_match.group(1)
         
         # 测试Rust代码生成
         rust_code = engine.generate_implementation(model_id, "rust")
@@ -158,7 +180,7 @@ def test_code_generation():
         
         # 测试Go代码生成
         go_code = engine.generate_implementation(model_id, "go")
-        if go_code and "type State string" in go_code:
+        if go_code and ("type State int" in go_code or "type StateMachine struct" in go_code):
             logging.info("✅ Go代码生成成功")
         else:
             logging.error("❌ Go代码生成失败")

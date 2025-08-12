@@ -1,0 +1,85 @@
+{
+  "verification_summary": {
+    "total_systems": 9,
+    "verification_time": "2025-08-11T21:23:35.501509",
+    "overall_score": 15.172839506172838,
+    "status_distribution": {
+      "pass": 1,
+      "warning": 1,
+      "fail": 15,
+      "warn": 1
+    }
+  },
+  "system_details": {
+    "01-哲学基础理论": {
+      "completeness": 1.0,
+      "consistency": 0.0025167785234899327,
+      "integration": 0.1111111111111111,
+      "concepts_count": 1192,
+      "dependencies_count": 1
+    },
+    "02-数学理论体系": {
+      "completeness": 0.975,
+      "consistency": 0.0015723270440251573,
+      "integration": 0.1111111111111111,
+      "concepts_count": 636,
+      "dependencies_count": 1
+    },
+    "03-形式语言理论体系": {
+      "completeness": 1.0,
+      "consistency": 0.009880609304240428,
+      "integration": 0.1111111111111111,
+      "concepts_count": 2429,
+      "dependencies_count": 1
+    },
+    "04-形式模型理论体系": {
+      "completeness": 1.0,
+      "consistency": 0.004964905799778352,
+      "integration": 0.6666666666666666,
+      "concepts_count": 67675,
+      "dependencies_count": 6
+    },
+    "05-编程语言理论体系": {
+      "completeness": 1.0,
+      "consistency": 0.008839641434262949,
+      "integration": 0.0,
+      "concepts_count": 24096,
+      "dependencies_count": 0
+    },
+    "06-软件架构理论体系": {
+      "completeness": 1.0,
+      "consistency": 0.012703101920236336,
+      "integration": 0.0,
+      "concepts_count": 10155,
+      "dependencies_count": 0
+    },
+    "07-分布式与微服务": {
+      "completeness": 1.0,
+      "consistency": 0.0024449877750611247,
+      "integration": 0.1111111111111111,
+      "concepts_count": 2863,
+      "dependencies_count": 1
+    },
+    "08-实践与应用": {
+      "completeness": 0.875,
+      "consistency": 0.014234875444839857,
+      "integration": 1.0,
+      "concepts_count": 843,
+      "dependencies_count": 12
+    },
+    "09-索引与导航": {
+      "completeness": 0.26,
+      "consistency": 0.0,
+      "integration": 0.0,
+      "concepts_count": 21,
+      "dependencies_count": 0
+    }
+  },
+  "cross_theory_mappings": [],
+  "recommendations": [
+    "有 8 个验证失败，需要优先修复",
+    "有 1 个验证警告，建议及时处理",
+    "理论体系 09-索引与导航 完整性不足，需要补充内容",
+    "理论体系 01-哲学基础理论, 02-数学理论体系, 03-形式语言理论体系, 05-编程语言理论体系, 06-软件架构理论体系, 07-分布式与微服务, 09-索引与导航 集成度低，需要加强跨体系关联"
+  ]
+}

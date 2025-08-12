@@ -92,7 +92,7 @@ class CrossTheoryVerificationEngine:
             "min_confidence_threshold": 0.7
         }
     
-    def load_theory_systems(self, base_path: str = "FormalUnified") -> bool:
+    def load_theory_systems(self, base_path: str = "../") -> bool:
         """加载所有理论体系"""
         try:
             base_path = Path(base_path)
@@ -728,8 +728,12 @@ class CrossTheoryVerificationEngine:
         total_score = 0.0
         for result in self.verification_results:
             total_score += result.score
-            status = result.status
-            report["verification_summary"]["status_distribution"][status] += 1
+            status = result.status.lower()  # 转换为小写以匹配字典键
+            if status in report["verification_summary"]["status_distribution"]:
+                report["verification_summary"]["status_distribution"][status] += 1
+            else:
+                # 如果状态不在预定义中，添加到字典
+                report["verification_summary"]["status_distribution"][status] = 1
         
         if self.verification_results:
             report["verification_summary"]["overall_score"] = total_score / len(self.verification_results)
@@ -817,38 +821,46 @@ class CrossTheoryVerificationEngine:
 
 def main():
     """主函数"""
-    engine = CrossTheoryVerificationEngine()
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="跨理论验证引擎")
+    parser.add_argument("--config", default="config.yaml", help="配置文件路径")
+    args = parser.parse_args()
+    
+    # 初始化验证引擎
+    engine = CrossTheoryVerificationEngine(args.config)
     
     # 加载理论体系
     if not engine.load_theory_systems():
-        logger.error("加载理论体系失败")
+        logger.error("❌ 加载理论体系失败")
         return
     
-    # 执行验证
+    # 验证理论一致性
     logger.info("开始验证理论一致性...")
     verification_results = engine.verify_theory_consistency()
     
-    # 分析跨理论映射
+    # 分析跨理论映射关系
     logger.info("分析跨理论映射关系...")
-    mappings = engine.analyze_cross_theory_mappings()
+    mapping_relations = engine.analyze_cross_theory_mappings()
     
-    # 生成报告
+    # 生成验证报告
     logger.info("生成验证报告...")
     report = engine.generate_verification_report()
     
     # 导出结果
     logger.info("导出验证结果...")
-    engine.export_results()
-    
-    # 输出摘要
-    print(f"\n=== 跨理论验证结果摘要 ===")
-    print(f"理论体系数量: {len(engine.theory_systems)}")
-    print(f"验证结果数量: {len(verification_results)}")
-    print(f"映射关系数量: {len(mappings)}")
-    print(f"总体评分: {report['verification_summary']['overall_score']:.2f}")
-    
-    status_dist = report['verification_summary']['status_distribution']
-    print(f"状态分布: 通过={status_dist['pass']}, 警告={status_dist['warning']}, 失败={status_dist['fail']}")
+    if engine.export_results():
+        print("\n=== 跨理论验证结果摘要 ===")
+        print(f"理论体系数量: {report['verification_summary']['total_systems']}")
+        print(f"验证结果数量: {len(verification_results)}")
+        print(f"映射关系数量: {len(mapping_relations)}")
+        print(f"总体评分: {report['verification_summary']['overall_score']:.2f}")
+        
+        status_dist = report['verification_summary']['status_distribution']
+        status_str = ", ".join([f"{k}={v}" for k, v in status_dist.items()])
+        print(f"状态分布: {status_str}")
+    else:
+        logger.error("❌ 导出验证结果失败")
 
 if __name__ == "__main__":
     main() 
