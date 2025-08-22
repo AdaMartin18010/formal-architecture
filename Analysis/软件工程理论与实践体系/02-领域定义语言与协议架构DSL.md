@@ -4,14 +4,27 @@
 
 ## 目录
 
-1. 主题概述与内容索引
-2. DSL设计原则与语法建模
-3. 协议定义语言（Protobuf/OpenAPI/IDL等）
-4. 架构DSL（CUE/KDL/YAML-based DSL等）
-5. 自动化生成与工具链
-6. 代码示例（Rust宏/Go模板/ANTLR等）
-7. 行业应用与最佳实践
-8. 相关性跳转与引用
+- [02-领域定义语言（DSL）与协议/架构DSL](#02-领域定义语言dsl与协议架构dsl)
+  - [目录](#目录)
+  - [1. 主题概述与内容索引](#1-主题概述与内容索引)
+  - [2. DSL设计原则与语法建模](#2-dsl设计原则与语法建模)
+    - [2.1 DSL设计原则](#21-dsl设计原则)
+    - [2.2 语法与语义建模](#22-语法与语义建模)
+  - [3. 协议定义语言（Protobuf/OpenAPI/IDL等）](#3-协议定义语言protobufopenapiidl等)
+    - [3.1 Protobuf（Protocol Buffers）](#31-protobufprotocol-buffers)
+    - [3.2 OpenAPI/Swagger](#32-openapiswagger)
+    - [3.3 IDL（Interface Definition Language）](#33-idlinterface-definition-language)
+  - [4. 架构DSL（CUE/KDL/YAML-based DSL等）](#4-架构dslcuekdlyaml-based-dsl等)
+    - [4.1 CUE语言](#41-cue语言)
+    - [4.2 KDL（KDL: KDL Document Language）](#42-kdlkdl-kdl-document-language)
+    - [4.3 YAML-based DSL](#43-yaml-based-dsl)
+  - [5. 自动化生成与工具链](#5-自动化生成与工具链)
+  - [6. 代码示例（Rust宏/Go模板/ANTLR等）](#6-代码示例rust宏go模板antlr等)
+    - [6.1 Rust宏定义DSL示例](#61-rust宏定义dsl示例)
+    - [6.2 Go模板生成代码示例](#62-go模板生成代码示例)
+    - [6.3 ANTLR语法定义片段](#63-antlr语法定义片段)
+  - [7. 行业应用与最佳实践](#7-行业应用与最佳实践)
+  - [8. 相关性跳转与引用](#8-相关性跳转与引用)
 
 ---
 
