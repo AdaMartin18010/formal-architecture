@@ -2,7 +2,8 @@
 
 ## 概述
 
-Petri网是并发系统建模和分析的重要形式化工具，由Carl Adam Petri在1962年提出。本文档系统性地梳理了Petri网理论的主要分支，从基本Petri网到高级变种，包括时间Petri网、着色Petri网等。
+Petri网是并发系统建模和分析的重要形式化工具，由Carl Adam Petri在1962年提出。
+本文档系统性地梳理了Petri网理论的主要分支，从基本Petri网到高级变种，包括时间Petri网、着色Petri网等。
 
 ## 1. 基本Petri网 (Basic Petri Nets)
 

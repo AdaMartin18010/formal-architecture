@@ -2,33 +2,15 @@
 
 ## 目录结构
 
-### 主题索引
-
-- [理论体系索引](TheoryIndex/)
-- [应用案例索引](ApplicationIndex/)
-- [工具链索引](ToolIndex/)
-- [文档索引](DocumentIndex/)
-
 ### 导航系统
 
-- [知识图谱](KnowledgeGraph/)
-- [主题关系图](TopicRelationships/)
-- [学习路径](LearningPaths/)
-- [快速查找](QuickFind/)
+- [知识导航系统](../09-知识导航系统/) - 完整的知识导航系统
+- [知识应用指南](../08-知识应用指南/) - 知识应用指南
 
-### 检索与查询
+### 相关导航
 
-- [全文搜索](FullTextSearch/)
-- [语义检索](SemanticSearch/)
-- [标签系统](TagSystem/)
-- [分类体系](Classification/)
-
-### 可视化
-
-- [概念图谱](ConceptMaps/)
-- [结构图表](StructureDiagrams/)
-- [流程图](ProcessFlows/)
-- [关系网络](RelationNetworks/)
+- [主索引](../index.md) - 返回主索引
+- [理论统一与整合](../07-理论统一与整合/) - 理论统一与整合
 
 ## 进程文档
 

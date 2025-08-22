@@ -19,7 +19,7 @@
 ### 3. 方法论基础
 
 - [方法论基础完善](方法论基础完善.md) - 科学方法和实践指导
-- [Philosophy/content/methodology/方法论分析](Philosophy/content/methodology/) - 详细的方法论分析
+- [Philosophy/content/现象学哲学分析](Philosophy/content/现象学哲学分析.md) - 现象学方法论分析
 
 ## 理论价值
 

@@ -1,5 +1,12 @@
 # IoT协议网关设计
 
+## 目录
+
+- [IoT协议网关设计](#iot协议网关设计)
+  - [目录](#目录)
+  - [1. 协议抽象 (`IoTProtocol` Trait)](#1-协议抽象-iotprotocol-trait)
+  - [2. IoT网关实现 (`IoTGateway`)](#2-iot网关实现-iotgateway)
+
 物联网（IoT）场景的突出特点是协议多样性，例如MQTT、CoAP、HTTP、LoRaWAN等。一个健壮的IoT网关必须能够灵活地处理多种协议，将不同设备的数据统一接入云端或边缘计算平台。
 
 本节展示了一个可动态注册和管理多种协议的IoT网关设计。该设计利用了特征（trait）来实现协议的抽象。

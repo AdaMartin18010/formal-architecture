@@ -11,31 +11,52 @@
 
 ### 组件与模块化
 
-- [组件理论](Software/Component/ComponentTheory/)
-- [接口设计](Software/Component/Interfaces/)
-- [模块化系统](Software/Component/Modularity/)
-- [组合性设计](Software/Component/Composition/)
+- [Web领域组件](Software/Component/web_domain/) - Web应用组件设计
+- [Web3领域组件](Software/Component/web3_domain/) - Web3应用组件设计
+- [认证领域组件](Software/Component/auth_domain/) - 认证系统组件设计
 
-### 架构模式
+### 设计模式
 
-- [分层架构](Software/DesignPattern/Layered/)
-- [微服务架构](Software/Microservice/Architecture/)
-- [事件驱动架构](Software/DesignPattern/EventDriven/)
-- [CQRS模式](Software/DesignPattern/CQRS/)
+- [设计模式总览](Software/DesignPattern/design_pattern.md) - 完整的设计模式体系
+- [设计模式详解01](Software/DesignPattern/design_pattern_01.md) - 设计模式详细分析
+- [设计模式详解02](Software/DesignPattern/design_pattern_02.md) - 设计模式深入分析
+- [Rust设计模式2024](Software/DesignPattern/rust_2024.md) - Rust语言设计模式
 
-### 工作流与领域
+### 创建型模式
 
-- [工作流领域设计](Software/WorkflowDomain/Design/)
-- [领域驱动设计](Software/WorkflowDomain/DDD/)
-- [业务流程建模](Software/WorkflowDomain/ProcessModeling/)
-- [工作流引擎](Software/WorkflowDomain/Engines/)
+- [创建型模式](Software/DesignPattern/dp1_creational_patterns/) - 对象创建相关模式
 
-### 设计模式深度
+### 结构型模式
 
-- [创建型模式](Software/DesignPattern/Creational/)
-- [结构型模式](Software/DesignPattern/Structural/)
-- [行为型模式](Software/DesignPattern/Behavioral/)
-- [并发模式](Software/DesignPattern/Concurrency/)
+- [结构型模式](Software/DesignPattern/dp2_structural_patterns/) - 对象结构相关模式
+
+### 行为型模式
+
+- [行为型模式](Software/DesignPattern/dp3_behavioral_patterns/) - 对象行为相关模式
+
+### 并发模式
+
+- [并发模式](Software/DesignPattern/dp4_concurrent_patterns/) - 并发编程相关模式
+
+### 并行模式
+
+- [并行模式](Software/DesignPattern/dp5_parallel_patterns/) - 并行计算相关模式
+
+### 分布式模式
+
+- [分布式系统模式](Software/DesignPattern/dp6_distributed_system_patterns/) - 分布式系统相关模式
+
+### 工作流模式
+
+- [工作流模式](Software/DesignPattern/dp7_workflow_patterns/) - 工作流相关模式
+
+### 微服务架构
+
+- [微服务架构](Software/Microservice/) - 微服务架构理论与实践
+
+### 工作流领域
+
+- [工作流领域](Software/WorkflowDomain/) - 工作流系统设计与实现
 
 ## 进程文档
 

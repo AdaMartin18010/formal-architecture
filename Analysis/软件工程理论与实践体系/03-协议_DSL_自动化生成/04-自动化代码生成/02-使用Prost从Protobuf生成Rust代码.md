@@ -1,6 +1,7 @@
 # 使用Prost从Protobuf生成Rust代码
 
-`prost` 是一个流行的、用于在Rust中处理Protocol Buffers的库。它与 `prost-build` crate 配合使用，可以在编译时自动将 `.proto` 文件编译成高效、地道的Rust代码。
+`prost` 是一个流行的、用于在Rust中处理Protocol Buffers的库。
+它与 `prost-build` crate 配合使用，可以在编译时自动将 `.proto` 文件编译成高效、地道的Rust代码。
 
 本节将展示从项目设置到代码使用的完整流程。
 

@@ -2,12 +2,14 @@
 
 ## 目录
 
-1. 引言：微服务部署的挑战
-2. Docker：应用打包与环境一致性的标准
-3. Kubernetes：容器化应用的操作系统
-4. 微服务在Kubernetes上的生命周期
-5. Mermaid图解K8s核心架构
-6. 参考文献
+- [4.1 容器化与编排 (Docker/Kubernetes)](#41-容器化与编排-dockerkubernetes)
+  - [目录](#目录)
+  - [1. 引言：微服务部署的挑战](#1-引言微服务部署的挑战)
+  - [2. Docker：应用打包与环境一致性的标准](#2-docker应用打包与环境一致性的标准)
+  - [3. Kubernetes：容器化应用的操作系统](#3-kubernetes容器化应用的操作系统)
+  - [4. 微服务在Kubernetes上的生命周期](#4-微服务在kubernetes上的生命周期)
+  - [5. Mermaid图解K8s核心架构](#5-mermaid图解k8s核心架构)
+  - [6. 参考文献](#6-参考文献)
 
 ---
 

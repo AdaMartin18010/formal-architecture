@@ -2,33 +2,14 @@
 
 ## 目录结构
 
-### 语言理论基础
-
-- [语言设计原理](ProgrammingLanguage/Design/)
-- [语法与语义理论](ProgrammingLanguage/Syntax/)
-- [类型系统理论](ProgrammingLanguage/TypeSystems/)
-- [编译理论](ProgrammingLanguage/Compilation/)
-
 ### 编程范式
 
-- [函数式编程](ProgrammingLanguage/Paradigm/Functional/)
-- [面向对象编程](ProgrammingLanguage/Paradigm/ObjectOriented/)
-- [并发编程](ProgrammingLanguage/Paradigm/Concurrent/)
-- [声明式编程](ProgrammingLanguage/Paradigm/Declarative/)
+- [编程范式理论](ProgrammingLanguage/Paradigm/) - 各种编程范式的理论基础
 
 ### 语言比较分析
 
-- [Rust语言精髓](ProgrammingLanguage/RustDomain/)
-- [Go语言特性](ProgrammingLanguage/GoDomain/)
-- [语言特性对比](ProgrammingLanguage/Language_Compare/)
-- [跨语言互操作](ProgrammingLanguage/Interop/)
-
-### 高级主题
-
-- [同伦类型理论](ProgrammingLanguage/HomotopyType/)
-- [线性类型系统](ProgrammingLanguage/LinearTypes/)
-- [依赖类型](ProgrammingLanguage/DependentTypes/)
-- [量子编程语言](ProgrammingLanguage/Quantum/)
+- [Rust语言精髓](ProgrammingLanguage/RustDomain/) - Rust语言的核心特性与设计理念
+- [语言特性对比](ProgrammingLanguage/Language_Compare/) - 不同编程语言的特性对比分析
 
 ## 进程文档
 

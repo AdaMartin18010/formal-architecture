@@ -1,6 +1,7 @@
 # OpenAPI规范入门与实践
 
-OpenAPI 规范（以前称为 Swagger 规范）是用于描述、生成、消费和可视化 RESTful Web 服务的语言无关的 API 定义格式。它允许将 API 定义为"单一事实来源（Single Source of Truth）"，团队可以围绕这个来源构建工具、生成代码、生成文档，并自动化测试。
+OpenAPI 规范（以前称为 Swagger 规范）是用于描述、生成、消费和可视化 RESTful Web 服务的语言无关的 API 定义格式。
+它允许将 API 定义为"单一事实来源（Single Source of Truth）"，团队可以围绕这个来源构建工具、生成代码、生成文档，并自动化测试。
 
 本节将通过一个简单的用户API示例，展示如何定义OpenAPI规范，以及如何利用该规范来驱动代码的自动生成。
 

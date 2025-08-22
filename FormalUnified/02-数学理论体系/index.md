@@ -9,17 +9,17 @@
 ### 1. 集合论基础
 
 - [集合论基础整理](集合论基础整理.md) - 集合的基本概念、运算和应用
-- [Mathematics/content/set_theory/集合论分析](Mathematics/content/set_theory/) - 详细的集合论分析
+- [Mathematics/content/数学核心概念梳理-2024](Mathematics/content/数学核心概念梳理-2024.md) - 详细的数学概念分析
 
 ### 2. 逻辑学基础
 
 - [逻辑学基础完善](逻辑学基础完善.md) - 逻辑推理、证明方法和形式化逻辑
-- [Mathematics/content/logic/逻辑学分析](Mathematics/content/logic/) - 详细的逻辑学分析
+- [Mathematics/content/数学内容思维导图-2024](Mathematics/content/数学内容思维导图-2024.md) - 详细的数学思维导图
 
 ### 3. 代数学基础
 
 - [代数学基础扩展](代数学基础扩展.md) - 代数结构、抽象代数和代数方法
-- [Mathematics/content/algebra/代数学分析](Mathematics/content/algebra/) - 详细的代数学分析
+- [Mathematics/content/数学内容全面分析-2024](Mathematics/content/数学内容全面分析-2024.md) - 详细的数学内容分析
 
 ## 理论价值
 
@@ -49,12 +49,12 @@
 
 ### 细分内容
 
-- [Mathematics/content/set_theory/集合论分析](Mathematics/content/set_theory/)
-- [Mathematics/content/logic/逻辑学分析](Mathematics/content/logic/)
-- [Mathematics/content/algebra/代数学分析](Mathematics/content/algebra/)
-- [Mathematics/content/analysis/分析学分析](Mathematics/content/analysis/)
-- [Mathematics/content/geometry/几何学分析](Mathematics/content/geometry/)
-- [Mathematics/content/topology/拓扑学分析](Mathematics/content/topology/)
+- [Mathematics/content/数学核心概念梳理-2024](Mathematics/content/数学核心概念梳理-2024.md)
+- [Mathematics/content/数学内容思维导图-2024](Mathematics/content/数学内容思维导图-2024.md)
+- [Mathematics/content/数学内容全面分析-2024](Mathematics/content/数学内容全面分析-2024.md)
+- [Mathematics/content/数学内容全面分析报告-2024](Mathematics/content/数学内容全面分析报告-2024.md)
+- [Mathematics/content/历史/数学核心概念梳理](Mathematics/content/历史/数学核心概念梳理.md)
+- [Mathematics/content/历史/数学内容全面分析报告](Mathematics/content/历史/数学内容全面分析报告.md)
 
 ## 理论特色
 

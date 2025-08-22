@@ -2,24 +2,26 @@
 
 ## 目录
 
-- [1. 引言与定义](#1-引言与定义)
-- [2. DSL驱动的开发模式](#2-dsl驱动的开发模式)
-- [3. CI/CD流水线中的关键阶段](#3-cicd流水线中的关键阶段)
-  - [3.1 验证与Linting](#31-验证与linting)
-  - [3.2 代码生成](#32-代码生成)
-  - [3.3 提交生成物 (Committing Artifacts)](#33-提交生成物-committing-artifacts)
-  - [3.4 构建与测试](#34-构建与测试)
-- [4. 核心工具与实践](#4-核心工具与实践)
-  - [4.1 `go generate`](#41-go-generate)
-  - [4.2 `Makefile`与构建脚本](#42-makefile与构建脚本)
-  - [4.3 CI平台: GitHub Actions, GitLab CI](#43-ci平台-github-actions-gitlab-ci)
-  - [4.4 校验脚本: `git diff --exit-code`](#44-校验脚本-git-diff---exit-code)
-- [5. 配置/代码示例](#5-配置代码示例)
-  - [5.1 `go:generate`指令示例](#51-go-generate指令示例)
-  - [5.2 GitHub Actions工作流示例](#52-github-actions工作流示例)
-- [6. 行业应用案例](#6-行业应用案例)
-- [7. Mermaid图表：DSL驱动的CI/CD流水线](#7-mermaid图表-dsl驱动的cicd流水线)
-- [8. 参考文献](#8-参考文献)
+- [2.3 集成CI/CD：实现DSL驱动的自动化](#23-集成cicd实现dsl驱动的自动化)
+  - [目录](#目录)
+  - [1. 引言与定义](#1-引言与定义)
+  - [2. DSL驱动的开发模式](#2-dsl驱动的开发模式)
+  - [3. CI/CD流水线中的关键阶段](#3-cicd流水线中的关键阶段)
+    - [3.1 验证与Linting](#31-验证与linting)
+    - [3.2 代码生成](#32-代码生成)
+    - [3.3 提交生成物 (Committing Artifacts)](#33-提交生成物-committing-artifacts)
+    - [3.4 构建与测试](#34-构建与测试)
+  - [4. 核心工具与实践](#4-核心工具与实践)
+    - [4.1 `go generate`](#41-go-generate)
+    - [4.2 `Makefile`与构建脚本](#42-makefile与构建脚本)
+    - [4.3 CI平台: GitHub Actions, GitLab CI](#43-ci平台-github-actions-gitlab-ci)
+    - [4.4 校验脚本: `git diff --exit-code`](#44-校验脚本-git-diff---exit-code)
+  - [5. 配置/代码示例](#5-配置代码示例)
+    - [5.1 `go:generate`指令示例](#51-gogenerate指令示例)
+    - [5.2 GitHub Actions工作流示例](#52-github-actions工作流示例)
+  - [6. 行业应用案例](#6-行业应用案例)
+  - [7. Mermaid图表：DSL驱动的CI/CD流水线](#7-mermaid图表dsl驱动的cicd流水线)
+  - [8. 参考文献](#8-参考文献)
 
 ---
 
@@ -32,6 +34,7 @@
 ## 2. DSL驱动的开发模式
 
 在这种模式下，开发者的工作流程通常如下：
+
 1. **修改DSL文件**: 根据业务需求，添加、删除或修改DSL文件中的定义。
 2. **运行代码生成器**: 在本地运行代码生成器，更新服务器存根、客户端SDK等。
 3. **实现业务逻辑**: 在生成的文件所提供的框架内，填充具体的业务逻辑。
@@ -44,6 +47,7 @@ CI/CD流水线则负责验证这一过程的正确性。
 ### 3.1 验证与Linting
 
 流水线的第一个阶段应该是验证DSL文件的正确性。
+
 - **语法检查**: 确保DSL文件没有语法错误。
 - **Linting**: 检查DSL是否遵循项目定义的最佳实践和风格指南（例如`buf lint`）。
 - **向后兼容性检查**: 对于API相关的DSL，检查变更是否会破坏现有客户端（例如`buf breaking`）。
@@ -55,6 +59,7 @@ CI/CD流水线则负责验证这一过程的正确性。
 ### 3.3 提交生成物 (Committing Artifacts)
 
 一个关键的争论点是：**是否应该将生成的代码提交到Git？**
+
 - **是（推荐）**: 这是目前最主流的做法。
   - **优点**:
     - **可读性与可发现性**: 开发者可以直接在代码库中查看生成的代码，IDE也能正常索引。
@@ -86,6 +91,7 @@ Go语言提供了一个标准机制来自动化代码生成。在任何`.go`文�
 ### 4.4 校验脚本: `git diff --exit-code`
 
 为了确保开发者提交了最新的生成代码，可以在CI流水线中加入一个**校验步骤**：
+
 1. 重新运行代码生成器。
 2. 运行`git diff --exit-code`。
 3. 如果git工作目录在生成代码后变"脏"了（即有文件被修改），`git diff`会返回一个非零的退出码，从而使CI流程失败。这会强制开发者在提交前必须在本地生成并提交最新的代码。
@@ -104,6 +110,7 @@ package api
 
 // ...
 ```
+
 然后开发者只需运行 `go generate ./...`。
 
 ### 5.2 GitHub Actions工作流示例
@@ -157,4 +164,4 @@ graph TD
 - [`go generate` command documentation](https://pkg.go.dev/cmd/go#hdr-Generate_Go_files_by_processing_source)
 - [Committing generated code to version control](https://www.jeremydaly.com/should-you-commit-generated-code-to-version-control/)
 - [Buf CI/CD Integration](https://docs.buf.build/ci-cd/overview)
-- [Monorepos and `go generate`](https://earthly.dev/blog/golang-monorepo/) 
+- [Monorepos and `go generate`](https://earthly.dev/blog/golang-monorepo/)

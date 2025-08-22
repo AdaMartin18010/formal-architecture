@@ -1,5 +1,13 @@
 # Rust中的协议处理器与适配器模式
 
+## 目录
+
+- [Rust中的协议处理器与适配器模式](#rust中的协议处理器与适配器模式)
+  - [目录](#目录)
+  - [1. 协议处理器（Protocol Handler）](#1-协议处理器protocol-handler)
+  - [2. 协议适配器（Protocol Adapter）](#2-协议适配器protocol-adapter)
+  - [3. 协议工厂（Protocol Factory）](#3-协议工厂protocol-factory)
+
 在构建需要与多种通信协议交互的系统时（例如IoT平台、微服务网关），采用协议无关的设计至关重要。这可以通过结合使用**处理器（Handler）**、**适配器（Adapter）**和**工厂（Factory）**等设计模式来实现。
 
 - **处理器（Handler）**: 负责特定协议的核心逻辑和业务处理。
