@@ -58,7 +58,7 @@ $$L \in \mathcal{L} \Leftrightarrow \exists \tau \in \mathcal{T} : L = L(\tau)$$
 2. **上下文无关语言到高阶类型**：通过下推自动机构造类型
 3. **递归可枚举语言到同伦类型**：通过图灵机构造类型
 
-**算法 2.1 (语言到类型转换)**
+**算法 2.1 (语言到类型转换)**:
 
 ```haskell
 languageToType :: LanguageClass -> TypeSystem
@@ -116,7 +116,7 @@ $$N \text{ 可达 } M \Leftrightarrow \Sigma \text{ 可控到 } x$$
 2. **转移关系**：Petri网的变迁对应控制系统的状态转移
 3. **控制律**：Petri网的变迁使能条件对应控制系统的控制律
 
-**算法 3.1 (Petri网到控制系统转换)**
+**算法 3.1 (Petri网到控制系统转换)**:
 
 ```haskell
 petriNetToControlSystem :: PetriNet -> ControlSystem
@@ -188,7 +188,7 @@ buildControlLaw pn =
 2. **完备性**：模型检查算法可以验证所有时态逻辑公式
 3. **正确性**：模型检查结果与语义定义一致
 
-**算法 4.1 (统一验证框架)**
+**算法 4.1 (统一验证框架)**:
 
 ```haskell
 data UnifiedVerification = UnifiedVerification
@@ -247,7 +247,7 @@ verifySystem uv =
 2. **实现保证**：类型检查确保实现正确性
 3. **规范满足**：类型安全蕴含规范满足
 
-**算法 5.1 (类型安全系统设计)**
+**算法 5.1 (类型安全系统设计)**:
 
 ```haskell
 data TypeSafeSystem = TypeSafeSystem
@@ -299,7 +299,7 @@ inferComponentTypes spec =
 **定义 6.1 (综合编译器框架)**
 综合编译器框架整合了语言理论、类型理论和系统理论。
 
-**算法 6.1 (综合编译器)**
+**算法 6.1 (综合编译器)**:
 
 ```haskell
 data IntegratedCompiler = IntegratedCompiler
@@ -345,7 +345,7 @@ typeCheck tc ast =
 **定义 6.2 (综合验证框架)**
 综合验证框架整合了时态逻辑、模型检查和类型理论。
 
-**算法 6.2 (综合验证)**
+**算法 6.2 (综合验证)**:
 
 ```haskell
 data IntegratedVerification = IntegratedVerification
