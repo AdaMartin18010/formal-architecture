@@ -1,0 +1,267 @@
+{
+  "knowledgeGraph": {
+    "id": "formal-architecture-kg-v64",
+    "name": "形式化架构理论知识图谱-v64",
+    "description": "形式化架构理论项目的知识图谱元数据定义",
+    "version": "v64",
+    "createdDate": "2024-07-10",
+    "updatedDate": "2024-07-10",
+    "status": "in-progress"
+  },
+  "nodeTypes": [
+    {
+      "id": "theory",
+      "name": "理论体系",
+      "description": "形式化架构理论中的主要理论体系",
+      "properties": ["domain", "formalism", "abstraction"]
+    },
+    {
+      "id": "concept",
+      "name": "概念",
+      "description": "理论体系中的核心概念",
+      "properties": ["definition", "formalism", "examples"]
+    },
+    {
+      "id": "model",
+      "name": "模型",
+      "description": "形式化的系统模型",
+      "properties": ["formalism", "semantics", "verification"]
+    },
+    {
+      "id": "method",
+      "name": "方法",
+      "description": "应用形式化理论的方法",
+      "properties": ["steps", "applicability", "limitations"]
+    },
+    {
+      "id": "tool",
+      "name": "工具",
+      "description": "支持形式化理论的工具",
+      "properties": ["functionality", "implementation", "usage"]
+    }
+  ],
+  "relationTypes": [
+    {
+      "id": "extends",
+      "name": "扩展",
+      "description": "理论扩展关系",
+      "sourceTypes": ["theory", "concept", "model"],
+      "targetTypes": ["theory", "concept", "model"]
+    },
+    {
+      "id": "implements",
+      "name": "实现",
+      "description": "概念或模型的实现关系",
+      "sourceTypes": ["method", "tool"],
+      "targetTypes": ["theory", "concept", "model"]
+    },
+    {
+      "id": "maps-to",
+      "name": "映射到",
+      "description": "不同理论间的概念映射关系",
+      "sourceTypes": ["concept", "model"],
+      "targetTypes": ["concept", "model"]
+    },
+    {
+      "id": "part-of",
+      "name": "属于",
+      "description": "归属关系",
+      "sourceTypes": ["concept", "model", "method"],
+      "targetTypes": ["theory", "model", "method"]
+    },
+    {
+      "id": "uses",
+      "name": "使用",
+      "description": "使用关系",
+      "sourceTypes": ["theory", "model", "method", "tool"],
+      "targetTypes": ["theory", "concept", "model", "method", "tool"]
+    }
+  ],
+  "coreNodes": [
+    {
+      "id": "formal-architecture-theory",
+      "type": "theory",
+      "label": "形式化架构理论",
+      "description": "融合形式方法与软件架构的统一理论框架",
+      "properties": {
+        "domain": "计算机科学",
+        "formalism": "多种形式体系",
+        "abstraction": "高"
+      },
+      "source": "形式化架构理论统一计划-v64.md"
+    },
+    {
+      "id": "unified-state-transition-system",
+      "type": "model",
+      "label": "统一状态转换系统",
+      "description": "融合状态机与Petri网的统一形式化模型",
+      "properties": {
+        "formalism": "七元组 $(S, E, R, M, I, F, L)$",
+        "semantics": "操作语义与交错语义",
+        "verification": "可达性分析、不变量分析、模型检查"
+      },
+      "source": "形式化架构理论统一计划-v64.md"
+    },
+    {
+      "id": "unified-module-system",
+      "type": "model",
+      "label": "统一模块化系统",
+      "description": "融合组件理论与接口理论的统一模型",
+      "properties": {
+        "formalism": "七元组 $(S, B, P, R, I, C, V)$",
+        "semantics": "交互语义与合成语义",
+        "verification": "接口兼容性检查、组件替换性验证"
+      },
+      "source": "形式化架构理论统一计划-v64.md"
+    },
+    {
+      "id": "knowledge-graph-visualization",
+      "type": "tool",
+      "label": "知识图谱可视化工具",
+      "description": "用于可视化形式化架构理论知识体系的工具",
+      "properties": {
+        "functionality": "知识提取、图谱可视化、查询分析、导航推荐",
+        "implementation": "TypeScript, React, D3.js",
+        "usage": "理论探索、关系分析、概念学习"
+      },
+      "source": "形式化架构理论统一计划-v64.md"
+    },
+    {
+      "id": "theory-navigation-system",
+      "type": "tool",
+      "label": "理论导航系统",
+      "description": "用于在理论体系中导航和搜索的系统",
+      "properties": {
+        "functionality": "理论导航、语义搜索、学习路径推荐",
+        "implementation": "TypeScript, React, 图数据库",
+        "usage": "理论学习、关联发现、深度理解"
+      },
+      "source": "形式化架构理论统一计划-v64.md"
+    },
+    {
+      "id": "unified-proof-framework",
+      "type": "method",
+      "label": "统一形式化证明框架",
+      "description": "支持不同理论之间证明转换和复用的框架",
+      "properties": {
+        "steps": "证明表示、转换规则、验证机制",
+        "applicability": "跨理论域证明",
+        "limitations": "高度形式化证明的复杂性"
+      },
+      "source": "形式化架构理论统一计划-v64.md"
+    },
+    {
+      "id": "cross-domain-verification",
+      "type": "method",
+      "label": "跨领域验证技术",
+      "description": "支持跨领域系统验证的技术框架",
+      "properties": {
+        "steps": "建模、映射、转换、验证",
+        "applicability": "异构系统验证",
+        "limitations": "模型转换保真度"
+      },
+      "source": "形式化架构理论统一计划-v64.md"
+    }
+  ],
+  "coreRelations": [
+    {
+      "id": "rel-1",
+      "type": "part-of",
+      "source": "unified-state-transition-system",
+      "target": "formal-architecture-theory",
+      "label": "属于",
+      "properties": {
+        "weight": 1.0,
+        "confidence": "高"
+      }
+    },
+    {
+      "id": "rel-2",
+      "type": "part-of",
+      "source": "unified-module-system",
+      "target": "formal-architecture-theory",
+      "label": "属于",
+      "properties": {
+        "weight": 1.0,
+        "confidence": "高"
+      }
+    },
+    {
+      "id": "rel-3",
+      "type": "implements",
+      "source": "knowledge-graph-visualization",
+      "target": "formal-architecture-theory",
+      "label": "实现",
+      "properties": {
+        "weight": 0.8,
+        "confidence": "中"
+      }
+    },
+    {
+      "id": "rel-4",
+      "type": "implements",
+      "source": "theory-navigation-system",
+      "target": "formal-architecture-theory",
+      "label": "实现",
+      "properties": {
+        "weight": 0.8,
+        "confidence": "中"
+      }
+    },
+    {
+      "id": "rel-5", 
+      "type": "uses",
+      "source": "theory-navigation-system",
+      "target": "knowledge-graph-visualization",
+      "label": "使用",
+      "properties": {
+        "weight": 0.7,
+        "confidence": "高"
+      }
+    },
+    {
+      "id": "rel-6",
+      "type": "maps-to",
+      "source": "unified-state-transition-system",
+      "target": "unified-module-system",
+      "label": "映射到",
+      "properties": {
+        "weight": 0.6,
+        "confidence": "中"
+      }
+    },
+    {
+      "id": "rel-7",
+      "type": "part-of",
+      "source": "unified-proof-framework",
+      "target": "formal-architecture-theory",
+      "label": "属于",
+      "properties": {
+        "weight": 0.9,
+        "confidence": "高"
+      }
+    },
+    {
+      "id": "rel-8",
+      "type": "part-of",
+      "source": "cross-domain-verification",
+      "target": "formal-architecture-theory",
+      "label": "属于",
+      "properties": {
+        "weight": 0.9,
+        "confidence": "高"
+      }
+    },
+    {
+      "id": "rel-9",
+      "type": "uses",
+      "source": "cross-domain-verification",
+      "target": "unified-proof-framework",
+      "label": "使用",
+      "properties": {
+        "weight": 0.8,
+        "confidence": "高"
+      }
+    }
+  ]
+} 
