@@ -2,9 +2,19 @@
 
 > 本文档系统梳理Golang与Rust后端工程的核心理论、工程模式、性能优化、自动化实践与行业应用，突出现代后端开发的工程创新与自动化能力。
 
+## 2025 对齐
+
+- 国际 Wiki：[Go (programming language)](https://en.wikipedia.org/wiki/Go_(programming_language))、[Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))、[Communicating sequential processes](https://en.wikipedia.org/wiki/Communicating_sequential_processes)、[Actor model](https://en.wikipedia.org/wiki/Actor_model)
+- 名校课程：[MIT 6.5840 Distributed Systems](https://pdos.csail.mit.edu/6.824/)（2024–2025）、[CMU 15-445/645 Database Systems](https://15445.courses.cs.cmu.edu/)（2024–2025）、[Berkeley CS 186](https://cs186berkeley.net/)（2024–2025）
+- 代表性论文/标准：[IETF QUIC RFC 9000](https://www.rfc-editor.org/rfc/rfc9000)（持续）、[gRPC 官方](https://grpc.io/)、[Wasm 组件模型（Component Model）提案](https://component-model.bytecodealliance.org/)
+- 前沿技术与版本：[Go 1.22/1.23 发布说明](https://go.dev/doc/devel/release)、[Rust 2024 Edition 指南](https://doc.rust-lang.org/edition-guide/)
+  、[Tokio 官方](https://tokio.rs/)、[axum 0.7 文档](https://docs.rs/axum/0.7/axum/)、[OpenTelemetry](https://opentelemetry.io/)、[CNCF](https://www.cncf.io/)/[Kubernetes](https://kubernetes.io/)
+- 对齐状态：进行中（最后更新：2025-09-07）
+
 ## 目录
 
 - [01-Golang/Rust后端工程理论与实践](#01-golangrust后端工程理论与实践)
+  - [2025 对齐](#2025-对齐)
   - [目录](#目录)
   - [1. 主题概述与内容索引](#1-主题概述与内容索引)
   - [2. 语言核心特性与类型系统](#2-语言核心特性与类型系统)
@@ -177,7 +187,10 @@ fn main() {
 ## 9. 相关性跳转与引用
 
 - [00-软件工程理论与实践体系总论.md](00-软件工程理论与实践体系总论.md)
-- [进度追踪与上下文.md](../进度追踪与上下文.md)
+- 进度追踪与上下文：
+  - [软件工程体系版本](进度追踪与上下文.md)
+  - [项目报告与总结版本](../../13-项目报告与总结/进度追踪与上下文.md)
+  - [实践应用开发子目录版本](进度追踪与上下文.md)
 
 ---
 

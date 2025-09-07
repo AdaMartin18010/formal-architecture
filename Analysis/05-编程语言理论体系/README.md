@@ -60,3 +60,11 @@
 ---
 
 > 索引与重定向将持续完善；请优先阅读“统一总论/统一理论”文档获取最新结论。
+
+### 2025 对齐
+
+- 国际 Wiki：[Programming language theory](https://en.wikipedia.org/wiki/Programming_language_theory)、[Type theory](https://en.wikipedia.org/wiki/Type_theory)、[Formal semantics of programming languages](https://en.wikipedia.org/wiki/Formal_semantics_of_programming_languages)、[Compiler](https://en.wikipedia.org/wiki/Compiler)
+- 名校课程：[MIT 6.820/6.821（编译）](https://student.mit.edu/catalog/search.cgi?search=6.821)、[CMU 15-312/317（PL）](https://www.cs.cmu.edu/)、[Berkeley CS 164（PL/编译）](https://cs164.org/)
+- 代表性论文/会议：POPL/PLDI/ICFP 近3年综述与教程；类型与效应系统、抽象解释、形式验证与合成交叉研究
+- 工具与生态：[LLVM](https://llvm.org/)、[Wasm](https://webassembly.org/)、[Coq](https://coq.inria.fr/)、[Lean](https://lean-lang.org/)、[Agda](https://agda.readthedocs.io/)
+- 对齐状态：进行中（最后更新：2025-09-07）

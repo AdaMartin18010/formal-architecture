@@ -15,3 +15,11 @@
 ---
 
 > 本索引将持续完善，所有文档均可通过本地跳转快速访问。
+
+### 2025 对齐
+
+- 国际 Wiki：[Model checking](https://en.wikipedia.org/wiki/Model_checking)、[Temporal logic](https://en.wikipedia.org/wiki/Temporal_logic)、[Petri net](https://en.wikipedia.org/wiki/Petri_net)、[Process calculus](https://en.wikipedia.org/wiki/Process_calculus)
+- 名校课程：[Stanford CS 263](https://cs.stanford.edu/)、[CMU 15-317/819](https://www.cs.cmu.edu/)、[MIT 6.826](https://www.eecs.mit.edu/)
+- 代表性论文/工具评测：CAV/TACAS/VMCAI 近3年综述与工具竞赛报告
+- 工具与生态：[TLA+](https://lamport.azurewebsites.net/tla/tla.html)、[Ivy](https://fsl.cs.illinois.edu/software/ivy/)、[UPPAAL](https://uppaal.org/)、[nuXmv](https://nuxmv.fbk.eu/)、[PRISM](http://www.prismmodelchecker.org/)、[Apalache](https://apalache.informal.systems/)
+- 对齐状态：进行中（最后更新：2025-09-07）
