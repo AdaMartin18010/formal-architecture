@@ -1,0 +1,10 @@
+{
+  "coursesTarget": 50,
+  "standardsTarget": 80,
+  "repoTarget": 120,
+  "c42010Target": 20,
+  "c25010Target": 20,
+  "c15288Target": 15,
+  "c12207Target": 15,
+  "gapsBaseline": 20
+}
