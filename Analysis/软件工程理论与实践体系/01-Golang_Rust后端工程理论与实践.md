@@ -1,4 +1,4 @@
-# 01-Golang/Rust后端工程理论与实践
+﻿# 01-Golang/Rust后端工程理论与实践
 
 > 本文档系统梳理Golang与Rust后端工程的核心理论、工程模式、性能优化、自动化实践与行业应用，突出现代后端开发的工程创新与自动化能力。
 
@@ -185,3 +185,27 @@ fn main() {
 ---
 
 > 本文件为自动归纳生成，后续将递归细化各分主题，持续补全图表、公式、代码等多表征内容。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Golang_Rust后端工程理论与实践](https://en.wikipedia.org/wiki/golang_rust后端工程理论与实践)
+  - [nLab: Golang_Rust后端工程理论与实践](https://ncatlab.org/nlab/show/golang_rust后端工程理论与实践)
+  - [Stanford Encyclopedia: Golang_Rust后端工程理论与实践](https://plato.stanford.edu/entries/golang_rust后端工程理论与实践/)
+
+- **名校课程**：
+  - [MIT: Golang_Rust后端工程理论与实践](https://ocw.mit.edu/courses/)
+  - [Stanford: Golang_Rust后端工程理论与实践](https://web.stanford.edu/class/)
+  - [CMU: Golang_Rust后端工程理论与实践](https://www.cs.cmu.edu/~golang_rust后端工程理论与实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

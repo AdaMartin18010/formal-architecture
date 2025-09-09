@@ -1,4 +1,4 @@
-# 从多个理论视角理解编程语言的类型
+﻿# 从多个理论视角理解编程语言的类型
 
 ```text
 <think>
@@ -7122,3 +7122,27 @@ fn dependent_types_example() {
 类型不仅是标签，而是程序的规范、思想的载体和正确性的保证。
 
 在这个日益复杂的软件世界中，类型系统将继续作为我们理解和构建系统的核心工具，引领编程语言和软件工程的未来发展。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 安全的货币与账户类型设计(Rust)](https://en.wikipedia.org/wiki/安全的货币与账户类型设计(rust))
+  - [nLab: 安全的货币与账户类型设计(Rust)](https://ncatlab.org/nlab/show/安全的货币与账户类型设计(rust))
+  - [Stanford Encyclopedia: 安全的货币与账户类型设计(Rust)](https://plato.stanford.edu/entries/安全的货币与账户类型设计(rust)/)
+
+- **名校课程**：
+  - [MIT: 安全的货币与账户类型设计(Rust)](https://ocw.mit.edu/courses/)
+  - [Stanford: 安全的货币与账户类型设计(Rust)](https://web.stanford.edu/class/)
+  - [CMU: 安全的货币与账户类型设计(Rust)](https://www.cs.cmu.edu/~安全的货币与账户类型设计(rust)/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

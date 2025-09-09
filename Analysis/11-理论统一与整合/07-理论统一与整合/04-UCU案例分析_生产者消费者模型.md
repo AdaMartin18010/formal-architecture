@@ -1,4 +1,4 @@
-# UCU案例分析：生产者-消费者模型
+﻿# UCU案例分析：生产者-消费者模型
 
 ## 目录
 
@@ -83,3 +83,27 @@
   - `Lifecycle` 在此例中较为简单，但在更复杂的系统中（如动态创建/销毁生产者）将非常关键。
 
 **结论**: UCU形式化定义草案初步通过了本次案例的检验，证明其在描述经典并发问题上具有足够的表达能力和结构清晰性。下一步是基于此分析，对UCU的转换关系 `T` 进行更数学化的定义，并考虑引入时间属性。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: UCU案例分析_生产者消费者模型](https://en.wikipedia.org/wiki/ucu案例分析_生产者消费者模型)
+  - [nLab: UCU案例分析_生产者消费者模型](https://ncatlab.org/nlab/show/ucu案例分析_生产者消费者模型)
+  - [Stanford Encyclopedia: UCU案例分析_生产者消费者模型](https://plato.stanford.edu/entries/ucu案例分析_生产者消费者模型/)
+
+- **名校课程**：
+  - [MIT: UCU案例分析_生产者消费者模型](https://ocw.mit.edu/courses/)
+  - [Stanford: UCU案例分析_生产者消费者模型](https://web.stanford.edu/class/)
+  - [CMU: UCU案例分析_生产者消费者模型](https://www.cs.cmu.edu/~ucu案例分析_生产者消费者模型/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

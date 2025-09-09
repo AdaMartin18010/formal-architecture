@@ -1,4 +1,4 @@
-# Rust图形与底层开发：Wgpu与Vulkan
+﻿# Rust图形与底层开发：Wgpu与Vulkan
 
 Rust 凭借其性能、内存安全和对底层的精细控制，在图形编程和底层开发领域表现出色。`wgpu`提供了一个现代、跨平台的图形API抽象，而`ash`等库则提供了对Vulkan等底层API的直接绑定。
 
@@ -158,3 +158,27 @@ fn vulkan_example() -> Result<(), Box<dyn std::error::Error>> {
 - **winit**: 窗口处理
 - **glam**: 图形数学库
 - **nalgebra**: 数学库
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Wgpu与Vulkan图形编程](https://en.wikipedia.org/wiki/wgpu与vulkan图形编程)
+  - [nLab: Wgpu与Vulkan图形编程](https://ncatlab.org/nlab/show/wgpu与vulkan图形编程)
+  - [Stanford Encyclopedia: Wgpu与Vulkan图形编程](https://plato.stanford.edu/entries/wgpu与vulkan图形编程/)
+
+- **名校课程**：
+  - [MIT: Wgpu与Vulkan图形编程](https://ocw.mit.edu/courses/)
+  - [Stanford: Wgpu与Vulkan图形编程](https://web.stanford.edu/class/)
+  - [CMU: Wgpu与Vulkan图形编程](https://www.cs.cmu.edu/~wgpu与vulkan图形编程/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

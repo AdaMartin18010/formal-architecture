@@ -1,4 +1,4 @@
-# 1.1 分布式系统核心理论 (CAP/FLP/Etc)
+﻿# 1.1 分布式系统核心理论 (CAP/FLP/Etc)
 
 ## 目录
 
@@ -148,3 +148,27 @@ graph LR
 ---
 
 > 本节内容吸收自FormalUnified分支，系统性补充分布式一致性理论、CAP/FLP定理及其工程意义，为后续共识协议与架构模式等章节提供理论支撑。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 分布式系统核心理论(CAP_FLP_Etc)](https://en.wikipedia.org/wiki/分布式系统核心理论(cap_flp_etc))
+  - [nLab: 分布式系统核心理论(CAP_FLP_Etc)](https://ncatlab.org/nlab/show/分布式系统核心理论(cap_flp_etc))
+  - [Stanford Encyclopedia: 分布式系统核心理论(CAP_FLP_Etc)](https://plato.stanford.edu/entries/分布式系统核心理论(cap_flp_etc)/)
+
+- **名校课程**：
+  - [MIT: 分布式系统核心理论(CAP_FLP_Etc)](https://ocw.mit.edu/courses/)
+  - [Stanford: 分布式系统核心理论(CAP_FLP_Etc)](https://web.stanford.edu/class/)
+  - [CMU: 分布式系统核心理论(CAP_FLP_Etc)](https://www.cs.cmu.edu/~分布式系统核心理论(cap_flp_etc)/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

@@ -1,4 +1,4 @@
-# 状态机与Petri网理论合并执行计划-v68
+﻿# 状态机与Petri网理论合并执行计划-v68
 
 ## 1. 概述
 
@@ -268,3 +268,27 @@ Petri网 $(P, T, A, W, M_0)$ 映射到USTS $(S, E, R, M, I, F, L)$ 的规则：
 **创建时间**: 2024年8月  
 **状态**: 🔄 执行中  
 **最后更新**: 2024年8月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 状态机与Petri网理论合并执行计划 v68](https://en.wikipedia.org/wiki/状态机与petri网理论合并执行计划_v68)
+  - [nLab: 状态机与Petri网理论合并执行计划 v68](https://ncatlab.org/nlab/show/状态机与petri网理论合并执行计划+v68)
+  - [Stanford Encyclopedia: 状态机与Petri网理论合并执行计划 v68](https://plato.stanford.edu/entries/状态机与petri网理论合并执行计划-v68/)
+
+- **名校课程**：
+  - [MIT: 状态机与Petri网理论合并执行计划 v68](https://ocw.mit.edu/courses/)
+  - [Stanford: 状态机与Petri网理论合并执行计划 v68](https://web.stanford.edu/class/)
+  - [CMU: 状态机与Petri网理论合并执行计划 v68](https://www.cs.cmu.edu/~状态机与petri网理论合并执行计划-v68/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

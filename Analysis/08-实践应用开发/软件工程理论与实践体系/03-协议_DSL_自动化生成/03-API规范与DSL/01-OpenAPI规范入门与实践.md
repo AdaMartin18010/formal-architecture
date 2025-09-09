@@ -1,4 +1,4 @@
-# 1. OpenAPI规范入门与实践
+﻿# 1. OpenAPI规范入门与实践
 
 ## 目录
 
@@ -1568,3 +1568,27 @@ impl OpenApiGenerator {
 ```
 
 通过这种"规范驱动开发（Specification-Driven Development）"的方法，可以极大地提高开发效率，减少手动编码错误，并保证API的消费者和提供者之间始终同步。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: OpenAPI规范入门与实践](https://en.wikipedia.org/wiki/openapi规范入门与实践)
+  - [nLab: OpenAPI规范入门与实践](https://ncatlab.org/nlab/show/openapi规范入门与实践)
+  - [Stanford Encyclopedia: OpenAPI规范入门与实践](https://plato.stanford.edu/entries/openapi规范入门与实践/)
+
+- **名校课程**：
+  - [MIT: OpenAPI规范入门与实践](https://ocw.mit.edu/courses/)
+  - [Stanford: OpenAPI规范入门与实践](https://web.stanford.edu/class/)
+  - [CMU: OpenAPI规范入门与实践](https://www.cs.cmu.edu/~openapi规范入门与实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

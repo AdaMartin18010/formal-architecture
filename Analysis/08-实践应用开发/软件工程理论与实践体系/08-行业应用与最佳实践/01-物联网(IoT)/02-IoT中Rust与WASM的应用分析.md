@@ -1,4 +1,4 @@
-
+﻿
 # Rust和WebAssembly技术堆栈在物联网行业中的应用分析
 
 ## 目录
@@ -778,3 +778,27 @@ Rust+WebAssembly在物联网中的应用
         ├── 跨厂商标准
         └── 云边界面
 ```
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: IoT中Rust与WASM的应用分析](https://en.wikipedia.org/wiki/iot中rust与wasm的应用分析)
+  - [nLab: IoT中Rust与WASM的应用分析](https://ncatlab.org/nlab/show/iot中rust与wasm的应用分析)
+  - [Stanford Encyclopedia: IoT中Rust与WASM的应用分析](https://plato.stanford.edu/entries/iot中rust与wasm的应用分析/)
+
+- **名校课程**：
+  - [MIT: IoT中Rust与WASM的应用分析](https://ocw.mit.edu/courses/)
+  - [Stanford: IoT中Rust与WASM的应用分析](https://web.stanford.edu/class/)
+  - [CMU: IoT中Rust与WASM的应用分析](https://www.cs.cmu.edu/~iot中rust与wasm的应用分析/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

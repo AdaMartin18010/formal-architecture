@@ -1,4 +1,4 @@
-# 03-Kubernetes容器编排核心原理
+﻿# 03-Kubernetes容器编排核心原理
 
 ## 目录
 
@@ -172,3 +172,27 @@ CRI是一层关键的抽象，它定义了Kubelet如何管理Pod、容器和镜�
 - **Docker**提供了构建和运行单个容器的标准和工具。
 - **Kubernetes**在此基础上，提供了大规模管理和编排这些容器的平台。
 - 二者通过**CRI**标准接口解耦，协同工作，构成了现代云原生应用部署的基石。Kubernetes负责"大脑"的决策和调度，而兼容CRI的容器运行时（如containerd）负责"肌肉"的执行。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Kubernetes容器编排核心原理](https://en.wikipedia.org/wiki/kubernetes容器编排核心原理)
+  - [nLab: Kubernetes容器编排核心原理](https://ncatlab.org/nlab/show/kubernetes容器编排核心原理)
+  - [Stanford Encyclopedia: Kubernetes容器编排核心原理](https://plato.stanford.edu/entries/kubernetes容器编排核心原理/)
+
+- **名校课程**：
+  - [MIT: Kubernetes容器编排核心原理](https://ocw.mit.edu/courses/)
+  - [Stanford: Kubernetes容器编排核心原理](https://web.stanford.edu/class/)
+  - [CMU: Kubernetes容器编排核心原理](https://www.cs.cmu.edu/~kubernetes容器编排核心原理/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

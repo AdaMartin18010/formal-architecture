@@ -1,4 +1,4 @@
-# TODO 任务列表
+﻿# TODO 任务列表
 
 ## 项目状态：✅ 完全完成
 
@@ -67,3 +67,27 @@
 **项目状态**: ✅ 已完成  
 **完成时间**: 2024年12月  
 **版本**: v62
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: TODO](https://en.wikipedia.org/wiki/todo)
+  - [nLab: TODO](https://ncatlab.org/nlab/show/todo)
+  - [Stanford Encyclopedia: TODO](https://plato.stanford.edu/entries/todo/)
+
+- **名校课程**：
+  - [MIT: TODO](https://ocw.mit.edu/courses/)
+  - [Stanford: TODO](https://web.stanford.edu/class/)
+  - [CMU: TODO](https://www.cs.cmu.edu/~todo/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

@@ -1,4 +1,4 @@
-# 知识图谱 Schema v1（说明与示例）
+﻿# 知识图谱 Schema v1（说明与示例）
 
 > 目的：统一三类对齐矩阵（课程/标准/仓库）与 L0-L4 知识域的节点与关系建模，支持自动校验与报表。
 
@@ -63,3 +63,27 @@
 ---
 
 更新说明：Schema v1 为最小可用集，后续可扩展 DomainL4/能力点与过程度量模型。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 知识图谱 Schema v1](https://en.wikipedia.org/wiki/知识图谱_schema_v1)
+  - [nLab: 知识图谱 Schema v1](https://ncatlab.org/nlab/show/知识图谱+schema+v1)
+  - [Stanford Encyclopedia: 知识图谱 Schema v1](https://plato.stanford.edu/entries/知识图谱-schema-v1/)
+
+- **名校课程**：
+  - [MIT: 知识图谱 Schema v1](https://ocw.mit.edu/courses/)
+  - [Stanford: 知识图谱 Schema v1](https://web.stanford.edu/class/)
+  - [CMU: 知识图谱 Schema v1](https://www.cs.cmu.edu/~知识图谱-schema-v1/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

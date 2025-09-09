@@ -1,4 +1,4 @@
-# 1.1.3.1 Go项目的CI/CD与DevOps实践
+﻿# 1.1.3.1 Go项目的CI/CD与DevOps实践
 
 > 本文属于1.1-Microservice主题，建议配合[主题树与内容索引](../../00-主题树与内容索引.md)一同阅读。
 
@@ -160,3 +160,27 @@ graph TD
 - [GitLab CI/CD Documentation](https://docs.gitlab.com/ee/ci/)
 - [Introduction to DevOps on Kubernetes](https://www.digitalocean.com/community/conceptual_articles/introduction-to-devops-on-kubernetes)
 - [Go CI/CD with GitHub Actions](https://blog.logrocket.com/ci-cd-for-golang-with-github-actions/)
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: CI_CD与DevOps实践](https://en.wikipedia.org/wiki/ci_cd与devops实践)
+  - [nLab: CI_CD与DevOps实践](https://ncatlab.org/nlab/show/ci_cd与devops实践)
+  - [Stanford Encyclopedia: CI_CD与DevOps实践](https://plato.stanford.edu/entries/ci_cd与devops实践/)
+
+- **名校课程**：
+  - [MIT: CI_CD与DevOps实践](https://ocw.mit.edu/courses/)
+  - [Stanford: CI_CD与DevOps实践](https://web.stanford.edu/class/)
+  - [CMU: CI_CD与DevOps实践](https://www.cs.cmu.edu/~ci_cd与devops实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

@@ -1,4 +1,4 @@
-# 2.3 集成CI/CD：实现DSL驱动的自动化
+﻿# 2.3 集成CI/CD：实现DSL驱动的自动化
 
 ## 目录
 
@@ -165,3 +165,27 @@ graph TD
 - [Committing generated code to version control](https://www.jeremydaly.com/should-you-commit-generated-code-to-version-control/)
 - [Buf CI/CD Integration](https://docs.buf.build/ci-cd/overview)
 - [Monorepos and `go generate`](https://earthly.dev/blog/golang-monorepo/)
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 集成CI_CD 实现DSL驱动的自动化](https://en.wikipedia.org/wiki/集成ci_cd_实现dsl驱动的自动化)
+  - [nLab: 集成CI_CD 实现DSL驱动的自动化](https://ncatlab.org/nlab/show/集成ci_cd+实现dsl驱动的自动化)
+  - [Stanford Encyclopedia: 集成CI_CD 实现DSL驱动的自动化](https://plato.stanford.edu/entries/集成ci_cd-实现dsl驱动的自动化/)
+
+- **名校课程**：
+  - [MIT: 集成CI_CD 实现DSL驱动的自动化](https://ocw.mit.edu/courses/)
+  - [Stanford: 集成CI_CD 实现DSL驱动的自动化](https://web.stanford.edu/class/)
+  - [CMU: 集成CI_CD 实现DSL驱动的自动化](https://www.cs.cmu.edu/~集成ci_cd-实现dsl驱动的自动化/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

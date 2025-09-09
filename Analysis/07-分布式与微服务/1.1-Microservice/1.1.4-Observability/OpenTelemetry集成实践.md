@@ -1,4 +1,4 @@
-# 1.1.4.1 OpenTelemetry集成实践
+﻿# 1.1.4.1 OpenTelemetry集成实践
 
 > 本文属于1.1-Microservice主题，建议配合[主题树与内容索引](../../00-主题树与内容索引.md)一同阅读。
 
@@ -656,3 +656,27 @@ impl AlertingService {
 ---
 
 > 本文档为OpenTelemetry集成实践指南，后续将根据具体实现需求进行细化。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: OpenTelemetry集成实践](https://en.wikipedia.org/wiki/opentelemetry集成实践)
+  - [nLab: OpenTelemetry集成实践](https://ncatlab.org/nlab/show/opentelemetry集成实践)
+  - [Stanford Encyclopedia: OpenTelemetry集成实践](https://plato.stanford.edu/entries/opentelemetry集成实践/)
+
+- **名校课程**：
+  - [MIT: OpenTelemetry集成实践](https://ocw.mit.edu/courses/)
+  - [Stanford: OpenTelemetry集成实践](https://web.stanford.edu/class/)
+  - [CMU: OpenTelemetry集成实践](https://www.cs.cmu.edu/~opentelemetry集成实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

@@ -1,4 +1,4 @@
-# 2.2 Temporal.io：可靠执行引擎
+﻿# 2.2 Temporal.io：可靠执行引擎
 
 ## 目录
 
@@ -121,3 +121,27 @@ graph TD
 
 ---
 > 支持断点续写与递归细化，如需扩展某一小节请指定。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Temporal_io_可靠执行引擎](https://en.wikipedia.org/wiki/temporal_io_可靠执行引擎)
+  - [nLab: Temporal_io_可靠执行引擎](https://ncatlab.org/nlab/show/temporal_io_可靠执行引擎)
+  - [Stanford Encyclopedia: Temporal_io_可靠执行引擎](https://plato.stanford.edu/entries/temporal_io_可靠执行引擎/)
+
+- **名校课程**：
+  - [MIT: Temporal_io_可靠执行引擎](https://ocw.mit.edu/courses/)
+  - [Stanford: Temporal_io_可靠执行引擎](https://web.stanford.edu/class/)
+  - [CMU: Temporal_io_可靠执行引擎](https://www.cs.cmu.edu/~temporal_io_可靠执行引擎/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

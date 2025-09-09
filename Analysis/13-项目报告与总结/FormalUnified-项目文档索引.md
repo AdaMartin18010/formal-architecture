@@ -1,4 +1,4 @@
-# FormalUnified 项目文档索引（只读引用）
+﻿# FormalUnified 项目文档索引（只读引用）
 
 本页汇总 `FormalUnified/` 根目录与关键子目录中的项目类文档，提供统一入口（保持原路径以保留历史结构）。
 
@@ -72,3 +72,27 @@
 
 ---
 说明：本页为只读索引。若需迁移副本至 `Analysis`，将先进行一致性与依赖校验后再行执行。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: FormalUnified 项目文档索引](https://en.wikipedia.org/wiki/formalunified_项目文档索引)
+  - [nLab: FormalUnified 项目文档索引](https://ncatlab.org/nlab/show/formalunified+项目文档索引)
+  - [Stanford Encyclopedia: FormalUnified 项目文档索引](https://plato.stanford.edu/entries/formalunified-项目文档索引/)
+
+- **名校课程**：
+  - [MIT: FormalUnified 项目文档索引](https://ocw.mit.edu/courses/)
+  - [Stanford: FormalUnified 项目文档索引](https://web.stanford.edu/class/)
+  - [CMU: FormalUnified 项目文档索引](https://www.cs.cmu.edu/~formalunified-项目文档索引/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

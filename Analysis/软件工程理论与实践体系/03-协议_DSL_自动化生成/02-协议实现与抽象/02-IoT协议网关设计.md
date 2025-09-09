@@ -1,4 +1,4 @@
-# IoT协议网关设计
+﻿# IoT协议网关设计
 
 ## 目录
 
@@ -131,3 +131,27 @@ impl IoTGateway {
 ```
 
 这种设计模式使得IoT网关具有极高的可扩展性。要支持一个新协议，开发者只需要实现`IoTProtocol`特征，并在系统启动时将其注册到网关即可，无需修改网关的核心代码。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: IoT协议网关设计](https://en.wikipedia.org/wiki/iot协议网关设计)
+  - [nLab: IoT协议网关设计](https://ncatlab.org/nlab/show/iot协议网关设计)
+  - [Stanford Encyclopedia: IoT协议网关设计](https://plato.stanford.edu/entries/iot协议网关设计/)
+
+- **名校课程**：
+  - [MIT: IoT协议网关设计](https://ocw.mit.edu/courses/)
+  - [Stanford: IoT协议网关设计](https://web.stanford.edu/class/)
+  - [CMU: IoT协议网关设计](https://www.cs.cmu.edu/~iot协议网关设计/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

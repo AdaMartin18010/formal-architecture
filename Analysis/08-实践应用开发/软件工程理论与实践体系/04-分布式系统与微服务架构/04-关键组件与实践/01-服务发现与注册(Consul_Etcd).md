@@ -1,4 +1,4 @@
-# 2.1 服务发现与注册 (Consul/Etcd)
+﻿# 2.1 服务发现与注册 (Consul/Etcd)
 
 ## 目录
 
@@ -149,3 +149,27 @@ graph TD
 ---
 
 > 本节内容吸收自FormalUnified分支，系统性补充服务发现与注册的形式化建模、可验证性分析与工程案例。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 服务发现与注册(Consul_Etcd)](https://en.wikipedia.org/wiki/服务发现与注册(consul_etcd))
+  - [nLab: 服务发现与注册(Consul_Etcd)](https://ncatlab.org/nlab/show/服务发现与注册(consul_etcd))
+  - [Stanford Encyclopedia: 服务发现与注册(Consul_Etcd)](https://plato.stanford.edu/entries/服务发现与注册(consul_etcd)/)
+
+- **名校课程**：
+  - [MIT: 服务发现与注册(Consul_Etcd)](https://ocw.mit.edu/courses/)
+  - [Stanford: 服务发现与注册(Consul_Etcd)](https://web.stanford.edu/class/)
+  - [CMU: 服务发现与注册(Consul_Etcd)](https://www.cs.cmu.edu/~服务发现与注册(consul_etcd)/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

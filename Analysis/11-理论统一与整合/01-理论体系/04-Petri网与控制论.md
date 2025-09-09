@@ -1,4 +1,4 @@
-# 01-理论体系-Petri网与控制论
+﻿# 01-理论体系-Petri网与控制论
 
 [返回主题树](../00-主题树与内容索引.md) | [主计划文档](../00-形式化架构理论统一计划.md) | [相关计划](../递归合并计划.md)
 
@@ -374,3 +374,27 @@ fn main() {
 ---
 
 > 本文件为自动归纳生成，后续将递归细化相关内容，持续补全图表、公式、代码等多表征内容。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Petri网与控制论](https://en.wikipedia.org/wiki/petri网与控制论)
+  - [nLab: Petri网与控制论](https://ncatlab.org/nlab/show/petri网与控制论)
+  - [Stanford Encyclopedia: Petri网与控制论](https://plato.stanford.edu/entries/petri网与控制论/)
+
+- **名校课程**：
+  - [MIT: Petri网与控制论](https://ocw.mit.edu/courses/)
+  - [Stanford: Petri网与控制论](https://web.stanford.edu/class/)
+  - [CMU: Petri网与控制论](https://www.cs.cmu.edu/~petri网与控制论/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

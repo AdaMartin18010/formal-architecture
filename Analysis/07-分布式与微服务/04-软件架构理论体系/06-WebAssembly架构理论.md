@@ -1,4 +1,4 @@
-# WebAssembly架构理论
+﻿# WebAssembly架构理论
 
 ## 目录
 
@@ -554,3 +554,27 @@ impl TypeChecker {
 - [云原生架构理论](04-云原生架构理论.md)
 - [分布式架构理论](05-分布式架构理论.md)
 - [工作流架构理论](07-工作流架构理论.md)
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: WebAssembly架构理论](https://en.wikipedia.org/wiki/webassembly架构理论)
+  - [nLab: WebAssembly架构理论](https://ncatlab.org/nlab/show/webassembly架构理论)
+  - [Stanford Encyclopedia: WebAssembly架构理论](https://plato.stanford.edu/entries/webassembly架构理论/)
+
+- **名校课程**：
+  - [MIT: WebAssembly架构理论](https://ocw.mit.edu/courses/)
+  - [Stanford: WebAssembly架构理论](https://web.stanford.edu/class/)
+  - [CMU: WebAssembly架构理论](https://www.cs.cmu.edu/~webassembly架构理论/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

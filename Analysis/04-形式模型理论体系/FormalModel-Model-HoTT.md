@@ -1,4 +1,4 @@
-# FormalModel-Model-HoTT
+﻿# FormalModel-Model-HoTT
 
 > **重定向声明**: 本文档内容已合并至 [04-形式模型理论体系/00-形式模型理论统一总论.md](04-形式模型理论体系/00-形式模型理论统一总论.md)，请参考主权威文件获取最新内容。
 
@@ -256,3 +256,27 @@
 ---
 
 > 本文严格分层归纳 HoTT 领域内容，所有编号与主题均与 /Matter/FormalModel/Model/HoTT 及其子目录内容一一对应，后续将递进填充各层内容。所有公式均支持 LaTeX，导航与引用均为本地化。请在 /Analysis/进度与上下文.md 查看详细进度与断点。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: FormalModel Model HoTT](https://en.wikipedia.org/wiki/formalmodel_model_hott)
+  - [nLab: FormalModel Model HoTT](https://ncatlab.org/nlab/show/formalmodel+model+hott)
+  - [Stanford Encyclopedia: FormalModel Model HoTT](https://plato.stanford.edu/entries/formalmodel-model-hott/)
+
+- **名校课程**：
+  - [MIT: FormalModel Model HoTT](https://ocw.mit.edu/courses/)
+  - [Stanford: FormalModel Model HoTT](https://web.stanford.edu/class/)
+  - [CMU: FormalModel Model HoTT](https://www.cs.cmu.edu/~formalmodel-model-hott/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

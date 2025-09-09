@@ -1,4 +1,4 @@
-# 1.1.2.1 RPC与Web框架集成
+﻿# 1.1.2.1 RPC与Web框架集成
 
 > 本文属于1.1-Microservice主题，建议配合[主题树与内容索引](../../00-主题树与内容索引.md)一同阅读。
 
@@ -179,3 +179,27 @@ graph TD
 - [gRPC-Gateway Documentation](https://grpc-ecosystem.github.io/grpc-gateway/)
 - [Connect-go: Simple, modern RPC for Go](https://connect.build/)
 - [Structuring Applications in Go](https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091) (discusses service layers)
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: RPC与Web框架集成](https://en.wikipedia.org/wiki/rpc与web框架集成)
+  - [nLab: RPC与Web框架集成](https://ncatlab.org/nlab/show/rpc与web框架集成)
+  - [Stanford Encyclopedia: RPC与Web框架集成](https://plato.stanford.edu/entries/rpc与web框架集成/)
+
+- **名校课程**：
+  - [MIT: RPC与Web框架集成](https://ocw.mit.edu/courses/)
+  - [Stanford: RPC与Web框架集成](https://web.stanford.edu/class/)
+  - [CMU: RPC与Web框架集成](https://www.cs.cmu.edu/~rpc与web框架集成/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

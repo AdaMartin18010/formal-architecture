@@ -122,7 +122,9 @@ function Generate-MermaidCode {
         [array]$edges
     )
     
-    $mermaidCode = "```mermaid`ngraph TD`n"
+    $sb = New-Object System.Text.StringBuilder
+    [void]$sb.AppendLine('```mermaid')
+    [void]$sb.AppendLine('graph TD')
     
     # 添加节点
     foreach ($node in $nodes) {
@@ -130,9 +132,9 @@ function Generate-MermaidCode {
         $label = $node.Label
         $color = $node.Color
         
-        $mermaidCode += "    $id[$label]`n"
+        [void]$sb.AppendLine(("    {0}[{1}]" -f $id, $label))
         if ($color) {
-            $mermaidCode += "    style $id fill:$color`n"
+            [void]$sb.AppendLine(("    style {0} fill:{1}" -f $id, $color))
         }
     }
     
@@ -143,20 +145,20 @@ function Generate-MermaidCode {
         $label = $edge.Label
         
         if ($label) {
-            $mermaidCode += "    $from -->|$label| $to`n"
+            [void]$sb.AppendLine(("    {0} -->|{1}| {2}" -f $from, $label, $to))
         } else {
-            $mermaidCode += "    $from --> $to`n"
+            [void]$sb.AppendLine(("    {0} --> {1}" -f $from, $to))
         }
     }
     
-    $mermaidCode += "```"
-    return $mermaidCode
+    [void]$sb.AppendLine('```')
+    return $sb.ToString()
 }
 
 # 主函数
 function Generate-KnowledgeGraph {
     # 获取所有Markdown文件
-    $allFiles = Get-ChildItem -Path "." -Recurse -File -Filter "*.md" | Select-Object -ExpandProperty FullName
+    $allFiles = Get-ChildItem -Path . -Recurse -File -Filter '*.md' | Select-Object -ExpandProperty FullName
     
     $nodes = @()
     $edges = @()
@@ -169,15 +171,16 @@ function Generate-KnowledgeGraph {
         $fileDir = [System.IO.Path]::GetDirectoryName($file)
         
         # 确定节点颜色
-        $color = "white"
+        $color = 'white'
         foreach ($system in $theorySystems) {
-            if ($fileDir -like "*$($system.Path)*") {
+            $dirPattern = ('*{0}*' -f $system.Path)
+            if ($fileDir -like $dirPattern) {
                 $color = $system.Color
                 break
             }
         }
         
-        $id = "node$nodeId"
+        $id = ('node{0}' -f $nodeId)
         $fileToNodeId[$file] = $id
         
         $nodes += @{
@@ -220,7 +223,7 @@ function Generate-KnowledgeGraph {
     foreach ($concept in $coreConcepts) {
         $conceptName = $concept.Name
         if ($conceptToFiles.ContainsKey($conceptName)) {
-            $id = "concept$nodeId"
+            $id = ('concept{0}' -f $nodeId)
             
             $nodes += @{
                 Id = $id
@@ -246,7 +249,7 @@ function Generate-KnowledgeGraph {
     $systemNodeId = 1
     
     foreach ($system in $theorySystems) {
-        $id = "system$systemNodeId"
+        $id = ('system{0}' -f $systemNodeId)
         
         $systemNodes += @{
             Id = $id
@@ -302,9 +305,9 @@ function Generate-KnowledgeGraph {
     $fileGraphCode | Out-File -FilePath "文件关系图.md" -Encoding utf8
     $systemGraphCode | Out-File -FilePath "理论体系关系图.md" -Encoding utf8
     
-    Write-Host "知识图谱已生成:"
-    Write-Host "1. 文件关系图: 文件关系图.md"
-    Write-Host "2. 理论体系关系图: 理论体系关系图.md"
+    Write-Host '知识图谱已生成:'
+    Write-Host '1. 文件关系图: 文件关系图.md'
+    Write-Host '2. 理论体系关系图: 理论体系关系图.md'
 }
 
 # 执行主函数

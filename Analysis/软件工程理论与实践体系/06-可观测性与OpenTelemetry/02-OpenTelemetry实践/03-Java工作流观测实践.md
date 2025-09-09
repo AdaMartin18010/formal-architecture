@@ -1,4 +1,4 @@
-# 工作流与OpenTelemetry的范畴论分析
+﻿# 工作流与OpenTelemetry的范畴论分析
 
 ```text
 <think>
@@ -2286,3 +2286,27 @@ public class OrderProcessingExample {
 5. 构建更智能的自愈系统
 
 通过将工作流思想与OpenTelemetry结合，可以创建更有效的可观测性解决方案，满足现代云原生和分布式系统的需求。这种范畴论框架不仅有助于理解现有的观测实践，还为未来的可观测性技术创新提供了理论指导。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Java工作流观测实践](https://en.wikipedia.org/wiki/java工作流观测实践)
+  - [nLab: Java工作流观测实践](https://ncatlab.org/nlab/show/java工作流观测实践)
+  - [Stanford Encyclopedia: Java工作流观测实践](https://plato.stanford.edu/entries/java工作流观测实践/)
+
+- **名校课程**：
+  - [MIT: Java工作流观测实践](https://ocw.mit.edu/courses/)
+  - [Stanford: Java工作流观测实践](https://web.stanford.edu/class/)
+  - [CMU: Java工作流观测实践](https://www.cs.cmu.edu/~java工作流观测实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

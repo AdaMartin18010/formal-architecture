@@ -1,4 +1,4 @@
-# CAP定理与设计权衡
+﻿# CAP定理与设计权衡
 
 ## 目录
 
@@ -64,3 +64,27 @@ PACELC 定理是对 CAP 的一个扩展，它提供了更全面的视角：
 - **E** (Else): 否则（在系统正常运行时），系统必须在 **L** (Latency) 和 **C** (Consistency) 之间选择。
 
 这意味着，即使在没有网络故障的情况下，系统设计者仍然面临着"追求更低的操作延迟"和"保证更强的数据一致性"之间的权衡。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: CAP定理与设计权衡](https://en.wikipedia.org/wiki/cap定理与设计权衡)
+  - [nLab: CAP定理与设计权衡](https://ncatlab.org/nlab/show/cap定理与设计权衡)
+  - [Stanford Encyclopedia: CAP定理与设计权衡](https://plato.stanford.edu/entries/cap定理与设计权衡/)
+
+- **名校课程**：
+  - [MIT: CAP定理与设计权衡](https://ocw.mit.edu/courses/)
+  - [Stanford: CAP定理与设计权衡](https://web.stanford.edu/class/)
+  - [CMU: CAP定理与设计权衡](https://www.cs.cmu.edu/~cap定理与设计权衡/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

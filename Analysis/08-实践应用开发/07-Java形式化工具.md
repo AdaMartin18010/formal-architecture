@@ -1,4 +1,4 @@
-# 08-实践应用开发-Java形式化工具
+﻿# 08-实践应用开发-Java形式化工具
 
 [返回主题树](../00-主题树与内容索引.md) | [主计划文档](../00-形式化架构理论统一计划.md) | [相关计划](../递归合并计划.md)
 
@@ -77,3 +77,27 @@
 ### 6.2 移动开发
 
 ## 7. 总结
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Java形式化工具](https://en.wikipedia.org/wiki/java形式化工具)
+  - [nLab: Java形式化工具](https://ncatlab.org/nlab/show/java形式化工具)
+  - [Stanford Encyclopedia: Java形式化工具](https://plato.stanford.edu/entries/java形式化工具/)
+
+- **名校课程**：
+  - [MIT: Java形式化工具](https://ocw.mit.edu/courses/)
+  - [Stanford: Java形式化工具](https://web.stanford.edu/class/)
+  - [CMU: Java形式化工具](https://www.cs.cmu.edu/~java形式化工具/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

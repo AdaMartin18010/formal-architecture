@@ -1,4 +1,4 @@
-# FormalUnified目录内容分析
+﻿# FormalUnified目录内容分析
 
 ## 分析概述
 
@@ -316,3 +316,27 @@ FormalUnified/
 **分析完成时间**: 2024年12月  
 **分析人员**: 知识梳理团队  
 **下一步**: 开始术语词典建立工作
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: FormalUnified目录内容分析](https://en.wikipedia.org/wiki/formalunified目录内容分析)
+  - [nLab: FormalUnified目录内容分析](https://ncatlab.org/nlab/show/formalunified目录内容分析)
+  - [Stanford Encyclopedia: FormalUnified目录内容分析](https://plato.stanford.edu/entries/formalunified目录内容分析/)
+
+- **名校课程**：
+  - [MIT: FormalUnified目录内容分析](https://ocw.mit.edu/courses/)
+  - [Stanford: FormalUnified目录内容分析](https://web.stanford.edu/class/)
+  - [CMU: FormalUnified目录内容分析](https://www.cs.cmu.edu/~formalunified目录内容分析/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

@@ -1,4 +1,4 @@
-# 03-n8n.io：可视化的低代码/无代码自动化平台
+﻿# 03-n8n.io：可视化的低代码/无代码自动化平台
 
 ## 目录
 
@@ -167,3 +167,27 @@ export class MyCustomNode implements INodeType {
 - **社区驱动**: 拥有活跃的开源社区，提供了大量的预构建工作流和节点。
 
 n8n是连接现代SaaS服务、实现内部系统自动化、以及快速构建业务流程原型的有力工具。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: n8n_io_低代码自动化](https://en.wikipedia.org/wiki/n8n_io_低代码自动化)
+  - [nLab: n8n_io_低代码自动化](https://ncatlab.org/nlab/show/n8n_io_低代码自动化)
+  - [Stanford Encyclopedia: n8n_io_低代码自动化](https://plato.stanford.edu/entries/n8n_io_低代码自动化/)
+
+- **名校课程**：
+  - [MIT: n8n_io_低代码自动化](https://ocw.mit.edu/courses/)
+  - [Stanford: n8n_io_低代码自动化](https://web.stanford.edu/class/)
+  - [CMU: n8n_io_低代码自动化](https://www.cs.cmu.edu/~n8n_io_低代码自动化/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

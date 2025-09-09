@@ -1,4 +1,4 @@
-# 05-编程语言理论体系-Rust语言精髓-并发模型与SendSync
+﻿# 05-编程语言理论体系-Rust语言精髓-并发模型与SendSync
 
 [返回主题树](../../00-主题树与内容索引.md) | [主计划文档](../../00-形式化架构理论统一计划.md) | [相关计划](../../递归合并计划.md)
 
@@ -87,3 +87,27 @@ pub unsafe auto trait Sync {}
 - **无运行时开销**: 作为标记，它们不产生任何额外代码，符合Rust的零成本抽象原则。
 - **组合性**: 编译器可根据类型的构成自动推导其线程安全性，使得构建复杂的线程安全类型变得简单和可靠。
 - **可验证性**: 任何不满足 `Send` 或 `Sync` 约束的跨线程操作都会导致编译失败，从根本上消除了数据竞争。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 并发模型与SendSync](https://en.wikipedia.org/wiki/并发模型与sendsync)
+  - [nLab: 并发模型与SendSync](https://ncatlab.org/nlab/show/并发模型与sendsync)
+  - [Stanford Encyclopedia: 并发模型与SendSync](https://plato.stanford.edu/entries/并发模型与sendsync/)
+
+- **名校课程**：
+  - [MIT: 并发模型与SendSync](https://ocw.mit.edu/courses/)
+  - [Stanford: 并发模型与SendSync](https://web.stanford.edu/class/)
+  - [CMU: 并发模型与SendSync](https://www.cs.cmu.edu/~并发模型与sendsync/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

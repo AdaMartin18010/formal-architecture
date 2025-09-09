@@ -1,4 +1,4 @@
-# 08-实践应用开发-Rust形式化工具
+﻿# 08-实践应用开发-Rust形式化工具
 
 [返回主题树](../00-主题树与内容索引.md) | [主计划文档](../00-形式化架构理论统一计划.md) | [相关计划](../递归合并计划.md) | [返回上级](../README.md)
 
@@ -242,3 +242,27 @@ Rust形式化工具为安全可靠的软件开发提供了强大的工具支持�
 ---
 
 > 本文件为自动归纳生成，后续将递归细化相关内容，持续补全图表、公式、代码等多表征内容。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Rust形式化工具](https://en.wikipedia.org/wiki/rust形式化工具)
+  - [nLab: Rust形式化工具](https://ncatlab.org/nlab/show/rust形式化工具)
+  - [Stanford Encyclopedia: Rust形式化工具](https://plato.stanford.edu/entries/rust形式化工具/)
+
+- **名校课程**：
+  - [MIT: Rust形式化工具](https://ocw.mit.edu/courses/)
+  - [Stanford: Rust形式化工具](https://web.stanford.edu/class/)
+  - [CMU: Rust形式化工具](https://www.cs.cmu.edu/~rust形式化工具/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

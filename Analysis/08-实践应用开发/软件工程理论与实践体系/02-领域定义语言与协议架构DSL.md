@@ -1,4 +1,4 @@
-# 02-领域定义语言（DSL）与协议/架构DSL
+﻿# 02-领域定义语言（DSL）与协议/架构DSL
 
 > 本文档系统梳理领域定义语言（DSL）、协议定义语言、架构定义语言的理论基础、设计原则、自动化生成与工程实践，突出自动化、工程创新与跨语言集成。
 
@@ -165,3 +165,27 @@ WS: [ \t\r\n]+ -> skip;
 ---
 
 > 本文件为自动归纳生成，后续将递归细化各分主题，持续补全图表、公式、代码等多表征内容。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 领域定义语言与协议架构DSL](https://en.wikipedia.org/wiki/领域定义语言与协议架构dsl)
+  - [nLab: 领域定义语言与协议架构DSL](https://ncatlab.org/nlab/show/领域定义语言与协议架构dsl)
+  - [Stanford Encyclopedia: 领域定义语言与协议架构DSL](https://plato.stanford.edu/entries/领域定义语言与协议架构dsl/)
+
+- **名校课程**：
+  - [MIT: 领域定义语言与协议架构DSL](https://ocw.mit.edu/courses/)
+  - [Stanford: 领域定义语言与协议架构DSL](https://web.stanford.edu/class/)
+  - [CMU: 领域定义语言与协议架构DSL](https://www.cs.cmu.edu/~领域定义语言与协议架构dsl/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

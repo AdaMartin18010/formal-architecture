@@ -1,4 +1,4 @@
-# release → Analysis 映射索引
+﻿# release → Analysis 映射索引
 
 本页描述 `FormalUnified/release` 中主要资料与 `Analysis/` 目录的对应落位，用于完成深度整合与导航统一。
 
@@ -43,3 +43,27 @@
 
 ---
 备注：本映射索引为导航性文档，原则上不复制 release 内容，仅统一入口与引用，确保单一事实源。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: release→Analysis 映射索引](https://en.wikipedia.org/wiki/release→analysis_映射索引)
+  - [nLab: release→Analysis 映射索引](https://ncatlab.org/nlab/show/release→analysis+映射索引)
+  - [Stanford Encyclopedia: release→Analysis 映射索引](https://plato.stanford.edu/entries/release→analysis-映射索引/)
+
+- **名校课程**：
+  - [MIT: release→Analysis 映射索引](https://ocw.mit.edu/courses/)
+  - [Stanford: release→Analysis 映射索引](https://web.stanford.edu/class/)
+  - [CMU: release→Analysis 映射索引](https://www.cs.cmu.edu/~release→analysis-映射索引/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

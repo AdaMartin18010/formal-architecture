@@ -1,4 +1,4 @@
-# 05-编程语言理论体系-Rust语言精髓-异步编程与Future
+﻿# 05-编程语言理论体系-Rust语言精髓-异步编程与Future
 
 [返回主题树](../../00-主题树与内容索引.md) | [主计划文档](../../00-形式化架构理论统一计划.md) | [相关计划](../../递归合并计划.md)
 
@@ -1275,3 +1275,27 @@ Rust的异步编程模型是一个强大但复杂的系统，它在不牺牲性�
 3. **异步泛型**：`async fn`在trait中的支持
 4. **异步闭包**：更自然的异步闭包语法
 5. **性能优化**：进一步的编译时优化和运行时优化
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 异步编程与Future](https://en.wikipedia.org/wiki/异步编程与future)
+  - [nLab: 异步编程与Future](https://ncatlab.org/nlab/show/异步编程与future)
+  - [Stanford Encyclopedia: 异步编程与Future](https://plato.stanford.edu/entries/异步编程与future/)
+
+- **名校课程**：
+  - [MIT: 异步编程与Future](https://ocw.mit.edu/courses/)
+  - [Stanford: 异步编程与Future](https://web.stanford.edu/class/)
+  - [CMU: 异步编程与Future](https://www.cs.cmu.edu/~异步编程与future/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

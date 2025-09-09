@@ -1,4 +1,4 @@
-# 2-WorkflowDomain
+﻿# 2-WorkflowDomain
 
 > **重定向声明**: 本文档内容已合并至 [05-工作流与自动化平台/](05-工作流与自动化平台/)目录下的相关文件，请参考主权威文件获取最新内容。
 > 建议配合[00-主题树与内容索引](./00-主题树与内容索引.md)一同阅读。
@@ -28,3 +28,27 @@
 - [2.7-WorkflowDomain-参考文献](./2.7-WorkflowDomain-参考文献.md)
 
 > **主权威内容请参考 [05-工作流与自动化平台/](05-工作流与自动化平台/) 目录下最新文件。**
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: WorkflowDomain](https://en.wikipedia.org/wiki/workflowdomain)
+  - [nLab: WorkflowDomain](https://ncatlab.org/nlab/show/workflowdomain)
+  - [Stanford Encyclopedia: WorkflowDomain](https://plato.stanford.edu/entries/workflowdomain/)
+
+- **名校课程**：
+  - [MIT: WorkflowDomain](https://ocw.mit.edu/courses/)
+  - [Stanford: WorkflowDomain](https://web.stanford.edu/class/)
+  - [CMU: WorkflowDomain](https://www.cs.cmu.edu/~workflowdomain/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

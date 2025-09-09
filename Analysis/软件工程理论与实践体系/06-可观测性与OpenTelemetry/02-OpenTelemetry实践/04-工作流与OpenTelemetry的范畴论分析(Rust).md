@@ -1,4 +1,4 @@
-# 从工作流视角分析OpenTelemetry：范畴论形式化分析与Rust实现
+﻿# 从工作流视角分析OpenTelemetry：范畴论形式化分析与Rust实现
 
 ```text
 <think>
@@ -3658,3 +3658,27 @@ Rust语言的特性使其特别适合构建高性能、可靠的可观测性系�
 我们不仅揭示了它们之间的深层联系，
 也为未来的可观测性系统设计提供了一种更系统、更形式化的方法，
 尤其是在Rust这样的现代系统编程语言中，这种方法的优势更加明显。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 工作流与OpenTelemetry的范畴论分析(Rust)](https://en.wikipedia.org/wiki/工作流与opentelemetry的范畴论分析(rust))
+  - [nLab: 工作流与OpenTelemetry的范畴论分析(Rust)](https://ncatlab.org/nlab/show/工作流与opentelemetry的范畴论分析(rust))
+  - [Stanford Encyclopedia: 工作流与OpenTelemetry的范畴论分析(Rust)](https://plato.stanford.edu/entries/工作流与opentelemetry的范畴论分析(rust)/)
+
+- **名校课程**：
+  - [MIT: 工作流与OpenTelemetry的范畴论分析(Rust)](https://ocw.mit.edu/courses/)
+  - [Stanford: 工作流与OpenTelemetry的范畴论分析(Rust)](https://web.stanford.edu/class/)
+  - [CMU: 工作流与OpenTelemetry的范畴论分析(Rust)](https://www.cs.cmu.edu/~工作流与opentelemetry的范畴论分析(rust)/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

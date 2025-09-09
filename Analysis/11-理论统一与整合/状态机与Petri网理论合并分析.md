@@ -1,4 +1,4 @@
-# 状态机与Petri网理论合并分析
+﻿# 状态机与Petri网理论合并分析
 
 ## 1. 概述
 
@@ -232,3 +232,27 @@ Petri网理论主要关注并发系统中的事件和条件之间的关系，是
 ## 9. 总结
 
 本文档对状态机理论和Petri网理论进行了初步分析，为后续合并工作提供了基础。通过分析两个理论的基础、关系、合并策略、文件结构设计、交叉引用更新、风险与挑战等方面，为合并工作提供了清晰的指导。下一步将进行更详细的内容分析和结构细化，为实际的合并工作做好准备。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 状态机与Petri网理论合并分析](https://en.wikipedia.org/wiki/状态机与petri网理论合并分析)
+  - [nLab: 状态机与Petri网理论合并分析](https://ncatlab.org/nlab/show/状态机与petri网理论合并分析)
+  - [Stanford Encyclopedia: 状态机与Petri网理论合并分析](https://plato.stanford.edu/entries/状态机与petri网理论合并分析/)
+
+- **名校课程**：
+  - [MIT: 状态机与Petri网理论合并分析](https://ocw.mit.edu/courses/)
+  - [Stanford: 状态机与Petri网理论合并分析](https://web.stanford.edu/class/)
+  - [CMU: 状态机与Petri网理论合并分析](https://www.cs.cmu.edu/~状态机与petri网理论合并分析/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

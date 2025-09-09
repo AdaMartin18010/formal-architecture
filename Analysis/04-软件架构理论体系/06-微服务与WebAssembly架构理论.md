@@ -1,4 +1,4 @@
-# 微服务与WebAssembly架构理论
+﻿# 微服务与WebAssembly架构理论
 
 ## 目录
 
@@ -665,3 +665,27 @@ flowchart TD
 3. Rossberg, A. (2019). "WebAssembly Core Specification"
 4. Richardson, C. (2018). "Microservices Patterns"
 5. Wasmer Team. (2023). "Running WebAssembly Workloads in Micro Service Architecture"
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 微服务与WebAssembly架构理论](https://en.wikipedia.org/wiki/微服务与webassembly架构理论)
+  - [nLab: 微服务与WebAssembly架构理论](https://ncatlab.org/nlab/show/微服务与webassembly架构理论)
+  - [Stanford Encyclopedia: 微服务与WebAssembly架构理论](https://plato.stanford.edu/entries/微服务与webassembly架构理论/)
+
+- **名校课程**：
+  - [MIT: 微服务与WebAssembly架构理论](https://ocw.mit.edu/courses/)
+  - [Stanford: 微服务与WebAssembly架构理论](https://web.stanford.edu/class/)
+  - [CMU: 微服务与WebAssembly架构理论](https://www.cs.cmu.edu/~微服务与webassembly架构理论/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

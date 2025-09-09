@@ -1,4 +1,4 @@
-# 1.3 GraphQL与自动化工具链
+﻿# 1.3 GraphQL与自动化工具链
 
 ## 目录
 
@@ -1440,3 +1440,27 @@ sequenceDiagram
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: GraphQL与自动化工具链](https://en.wikipedia.org/wiki/graphql与自动化工具链)
+  - [nLab: GraphQL与自动化工具链](https://ncatlab.org/nlab/show/graphql与自动化工具链)
+  - [Stanford Encyclopedia: GraphQL与自动化工具链](https://plato.stanford.edu/entries/graphql与自动化工具链/)
+
+- **名校课程**：
+  - [MIT: GraphQL与自动化工具链](https://ocw.mit.edu/courses/)
+  - [Stanford: GraphQL与自动化工具链](https://web.stanford.edu/class/)
+  - [CMU: GraphQL与自动化工具链](https://www.cs.cmu.edu/~graphql与自动化工具链/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

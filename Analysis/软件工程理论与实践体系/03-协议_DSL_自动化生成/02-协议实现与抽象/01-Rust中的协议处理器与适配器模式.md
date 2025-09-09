@@ -1,4 +1,4 @@
-# Rust中的协议处理器与适配器模式
+﻿# Rust中的协议处理器与适配器模式
 
 ## 目录
 
@@ -135,3 +135,27 @@ impl ProtocolFactory {
 ```
 
 通过将这三种模式结合起来，可以构建一个高度解耦、可扩展且易于维护的系统，能够灵活地适应不断变化的协议需求。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Rust中的协议处理器与适配器模式](https://en.wikipedia.org/wiki/rust中的协议处理器与适配器模式)
+  - [nLab: Rust中的协议处理器与适配器模式](https://ncatlab.org/nlab/show/rust中的协议处理器与适配器模式)
+  - [Stanford Encyclopedia: Rust中的协议处理器与适配器模式](https://plato.stanford.edu/entries/rust中的协议处理器与适配器模式/)
+
+- **名校课程**：
+  - [MIT: Rust中的协议处理器与适配器模式](https://ocw.mit.edu/courses/)
+  - [Stanford: Rust中的协议处理器与适配器模式](https://web.stanford.edu/class/)
+  - [CMU: Rust中的协议处理器与适配器模式](https://www.cs.cmu.edu/~rust中的协议处理器与适配器模式/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

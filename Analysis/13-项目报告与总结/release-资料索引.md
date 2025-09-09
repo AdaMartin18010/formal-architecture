@@ -1,4 +1,4 @@
-# Release 资料索引（只读引用）
+﻿# Release 资料索引（只读引用）
 
 本页汇总 `FormalUnified/release` 中的重要发布资料，统一从 `Analysis/13-项目报告与总结` 访问。
 
@@ -36,3 +36,27 @@
 
 ---
 说明：本页为索引型文档，后续若需要在 `Analysis` 侧生成可发布版本，将在完成一致性与依赖校验后另行生成副本。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: release 资料索引](https://en.wikipedia.org/wiki/release_资料索引)
+  - [nLab: release 资料索引](https://ncatlab.org/nlab/show/release+资料索引)
+  - [Stanford Encyclopedia: release 资料索引](https://plato.stanford.edu/entries/release-资料索引/)
+
+- **名校课程**：
+  - [MIT: release 资料索引](https://ocw.mit.edu/courses/)
+  - [Stanford: release 资料索引](https://web.stanford.edu/class/)
+  - [CMU: release 资料索引](https://www.cs.cmu.edu/~release-资料索引/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

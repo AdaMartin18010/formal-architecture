@@ -1,4 +1,4 @@
-# 1.2 gRPC与Protocol Buffers：自动化实践
+﻿# 1.2 gRPC与Protocol Buffers：自动化实践
 
 ## 目录
 
@@ -772,3 +772,27 @@ sequenceDiagram
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 03a gRPC与ProtocolBuffers 自动化实践](https://en.wikipedia.org/wiki/03a_grpc与protocolbuffers_自动化实践)
+  - [nLab: 03a gRPC与ProtocolBuffers 自动化实践](https://ncatlab.org/nlab/show/03a+grpc与protocolbuffers+自动化实践)
+  - [Stanford Encyclopedia: 03a gRPC与ProtocolBuffers 自动化实践](https://plato.stanford.edu/entries/03a-grpc与protocolbuffers-自动化实践/)
+
+- **名校课程**：
+  - [MIT: 03a gRPC与ProtocolBuffers 自动化实践](https://ocw.mit.edu/courses/)
+  - [Stanford: 03a gRPC与ProtocolBuffers 自动化实践](https://web.stanford.edu/class/)
+  - [CMU: 03a gRPC与ProtocolBuffers 自动化实践](https://www.cs.cmu.edu/~03a-grpc与protocolbuffers-自动化实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

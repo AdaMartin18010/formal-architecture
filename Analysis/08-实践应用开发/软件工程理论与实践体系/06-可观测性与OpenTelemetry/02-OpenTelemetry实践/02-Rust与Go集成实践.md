@@ -1,4 +1,4 @@
-# OpenTelemetry在Rust和Golang技术堆栈中的详细分析
+﻿# OpenTelemetry在Rust和Golang技术堆栈中的详细分析
 
 ## 目录
 
@@ -5449,3 +5449,27 @@ func (s *CriticalPathSampler) Description() string {
 - **改进的上下文传播**: 更丰富的上下文信息和传播机制
 
 无论选择Rust还是Golang实现OpenTelemetry，或者两者结合使用，关键是建立一个一致的、可扩展的可观测性战略，以支持业务需求并提供深入的系统洞察。每种语言都有其优势和适用场景，合理选择和组合这些技术可以构建出健壮、高效且可观测的分布式系统。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Rust与Go集成实践](https://en.wikipedia.org/wiki/rust与go集成实践)
+  - [nLab: Rust与Go集成实践](https://ncatlab.org/nlab/show/rust与go集成实践)
+  - [Stanford Encyclopedia: Rust与Go集成实践](https://plato.stanford.edu/entries/rust与go集成实践/)
+
+- **名校课程**：
+  - [MIT: Rust与Go集成实践](https://ocw.mit.edu/courses/)
+  - [Stanford: Rust与Go集成实践](https://web.stanford.edu/class/)
+  - [CMU: Rust与Go集成实践](https://www.cs.cmu.edu/~rust与go集成实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

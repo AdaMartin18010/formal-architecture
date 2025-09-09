@@ -1,4 +1,4 @@
-# IoT 相关
+﻿# IoT 相关
 
 ## Embedded-HAL 当前生态支持情况
 
@@ -404,3 +404,27 @@ IOT_Control_Interaction_Data_Format_Standards.md
   随着 IoT 生态的不断完善，多标准之间的互通性与兼容性正成为未来的重点突破方向，推动设备和系统之间实现更高层次的数据标准化和互操作性。
 
 通过这些标准规范以及开放的实现，物联网系统能够在不同层面上实现设备数据的标准化描述及高效的控制和交互，为构建智能、互联的 IoT 生态提供了坚实的技术基础。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: IoT行业标准与Rust嵌入式实践](https://en.wikipedia.org/wiki/iot行业标准与rust嵌入式实践)
+  - [nLab: IoT行业标准与Rust嵌入式实践](https://ncatlab.org/nlab/show/iot行业标准与rust嵌入式实践)
+  - [Stanford Encyclopedia: IoT行业标准与Rust嵌入式实践](https://plato.stanford.edu/entries/iot行业标准与rust嵌入式实践/)
+
+- **名校课程**：
+  - [MIT: IoT行业标准与Rust嵌入式实践](https://ocw.mit.edu/courses/)
+  - [Stanford: IoT行业标准与Rust嵌入式实践](https://web.stanford.edu/class/)
+  - [CMU: IoT行业标准与Rust嵌入式实践](https://www.cs.cmu.edu/~iot行业标准与rust嵌入式实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

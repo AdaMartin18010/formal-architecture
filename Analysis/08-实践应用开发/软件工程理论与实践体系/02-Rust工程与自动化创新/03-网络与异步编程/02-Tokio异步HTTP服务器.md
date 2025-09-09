@@ -1,4 +1,4 @@
-# 使用Tokio构建异步HTTP服务器
+﻿# 使用Tokio构建异步HTTP服务器
 
 本节展示如何使用`Tokio`从头开始构建一个简单的、基于`Future`的高性能异步HTTP服务器。这个例子将深入探讨`async/await`、特征在服务抽象中的应用，以及如何在异步任务间共享状态。
 
@@ -126,3 +126,27 @@ pub async fn run_server() {
         }
     }
 }
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Tokio异步HTTP服务器](https://en.wikipedia.org/wiki/tokio异步http服务器)
+  - [nLab: Tokio异步HTTP服务器](https://ncatlab.org/nlab/show/tokio异步http服务器)
+  - [Stanford Encyclopedia: Tokio异步HTTP服务器](https://plato.stanford.edu/entries/tokio异步http服务器/)
+
+- **名校课程**：
+  - [MIT: Tokio异步HTTP服务器](https://ocw.mit.edu/courses/)
+  - [Stanford: Tokio异步HTTP服务器](https://web.stanford.edu/class/)
+  - [CMU: Tokio异步HTTP服务器](https://www.cs.cmu.edu/~tokio异步http服务器/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

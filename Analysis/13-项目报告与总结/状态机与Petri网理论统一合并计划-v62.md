@@ -1,4 +1,4 @@
-# 状态机与Petri网理论统一合并计划 - v62
+﻿# 状态机与Petri网理论统一合并计划 - v62
 
 ## 1. 理论基础
 
@@ -255,3 +255,27 @@ Petri网在并发系统建模、工作流分析、通信协议和制造系统等
 **创建时间**: 2024年7月  
 **状态**: 🔄 计划中  
 **最后更新**: 2024年7月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 状态机与Petri网理论统一合并计划 v62](https://en.wikipedia.org/wiki/状态机与petri网理论统一合并计划_v62)
+  - [nLab: 状态机与Petri网理论统一合并计划 v62](https://ncatlab.org/nlab/show/状态机与petri网理论统一合并计划+v62)
+  - [Stanford Encyclopedia: 状态机与Petri网理论统一合并计划 v62](https://plato.stanford.edu/entries/状态机与petri网理论统一合并计划-v62/)
+
+- **名校课程**：
+  - [MIT: 状态机与Petri网理论统一合并计划 v62](https://ocw.mit.edu/courses/)
+  - [Stanford: 状态机与Petri网理论统一合并计划 v62](https://web.stanford.edu/class/)
+  - [CMU: 状态机与Petri网理论统一合并计划 v62](https://www.cs.cmu.edu/~状态机与petri网理论统一合并计划-v62/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

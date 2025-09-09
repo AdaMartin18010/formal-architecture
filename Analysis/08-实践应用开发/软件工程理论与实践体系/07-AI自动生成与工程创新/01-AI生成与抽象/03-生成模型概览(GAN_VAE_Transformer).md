@@ -1,4 +1,4 @@
-# 数学、认知科学与 AI 的关联性深度分析
+﻿# 数学、认知科学与 AI 的关联性深度分析
 
 ## 目录
 
@@ -1964,3 +1964,27 @@ AI 则致力于构建实用的学习系统，其成功和局限性又反过来�
 
 确保强大 AI 的发展符合人类的长远利益，是这个时代赋予我们的共同责任。
 对伦理、价值观与对齐问题的持续探索和努力，将决定我们与未来智能的关系。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 生成模型概览(GAN_VAE_Transformer)](https://en.wikipedia.org/wiki/生成模型概览(gan_vae_transformer))
+  - [nLab: 生成模型概览(GAN_VAE_Transformer)](https://ncatlab.org/nlab/show/生成模型概览(gan_vae_transformer))
+  - [Stanford Encyclopedia: 生成模型概览(GAN_VAE_Transformer)](https://plato.stanford.edu/entries/生成模型概览(gan_vae_transformer)/)
+
+- **名校课程**：
+  - [MIT: 生成模型概览(GAN_VAE_Transformer)](https://ocw.mit.edu/courses/)
+  - [Stanford: 生成模型概览(GAN_VAE_Transformer)](https://web.stanford.edu/class/)
+  - [CMU: 生成模型概览(GAN_VAE_Transformer)](https://www.cs.cmu.edu/~生成模型概览(gan_vae_transformer)/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

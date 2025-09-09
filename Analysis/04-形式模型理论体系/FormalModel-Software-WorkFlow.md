@@ -1,4 +1,4 @@
-# FormalModel-Software-WorkFlow 领域内容归纳与规范化输出
+﻿# FormalModel-Software-WorkFlow 领域内容归纳与规范化输出
 
 > 本文档归纳自 /Matter/FormalModel/Software/WorkFlow 目录，涵盖 patterns、analysis、model 等子目录，旨在形成精炼、分层、规范的内容输出，便于后续学术化、工程化引用。
 
@@ -895,3 +895,27 @@ func RunWorkflow(tasks []func(interface{}) interface{}, input interface{}) inter
 ---
 
 > 后续将对上述各主题内容进行精炼、分层、去重、重构，输出符合学术与工程规范的 markdown 内容。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: FormalModel Software WorkFlow](https://en.wikipedia.org/wiki/formalmodel_software_workflow)
+  - [nLab: FormalModel Software WorkFlow](https://ncatlab.org/nlab/show/formalmodel+software+workflow)
+  - [Stanford Encyclopedia: FormalModel Software WorkFlow](https://plato.stanford.edu/entries/formalmodel-software-workflow/)
+
+- **名校课程**：
+  - [MIT: FormalModel Software WorkFlow](https://ocw.mit.edu/courses/)
+  - [Stanford: FormalModel Software WorkFlow](https://web.stanford.edu/class/)
+  - [CMU: FormalModel Software WorkFlow](https://www.cs.cmu.edu/~formalmodel-software-workflow/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

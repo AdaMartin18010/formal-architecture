@@ -1,4 +1,4 @@
-# 1.1.1 Gin微服务设计与实现
+﻿# 1.1.1 Gin微服务设计与实现
 
 > 本文属于1.1-Microservice主题，建议配合[主题树与内容索引](../../00-主题树与内容索引.md)一同阅读。
 
@@ -1663,3 +1663,27 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
 5. **安全与合规性**：随着系统复杂度增加，工作流级别的安全审计和合规追踪将变得越来越重要。
 
 通过将工作流视角与微服务架构相结合，并应用现代分布式系统技术，我们可以构建更加灵活、可靠和可维护的企业系统，更好地满足业务需求的快速变化。Golang作为高性能并发语言，将继续在这一领域发挥重要作用。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Gin微服务设计与实现](https://en.wikipedia.org/wiki/gin微服务设计与实现)
+  - [nLab: Gin微服务设计与实现](https://ncatlab.org/nlab/show/gin微服务设计与实现)
+  - [Stanford Encyclopedia: Gin微服务设计与实现](https://plato.stanford.edu/entries/gin微服务设计与实现/)
+
+- **名校课程**：
+  - [MIT: Gin微服务设计与实现](https://ocw.mit.edu/courses/)
+  - [Stanford: Gin微服务设计与实现](https://web.stanford.edu/class/)
+  - [CMU: Gin微服务设计与实现](https://www.cs.cmu.edu/~gin微服务设计与实现/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

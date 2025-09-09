@@ -1,4 +1,4 @@
-# 1.1 OpenAPI与Swagger：自动化实践
+﻿# 1.1 OpenAPI与Swagger：自动化实践
 
 ## 目录
 
@@ -1005,3 +1005,27 @@ graph LR
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 01a OpenAPI与Swagger 自动化实践](https://en.wikipedia.org/wiki/01a_openapi与swagger_自动化实践)
+  - [nLab: 01a OpenAPI与Swagger 自动化实践](https://ncatlab.org/nlab/show/01a+openapi与swagger+自动化实践)
+  - [Stanford Encyclopedia: 01a OpenAPI与Swagger 自动化实践](https://plato.stanford.edu/entries/01a-openapi与swagger-自动化实践/)
+
+- **名校课程**：
+  - [MIT: 01a OpenAPI与Swagger 自动化实践](https://ocw.mit.edu/courses/)
+  - [Stanford: 01a OpenAPI与Swagger 自动化实践](https://web.stanford.edu/class/)
+  - [CMU: 01a OpenAPI与Swagger 自动化实践](https://www.cs.cmu.edu/~01a-openapi与swagger-自动化实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

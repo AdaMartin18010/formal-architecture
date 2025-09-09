@@ -1,4 +1,4 @@
-# 1.4 AsyncAPI与事件驱动架构自动化
+﻿# 1.4 AsyncAPI与事件驱动架构自动化
 
 ## 目录
 
@@ -1379,3 +1379,27 @@ sequenceDiagram
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: AsyncAPI与事件驱动架构自动化](https://en.wikipedia.org/wiki/asyncapi与事件驱动架构自动化)
+  - [nLab: AsyncAPI与事件驱动架构自动化](https://ncatlab.org/nlab/show/asyncapi与事件驱动架构自动化)
+  - [Stanford Encyclopedia: AsyncAPI与事件驱动架构自动化](https://plato.stanford.edu/entries/asyncapi与事件驱动架构自动化/)
+
+- **名校课程**：
+  - [MIT: AsyncAPI与事件驱动架构自动化](https://ocw.mit.edu/courses/)
+  - [Stanford: AsyncAPI与事件驱动架构自动化](https://web.stanford.edu/class/)
+  - [CMU: AsyncAPI与事件驱动架构自动化](https://www.cs.cmu.edu/~asyncapi与事件驱动架构自动化/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

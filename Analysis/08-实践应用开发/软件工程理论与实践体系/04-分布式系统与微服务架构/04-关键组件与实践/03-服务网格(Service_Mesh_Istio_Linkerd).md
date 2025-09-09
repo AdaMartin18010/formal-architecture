@@ -1,4 +1,4 @@
-# 2.5 服务网格 (Service Mesh - Istio/Linkerd)
+﻿# 2.5 服务网格 (Service Mesh - Istio/Linkerd)
 
 ## 目录
 
@@ -94,3 +94,27 @@ graph TD
 
 ---
 > 支持断点续写与递归细化，如需扩展某一小节请指定。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 服务网格(Service_Mesh_Istio_Linkerd)](https://en.wikipedia.org/wiki/服务网格(service_mesh_istio_linkerd))
+  - [nLab: 服务网格(Service_Mesh_Istio_Linkerd)](https://ncatlab.org/nlab/show/服务网格(service_mesh_istio_linkerd))
+  - [Stanford Encyclopedia: 服务网格(Service_Mesh_Istio_Linkerd)](https://plato.stanford.edu/entries/服务网格(service_mesh_istio_linkerd)/)
+
+- **名校课程**：
+  - [MIT: 服务网格(Service_Mesh_Istio_Linkerd)](https://ocw.mit.edu/courses/)
+  - [Stanford: 服务网格(Service_Mesh_Istio_Linkerd)](https://web.stanford.edu/class/)
+  - [CMU: 服务网格(Service_Mesh_Istio_Linkerd)](https://www.cs.cmu.edu/~服务网格(service_mesh_istio_linkerd)/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

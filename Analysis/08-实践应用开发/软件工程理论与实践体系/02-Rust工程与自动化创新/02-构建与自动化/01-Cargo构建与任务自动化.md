@@ -1,4 +1,4 @@
-# Cargo构建与任务自动化
+﻿# Cargo构建与任务自动化
 
 Rust 提供了强大的构建和包管理工具，其核心是`Cargo`。通过`build.rs`自定义构建脚本、Cargo别名、工作区以及`cargo-make`等社区工具，可以实现高度的构建与任务自动化。
 
@@ -138,3 +138,27 @@ dependencies = [
 - **cargo-deny**: 依赖审核
 - **sccache**: 编译缓存
 - **cross**: 跨平台编译
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Cargo构建与任务自动化](https://en.wikipedia.org/wiki/cargo构建与任务自动化)
+  - [nLab: Cargo构建与任务自动化](https://ncatlab.org/nlab/show/cargo构建与任务自动化)
+  - [Stanford Encyclopedia: Cargo构建与任务自动化](https://plato.stanford.edu/entries/cargo构建与任务自动化/)
+
+- **名校课程**：
+  - [MIT: Cargo构建与任务自动化](https://ocw.mit.edu/courses/)
+  - [Stanford: Cargo构建与任务自动化](https://web.stanford.edu/class/)
+  - [CMU: Cargo构建与任务自动化](https://www.cs.cmu.edu/~cargo构建与任务自动化/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

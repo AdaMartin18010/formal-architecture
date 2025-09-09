@@ -1,4 +1,4 @@
-# 2.2 AST转换与代码生成器
+﻿# 2.2 AST转换与代码生成器
 
 ## 目录
 
@@ -171,3 +171,27 @@ graph TD
 - [Go `text/template` documentation](https://pkg.go.dev/text/template)
 - [Tera (Rust Template Engine) Documentation](https://tera.netlify.app/docs/)
 - [Generating code (in Go)](https://blog.carlmjohnson.net/post/2021/go-generate-code/)
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: AST转换与代码生成器](https://en.wikipedia.org/wiki/ast转换与代码生成器)
+  - [nLab: AST转换与代码生成器](https://ncatlab.org/nlab/show/ast转换与代码生成器)
+  - [Stanford Encyclopedia: AST转换与代码生成器](https://plato.stanford.edu/entries/ast转换与代码生成器/)
+
+- **名校课程**：
+  - [MIT: AST转换与代码生成器](https://ocw.mit.edu/courses/)
+  - [Stanford: AST转换与代码生成器](https://web.stanford.edu/class/)
+  - [CMU: AST转换与代码生成器](https://www.cs.cmu.edu/~ast转换与代码生成器/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

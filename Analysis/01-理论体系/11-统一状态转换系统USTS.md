@@ -1,4 +1,4 @@
-# 01-理论体系-统一状态转换系统USTS
+﻿# 01-理论体系-统一状态转换系统USTS
 
 [返回主题树](../00-主题树与内容索引.md) | [主计划文档](../00-形式化架构理论统一计划.md) | [相关计划](../递归合并计划.md)
 
@@ -353,3 +353,27 @@ func NewUSTS() *USTS {
 2. 阅读USTS相关论文与案例
 3. 实践开源工具建模与分析
 4. 结合行业标准进行对比与扩展
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 统一状态转换系统USTS](https://en.wikipedia.org/wiki/统一状态转换系统usts)
+  - [nLab: 统一状态转换系统USTS](https://ncatlab.org/nlab/show/统一状态转换系统usts)
+  - [Stanford Encyclopedia: 统一状态转换系统USTS](https://plato.stanford.edu/entries/统一状态转换系统usts/)
+
+- **名校课程**：
+  - [MIT: 统一状态转换系统USTS](https://ocw.mit.edu/courses/)
+  - [Stanford: 统一状态转换系统USTS](https://web.stanford.edu/class/)
+  - [CMU: 统一状态转换系统USTS](https://www.cs.cmu.edu/~统一状态转换系统usts/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

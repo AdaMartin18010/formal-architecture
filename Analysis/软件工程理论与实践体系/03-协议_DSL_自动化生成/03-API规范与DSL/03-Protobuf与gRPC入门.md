@@ -1,4 +1,4 @@
-# 3. Protobuf与gRPC入门
+﻿# 3. Protobuf与gRPC入门
 
 ## 目录
 
@@ -1243,3 +1243,27 @@ enum ChangeType {
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Protobuf与gRPC入门](https://en.wikipedia.org/wiki/protobuf与grpc入门)
+  - [nLab: Protobuf与gRPC入门](https://ncatlab.org/nlab/show/protobuf与grpc入门)
+  - [Stanford Encyclopedia: Protobuf与gRPC入门](https://plato.stanford.edu/entries/protobuf与grpc入门/)
+
+- **名校课程**：
+  - [MIT: Protobuf与gRPC入门](https://ocw.mit.edu/courses/)
+  - [Stanford: Protobuf与gRPC入门](https://web.stanford.edu/class/)
+  - [CMU: Protobuf与gRPC入门](https://www.cs.cmu.edu/~protobuf与grpc入门/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

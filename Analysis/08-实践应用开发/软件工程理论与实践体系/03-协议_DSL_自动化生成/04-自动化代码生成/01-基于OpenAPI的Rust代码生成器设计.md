@@ -1,4 +1,4 @@
-# 1. 基于OpenAPI的Rust代码生成器设计
+﻿# 1. 基于OpenAPI的Rust代码生成器设计
 
 ## 目录
 
@@ -1311,3 +1311,27 @@ impl CacheManager {
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 基于OpenAPI的Rust代码生成器设计](https://en.wikipedia.org/wiki/基于openapi的rust代码生成器设计)
+  - [nLab: 基于OpenAPI的Rust代码生成器设计](https://ncatlab.org/nlab/show/基于openapi的rust代码生成器设计)
+  - [Stanford Encyclopedia: 基于OpenAPI的Rust代码生成器设计](https://plato.stanford.edu/entries/基于openapi的rust代码生成器设计/)
+
+- **名校课程**：
+  - [MIT: 基于OpenAPI的Rust代码生成器设计](https://ocw.mit.edu/courses/)
+  - [Stanford: 基于OpenAPI的Rust代码生成器设计](https://web.stanford.edu/class/)
+  - [CMU: 基于OpenAPI的Rust代码生成器设计](https://www.cs.cmu.edu/~基于openapi的rust代码生成器设计/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

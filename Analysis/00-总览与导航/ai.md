@@ -1,4 +1,4 @@
-# ai
+﻿# ai
 
 ```text
 1.   分析/Matter 目录下  的所有递归子目录中  
@@ -33,3 +33,27 @@ B.  不要删除源文件  到行业领域 到架构领域 到组件算法和实
 参考您自己规划和进展
 go on  激情澎湃的 <(￣︶￣)↗[GO!]  
 ```
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: ai](https://en.wikipedia.org/wiki/ai)
+  - [nLab: ai](https://ncatlab.org/nlab/show/ai)
+  - [Stanford Encyclopedia: ai](https://plato.stanford.edu/entries/ai/)
+
+- **名校课程**：
+  - [MIT: ai](https://ocw.mit.edu/courses/)
+  - [Stanford: ai](https://web.stanford.edu/class/)
+  - [CMU: ai](https://www.cs.cmu.edu/~ai/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

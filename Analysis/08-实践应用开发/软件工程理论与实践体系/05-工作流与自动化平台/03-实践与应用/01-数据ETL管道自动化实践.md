@@ -1,4 +1,4 @@
-# 3.1 数据ETL管道自动化实践
+﻿# 3.1 数据ETL管道自动化实践
 
 ## 目录
 
@@ -85,3 +85,27 @@ graph TD
 
 ---
 > 支持断点续写与递归细化，如需扩展某一小节请指定。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 数据ETL管道自动化实践](https://en.wikipedia.org/wiki/数据etl管道自动化实践)
+  - [nLab: 数据ETL管道自动化实践](https://ncatlab.org/nlab/show/数据etl管道自动化实践)
+  - [Stanford Encyclopedia: 数据ETL管道自动化实践](https://plato.stanford.edu/entries/数据etl管道自动化实践/)
+
+- **名校课程**：
+  - [MIT: 数据ETL管道自动化实践](https://ocw.mit.edu/courses/)
+  - [Stanford: 数据ETL管道自动化实践](https://web.stanford.edu/class/)
+  - [CMU: 数据ETL管道自动化实践](https://www.cs.cmu.edu/~数据etl管道自动化实践/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

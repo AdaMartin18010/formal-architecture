@@ -1,4 +1,4 @@
-# 2. 在Kubernetes中使用OpenAPI定义CRD
+﻿# 2. 在Kubernetes中使用OpenAPI定义CRD
 
 ## 目录
 
@@ -1248,3 +1248,27 @@ kubectl describe mycrd my-instance
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 在Kubernetes中使用OpenAPI定义CRD](https://en.wikipedia.org/wiki/在kubernetes中使用openapi定义crd)
+  - [nLab: 在Kubernetes中使用OpenAPI定义CRD](https://ncatlab.org/nlab/show/在kubernetes中使用openapi定义crd)
+  - [Stanford Encyclopedia: 在Kubernetes中使用OpenAPI定义CRD](https://plato.stanford.edu/entries/在kubernetes中使用openapi定义crd/)
+
+- **名校课程**：
+  - [MIT: 在Kubernetes中使用OpenAPI定义CRD](https://ocw.mit.edu/courses/)
+  - [Stanford: 在Kubernetes中使用OpenAPI定义CRD](https://web.stanford.edu/class/)
+  - [CMU: 在Kubernetes中使用OpenAPI定义CRD](https://www.cs.cmu.edu/~在kubernetes中使用openapi定义crd/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

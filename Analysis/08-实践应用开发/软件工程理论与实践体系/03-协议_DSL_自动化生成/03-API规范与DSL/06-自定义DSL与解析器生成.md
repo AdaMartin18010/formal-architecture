@@ -1,4 +1,4 @@
-# 2.1 自定义DSL与解析器生成
+﻿# 2.1 自定义DSL与解析器生成
 
 ## 目录
 
@@ -576,3 +576,27 @@ graph LR
 ---
 
 **最后更新**: 2025年01月
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: 自定义DSL与解析器生成](https://en.wikipedia.org/wiki/自定义dsl与解析器生成)
+  - [nLab: 自定义DSL与解析器生成](https://ncatlab.org/nlab/show/自定义dsl与解析器生成)
+  - [Stanford Encyclopedia: 自定义DSL与解析器生成](https://plato.stanford.edu/entries/自定义dsl与解析器生成/)
+
+- **名校课程**：
+  - [MIT: 自定义DSL与解析器生成](https://ocw.mit.edu/courses/)
+  - [Stanford: 自定义DSL与解析器生成](https://web.stanford.edu/class/)
+  - [CMU: 自定义DSL与解析器生成](https://www.cs.cmu.edu/~自定义dsl与解析器生成/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

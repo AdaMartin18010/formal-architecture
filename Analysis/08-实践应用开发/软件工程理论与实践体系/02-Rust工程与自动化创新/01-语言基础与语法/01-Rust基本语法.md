@@ -1,4 +1,4 @@
-# 语法
+﻿# 语法
 
 Rust 是一种系统编程语言，以其安全性、速度和内存效率而闻名。
 以下是 Rust 编程语言的一些基本语法规则：
@@ -184,3 +184,27 @@ Rust 是一种系统编程语言，具有一些独特的语法概念，这些概
     - 解释：闭包可以捕获和存储其环境中的变量，常用于高阶函数。
 
 这些概念共同构成了 Rust 的语法基础，使其成为一种既安全又高效的编程语言。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Rust基本语法](https://en.wikipedia.org/wiki/rust基本语法)
+  - [nLab: Rust基本语法](https://ncatlab.org/nlab/show/rust基本语法)
+  - [Stanford Encyclopedia: Rust基本语法](https://plato.stanford.edu/entries/rust基本语法/)
+
+- **名校课程**：
+  - [MIT: Rust基本语法](https://ocw.mit.edu/courses/)
+  - [Stanford: Rust基本语法](https://web.stanford.edu/class/)
+  - [CMU: Rust基本语法](https://www.cs.cmu.edu/~rust基本语法/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

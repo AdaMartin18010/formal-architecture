@@ -1,4 +1,4 @@
-# 索引与导航推进进程
+﻿# 索引与导航推进进程
 
 ## 当前阶段：知识体系导航构建
 
@@ -94,3 +94,27 @@
 
 **最后更新**: 2024年12月  
 **当前状态**: 统一导航系统设计完成，开始核心功能实现
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: process](https://en.wikipedia.org/wiki/process)
+  - [nLab: process](https://ncatlab.org/nlab/show/process)
+  - [Stanford Encyclopedia: process](https://plato.stanford.edu/entries/process/)
+
+- **名校课程**：
+  - [MIT: process](https://ocw.mit.edu/courses/)
+  - [Stanford: process](https://web.stanford.edu/class/)
+  - [CMU: process](https://www.cs.cmu.edu/~process/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）

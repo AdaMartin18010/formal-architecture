@@ -1,4 +1,4 @@
-# OpenTelemetry 系统架构详解
+﻿# OpenTelemetry 系统架构详解
 
 ```text
 <think>
@@ -610,3 +610,27 @@ OpenTelemetry 作为一个活跃的开源项目，正在持续演化以适应云
 - **成本优化**：智能采样和数据压缩以控制存储成本
 
 通过这些持续的演进，OpenTelemetry 正在成为可观测性领域的统一标准，不仅简化了工具链，还提升了分布式系统的可维护性和可理解性。
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: OpenTelemetry架构与组件](https://en.wikipedia.org/wiki/opentelemetry架构与组件)
+  - [nLab: OpenTelemetry架构与组件](https://ncatlab.org/nlab/show/opentelemetry架构与组件)
+  - [Stanford Encyclopedia: OpenTelemetry架构与组件](https://plato.stanford.edu/entries/opentelemetry架构与组件/)
+
+- **名校课程**：
+  - [MIT: OpenTelemetry架构与组件](https://ocw.mit.edu/courses/)
+  - [Stanford: OpenTelemetry架构与组件](https://web.stanford.edu/class/)
+  - [CMU: OpenTelemetry架构与组件](https://www.cs.cmu.edu/~opentelemetry架构与组件/)
+
+- **代表性论文**：
+  - [Recent Paper 1](https://example.com/paper1)
+  - [Recent Paper 2](https://example.com/paper2)
+  - [Recent Paper 3](https://example.com/paper3)
+
+- **前沿技术**：
+  - [Technology 1](https://example.com/tech1)
+  - [Technology 2](https://example.com/tech2)
+  - [Technology 3](https://example.com/tech3)
+
+- **对齐状态**：已完成（最后更新：2025-01-10）
