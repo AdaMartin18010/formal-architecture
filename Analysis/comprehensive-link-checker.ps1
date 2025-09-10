@@ -71,14 +71,17 @@ foreach ($file in $markdownFiles) {
                 $linkCategories["锚点链接"]++
             } else {
                 $linkCategories["内部链接"]++
-                
-                # 构建完整路径
-                $fullPath = if ($linkPath.StartsWith('./') -or $linkPath.StartsWith('../')) {
-                    Join-Path $file.DirectoryName $linkPath
+
+                # 忽略锚点片段，仅验证文件是否存在
+                $pathWithoutAnchor = ($linkPath -replace '#[^)]*$', '')
+
+                # 构建完整路径（相对或同级）
+                $fullPath = if ($pathWithoutAnchor.StartsWith('./') -or $pathWithoutAnchor.StartsWith('../')) {
+                    Join-Path $file.DirectoryName $pathWithoutAnchor
                 } else {
-                    Join-Path $file.DirectoryName $linkPath
+                    Join-Path $file.DirectoryName $pathWithoutAnchor
                 }
-                
+
                 # 检查文件是否存在
                 if (!(Test-Path $fullPath)) {
                     $linkCategories["断链"]++

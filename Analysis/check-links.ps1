@@ -16,16 +16,18 @@ $checked = 0
 foreach ($f in $files) {
     $checked++
     $content = Get-Content -Raw -Encoding UTF8 -Path $f.FullName
+    if ([string]::IsNullOrEmpty($content)) { continue }
     # 仅匹配内部markdown链接 [text](...md) 或 带锚点的md
-    $matches = [regex]::Matches($content, "\]\((?!https?://)([^)]+\.md(?:#[^)]+)?)\)")
-    foreach ($m in $matches) {
+    $linkMatches = [regex]::Matches($content, "\]\((?!https?://)([^)]+\.md(?:#[^)]+)?)\)")
+    foreach ($m in $linkMatches) {
         $total++
         $rel = $m.Groups[1].Value
         # 去掉锚点部分
         $pathOnly = $rel.Split('#')[0]
         $full = Join-Path $f.DirectoryName $pathOnly
         if (!(Test-Path $full)) {
-            $line = ($content.Substring(0, $m.Index) -split "`n").Count
+            $safeIndex = [Math]::Min($m.Index, $content.Length)
+            $line = ($content.Substring(0, $safeIndex) -split "`n").Count
             $broken += [PSCustomObject]@{
                 SourceFile = $f.FullName
                 LinkPath = $rel
