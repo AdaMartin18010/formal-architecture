@@ -8,7 +8,7 @@
 
 ### 1. 集成开发环境
 
-- [集成开发环境](integrated_development_environment.py) - 完整的集成开发环境实现
+- [集成开发环境](README.md) - 完整的集成开发环境实现
 
 ## 功能特色
 

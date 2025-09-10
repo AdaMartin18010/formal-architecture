@@ -1,4 +1,4 @@
-# 哲学基础理论主题导航索引
+﻿# 哲学基础理论主题导航索引
 
 ## 目录结构
 
@@ -9,17 +9,17 @@
 - [哲学内容全面分析报告-增强版](Philosophy/哲学内容全面分析报告-增强版.md)
 - [哲学内容全面分析报告-最终版](Philosophy/哲学内容全面分析报告-最终版.md)
 - [README](Philosophy/README.md)
-- [visualizations 可视化](Philosophy/visualizations/)
-- [content 细分内容](Philosophy/content/)
+- [visualizations 可视化](Philosophy/visualizations/README.md)
+- [content 细分内容](Philosophy/content/README.md)
 
 ## 重点分支
 
 - [visualizations/思维导图](Philosophy/content/visualizations/哲学概念思维导图-增强版.md)
-- [content/ontology/本体论分析](Philosophy/content/ontology/)
-- [content/phenomenology/现象学分析](Philosophy/content/phenomenology/)
-- [content/ethics/伦理学分析](Philosophy/content/ethics/)
-- [content/epistemology/认识论分析](Philosophy/content/epistemology/)
-- [content/traditional/传统哲学](Philosophy/content/traditional/)
+- [content/ontology/本体论分析](Philosophy/content/ontology/README.md)
+- [content/phenomenology/现象学分析](Philosophy/content/phenomenology/README.md)
+- [content/ethics/伦理学分析](Philosophy/content/ethics/README.md)
+- [content/epistemology/认识论分析](Philosophy/content/epistemology/README.md)
+- [content/traditional/传统哲学](Philosophy/content/traditional/README.md)
 
 ## 进程文档
 

@@ -1,4 +1,4 @@
-# 哲学内容详细分析
+﻿# 哲学内容详细分析
 
 ## 概述
 
@@ -8,15 +8,15 @@
 
 ### 1. 哲学分支领域
 
-- [本体论](ontology/) - 存在和现实的哲学分析
-- [认识论](epistemology/) - 知识和真理的哲学分析
-- [伦理学](ethics/) - 道德和价值的哲学分析
-- [现象学](phenomenology/) - 现象学哲学分析
-- [传统哲学](traditional/) - 传统哲学流派分析
+- [本体论](ontology/README.md) - 存在和现实的哲学分析
+- [认识论](epistemology/README.md) - 知识和真理的哲学分析
+- [伦理学](ethics/README.md) - 道德和价值的哲学分析
+- [现象学](phenomenology/README.md) - 现象学哲学分析
+- [传统哲学](traditional/README.md) - 传统哲学流派分析
 
 ### 2. 可视化分析
 
-- [可视化](visualizations/) - 哲学概念的可视化分析
+- [可视化](visualizations/README.md) - 哲学概念的可视化分析
 
 ### 3. 综合分析
 

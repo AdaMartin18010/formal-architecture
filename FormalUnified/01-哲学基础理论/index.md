@@ -1,4 +1,4 @@
-# 哲学基础理论主题导航索引
+﻿# 哲学基础理论主题导航索引
 
 ## 概述
 
@@ -9,12 +9,12 @@
 ### 1. 本体论基础
 
 - [本体论基础深化](本体论基础深化.md) - 存在的本质、形式和规律
-- [Philosophy/content/ontology/本体论分析](Philosophy/content/ontology/) - 详细的本体论分析
+- [Philosophy/content/ontology/本体论分析](Philosophy/content/ontology/README.md) - 详细的本体论分析
 
 ### 2. 认识论基础
 
 - [认识论基础扩展](认识论基础扩展.md) - 知识的本质、来源和应用
-- [Philosophy/content/epistemology/认识论分析](Philosophy/content/epistemology/) - 详细的认识论分析
+- [Philosophy/content/epistemology/认识论分析](Philosophy/content/epistemology/README.md) - 详细的认识论分析
 
 ### 3. 方法论基础
 
@@ -48,16 +48,16 @@
 
 ### 可视化内容
 
-- [Philosophy/visualizations/](Philosophy/visualizations/) - 可视化内容
+- [Philosophy/visualizations/](Philosophy/visualizations/README.md) - 可视化内容
 - [Philosophy/content/visualizations/哲学概念思维导图](Philosophy/content/visualizations/哲学概念思维导图-增强版.md)
 
 ### 细分内容
 
-- [Philosophy/content/ontology/本体论分析](Philosophy/content/ontology/)
-- [Philosophy/content/phenomenology/现象学分析](Philosophy/content/phenomenology/)
-- [Philosophy/content/ethics/伦理学分析](Philosophy/content/ethics/)
-- [Philosophy/content/epistemology/认识论分析](Philosophy/content/epistemology/)
-- [Philosophy/content/traditional/传统哲学](Philosophy/content/traditional/)
+- [Philosophy/content/ontology/本体论分析](Philosophy/content/ontology/README.md)
+- [Philosophy/content/phenomenology/现象学分析](Philosophy/content/phenomenology/README.md)
+- [Philosophy/content/ethics/伦理学分析](Philosophy/content/ethics/README.md)
+- [Philosophy/content/epistemology/认识论分析](Philosophy/content/epistemology/README.md)
+- [Philosophy/content/traditional/传统哲学](Philosophy/content/traditional/README.md)
 
 ## 理论特色
 

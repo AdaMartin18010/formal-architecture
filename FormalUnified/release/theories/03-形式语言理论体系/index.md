@@ -1,4 +1,4 @@
-# 形式语言理论体系主题导航索引
+﻿# 形式语言理论体系主题导航索引
 
 ## 目录结构
 
@@ -6,10 +6,10 @@
 - [理论模型与层次结构](FormalLanguage/形式语言的理论模型与层次结构.md)
 - [综合批判分析](FormalLanguage/形式语言的综合批判分析.md)
 - [Automata_Theory](FormalLanguage/Automata_Theory.md)
-- [Philosophy_Science](FormalLanguage/Philosophy_Science/)
-- [Mathematics](FormalLanguage/Mathematics/)
-- [CS](FormalLanguage/CS/)
-- [View](FormalLanguage/View/)
+- [Philosophy_Science](FormalLanguage/Philosophy_Science/README.md)
+- [Mathematics](FormalLanguage/Mathematics/README.md)
+- [CS](FormalLanguage/CS/README.md)
+- [View](FormalLanguage/View/README.md)
 
 ## 进程文档
 

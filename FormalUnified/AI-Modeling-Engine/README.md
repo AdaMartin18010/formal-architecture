@@ -1,4 +1,4 @@
-# AI建模引擎 (AI Modeling Engine)
+﻿# AI建模引擎 (AI Modeling Engine)
 
 ## 概述
 
@@ -130,8 +130,8 @@ graph TD
 ## 相关资源
 
 - [形式化架构理论统一计划](../形式化架构理论统一计划-v69.md)
-- [FormalUnified统一知识体系](../FormalUnified/)
-- [Analysis分析文档](../Analysis/)
+- [FormalUnified统一知识体系](../FormalUnified/README.md)
+- [Analysis分析文档](../Analysis/README.md)
 
 ---
 

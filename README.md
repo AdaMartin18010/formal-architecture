@@ -1,8 +1,8 @@
-# FormalUnified形式化架构理论统一项目
+﻿# FormalUnified形式化架构理论统一项目
 
 [![知识完整性](https://img.shields.io/badge/知识完整性-95%25-brightgreen)](./项目重新定位声明.md)
-[![理论体系](https://img.shields.io/badge/理论体系-9大体系-orange)](./FormalUnified/)
-[![学习路径](https://img.shields.io/badge/学习路径-3种路径-blue)](./FormalUnified/08-知识应用指南/)
+[![理论体系](https://img.shields.io/badge/理论体系-9大体系-orange)](./FormalUnified/README.md)
+[![学习路径](https://img.shields.io/badge/学习路径-3种路径-blue)](./FormalUnified/08-知识应用指南/README.md)
 
 ## 项目重新定位
 
@@ -36,47 +36,47 @@ graph TD
 
 ## 主要组成部分
 
-### 🏗️ [FormalUnified统一知识体系](FormalUnified/)
+### 🏗️ [FormalUnified统一知识体系](FormalUnified/README.md)
 
 **9大理论体系** | 系统完整性 95%
 
-#### [01-哲学基础理论](FormalUnified/01-哲学基础理论/)
+#### [01-哲学基础理论](FormalUnified/01-哲学基础理论/README.md)
 
 为整个理论体系提供本体论、认识论和方法论基础
 
-#### [02-数学理论体系](FormalUnified/02-数学理论体系/)
+#### [02-数学理论体系](FormalUnified/02-数学理论体系/README.md)
 
 集合论、范畴论、图论、代数学等数学基础理论
 
-#### [03-形式语言理论体系](FormalUnified/03-形式语言理论体系/)
+#### [03-形式语言理论体系](FormalUnified/03-形式语言理论体系/README.md)
 
 自动机理论、形式语法、语义理论的完整体系
 
-#### [04-形式模型理论体系](FormalUnified/04-形式模型理论体系/)
+#### [04-形式模型理论体系](FormalUnified/04-形式模型理论体系/README.md)
 
 状态机、Petri网、进程代数、时序逻辑等形式建模方法
 
-#### [05-编程语言理论体系](FormalUnified/05-编程语言理论体系/)
+#### [05-编程语言理论体系](FormalUnified/05-编程语言理论体系/README.md)
 
 类型理论、语言设计、编译理论、Rust/Go深度分析
 
-#### [06-软件架构理论体系](FormalUnified/06-软件架构理论体系/)
+#### [06-软件架构理论体系](FormalUnified/06-软件架构理论体系/README.md)
 
 组件理论、设计模式、微服务架构、工作流设计
 
-#### [07-分布式与微服务](FormalUnified/07-分布式与微服务/)
+#### [07-分布式与微服务](FormalUnified/07-分布式与微服务/README.md)
 
 69个理论文档，统一形式理论、分布式算法、微服务治理
 
-#### [08-知识应用指南](FormalUnified/08-知识应用指南/)
+#### [08-知识应用指南](FormalUnified/08-知识应用指南/README.md)
 
 理论应用方法、学习路径设计、知识迁移策略
 
-#### [09-知识导航系统](FormalUnified/09-知识导航系统/)
+#### [09-知识导航系统](FormalUnified/09-知识导航系统/README.md)
 
 知识图谱、概念索引、主题导航、智能检索
 
-### 📊 [Analysis分析文档](Analysis/)
+### 📊 [Analysis分析文档](Analysis/README.md)
 
 深度分析报告和理论整合文档，包含主题树、内容索引、统一计划等
 

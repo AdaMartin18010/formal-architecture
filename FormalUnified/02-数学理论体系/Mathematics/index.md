@@ -1,4 +1,4 @@
-# 数学理论体系
+﻿# 数学理论体系
 
 ## 概述
 
@@ -16,7 +16,7 @@
 
 ### 2. 结构组织
 
-- [content/](content/) - 数学内容详细分析
+- [content/](content/README.md) - 数学内容详细分析
 - [README](README.md) - 数学理论体系说明文档
 
 ## 理论特色

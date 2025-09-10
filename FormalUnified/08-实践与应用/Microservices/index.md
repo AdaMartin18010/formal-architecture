@@ -1,4 +1,4 @@
-# 微服务架构实践
+﻿# 微服务架构实践
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ### 1. Rust微服务框架
 
-- [Rust微服务框架](RustMicroserviceFramework/) - 基于Rust的微服务框架实现
+- [Rust微服务框架](RustMicroserviceFramework/README.md) - 基于Rust的微服务框架实现
 
 ### 2. 架构设计
 

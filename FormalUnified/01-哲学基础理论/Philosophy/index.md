@@ -1,4 +1,4 @@
-# 哲学基础理论
+﻿# 哲学基础理论
 
 ## 概述
 
@@ -17,8 +17,8 @@
 ### 2. 结构组织
 
 - [目录结构](目录结构.md) - 哲学内容的目录结构
-- [content/](content/) - 哲学内容详细分析
-- [visualizations/](visualizations/) - 哲学内容可视化
+- [content/](content/README.md) - 哲学内容详细分析
+- [visualizations/](visualizations/README.md) - 哲学内容可视化
 
 ### 3. 系统文档
 
