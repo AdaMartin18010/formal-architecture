@@ -1,3 +1,0 @@
-F:\_src\formal-architecture\Analysis\00-总览与导航\学术规范与质量保证体系.md => .*\.md
-F:\_src\formal-architecture\Analysis\00-总览与导航\学术规范与质量保证体系.md => .*\.md
-F:\_src\formal-architecture\Analysis\00-总览与导航\学术规范与质量保证体系.md => .*\.md
