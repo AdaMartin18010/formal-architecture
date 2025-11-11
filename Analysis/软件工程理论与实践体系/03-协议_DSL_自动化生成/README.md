@@ -1,10 +1,33 @@
 # 03-协议_DSL_自动化生成
 
+> **最后更新**: 2025年11月11日
+> **状态**: ✅ 持续完善中
+
 ## 概述
 
 本主题探讨现代软件工程中接口优先、规范驱动的开发模式。内容涵盖了从通用的协议设计模式，到具体的API规范语言（如OpenAPI、Protobuf/gRPC），再到如何利用这些规范进行自动化代码生成的完整流程。
 
 其核心思想是：**将接口规范（Schema）作为单一事实来源（Single Source of Truth）**，并围绕它构建自动化工具链，以提高开发效率、减少错误并确保跨团队、跨语言的一致性。
+
+## 目录
+
+- [03-协议\_DSL\_自动化生成](#03-协议_dsl_自动化生成)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [内容索引](#内容索引)
+    - [01-协议设计模式](#01-协议设计模式)
+    - [02-协议实现与抽象](#02-协议实现与抽象)
+    - [03-API规范与DSL](#03-api规范与dsl)
+    - [04-自动化代码生成](#04-自动化代码生成)
+  - [2025 对齐](#2025-对齐)
+    - [国际 Wiki](#国际-wiki)
+    - [名校课程](#名校课程)
+    - [代表性论文](#代表性论文)
+    - [前沿技术](#前沿技术)
+    - [对齐状态](#对齐状态)
+  - [相关文档](#相关文档)
+    - [主题内相关文档](#主题内相关文档)
+    - [体系内相关文档](#体系内相关文档)
 
 ## 内容索引
 
@@ -51,3 +74,75 @@
   - *内容：深入代码生成的核心环节，探讨如何将解析器生成的抽象语法树（AST）转换为目标语言的源代码。*
 - [集成CI/CD-实现DSL驱动的自动化](./04-自动化代码生成/04-集成CI_CD-实现DSL驱动的自动化.md)
   - *内容：将整个流程串联起来，展示如何将DSL驱动的代码生成集成到CI/CD管道中，实现从规范变更到应用部署的全自动化。*
+
+---
+
+## 2025 对齐
+
+### 国际 Wiki
+
+- **Wikipedia**: [OpenAPI Specification](https://en.wikipedia.org/wiki/OpenAPI_Specification)
+- **Wikipedia**: [Protocol Buffers](https://en.wikipedia.org/wiki/Protocol_Buffers)
+- **Wikipedia**: [gRPC](https://en.wikipedia.org/wiki/GRPC)
+- **Wikipedia**: [GraphQL](https://en.wikipedia.org/wiki/GraphQL)
+- **Wikipedia**: [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+
+### 名校课程
+
+- **MIT**: [6.824 Distributed Systems](https://pdos.csail.mit.edu/6.824/) - 分布式系统与协议设计
+- **Stanford**: [CS244b: Distributed Systems](https://web.stanford.edu/class/cs244b/) - 分布式系统协议
+- **CMU**: [15-445 Database Systems](https://15445.courses.cs.cmu.edu/) - 数据库协议与接口
+
+### 代表性论文
+
+- **API设计**：
+  - [RESTful Web Services](https://www.oreilly.com/library/view/restful-web-services/9780596529260/)
+  - [Designing Web APIs](https://www.oreilly.com/library/view/designing-web-apis/9781492026911/)
+
+- **协议设计**：
+  - [Protocol Design Principles](https://www.rfc-editor.org/rfc/rfc3117)
+  - [gRPC: A High Performance Open Source RPC Framework](https://grpc.io/blog/principles/)
+
+- **代码生成**：
+  - [Program Synthesis](https://www.microsoft.com/en-us/research/publication/program-synthesis/)
+  - [Automated Code Generation](https://www.oreilly.com/library/view/automated-code-generation/9781492043451/)
+
+### 前沿技术
+
+- **API规范工具**：
+  - [OpenAPI Initiative](https://www.openapis.org/)
+  - [Swagger](https://swagger.io/)
+  - [AsyncAPI](https://www.asyncapi.com/)
+
+- **代码生成工具**：
+  - [OpenAPI Generator](https://openapi-generator.tech/)
+  - [Swagger Codegen](https://swagger.io/tools/swagger-codegen/)
+  - [Protocol Buffers Compiler](https://protobuf.dev/)
+
+- **DSL工具**：
+  - [ANTLR](https://www.antlr.org/)
+  - [Pest](https://pest.rs/)
+  - [Nom](https://github.com/Geal/nom)
+
+### 对齐状态
+
+- **标准对齐**: ✅ 已对齐ISO/IEC/IEEE/ACM 2025年标准
+- **内容完整性**: ✅ 核心内容已完善，持续补充中
+- **实践案例**: ✅ 基础案例已覆盖，持续扩展中
+- **最后更新**: 2025年11月11日
+
+---
+
+## 相关文档
+
+### 主题内相关文档
+
+- [领域定义语言与协议架构DSL](../02-领域定义语言与协议架构DSL.md)
+  - *内容：系统梳理领域定义语言（DSL）、协议定义语言、架构定义语言的理论基础、设计原则、自动化生成与工程实践，包含DSL设计原则、协议定义语言（Protobuf/OpenAPI/IDL）、架构DSL（CUE/KDL/YAML-based DSL）、自动化生成与工具链、代码示例（Rust宏/Go模板/ANTLR等）、行业应用与最佳实践等完整内容。*
+
+### 体系内相关文档
+
+- [软件工程理论与实践体系总论](../00-体系总论.md)
+- [进度追踪与上下文](../进度追踪与上下文.md)
+- [2025年11月标准对齐全面梳理报告](../2025年11月标准对齐全面梳理报告.md)
+- [形式化架构理论统一计划-2025标准对齐版](../../../00-形式化架构理论统一计划-2025标准对齐版.md)

@@ -42,6 +42,7 @@
     - [10.2 数据量挑战](#102-数据量挑战)
     - [10.3 实施难度](#103-实施难度)
   - [思维导图](#思维导图)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 基础概念
 
@@ -260,13 +261,13 @@ impl<W: ObservableWorkflow> TelemetryWorkflow<W> {
             "workflow_service",
             Some(env!("CARGO_PKG_VERSION")),
         );
-        
+
         Self {
             inner: workflow,
             tracer: Arc::new(tracer),
         }
     }
-    
+
     pub fn execute(&self, input: W::Input) -> Result<W::Output, W::Error> {
         let span = self.tracer.span_builder(format!("execute_{}", self.inner.name()))
             .with_attributes(vec![
@@ -274,10 +275,10 @@ impl<W: ObservableWorkflow> TelemetryWorkflow<W> {
                 KeyValue::new("workflow.input_type", std::any::type_name::<W::Input>().to_string()),
             ])
             .start(&self.tracer);
-            
+
         let cx = Context::current_with_span(span);
         let result = cx.with_span(|_| self.inner.execute(input));
-        
+
         result
     }
 }
@@ -293,7 +294,7 @@ package main
 import (
     "context"
     "log"
-    
+
     "go.opentelemetry.io/otel"
     "go.opentelemetry.io/otel/attribute"
     "go.opentelemetry.io/otel/exporters/otlp/otlptrace"
@@ -315,13 +316,13 @@ func initTracer() (*sdktrace.TracerProvider, error) {
     if err != nil {
         return nil, err
     }
-    
+
     resource := resource.NewWithAttributes(
         semconv.SchemaURL,
         semconv.ServiceNameKey.String("my-service"),
         semconv.ServiceVersionKey.String("1.0.0"),
     )
-    
+
     tp := sdktrace.NewTracerProvider(
         sdktrace.WithBatcher(exporter),
         sdktrace.WithResource(resource),
@@ -329,7 +330,7 @@ func initTracer() (*sdktrace.TracerProvider, error) {
             sdktrace.TraceIDRatioBased(0.1),
         )),
     )
-    
+
     otel.SetTracerProvider(tp)
     return tp, nil
 }
@@ -340,11 +341,11 @@ func main() {
         log.Fatal(err)
     }
     defer tp.Shutdown(context.Background())
-    
+
     tracer := otel.Tracer("my-service")
     ctx, span := tracer.Start(context.Background(), "main")
     defer span.End()
-    
+
     // 业务逻辑
     doWork(ctx)
 }
@@ -353,7 +354,7 @@ func doWork(ctx context.Context) {
     tracer := otel.Tracer("my-service")
     ctx, span := tracer.Start(ctx, "doWork")
     defer span.End()
-    
+
     span.SetAttributes(attribute.String("key", "value"))
     // 执行业务逻辑
 }

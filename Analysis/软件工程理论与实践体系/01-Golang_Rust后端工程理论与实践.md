@@ -218,7 +218,7 @@ func (wp *WorkerPool) Start(ctx context.Context) {
 
 func (wp *WorkerPool) worker(ctx context.Context, id int) {
     defer wp.wg.Done()
-    
+
     for {
         select {
         case job := <-wp.jobQueue:
@@ -254,10 +254,10 @@ func (wp *WorkerPool) Close() {
 func main() {
     ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
     defer cancel()
-    
+
     pool := NewWorkerPool(3)
     pool.Start(ctx)
-    
+
     // 提交任务
     for i := 0; i < 10; i++ {
         pool.Submit(Job{
@@ -265,7 +265,7 @@ func main() {
             Data: fmt.Sprintf("task-%d", i),
         })
     }
-    
+
     // 收集结果
     go func() {
         for result := range pool.resultChan {
@@ -276,7 +276,7 @@ func main() {
             }
         }
     }()
-    
+
     pool.Close()
 }
 ```
@@ -313,12 +313,12 @@ impl AsyncWorkerPool {
     pub fn new(workers: usize) -> Self {
         let (job_sender, mut job_receiver) = mpsc::unbounded_channel();
         let (result_sender, result_receiver) = mpsc::unbounded_channel();
-        
+
         // 启动工作线程
         for worker_id in 0..workers {
             let job_receiver = job_receiver.clone();
             let result_sender = result_sender.clone();
-            
+
             tokio::spawn(async move {
                 while let Some(job) = job_receiver.recv().await {
                     let result = Self::process_job(job, worker_id).await;
@@ -329,28 +329,28 @@ impl AsyncWorkerPool {
                 }
             });
         }
-        
+
         Self {
             sender: job_sender,
             receiver: Arc::new(Mutex::new(result_receiver)),
         }
     }
-    
+
     async fn process_job(job: Job, worker_id: usize) -> Result {
         // 模拟异步处理
         sleep(Duration::from_millis(100)).await;
-        
+
         Result {
             job_id: job.id,
             data: format!("processed by worker {}: {}", worker_id, job.data),
             error: None,
         }
     }
-    
+
     pub fn submit(&self, job: Job) -> Result<(), mpsc::error::SendError<Job>> {
         self.sender.send(job)
     }
-    
+
     pub async fn get_result(&self) -> Option<Result> {
         let mut receiver = self.receiver.lock().unwrap();
         receiver.recv().await
@@ -361,19 +361,19 @@ impl AsyncWorkerPool {
 #[tokio::main]
 async fn main() {
     let pool = AsyncWorkerPool::new(3);
-    
+
     // 提交任务
     for i in 0..10 {
         let job = Job {
             id: i,
             data: format!("task-{}", i),
         };
-        
+
         if let Err(e) = pool.submit(job) {
             eprintln!("Failed to submit job: {}", e);
         }
     }
-    
+
     // 收集结果
     for _ in 0..10 {
         if let Some(result) = pool.get_result().await {
@@ -395,7 +395,7 @@ impl ResourceManager {
             max_capacity,
         }
     }
-    
+
     pub fn add_resource(&mut self, resource: String) -> Result<(), String> {
         if self.resources.len() >= self.max_capacity {
             return Err("Capacity exceeded".to_string());
@@ -403,11 +403,11 @@ impl ResourceManager {
         self.resources.push(resource);
         Ok(())
     }
-    
+
     pub fn get_resource(&self, index: usize) -> Option<&String> {
         self.resources.get(index)
     }
-    
+
     pub fn remove_resource(&mut self, index: usize) -> Option<String> {
         if index < self.resources.len() {
             Some(self.resources.remove(index))
@@ -415,7 +415,7 @@ impl ResourceManager {
             None
         }
     }
-    
+
     pub fn len(&self) -> usize {
         self.resources.len()
     }
@@ -424,7 +424,7 @@ impl ResourceManager {
 // 使用示例
 fn main() {
     let mut manager = ResourceManager::new(5);
-    
+
     // 添加资源
     for i in 0..3 {
         let resource = format!("resource-{}", i);
@@ -433,17 +433,17 @@ fn main() {
             Err(e) => println!("Failed to add resource: {}", e),
         }
     }
-    
+
     // 访问资源
     if let Some(resource) = manager.get_resource(0) {
         println!("First resource: {}", resource);
     }
-    
+
     // 移除资源
     if let Some(removed) = manager.remove_resource(0) {
         println!("Removed resource: {}", removed);
     }
-    
+
     println!("Current resource count: {}", manager.len());
 }
 ```
@@ -501,7 +501,14 @@ fn main() {
 
 ## 9. 相关性跳转与引用
 
-### 9.1 相关理论
+### 主题内相关文档
+
+- [01-Golang工程与自动化创新](./01-Golang工程与自动化创新/README.md)
+  - *Golang工程与自动化创新主题的README，包含完整的主题概述、内容索引和2025对齐信息*
+- [02-Rust工程与自动化创新](./02-Rust工程与自动化创新/README.md)
+  - *Rust工程与自动化创新主题的README，包含完整的主题概述、内容索引和2025对齐信息*
+
+### 相关理论文档
 
 - [02-领域定义语言与协议架构DSL](02-领域定义语言与协议架构DSL.md)
 - [03-自动化生成与工程工具链](03-自动化生成与工程工具链.md)

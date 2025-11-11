@@ -58,6 +58,7 @@
     - [7.3 简化配置与操作](#73-简化配置与操作)
     - [7.4 边缘计算与流处理](#74-边缘计算与流处理)
     - [7.5 企业级功能增强](#75-企业级功能增强)
+  - [2025 对齐](#2025-对齐)
 
 ## 思维导图
 
@@ -299,36 +300,36 @@ use std::error::Error;
 fn main() -> Result<(), Box<dyn Error>> {
     // 配置全局追踪器
     let tracer = init_tracer()?;
-    
+
     // 创建一个根 Span
     let mut root_span = tracer.start("root_operation");
-    
+
     // 添加属性
     root_span.set_attribute(KeyValue::new("component", "example"));
-    
+
     {
         // 创建一个子 Span
         let mut child_span = tracer.start("child_operation");
-        
+
         // 执行一些工作
         perform_work();
-        
+
         // 记录事件
         child_span.add_event(
             "工作已完成",
             vec![KeyValue::new("duration_ms", 42)],
         );
-        
+
         // 子 Span 结束
         child_span.end();
     }
-    
+
     // 根 Span 结束
     root_span.end();
-    
+
     // 关闭追踪器提供程序
     global::shutdown_tracer_provider();
-    
+
     Ok(())
 }
 
@@ -337,7 +338,7 @@ fn init_tracer() -> Result<sdktrace::Tracer, Box<dyn Error>> {
     let exporter = opentelemetry_otlp::new_exporter()
         .tonic()
         .with_endpoint("http://localhost:4317");
-    
+
     // 创建追踪器提供程序
     let provider = sdktrace::TracerProvider::builder()
         .with_simple_exporter(exporter)
@@ -346,10 +347,10 @@ fn init_tracer() -> Result<sdktrace::Tracer, Box<dyn Error>> {
             KeyValue::new("service.version", env!("CARGO_PKG_VERSION")),
         ])))
         .build();
-    
+
     // 设置全局追踪器提供程序
     global::set_tracer_provider(provider.clone());
-    
+
     // 获取追踪器
     Ok(provider.tracer("opentelemetry-example"))
 }
@@ -378,27 +379,27 @@ use std::time::Duration;
 fn main() -> Result<(), Box<dyn Error>> {
     // 初始化指标提供程序
     let meter = init_meter()?;
-    
+
     // 创建计数器
     let counter = meter.u64_counter("requests.total")
         .with_description("总请求数")
         .init();
-    
+
     // 创建直方图
     let histogram = meter.f64_histogram("request.duration")
         .with_description("请求持续时间（毫秒）")
         .init();
-    
+
     // 模拟工作并记录指标
     for i in 0..10 {
         // 记录一个请求
         counter.add(1, &[KeyValue::new("endpoint", "/api/data")]);
-        
+
         // 执行一些工作
         let start = std::time::Instant::now();
         perform_work();
         let duration = start.elapsed().as_millis() as f64;
-        
+
         // 记录持续时间
         histogram.record(
             duration,
@@ -408,13 +409,13 @@ fn main() -> Result<(), Box<dyn Error>> {
             ],
         );
     }
-    
+
     // 确保导出最终指标
     std::thread::sleep(Duration::from_secs(1));
-    
+
     // 关闭指标提供程序
     global::shutdown_meter_provider();
-    
+
     Ok(())
 }
 
@@ -423,12 +424,12 @@ fn init_meter() -> Result<metrics::Meter, Box<dyn Error>> {
     let exporter = opentelemetry_otlp::new_exporter()
         .tonic()
         .with_endpoint("http://localhost:4317");
-    
+
     // 创建周期性导出器和一个读取器
     let reader = metrics::PeriodicReader::builder(exporter, opentelemetry_sdk::runtime::Tokio)
         .with_interval(Duration::from_secs(5))
         .build();
-    
+
     // 创建并配置指标提供程序
     let provider = MeterProviderBuilder::default()
         .with_reader(reader)
@@ -437,10 +438,10 @@ fn init_meter() -> Result<metrics::Meter, Box<dyn Error>> {
             KeyValue::new("service.version", env!("CARGO_PKG_VERSION")),
         ]))
         .build();
-    
+
     // 设置全局指标提供程序
     global::set_meter_provider(provider.clone());
-    
+
     // 返回指标器
     Ok(provider.meter("opentelemetry-metrics-example"))
 }
@@ -490,32 +491,32 @@ fn main() -> Result<(), Box<dyn Error>> {
     // 初始化追踪器和传播器
     let tracer = init_tracer()?;
     let propagator = TraceContextPropagator::new();
-    
+
     // 模拟微服务 A - 创建追踪上下文并注入到请求头
     let mut service_a_headers = HeaderCarrier { headers: HashMap::new() };
-    
+
     // 创建根 Span
     let mut root_span = tracer.start("service_a.request");
     let cx = Context::current_with_span(root_span);
-    
+
     // 注入上下文到请求头
     propagator.inject_context(&cx, &mut service_a_headers);
-    
+
     // 记录请求头用于演示
     println!("传播的头信息:");
     for (key, value) in &service_a_headers.headers {
         println!("  {}: {}", key, value);
     }
-    
+
     // 模拟将请求发送到服务 B
     service_b_handler(service_a_headers, tracer, propagator)?;
-    
+
     // 完成根 Span
     root_span.end();
-    
+
     // 关闭追踪器
     global::shutdown_tracer_provider();
-    
+
     Ok(())
 }
 
@@ -526,36 +527,36 @@ fn service_b_handler(
 ) -> Result<(), Box<dyn Error>> {
     // 从请求头中提取上下文
     let parent_cx = propagator.extract(&headers);
-    
+
     // 在父上下文中创建新的 Span
     let mut span = tracer.start_with_context("service_b.handler", &parent_cx);
     span.set_attribute(opentelemetry::KeyValue::new("service", "B"));
-    
+
     // 执行一些工作
     println!("服务 B 处理请求中...");
     std::thread::sleep(std::time::Duration::from_millis(50));
-    
+
     // 完成 Span
     span.end();
-    
+
     Ok(())
 }
 
 fn init_tracer() -> Result<sdktrace::Tracer, Box<dyn Error>> {
     // 创建基于控制台的导出器用于演示
     let exporter = opentelemetry_stdout::SpanExporter::default();
-    
+
     // 配置追踪器提供程序
     let provider = sdktrace::TracerProvider::builder()
         .with_simple_exporter(exporter)
         .build();
-    
+
     // 设置全局传播器
     global::set_text_map_propagator(TraceContextPropagator::new());
-    
+
     // 设置全局追踪器提供程序
     global::set_tracer_provider(provider.clone());
-    
+
     // 返回追踪器
     Ok(provider.tracer("context-propagation-example"))
 }

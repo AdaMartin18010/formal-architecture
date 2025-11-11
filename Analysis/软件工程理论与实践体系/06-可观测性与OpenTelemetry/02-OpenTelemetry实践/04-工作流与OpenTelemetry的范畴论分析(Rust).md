@@ -64,6 +64,7 @@
     - [主要发现](#主要发现)
     - [Rust与可观测性的未来](#rust与可观测性的未来)
     - [未来方向](#未来方向)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 引言：工作流与可观测性的交汇
 
@@ -158,11 +159,11 @@ impl<K: Eq + Hash, V> WorkflowState<K, V> {
             data: HashMap::new(),
         }
     }
-    
+
     pub fn get(&self, key: &K) -> Option<&V> {
         self.data.get(key)
     }
-    
+
     pub fn set(&mut self, key: K, value: V) {
         self.data.insert(key, value);
     }
@@ -423,11 +424,11 @@ where
             _marker: PhantomData,
         }
     }
-    
+
     // 对象映射：工作流状态 -> 遥测上下文
     pub fn map_state(&self, state: &WorkflowState<K, V>) -> Context {
         let mut ctx = Context::current();
-        
+
         // 添加工作流状态属性到上下文
         for (key, value) in &state.data {
             let kv = KeyValue::new(key.to_string(), value.to_string());
@@ -437,32 +438,32 @@ where
                 span.set_attribute(kv);
             }
         }
-        
+
         ctx
     }
-    
+
     // 态射映射：工作流转换 -> 遥测操作
-    pub fn map_transition<T: StateTransition<K, V>>(&self, 
-        transition_name: &str, 
+    pub fn map_transition<T: StateTransition<K, V>>(&self,
+        transition_name: &str,
         transition: &T,
         state: &WorkflowState<K, V>
     ) -> (Context, TelemetryData) {
         // 创建跨度表示工作流转换
         let ctx = self.map_state(state);
         let mut span = self.tracer.start_with_context(transition_name, &ctx);
-        
+
         // 执行工作流转换
         let new_state = transition.apply(state);
-        
+
         // 记录转换结果
         for (key, value) in &new_state.data {
             span.set_attribute(KeyValue::new(key.to_string(), value.to_string()));
         }
-        
+
         // 结束跨度
         let end_time = SystemTime::now();
         span.end();
-        
+
         // 生成遥测数据
         let span_data = SpanData {
             span_id: span.span_context().span_id(),
@@ -474,13 +475,13 @@ where
             events: Vec::new(),
             status: SpanStatus::Ok,
         };
-        
+
         let trace_data = TraceData {
             trace_id: span.span_context().trace_id(),
             spans: vec![span_data],
             timestamp: SystemTime::now(),
         };
-        
+
         (Context::current_with_span(span), TelemetryData::Trace(trace_data))
     }
 }
@@ -556,9 +557,9 @@ impl Error for WorkflowError {}
 pub trait AsyncWorkflowStep: Send + Sync {
     type Input: Send;
     type Output: Send;
-    
+
     fn name(&self) -> &str;
-    
+
     async fn execute(
         &self,
         ctx: &Context,
@@ -585,11 +586,11 @@ where
 {
     type Input = S::Input;
     type Output = S::Output;
-    
+
     fn name(&self) -> &str {
         self.step.name()
     }
-    
+
     async fn execute(
         &self,
         ctx: &Context,
@@ -598,25 +599,25 @@ where
         // 创建跨度表示工作流步骤
         let mut span = self.tracer.start_with_context(self.name(), ctx);
         span.set_kind(SpanKind::Internal);
-        
+
         // 记录开始时间
         let start_time = SystemTime::now();
         span.add_event(
             "step_started",
             vec![KeyValue::new("workflow.step", self.name().to_string())],
         );
-        
+
         // 在跨度上下文中执行步骤
         let ctx = ctx.with_span(span);
         let result = self.step.execute(&ctx, input).await;
-        
+
         // 获取跨度引用
         if let Some(span) = ctx.span() {
             // 记录执行时间
             if let Ok(duration) = SystemTime::now().duration_since(start_time) {
                 span.set_attribute(KeyValue::new("duration_ms", duration.as_millis() as i64));
             }
-            
+
             // 处理结果
             match &result {
                 Ok(_) => {
@@ -635,10 +636,10 @@ where
                     );
                 }
             }
-            
+
             // 结束跨度（实际会在引用离开作用域时结束）
         }
-        
+
         result
     }
 }
@@ -658,12 +659,12 @@ impl<T: Send + 'static, U: Send + 'static> SequentialWorkflow<T, U> {
             tracer: Arc::new(global::tracer("")),
         }
     }
-    
+
     pub fn with_tracer(mut self, tracer: Arc<dyn Tracer + Send + Sync>) -> Self {
         self.tracer = tracer;
         self
     }
-    
+
     pub fn add_step<S>(mut self, step: S) -> Self
     where
         S: AsyncWorkflowStep<Input = T, Output = U> + Send + Sync + 'static,
@@ -672,22 +673,22 @@ impl<T: Send + 'static, U: Send + 'static> SequentialWorkflow<T, U> {
         self.steps.push(Box::new(traced_step));
         self
     }
-    
+
     pub async fn execute(&self, input: T) -> Result<U, WorkflowError> {
         // 创建工作流跨度
         let mut parent_span = self.tracer.start(self.name.clone());
         parent_span.set_kind(SpanKind::Internal);
         parent_span.set_attribute(KeyValue::new("workflow.name", self.name.clone()));
         parent_span.set_attribute(KeyValue::new("workflow.steps", self.steps.len() as i64));
-        
+
         // 开始工作流
         let ctx = Context::current_with_span(parent_span);
         ctx.span().unwrap().add_event("workflow_started", vec![]);
-        
+
         // 执行每个步骤
         let mut current_input = input;
         let mut final_result = Err(WorkflowError::new("No steps executed"));
-        
+
         for (i, step) in self.steps.iter().enumerate() {
             // 记录步骤信息
             if let Some(span) = ctx.span() {
@@ -699,7 +700,7 @@ impl<T: Send + 'static, U: Send + 'static> SequentialWorkflow<T, U> {
                     ],
                 );
             }
-            
+
             // 执行步骤
             match step.execute(&ctx, current_input).await {
                 Ok(output) => {
@@ -719,13 +720,13 @@ impl<T: Send + 'static, U: Send + 'static> SequentialWorkflow<T, U> {
                 }
             }
         }
-        
+
         // 工作流完成
         if let Some(span) = ctx.span() {
             span.set_status(StatusCode::Ok, "Workflow completed successfully".to_string());
             span.add_event("workflow_completed", vec![]);
         }
-        
+
         final_result
     }
 }
@@ -734,19 +735,19 @@ impl<T: Send + 'static, U: Send + 'static> SequentialWorkflow<T, U> {
 async fn workflow_trace_example() -> Result<(), Box<dyn Error>> {
     // 初始化 OpenTelemetry（省略配置细节）
     let tracer = global::tracer("workflow-example");
-    
+
     // 定义工作流步骤
     struct ValidateOrderStep;
-    
+
     #[async_trait]
     impl AsyncWorkflowStep for ValidateOrderStep {
         type Input = Order;
         type Output = Order;
-        
+
         fn name(&self) -> &str {
             "validate_order"
         }
-        
+
         async fn execute(
             &self,
             _ctx: &Context,
@@ -762,18 +763,18 @@ async fn workflow_trace_example() -> Result<(), Box<dyn Error>> {
             Ok(input)
         }
     }
-    
+
     struct ProcessPaymentStep;
-    
+
     #[async_trait]
     impl AsyncWorkflowStep for ProcessPaymentStep {
         type Input = Order;
         type Output = Order;
-        
+
         fn name(&self) -> &str {
             "process_payment"
         }
-        
+
         async fn execute(
             &self,
             ctx: &Context,
@@ -790,16 +791,16 @@ async fn workflow_trace_example() -> Result<(), Box<dyn Error>> {
                     ],
                 );
             }
-            
+
             // 模拟异步支付处理
             tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
-            
+
             let mut order = input;
             order.status = "paid".to_string();
             Ok(order)
         }
     }
-    
+
     // 创建并执行工作流
     let order = Order {
         id: "ord-123".to_string(),
@@ -814,15 +815,15 @@ async fn workflow_trace_example() -> Result<(), Box<dyn Error>> {
         total_amount: 51.98,
         status: "new".to_string(),
     };
-    
+
     let workflow = SequentialWorkflow::new("order_processing")
         .with_tracer(Arc::new(tracer))
         .add_step(ValidateOrderStep)
         .add_step(ProcessPaymentStep);
-    
+
     let result = workflow.execute(order).await?;
     println!("Order processed: {:?}", result);
-    
+
     Ok(())
 }
 ```
@@ -871,10 +872,10 @@ use std::time::{Duration, SystemTime};
 pub trait TelemetryConverter: Send + Sync {
     // 追踪转度量
     async fn trace_to_metrics(&self, trace: &TraceData) -> Vec<MetricData>;
-    
+
     // 度量转日志
     async fn metrics_to_logs(&self, metrics: &[MetricData]) -> Vec<LogData>;
-    
+
     // 日志转追踪（部分重建）
     async fn logs_to_trace(&self, logs: &[LogData]) -> Option<TraceData>;
 }
@@ -899,7 +900,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
     async fn trace_to_metrics(&self, trace: &TraceData) -> Vec<MetricData> {
         let mut metrics = Vec::new();
         let timestamp = SystemTime::now();
-        
+
         // 1. 跨度计数度量
         let span_count = trace.spans.len() as i64;
         metrics.push(MetricData {
@@ -913,13 +914,13 @@ impl TelemetryConverter for StandardTelemetryConverter {
                 ("service.name".to_string(), AttributeValue::String("trace_converter".to_string())),
             ]),
         });
-        
+
         // 2. 为每个跨度创建持续时间度量
         for span in &trace.spans {
             if let Some(end_time) = span.end_time {
                 if let Ok(duration) = end_time.duration_since(span.start_time) {
                     let duration_ms = duration.as_millis() as f64;
-                    
+
                     // 添加持续时间直方图
                     metrics.push(MetricData {
                         name: "span.duration".to_string(),
@@ -952,7 +953,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                     });
                 }
             }
-            
+
             // 3. 错误计数
             if let SpanStatus::Error { .. } = span.status {
                 metrics.push(MetricData {
@@ -969,13 +970,13 @@ impl TelemetryConverter for StandardTelemetryConverter {
                 });
             }
         }
-        
+
         metrics
     }
-    
+
     async fn metrics_to_logs(&self, metrics: &[MetricData]) -> Vec<LogData> {
         let mut logs = Vec::new();
-        
+
         for metric in metrics {
             // 创建一个描述度量的日志条目
             let message = match &metric.data {
@@ -992,7 +993,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                     )
                 }
             };
-            
+
             // 提取跟踪信息（如果存在）
             let trace_id = metric
                 .attributes
@@ -1003,7 +1004,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                     }
                     _ => None,
                 });
-                
+
             let span_id = metric
                 .attributes
                 .get("span.id")
@@ -1013,7 +1014,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                     }
                     _ => None,
                 });
-            
+
             // 创建日志条目
             logs.push(LogData {
                 timestamp: metric.timestamp,
@@ -1024,14 +1025,14 @@ impl TelemetryConverter for StandardTelemetryConverter {
                 attributes: metric.attributes.clone(),
             });
         }
-        
+
         logs
     }
-    
+
     async fn logs_to_trace(&self, logs: &[LogData]) -> Option<TraceData> {
         // 按追踪ID分组日志
         let mut logs_by_trace = HashMap::new();
-        
+
         for log in logs {
             if let Some(trace_id) = log.trace_id {
                 logs_by_trace
@@ -1040,18 +1041,18 @@ impl TelemetryConverter for StandardTelemetryConverter {
                     .push(log);
             }
         }
-        
+
         // 如果没有包含有效追踪ID的日志，则返回None
         if logs_by_trace.is_empty() {
             return None;
         }
-        
+
         // 选择包含日志最多的追踪重建
         let (trace_id, trace_logs) = logs_by_trace
             .into_iter()
             .max_by_key(|(_, logs)| logs.len())
             .unwrap();
-        
+
         // 从日志中重建跨度
         let mut spans = HashMap::new();
         for log in trace_logs {
@@ -1065,7 +1066,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                         _ => None,
                     })
                     .unwrap_or_else(|| "unknown".to_string());
-                
+
                 // 使用日志属性创建跨度
                 let span = spans.entry(span_id).or_insert_with(|| SpanData {
                     span_id,
@@ -1077,7 +1078,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                     events: Vec::new(),
                     status: SpanStatus::Unset,
                 });
-                
+
                 // 添加日志作为跨度事件
                 span.events.push(SpanEvent {
                     name: "log".to_string(),
@@ -1093,7 +1094,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                         ),
                     ]),
                 });
-                
+
                 // 更新跨度结束时间（使用最晚的日志时间）
                 if span.end_time.is_none()
                     || span
@@ -1104,7 +1105,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                 {
                     span.end_time = Some(log.timestamp);
                 }
-                
+
                 // 如果日志表示错误，更新跨度状态
                 if log.severity == LogSeverity::Error || log.severity == LogSeverity::Fatal {
                     span.status = SpanStatus::Error {
@@ -1113,7 +1114,7 @@ impl TelemetryConverter for StandardTelemetryConverter {
                 }
             }
         }
-        
+
         // 创建追踪数据
         Some(TraceData {
             trace_id,
@@ -1136,13 +1137,13 @@ impl TelemetryAdapter {
     ) -> Self {
         Self { tracer, meter }
     }
-    
+
     // 记录追踪数据作为OTel跨度
     pub async fn record_trace(&self, trace_data: &TraceData) {
         // 按照父子关系排序跨度
         let mut root_spans = Vec::new();
         let mut child_spans = HashMap::new();
-        
+
         for span in &trace_data.spans {
             if span.parent_id.is_none() {
                 root_spans.push(span);
@@ -1153,14 +1154,14 @@ impl TelemetryAdapter {
                     .push(span);
             }
         }
-        
+
         // 创建上下文和记录跨度
         let ctx = Context::new();
         for root_span in root_spans {
             self.record_span_and_children(root_span, &child_spans, &ctx).await;
         }
     }
-    
+
     // 递归记录跨度及其子跨度
     async fn record_span_and_children(
         &self,
@@ -1170,7 +1171,7 @@ impl TelemetryAdapter {
     ) {
         // 创建OTel跨度
         let mut span = self.tracer.start_with_context(&span_data.name, parent_ctx);
-        
+
         // 设置属性
         for (key, value) in &span_data.attributes {
             let kv = match value {
@@ -1182,7 +1183,7 @@ impl TelemetryAdapter {
             };
             span.set_attribute(kv);
         }
-        
+
         // 设置状态
         match &span_data.status {
             SpanStatus::Ok => span.set_status(StatusCode::Ok, "".to_string()),
@@ -1191,7 +1192,7 @@ impl TelemetryAdapter {
             }
             SpanStatus::Unset => {}
         }
-        
+
         // 添加事件
         for event in &span_data.events {
             let attributes: Vec<KeyValue> = event
@@ -1205,13 +1206,13 @@ impl TelemetryAdapter {
                     _ => KeyValue::new(k, "unsupported_value_type"),
                 })
                 .collect();
-            
+
             span.add_event(event.name.clone(), attributes);
         }
-        
+
         // 创建带有当前跨度的上下文
         let span_ctx = parent_ctx.with_span(span);
-        
+
         // 处理子跨度
         if let Some(children) = child_spans.get(&span_data.span_id) {
             for child_span in children {
@@ -1219,10 +1220,10 @@ impl TelemetryAdapter {
                     .await;
             }
         }
-        
+
         // 注意：跨度会在离开作用域时自动结束
     }
-    
+
     // 记录度量数据
     pub async fn record_metrics(&self, metrics: &[MetricData]) {
         for metric in metrics {
@@ -1240,7 +1241,7 @@ impl TelemetryAdapter {
                             _ => KeyValue::new(k, "unsupported_value_type"),
                         })
                         .collect();
-                    
+
                     counter.add(Context::current(), *value as u64, &attributes);
                 }
                 MetricValue::Gauge(value) => {
@@ -1256,7 +1257,7 @@ impl TelemetryAdapter {
                             _ => KeyValue::new(k, "unsupported_value_type"),
                         })
                         .collect();
-                    
+
                     gauge.record(Context::current(), *value, &attributes);
                 }
                 MetricValue::Histogram { sum, count, .. } => {
@@ -1272,7 +1273,7 @@ impl TelemetryAdapter {
                             _ => KeyValue::new(k, "unsupported_value_type"),
                         })
                         .collect();
-                    
+
                     // 为简单起见，我们只记录总和/计数的平均值
                     let avg = if *count > 0 { *sum / (*count as f64) } else { 0.0 };
                     histogram.record(Context::current(), avg, &attributes);
@@ -1285,43 +1286,43 @@ impl TelemetryAdapter {
 // 示例：遥测数据转换链
 async fn telemetry_conversion_example() {
     // 设置 OpenTelemetry（省略）
-    
+
     // 创建转换器和适配器
     let tracer = global::tracer("converter-example");
     let meter = global::meter("converter-example");
-    
+
     let converter = StandardTelemetryConverter::new(
         Arc::new(meter.clone()),
         Arc::new(tracer.clone()),
     );
-    
+
     let adapter = TelemetryAdapter::new(
         Arc::new(tracer),
         Arc::new(meter),
     );
-    
+
     // 创建模拟追踪数据
     let trace_data = create_sample_trace();
-    
+
     // 转换链：追踪 -> 度量 -> 日志 -> 追踪
     let metrics = converter.trace_to_metrics(&trace_data).await;
     println!("Converted trace to {} metrics", metrics.len());
-    
+
     // 记录生成的度量
     adapter.record_metrics(&metrics).await;
-    
+
     let logs = converter.metrics_to_logs(&metrics).await;
     println!("Converted metrics to {} logs", logs.len());
-    
+
     if let Some(reconstructed_trace) = converter.logs_to_trace(&logs).await {
         println!(
             "Reconstructed trace with {} spans",
             reconstructed_trace.spans.len()
         );
-        
+
         // 记录重建的追踪
         adapter.record_trace(&reconstructed_trace).await;
-        
+
         // 验证重建的追踪与原始追踪的相似性
         let similarity = calculate_trace_similarity(&trace_data, &reconstructed_trace);
         println!("Trace similarity: {:.2}%", similarity * 100.0);
@@ -1337,9 +1338,9 @@ fn create_sample_trace() -> TraceData {
     let root_span_id = SpanId::from_u64(1);
     let child1_span_id = SpanId::from_u64(2);
     let child2_span_id = SpanId::from_u64(3);
-    
+
     let now = SystemTime::now();
-    
+
     TraceData {
         trace_id,
         spans: vec![
@@ -1427,17 +1428,17 @@ fn calculate_trace_similarity(original: &TraceData, reconstructed: &TraceData) -
         .iter()
         .map(|span| span.name.clone())
         .collect();
-    
+
     let recon_span_names: std::collections::HashSet<String> = reconstructed
         .spans
         .iter()
         .map(|span| span.name.clone())
         .collect();
-    
+
     let common_spans = orig_span_names
         .intersection(&recon_span_names)
         .count();
-    
+
     common_spans as f64 / original.spans.len() as f64
 }
 ```
@@ -1495,7 +1496,7 @@ impl ProcessorError {
             source: None,
         }
     }
-    
+
     pub fn with_source<E: Error + Send + Sync + 'static>(message: &str, source: E) -> Self {
         Self {
             message: message.to_string(),
@@ -1524,9 +1525,9 @@ pub trait AsyncProcessor: Send + Sync {
         ctx: &Context,
         data: TelemetryData,
     ) -> Result<TelemetryData, ProcessorError>;
-    
+
     fn name(&self) -> &str;
-    
+
     // 组合方法 - 创建两个处理器的组合
     fn then<P>(self, next: P) -> ComposedProcessor<Self, P>
     where
@@ -1559,7 +1560,7 @@ impl AsyncProcessor for IdentityProcessor {
     ) -> Result<TelemetryData, ProcessorError> {
         Ok(data)
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -1604,11 +1605,11 @@ where
     ) -> Result<TelemetryData, ProcessorError> {
         // 先应用第一个处理器
         let intermediate = self.first.process(ctx, data).await?;
-        
+
         // 然后应用第二个处理器
         self.second.process(ctx, intermediate).await
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -1646,9 +1647,9 @@ impl AsyncProcessor for AttributeFilterProcessor {
                         .filter(|(key, _)| self.allowed_keys.contains(key))
                         .map(|(k, v)| (k.clone(), v.clone()))
                         .collect();
-                    
+
                     span.attributes = filtered_attrs;
-                    
+
                     // 同样过滤事件属性
                     for event in &mut span.events {
                         let filtered_event_attrs = event
@@ -1657,11 +1658,11 @@ impl AsyncProcessor for AttributeFilterProcessor {
                             .filter(|(key, _)| self.allowed_keys.contains(key))
                             .map(|(k, v)| (k.clone(), v.clone()))
                             .collect();
-                        
+
                         event.attributes = filtered_event_attrs;
                     }
                 }
-                
+
                 Ok(TelemetryData::Trace(trace_data))
             }
             TelemetryData::Metric(mut metric_data) => {
@@ -1672,9 +1673,9 @@ impl AsyncProcessor for AttributeFilterProcessor {
                     .filter(|(key, _)| self.allowed_keys.contains(key))
                     .map(|(k, v)| (k.clone(), v.clone()))
                     .collect();
-                
+
                 metric_data.attributes = filtered_attrs;
-                
+
                 Ok(TelemetryData::Metric(metric_data))
             }
             TelemetryData::Log(mut log_data) => {
@@ -1685,14 +1686,14 @@ impl AsyncProcessor for AttributeFilterProcessor {
                     .filter(|(key, _)| self.allowed_keys.contains(key))
                     .map(|(k, v)| (k.clone(), v.clone()))
                     .collect();
-                
+
                 log_data.attributes = filtered_attrs;
-                
+
                 Ok(TelemetryData::Log(log_data))
             }
         }
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -1710,7 +1711,7 @@ impl SamplingProcessor {
             sampling_ratio >= 0.0 && sampling_ratio <= 1.0,
             "Sampling ratio must be between 0 and 1"
         );
-        
+
         Self {
             name: name.to_string(),
             sampling_ratio,
@@ -1733,7 +1734,7 @@ impl AsyncProcessor for SamplingProcessor {
             Err(ProcessorError::new("Data sampled out"))
         }
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -1782,7 +1783,7 @@ impl AsyncProcessor for EnrichmentProcessor {
                         span.attributes.insert(key.clone(), value.clone());
                     }
                 }
-                
+
                 Ok(TelemetryData::Trace(trace_data))
             }
             TelemetryData::Metric(mut metric_data) => {
@@ -1790,7 +1791,7 @@ impl AsyncProcessor for EnrichmentProcessor {
                 for (key, value) in &self.attributes {
                     metric_data.attributes.insert(key.clone(), value.clone());
                 }
-                
+
                 Ok(TelemetryData::Metric(metric_data))
             }
             TelemetryData::Log(mut log_data) => {
@@ -1798,12 +1799,12 @@ impl AsyncProcessor for EnrichmentProcessor {
                 for (key, value) in &self.attributes {
                     log_data.attributes.insert(key.clone(), value.clone());
                 }
-                
+
                 Ok(TelemetryData::Log(log_data))
             }
         }
     }
-    
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -1822,19 +1823,19 @@ impl ProcessorPipeline {
             processors: Vec::new(),
         }
     }
-    
+
     pub fn add_processor<P: AsyncProcessor + 'static>(mut self, processor: P) -> Self {
         self.processors.push(Arc::new(processor));
         self
     }
-    
+
     pub async fn process(
         &self,
         ctx: Context,
         data: TelemetryData,
     ) -> Result<TelemetryData, ProcessorError> {
         let mut current_data = data;
-        
+
         for processor in &self.processors {
             match processor.process(&ctx, current_data).await {
                 Ok(processed_data) => {
@@ -1845,7 +1846,7 @@ impl ProcessorPipeline {
                     if err.message == "Data sampled out" {
                         return Err(err);
                     }
-                    
+
                     // 其他错误我们记录并继续
                     eprintln!(
                         "Processor '{}' failed: {}. Continuing with unprocessed data.",
@@ -1856,7 +1857,7 @@ impl ProcessorPipeline {
                 }
             }
         }
-        
+
         Ok(current_data)
     }
 }
@@ -1865,7 +1866,7 @@ impl ProcessorPipeline {
 async fn processor_composition_example() -> Result<(), Box<dyn Error>> {
     // 创建几个基本处理器
     let identity = IdentityProcessor::new("identity");
-    
+
     let filter = AttributeFilterProcessor::new(
         "filter",
         vec![
@@ -1875,9 +1876,9 @@ async fn processor_composition_example() -> Result<(), Box<dyn Error>> {
             "http.status_code".to_string(),
         ],
     );
-    
+
     let sampler = SamplingProcessor::new("sampler", 0.5);
-    
+
     let enricher = EnrichmentProcessor::new(
         "enricher",
         HashMap::from([
@@ -1891,25 +1892,25 @@ async fn processor_composition_example() -> Result<(), Box<dyn Error>> {
             ),
         ]),
     );
-    
+
     // 方法1：使用pipeline
     let pipeline = ProcessorPipeline::new("standard-pipeline")
         .add_processor(filter.clone())
         .add_processor(sampler.clone())
         .add_processor(enricher.clone());
-    
+
     // 方法2：使用函数式组合 (通过then方法)
     let composed_processor = filter
         .then(sampler)
         .then(enricher);
-    
+
     // 创建一些示例数据
     let trace_data = create_sample_trace();
     let telemetry_data = TelemetryData::Trace(trace_data);
-    
+
     // 使用两种方法处理数据并比较结果
     let ctx = Context::current();
-    
+
     println!("Processing with pipeline...");
     match pipeline.process(ctx.clone(), telemetry_data.clone()).await {
         Ok(processed) => {
@@ -1920,7 +1921,7 @@ async fn processor_composition_example() -> Result<(), Box<dyn Error>> {
             println!("Pipeline processing failed: {}", e);
         }
     }
-    
+
     println!("Processing with composed processor...");
     match composed_processor.process(&ctx, telemetry_data).await {
         Ok(processed) => {
@@ -1931,24 +1932,24 @@ async fn processor_composition_example() -> Result<(), Box<dyn Error>> {
             println!("Composed processor failed: {}", e);
         }
     }
-    
+
     // 验证结合律
     // 在这里我们可以验证 (f . g) . h = f . (g . h)
     // 为简单起见，仅通过名称检查
-    
+
     let f = IdentityProcessor::new("f");
     let g = IdentityProcessor::new("g");
     let h = IdentityProcessor::new("h");
-    
+
     let composition1 = f.clone().then(g.clone()).then(h.clone());
     let composition2 = f.then(g.then(h));
-    
+
     println!(
         "Associativity check: '{}' vs '{}'",
         composition1.name(),
         composition2.name()
     );
-    
+
     Ok(())
 }
 ```
@@ -2011,7 +2012,7 @@ impl AggregatorError {
             source: None,
         }
     }
-    
+
     pub fn with_source<E: Error + Send + Sync + 'static>(message: &str, source: E) -> Self {
         Self {
             message: message.to_string(),
@@ -2052,7 +2053,7 @@ impl BasicTelemetrySource {
             data: Arc::new(RwLock::new(Vec::new())),
         }
     }
-    
+
     pub async fn add_data(&self, data: TelemetryData) {
         let mut guard = self.data.write().await;
         guard.push(data);
@@ -2064,7 +2065,7 @@ impl TelemetrySource for BasicTelemetrySource {
     fn get_id(&self) -> &str {
         &self.id
     }
-    
+
     async fn get_data(&self) -> Result<Vec<TelemetryData>, AggregatorError> {
         let guard = self.data.read().await;
         Ok(guard.clone())
@@ -2117,7 +2118,7 @@ impl TraceAggregator {
             last_aggregation: Arc::new(RwLock::new(None)),
         }
     }
-    
+
     // 聚合一个特定的追踪
     async fn aggregate_trace(
         &self,
@@ -2128,20 +2129,20 @@ impl TraceAggregator {
         // 检查缓存中是否已存在此追踪
         if let Some(mut entry) = self.trace_cache.get_mut(&trace_id) {
             let trace = &mut *entry;
-            
+
             // 添加新的数据源
             if !trace.sources.contains(&source_id.to_string()) {
                 trace.sources.push(source_id.to_string());
             }
-            
+
             // 合并新跨度
             for span in spans {
                 trace.spans.insert(span.span_id, span);
             }
-            
+
             // 更新时间戳
             trace.timestamp = SystemTime::now();
-            
+
             trace.clone()
         } else {
             // 创建新的聚合追踪
@@ -2149,17 +2150,17 @@ impl TraceAggregator {
             for span in spans {
                 span_map.insert(span.span_id, span);
             }
-            
+
             let aggregated = AggregatedTrace {
                 trace_id,
                 spans: span_map,
                 sources: vec![source_id.to_string()],
                 timestamp: SystemTime::now(),
             };
-            
+
             // 添加到缓存
             self.trace_cache.insert(trace_id, aggregated.clone());
-            
+
             aggregated
         }
     }
@@ -2171,13 +2172,13 @@ impl TelemetryAggregator for TraceAggregator {
         let mut sources = self.sources.write().await;
         sources.push(source);
     }
-    
+
     async fn aggregate(&self) -> Result<AggregatedTelemetry, AggregatorError> {
         let sources = self.sources.read().await;
-        
+
         // 从所有源收集遥测数据
         let mut all_traces = Vec::new();
-        
+
         for source in sources.iter() {
             match source.get_data().await {
                 Ok(data_items) => {
@@ -2194,30 +2195,30 @@ impl TelemetryAggregator for TraceAggregator {
                 }
             }
         }
-        
+
         // 按追踪ID分组
         let mut traces_by_id: HashMap<TraceId, Vec<(String, Vec<SpanData>)>> = HashMap::new();
-        
+
         for (source_id, trace) in all_traces {
             traces_by_id
                 .entry(trace.trace_id)
                 .or_insert_with(Vec::new)
                 .push((source_id.to_string(), trace.spans));
         }
-        
+
         // 聚合每个追踪
         let mut aggregated_traces = Vec::new();
-        
+
         for (trace_id, source_spans) in traces_by_id {
             for (source_id, spans) in source_spans {
                 let aggregated = self.aggregate_trace(trace_id, spans, &source_id).await;
                 aggregated_traces.push(aggregated);
             }
         }
-        
+
         // 更新最后聚合时间
         *self.last_aggregation.write().await = Some(SystemTime::now());
-        
+
         Ok(AggregatedTelemetry::Traces(aggregated_traces))
     }
 }
@@ -2239,34 +2240,34 @@ impl SourceMapping {
             attribute_map: HashMap::new(),
         }
     }
-    
+
     pub fn map_span_id(&mut self, from: SpanId, to: SpanId) -> &mut Self {
         self.span_id_map.insert(from, to);
         self
     }
-    
+
     pub fn map_attribute(&mut self, from: &str, to: &str) -> &mut Self {
         self.attribute_map.insert(from.to_string(), to.to_string());
         self
     }
-    
+
     // 应用映射到跨度
     pub fn apply_to_span(&self, span: &mut SpanData) {
         // 映射属性键
         let mut new_attributes = HashMap::new();
-        
+
         for (key, value) in &span.attributes {
             let mapped_key = self
                 .attribute_map
                 .get(key)
                 .unwrap_or(key)
                 .clone();
-            
+
             new_attributes.insert(mapped_key, value.clone());
         }
-        
+
         span.attributes = new_attributes;
-        
+
         // 映射关联的ID
         if let Some(parent_id) = span.parent_id {
             span.parent_id = self.span_id_map.get(&parent_id).copied().or(Some(parent_id));
@@ -2287,22 +2288,22 @@ impl MappedTraceAggregator {
             mappings: Arc::new(RwLock::new(Vec::new())),
         }
     }
-    
+
     pub async fn add_mapping(&self, mapping: SourceMapping) {
         let mut mappings = self.mappings.write().await;
         mappings.push(mapping);
     }
-    
+
     // 应用映射到聚合结果
     async fn apply_mappings(&self, traces: Vec<AggregatedTrace>) -> Vec<AggregatedTrace> {
         let mappings = self.mappings.read().await;
-        
+
         if mappings.is_empty() {
             return traces;
         }
-        
+
         let mut result = Vec::new();
-        
+
         for mut trace in traces {
             // 对每个跨度应用所有相关映射
             for span_id in trace.spans.keys().copied().collect::<Vec<_>>() {
@@ -2319,10 +2320,10 @@ impl MappedTraceAggregator {
                     }
                 }
             }
-            
+
             result.push(trace);
         }
-        
+
         result
     }
 }
@@ -2332,7 +2333,7 @@ impl TelemetryAggregator for MappedTraceAggregator {
     async fn add_source(&self, source: Arc<dyn TelemetrySource>) {
         self.inner.add_source(source).await;
     }
-    
+
     async fn aggregate(&self) -> Result<AggregatedTelemetry, AggregatorError> {
         match self.inner.aggregate().await? {
             AggregatedTelemetry::Traces(traces) => {
@@ -2350,15 +2351,15 @@ async fn distributed_aggregation_example() -> Result<(), Box<dyn Error>> {
     let api_source = Arc::new(BasicTelemetrySource::new("api-service"));
     let order_source = Arc::new(BasicTelemetrySource::new("order-service"));
     let payment_source = Arc::new(BasicTelemetrySource::new("payment-service"));
-    
+
     // 添加一些模拟数据
     // 同一个追踪的跨度分布在不同服务中
     let trace_id = TraceId::from_u128(123456789);
-    
+
     // API服务的跨度
     let api_root_span_id = SpanId::from_u64(1);
     let api_child_span_id = SpanId::from_u64(2);
-    
+
     api_source
         .add_data(TelemetryData::Trace(TraceData {
             trace_id,
@@ -2419,11 +2420,11 @@ async fn distributed_aggregation_example() -> Result<(), Box<dyn Error>> {
             timestamp: SystemTime::now(),
         }))
         .await;
-    
+
     // 订单服务的跨度
     let order_span_id = SpanId::from_u64(3);
     let order_payment_span_id = SpanId::from_u64(4);
-    
+
     order_source
         .add_data(TelemetryData::Trace(TraceData {
             trace_id,
@@ -2488,10 +2489,10 @@ async fn distributed_aggregation_example() -> Result<(), Box<dyn Error>> {
             timestamp: SystemTime::now(),
         }))
         .await;
-    
+
     // 支付服务的跨度
     let payment_span_id = SpanId::from_u64(5);
-    
+
     payment_source
         .add_data(TelemetryData::Trace(TraceData {
             trace_id,
@@ -2532,25 +2533,25 @@ async fn distributed_aggregation_example() -> Result<(), Box<dyn Error>> {
             timestamp: SystemTime::now(),
         }))
         .await;
-    
+
     // 创建追踪聚合器
     let trace_aggregator = TraceAggregator::new();
-    
+
     // 添加数据源
     trace_aggregator.add_source(api_source).await;
     trace_aggregator.add_source(order_source).await;
     trace_aggregator.add_source(payment_source).await;
-    
+
     // 执行聚合
     match trace_aggregator.aggregate().await {
         Ok(AggregatedTelemetry::Traces(traces)) => {
             println!("Aggregated {} traces", traces.len());
-            
+
             for trace in traces {
                 println!("Trace ID: {}", trace.trace_id);
                 println!("Sources: {:?}", trace.sources);
                 println!("Spans: {}", trace.spans.len());
-                
+
                 // 打印跨度树
                 print_span_tree(&trace, api_root_span_id, 0);
             }
@@ -2559,35 +2560,35 @@ async fn distributed_aggregation_example() -> Result<(), Box<dyn Error>> {
             println!("Unexpected aggregation result type");
         }
     }
-    
+
     // 带映射的聚合器示例
     println!("\nDemonstrating aggregator with mappings:");
-    
+
     let mapped_aggregator = MappedTraceAggregator::new(TraceAggregator::new());
-    
+
     // 添加数据源
     mapped_aggregator.add_source(api_source).await;
     mapped_aggregator.add_source(order_source).await;
     mapped_aggregator.add_source(payment_source).await;
-    
+
     // 添加映射 - 从一个服务到另一个的属性映射
     let mut mapping = SourceMapping::new("order-service", "api-service");
     mapping
         .map_attribute("order.id", "api.order_id")
         .map_attribute("order.amount", "api.total_amount");
-    
+
     mapped_aggregator.add_mapping(mapping).await;
-    
+
     // 执行聚合
     match mapped_aggregator.aggregate().await {
         Ok(AggregatedTelemetry::Traces(traces)) => {
             println!("Aggregated {} traces with mappings", traces.len());
-            
+
             for trace in traces {
                 println!("Trace ID: {}", trace.trace_id);
                 println!("Sources: {:?}", trace.sources);
                 println!("Spans: {}", trace.spans.len());
-                
+
                 // 打印跨度树
                 print_span_tree(&trace, api_root_span_id, 0);
             }
@@ -2596,7 +2597,7 @@ async fn distributed_aggregation_example() -> Result<(), Box<dyn Error>> {
             println!("Unexpected aggregation result type");
         }
     }
-    
+
     Ok(())
 }
 
@@ -2611,7 +2612,7 @@ fn print_span_tree(trace: &AggregatedTrace, span_id: SpanId, depth: usize) {
             span.name,
             get_service_name(span)
         );
-        
+
         // 查找子跨度
         for (child_id, child_span) in &trace.spans {
             if child_span.parent_id == Some(span_id) {
@@ -2659,7 +2660,7 @@ enum OrderState {
 async fn process_order(initial: Order) -> OrderState {
     // 初始状态
     let state = OrderState::Created(initial);
-    
+
     // 状态转换
     match validate_order(state).await {
         OrderState::Validated(order) => match process_payment(order).await {
@@ -2758,7 +2759,7 @@ impl<'a> Extractor for HeaderExtractor<'a> {
     fn get(&self, key: &str) -> Option<&str> {
         self.0.get(key).map(|v| v.as_str())
     }
-    
+
     fn keys(&self) -> Vec<&str> {
         self.0.keys().map(|k| k.as_str()).collect()
     }
@@ -2779,23 +2780,23 @@ async fn propagate_context_example(tracer: &Tracer) {
     let mut cx = Context::current();
     let span = tracer.start("client_operation");
     cx = cx.with_span(span);
-    
+
     // 准备请求头
     let mut headers = HashMap::new();
     let propagator = opentelemetry::global::get_text_map_propagator();
     propagator.inject_context(&cx, &mut HeaderInjector(&mut headers));
-    
+
     // 发送请求（模拟）
     // ... 发送HTTP请求 ...
-    
+
     // 在服务器端提取上下文
     let server_cx = Context::current();
     let extracted_cx = propagator.extract(&server_cx, &HeaderExtractor(&headers));
-    
+
     // 使用提取的上下文创建服务器跨度
     let server_span = tracer.start_with_context("server_operation", &extracted_cx);
     let server_cx = extracted_cx.with_span(server_span);
-    
+
     // 服务器操作现在与客户端追踪链接
 }
 ```
@@ -2813,30 +2814,30 @@ async fn cross_thread_context() {
     let tracer = global::tracer("example");
     let span = tracer.start("parent_operation");
     let cx = Context::current_with_span(span);
-    
+
     // 将上下文封装在Arc中以便在线程间共享
     let cx_arc = Arc::new(cx);
     let cx_clone = cx_arc.clone();
-    
+
     // 创建一个任务，使用共享的上下文
     let task = tokio::spawn(async move {
         // 从共享的Arc中获取上下文
         let cx = &*cx_clone;
-        
+
         // 使用父上下文创建子跨度
         let tracer = global::tracer("example");
         let child_span = tracer.start_with_context("child_operation", cx);
-        
+
         // 执行操作
         tokio::time::sleep(Duration::from_millis(100)).await;
-        
+
         // 结束跨度
         child_span.end();
     });
-    
+
     // 等待任务完成
     task.await.unwrap();
-    
+
     // 获取原始上下文中的跨度并结束
     if let Some(span) = cx_arc.span() {
         span.end();
@@ -2859,7 +2860,7 @@ Rust异步工作流中的上下文传播需要特别考虑以下几点：
 pub trait ContextAwareOperation {
     type Input;
     type Output;
-    
+
     async fn execute(&self, cx: &Context, input: Self::Input) -> Self::Output;
 }
 
@@ -2874,7 +2875,7 @@ impl<I: Clone + Send + 'static, O: Send + 'static> ContextPipeline<I, O> {
             operations: Vec::new(),
         }
     }
-    
+
     pub fn add_operation<T>(mut self, operation: T) -> Self
     where
         T: ContextAwareOperation<Input = I, Output = O> + Send + Sync + 'static,
@@ -2882,16 +2883,16 @@ impl<I: Clone + Send + 'static, O: Send + 'static> ContextPipeline<I, O> {
         self.operations.push(Box::new(operation));
         self
     }
-    
+
     pub async fn execute(&self, cx: &Context, input: I) -> Vec<O> {
         let mut results = Vec::with_capacity(self.operations.len());
-        
+
         for op in &self.operations {
             let input_clone = input.clone();
             let result = op.execute(cx, input_clone).await;
             results.push(result);
         }
-        
+
         results
     }
 }
@@ -3012,7 +3013,7 @@ trait WorkflowStep {
     type Input;
     type Output;
     type Error;
-    
+
     async fn execute(
         &self,
         ctx: &Context,
@@ -3029,7 +3030,7 @@ impl WorkflowStep for ValidateOrderStep {
     type Input = Order;
     type Output = Order;
     type Error = OrderError;
-    
+
     async fn execute(
         &self,
         ctx: &Context,
@@ -3038,30 +3039,30 @@ impl WorkflowStep for ValidateOrderStep {
         let tracer = global::tracer("order-workflow");
         let span = tracer.start_with_context("validate_order", ctx);
         let cx = ctx.with_span(span);
-        
+
         // 记录关键属性
         if let Some(span) = cx.span() {
             span.set_attribute(KeyValue::new("order.id", input.id.clone()));
             span.set_attribute(KeyValue::new("order.customer_id", input.customer_id.clone()));
             span.set_attribute(KeyValue::new("order.total_amount", input.total_amount));
         }
-        
+
         // 验证逻辑
         let mut order = input.clone();
-        
+
         // 验证总金额与商品金额匹配
         let calculated_total = order
             .items
             .iter()
             .map(|item| item.price * item.quantity as f64)
             .sum::<f64>();
-        
+
         if (order.total_amount - calculated_total).abs() > 0.01 {
             let err = OrderError::ValidationError(format!(
                 "Order total amount {} doesn't match calculated total {}",
                 order.total_amount, calculated_total
             ));
-            
+
             if let Some(span) = cx.span() {
                 span.record_exception(&[
                     KeyValue::new("exception.type", "ValidationError"),
@@ -3069,10 +3070,10 @@ impl WorkflowStep for ValidateOrderStep {
                 ]);
                 span.set_status(StatusCode::Error, "Validation failed".to_string());
             }
-            
+
             return Err(err);
         }
-        
+
         // 验证商品数量 > 0
         for item in &order.items {
             if item.quantity == 0 {
@@ -3080,7 +3081,7 @@ impl WorkflowStep for ValidateOrderStep {
                     "Product {} has zero quantity",
                     item.product_id
                 ));
-                
+
                 if let Some(span) = cx.span() {
                     span.record_exception(&[
                         KeyValue::new("exception.type", "ValidationError"),
@@ -3088,15 +3089,15 @@ impl WorkflowStep for ValidateOrderStep {
                     ]);
                     span.set_status(StatusCode::Error, "Validation failed".to_string());
                 }
-                
+
                 return Err(err);
             }
         }
-        
+
         // 验证订单至少有一件商品
         if order.items.is_empty() {
             let err = OrderError::ValidationError("Order must have at least one item".to_string());
-            
+
             if let Some(span) = cx.span() {
                 span.record_exception(&[
                     KeyValue::new("exception.type", "ValidationError"),
@@ -3104,13 +3105,13 @@ impl WorkflowStep for ValidateOrderStep {
                 ]);
                 span.set_status(StatusCode::Error, "Validation failed".to_string());
             }
-            
+
             return Err(err);
         }
-        
+
         // 更新订单状态
         order.status = OrderStatus::Validated;
-        
+
         // 记录验证成功
         if let Some(span) = cx.span() {
             span.add_event(
@@ -3122,7 +3123,7 @@ impl WorkflowStep for ValidateOrderStep {
             );
             span.set_status(StatusCode::Ok, "Order validated successfully".to_string());
         }
-        
+
         Ok(order)
     }
 }
@@ -3134,7 +3135,7 @@ impl WorkflowStep for ProcessPaymentStep {
     type Input = Order;
     type Output = (Order, PaymentInfo);
     type Error = OrderError;
-    
+
     async fn execute(
         &self,
         ctx: &Context,
@@ -3143,38 +3144,38 @@ impl WorkflowStep for ProcessPaymentStep {
         let tracer = global::tracer("order-workflow");
         let span = tracer.start_with_context("process_payment", ctx);
         let cx = ctx.with_span(span);
-        
+
         if let Some(span) = cx.span() {
             span.set_attribute(KeyValue::new("order.id", input.id.clone()));
             span.set_attribute(KeyValue::new("payment.amount", input.total_amount));
         }
-        
+
         // 更新订单状态
         let mut order = input.clone();
         order.status = OrderStatus::PaymentPending;
-        
+
         // 创建验证子跨度
         let validate_span = tracer.start_with_context("validate_payment_method", &cx);
         let validate_cx = cx.with_span(validate_span);
-        
+
         // 模拟验证支付方法
         tokio::time::sleep(Duration::from_millis(50)).await;
-        
+
         if let Some(span) = validate_cx.span() {
             span.set_status(StatusCode::Ok, "Payment method validated".to_string());
         }
-        
+
         // 创建处理子跨度
         let process_span = tracer.start_with_context("process_transaction", &cx);
         let process_cx = cx.with_span(process_span);
-        
+
         if let Some(span) = process_cx.span() {
             span.set_attribute(KeyValue::new("payment.method", "credit_card"));
         }
-        
+
         // 模拟处理支付（异步）
         tokio::time::sleep(Duration::from_millis(200)).await;
-        
+
         // 随机支付结果 (95% 成功率)
         if rand::random::<f32>() > 0.05 {
             let payment_info = PaymentInfo {
@@ -3183,10 +3184,10 @@ impl WorkflowStep for ProcessPaymentStep {
                 method: "credit_card".to_string(),
                 status: PaymentStatus::Captured,
             };
-            
+
             // 更新订单状态
             order.status = OrderStatus::PaymentCompleted;
-            
+
             if let Some(span) = process_cx.span() {
                 span.set_attribute(KeyValue::new(
                     "payment.transaction_id",
@@ -3198,15 +3199,15 @@ impl WorkflowStep for ProcessPaymentStep {
                 );
                 span.set_status(StatusCode::Ok, "Payment processed successfully".to_string());
             }
-            
+
             if let Some(span) = cx.span() {
                 span.set_status(StatusCode::Ok, "Payment successful".to_string());
             }
-            
+
             Ok((order, payment_info))
         } else {
             let err = OrderError::PaymentError("Payment declined: insufficient funds".to_string());
-            
+
             if let Some(span) = process_cx.span() {
                 span.record_exception(&[
                     KeyValue::new("exception.type", "PaymentError"),
@@ -3214,14 +3215,14 @@ impl WorkflowStep for ProcessPaymentStep {
                 ]);
                 span.set_status(StatusCode::Error, "Payment failed".to_string());
             }
-            
+
             if let Some(span) = cx.span() {
                 span.set_status(StatusCode::Error, "Payment failed".to_string());
             }
-            
+
             // 更新订单状态
             order.status = OrderStatus::Failed;
-            
+
             Err(err)
         }
     }
@@ -3234,55 +3235,55 @@ impl WorkflowStep for CreateShipmentStep {
     type Input = (Order, PaymentInfo);
     type Output = (Order, PaymentInfo, ShipmentInfo);
     type Error = OrderError;
-    
+
     async fn execute(
         &self,
         ctx: &Context,
         input: Self::Input,
     ) -> Result<Self::Output, Self::Error> {
         let (mut order, payment_info) = input;
-        
+
         let tracer = global::tracer("order-workflow");
         let span = tracer.start_with_context("create_shipment", ctx);
         let cx = ctx.with_span(span);
-        
+
         if let Some(span) = cx.span() {
             span.set_attribute(KeyValue::new("order.id", order.id.clone()));
         }
-        
+
         // 分配仓库子跨度
         let warehouse_span = tracer.start_with_context("allocate_warehouse", &cx);
         let warehouse_cx = cx.with_span(warehouse_span);
-        
+
         // 模拟仓库分配
         tokio::time::sleep(Duration::from_millis(100)).await;
         let warehouse = "central-warehouse";
-        
+
         if let Some(span) = warehouse_cx.span() {
             span.set_attribute(KeyValue::new("warehouse.id", warehouse));
             span.set_status(StatusCode::Ok, "Warehouse allocated".to_string());
         }
-        
+
         // 创建发货单子跨度
         let create_span = tracer.start_with_context("create_shipping_order", &cx);
         let create_cx = cx.with_span(create_span);
-        
+
         // 模拟创建发货单
         tokio::time::sleep(Duration::from_millis(150)).await;
-        
+
         // 随机发货结果 (90% 成功率)
         if rand::random::<f32>() > 0.1 {
             let estimated_delivery = SystemTime::now() + Duration::from_secs(86400 * 3); // 3天
-            
+
             let shipment_info = ShipmentInfo {
                 tracking_id: format!("track-{}", Uuid::new_v4()),
                 carrier: "FastShip".to_string(),
                 estimated_delivery,
             };
-            
+
             // 更新订单状态
             order.status = OrderStatus::Shipped;
-            
+
             if let Some(span) = create_cx.span() {
                 span.set_attribute(KeyValue::new(
                     "shipment.tracking_id",
@@ -3292,17 +3293,17 @@ impl WorkflowStep for CreateShipmentStep {
                 span.add_event("shipment_created", vec![]);
                 span.set_status(StatusCode::Ok, "Shipment created successfully".to_string());
             }
-            
+
             if let Some(span) = cx.span() {
                 span.set_status(StatusCode::Ok, "Shipment successful".to_string());
             }
-            
+
             Ok((order, payment_info, shipment_info))
         } else {
             let err = OrderError::ShippingError(
                 "Unable to create shipment: no delivery capacity".to_string(),
             );
-            
+
             if let Some(span) = create_cx.span() {
                 span.record_exception(&[
                     KeyValue::new("exception.type", "ShippingError"),
@@ -3310,11 +3311,11 @@ impl WorkflowStep for CreateShipmentStep {
                 ]);
                 span.set_status(StatusCode::Error, "Shipment creation failed".to_string());
             }
-            
+
             if let Some(span) = cx.span() {
                 span.set_status(StatusCode::Error, "Shipment failed".to_string());
             }
-            
+
             Err(err)
         }
     }
@@ -3327,50 +3328,50 @@ impl WorkflowStep for SendNotificationStep {
     type Input = (Order, PaymentInfo, ShipmentInfo);
     type Output = Order;
     type Error = OrderError;
-    
+
     async fn execute(
         &self,
         ctx: &Context,
         input: Self::Input,
     ) -> Result<Self::Output, Self::Error> {
         let (order, payment_info, shipment_info) = input;
-        
+
         let tracer = global::tracer("order-workflow");
         let span = tracer.start_with_context("send_notification", ctx);
         let cx = ctx.with_span(span);
-        
+
         if let Some(span) = cx.span() {
             span.set_attribute(KeyValue::new("order.id", order.id.clone()));
             span.set_attribute(KeyValue::new("customer.id", order.customer_id.clone()));
         }
-        
+
         // 创建电子邮件通知子跨度
         let email_span = tracer.start_with_context("send_email_notification", &cx);
         let email_cx = cx.with_span(email_span);
-        
+
         // 模拟发送电子邮件
         tokio::time::sleep(Duration::from_millis(150)).await;
-        
+
         if let Some(span) = email_cx.span() {
             span.set_attribute(KeyValue::new("notification.type", "email"));
             span.set_attribute(KeyValue::new("notification.template", "order_confirmation"));
             span.add_event("email_sent", vec![]);
             span.set_status(StatusCode::Ok, "Email notification sent".to_string());
         }
-        
+
         // 创建SMS通知子跨度
         let sms_span = tracer.start_with_context("send_sms_notification", &cx);
         let sms_cx = cx.with_span(sms_span);
-        
+
         // 模拟发送短信
         tokio::time::sleep(Duration::from_millis(100)).await;
-        
+
         if let Some(span) = sms_cx.span() {
             span.set_attribute(KeyValue::new("notification.type", "sms"));
             span.add_event("sms_sent", vec![]);
             span.set_status(StatusCode::Ok, "SMS notification sent".to_string());
         }
-        
+
         if let Some(span) = cx.span() {
             span.add_event(
                 "notifications_completed",
@@ -3381,7 +3382,7 @@ impl WorkflowStep for SendNotificationStep {
             );
             span.set_status(StatusCode::Ok, "Notifications sent successfully".to_string());
         }
-        
+
         Ok(order)
     }
 }
@@ -3396,14 +3397,14 @@ impl OrderWorkflow {
     fn new(tracer: Arc<dyn Tracer + Send + Sync>) -> Self {
         Self { tracer }
     }
-    
+
     async fn process_order(&self, order: Order) -> Result<Order, OrderError> {
         // 创建工作流根跨度
         let span = self.tracer.start_with_context(
             "process_order_workflow",
             &Context::current(),
         );
-        
+
         // 设置根跨度属性
         span.set_attribute(KeyValue::new("workflow.name", "order_processing"));
         span.set_attribute(KeyValue::new("order.id", order.id.clone()));
@@ -3412,21 +3413,21 @@ impl OrderWorkflow {
             .duration_since(SystemTime::UNIX_EPOCH)
             .unwrap()
             .as_secs() as i64));
-        
+
         // 创建工作流上下文
         let cx = Context::current_with_span(span);
-        
+
         // 记录工作流开始
         if let Some(span) = cx.span() {
             span.add_event("workflow_started", vec![]);
         }
-        
+
         // 创建工作流步骤
         let validate_step = ValidateOrderStep;
         let payment_step = ProcessPaymentStep;
         let shipment_step = CreateShipmentStep;
         let notification_step = SendNotificationStep;
-        
+
         // 执行工作流
         let result = validate_step
             .execute(&cx, order)
@@ -3440,7 +3441,7 @@ impl OrderWorkflow {
             .and_then(|(order, payment, shipment)| {
                 notification_step.execute(&cx, (order, payment, shipment)).await
             });
-        
+
         // 记录工作流结果
         if let Some(span) = cx.span() {
             match &result {
@@ -3462,7 +3463,7 @@ impl OrderWorkflow {
                     span.set_status(StatusCode::Error, format!("Workflow failed: {}", err));
                 }
             }
-            
+
             // 记录工作流执行时间
             let end_time = SystemTime::now();
             if let Ok(duration) = end_time.duration_since(SystemTime::UNIX_EPOCH) {
@@ -3472,7 +3473,7 @@ impl OrderWorkflow {
                 ));
             }
         }
-        
+
         result
     }
 }
@@ -3501,7 +3502,7 @@ impl OrderService {
             receiver,
         }
     }
-    
+
     async fn run(mut self) {
         while let Some(cmd) = self.receiver.recv().await {
             match cmd {
@@ -3525,10 +3526,10 @@ impl OrderService {
 async fn main() -> Result<(), Box<dyn Error>> {
     // 设置日志
     tracing_subscriber::fmt::init();
-    
+
     // 设置OpenTelemetry导出到stdout（在实际应用中会导出到遥测后端）
     global::set_text_map_propagator(TraceContextPropagator::new());
-    
+
     let tracer = opentelemetry_jaeger::new_pipeline()
         .with_service_name("order-processing-service")
         .with_tags(vec![
@@ -3536,21 +3537,21 @@ async fn main() -> Result<(), Box<dyn Error>> {
             KeyValue::new("service.version", "1.0.0"),
         ])
         .install_batch(opentelemetry::runtime::Tokio)?;
-    
+
     let tracer = Arc::new(tracer);
-    
+
     // 创建Actor通道
     let (sender, receiver) = mpsc::channel(100);
-    
+
     // 启动订单服务Actor
     let order_service = OrderService::new(tracer.clone(), receiver);
     let service_handle = tokio::spawn(order_service.run());
-    
+
     // 创建几个测试订单
     for i in 1..=5 {
         let order = create_test_order(i);
         info!("Submitting order {}: {}", i, order.id);
-        
+
         // 发送处理命令并等待响应
         let (tx, rx) = oneshot::channel();
         sender
@@ -3559,7 +3560,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 response: tx,
             })
             .await?;
-        
+
         // 等待处理结果
         match rx.await {
             Ok(Ok(order)) => {
@@ -3575,18 +3576,18 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 error!("Failed to receive response for order {}", i);
             }
         }
-        
+
         // 在订单之间稍作延迟
         tokio::time::sleep(Duration::from_millis(500)).await;
     }
-    
+
     // 关闭服务
     let _ = sender.send(OrderServiceCommand::Shutdown).await;
     let _ = service_handle.await;
-    
+
     // 清理OpenTelemetry
     global::shutdown_tracer_provider();
-    
+
     Ok(())
 }
 
@@ -3604,9 +3605,9 @@ fn create_test_order(index: usize) -> Order {
             price: 49.99,
         },
     ];
-    
+
     let total_amount = items.iter().map(|i| i.price * i.quantity as f64).sum();
-    
+
     Order {
         id: format!("ord-{}", Uuid::new_v4()),
         customer_id: format!("cust-{}", 1000 + index),

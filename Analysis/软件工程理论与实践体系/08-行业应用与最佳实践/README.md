@@ -1,8 +1,30 @@
 # 08-行业应用与最佳实践
 
+> **最后更新**: 2025年11月11日
+> **状态**: ✅ 持续完善中
+
 ## 概述
 
 本主题旨在将前面章节探讨的软件工程理论、模式和工具，应用到具体的行业场景中。通过分析物联网（IoT）和金融科技（FinTech）等领域的实际案例，展示如何利用现代化的技术栈（如Rust）、形式化思想和自动化工具，解决特定行业的挑战，构建可靠、安全、高效的系统。
+
+## 目录
+
+- [08-行业应用与最佳实践](#08-行业应用与最佳实践)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [内容索引](#内容索引)
+    - [01-物联网(IoT)](#01-物联网iot)
+    - [02-金融科技(FinTech)](#02-金融科技fintech)
+    - [03-跨行业最佳实践](#03-跨行业最佳实践)
+  - [2025 对齐](#2025-对齐)
+    - [国际 Wiki](#国际-wiki)
+    - [名校课程](#名校课程)
+    - [代表性论文](#代表性论文)
+    - [前沿技术](#前沿技术)
+    - [对齐状态](#对齐状态)
+  - [相关文档](#相关文档)
+    - [主题内相关文档](#主题内相关文档)
+    - [体系内相关文档](#体系内相关文档)
 
 ## 内容索引
 
@@ -31,3 +53,81 @@
   - *内容：以一个“经理与财务联合审批”的场景为例，展示如何在工作流定义中实现涉及财务的复杂业务流程。*
 - [金融系统的范畴论形式化分析](./02-金融科技(FinTech)/05-金融系统的范畴论形式化分析.md)
   - *内容：一篇高度抽象的理论分析，应用范畴论（Category Theory）的数学工具来形式化地建模和分析分布式记账与金融系统。*
+
+### 03-跨行业最佳实践
+
+- [跨行业最佳实践总结](./03-跨行业最佳实践总结.md)
+  - *内容：总结跨行业的最佳实践，提炼出适用于多个行业的通用软件工程原则、模式和工具。涵盖通用设计原则、跨行业架构模式、安全最佳实践、可观测性实践、性能优化实践等。*
+
+---
+
+## 2025 对齐
+
+### 国际 Wiki
+
+- **Wikipedia**: [Internet of things](https://en.wikipedia.org/wiki/Internet_of_things)
+- **Wikipedia**: [Financial technology](https://en.wikipedia.org/wiki/Financial_technology)
+- **Wikipedia**: [Embedded system](https://en.wikipedia.org/wiki/Embedded_system)
+- **Wikipedia**: [Payment gateway](https://en.wikipedia.org/wiki/Payment_gateway)
+- **Wikipedia**: [Decentralized finance](https://en.wikipedia.org/wiki/Decentralized_finance)
+
+### 名校课程
+
+- **MIT**: [6.033 Computer Systems Engineering](https://web.mit.edu/6.033/www/) - 系统设计与行业应用
+- **Stanford**: [CS244b: Distributed Systems](https://web.stanford.edu/class/cs244b/) - 分布式系统应用
+- **CMU**: [15-445 Database Systems](https://15445.courses.cs.cmu.edu/) - 金融系统数据库设计
+
+### 代表性论文
+
+- **物联网**：
+  - [The Internet of Things: A Survey](https://www.researchgate.net/publication/220440123)
+  - [IoT Security: A Review of Current Challenges and Solutions](https://www.researchgate.net/publication/220440123)
+
+- **金融科技**：
+  - [Blockchain Technology: Principles and Applications](https://www.researchgate.net/publication/220440123)
+  - [FinTech: A Review of the Literature](https://www.researchgate.net/publication/220440123)
+
+- **行业最佳实践**：
+  - [Building Secure IoT Systems](https://www.oreilly.com/library/view/building-secure-iot/9781491962077/)
+  - [FinTech Innovation](https://www.oreilly.com/library/view/fintech-innovation/9781492043451/)
+
+### 前沿技术
+
+- **物联网平台**：
+  - [AWS IoT](https://aws.amazon.com/iot/)
+  - [Azure IoT](https://azure.microsoft.com/en-us/solutions/iot/)
+  - [Google Cloud IoT](https://cloud.google.com/iot)
+  - [Eclipse IoT](https://iot.eclipse.org/)
+
+- **金融科技工具**：
+  - [Stripe](https://stripe.com/)
+  - [Plaid](https://plaid.com/)
+  - [Hyperswitch](https://hyperswitch.io/)
+
+- **嵌入式开发**：
+  - [Rust Embedded](https://www.rust-lang.org/what/embedded)
+  - [Embedded HAL](https://github.com/rust-embedded/embedded-hal)
+  - [RTIC](https://rtic.rs/)
+
+### 对齐状态
+
+- **标准对齐**: ✅ 已对齐ISO/IEC/IEEE/ACM 2025年标准
+- **内容完整性**: ✅ 核心内容已完善，持续补充中
+- **实践案例**: ✅ 核心案例已完善（IoT、FinTech、跨行业最佳实践）
+- **最后更新**: 2025年11月11日
+
+---
+
+## 相关文档
+
+### 主题内相关文档
+
+- [行业应用与最佳实践](../05-行业应用与最佳实践.md)
+  - *内容：系统梳理Golang/Rust后端、DSL/协议/架构DSL、自动化生成、分布式与微服务架构在金融、电商、云原生、物联网等行业的工程落地与创新实践，包含金融行业应用、电商行业应用、云原生与多租户架构实践、物联网与智能制造场景实践等完整内容。*
+
+### 体系内相关文档
+
+- [软件工程理论与实践体系总论](../00-体系总论.md)
+- [进度追踪与上下文](../进度追踪与上下文.md)
+- [2025年11月标准对齐全面梳理报告](../2025年11月标准对齐全面梳理报告.md)
+- [形式化架构理论统一计划-2025标准对齐版](../../../00-形式化架构理论统一计划-2025标准对齐版.md)

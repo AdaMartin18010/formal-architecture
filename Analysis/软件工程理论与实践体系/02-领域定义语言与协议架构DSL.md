@@ -30,6 +30,8 @@
     - [7.3 数据工程中的DSL应用](#73-数据工程中的dsl应用)
     - [7.4 最佳实践总结](#74-最佳实践总结)
   - [8. 相关性跳转与引用](#8-相关性跳转与引用)
+    - [主题内相关文档](#主题内相关文档)
+    - [体系内相关文档](#体系内相关文档)
   - [2025 对齐](#2025-对齐)
 
 ---
@@ -231,11 +233,11 @@ func StartServer(port string, service {{.Name}}Service) error {
     if err != nil {
         return fmt.Errorf("failed to listen: %v", err)
     }
-    
+
     server := grpc.NewServer()
     grpcServer := New{{.Name}}Server(service)
     grpcServer.RegisterService(server)
-    
+
     fmt.Printf("Server listening on port %s\n", port)
     return server.Serve(lis)
 }
@@ -318,12 +320,12 @@ func NewCodeGenerator() *CodeGenerator {
     cg := &CodeGenerator{
         templates: make(map[string]*template.Template),
     }
-    
+
     // 解析模板
     cg.templates["service"] = template.Must(template.New("service").Parse(goServiceTemplate))
     cg.templates["message"] = template.Must(template.New("message").Parse(goMessageTemplate))
     cg.templates["enum"] = template.Must(template.New("enum").Parse(goEnumTemplate))
-    
+
     return cg
 }
 
@@ -335,12 +337,12 @@ func (cg *CodeGenerator) GenerateService(protocol *ProtocolDefinition, packageNa
         ProtocolDefinition: protocol,
         PackageName:        packageName,
     }
-    
+
     var buf bytes.Buffer
     if err := cg.templates["service"].Execute(&buf, data); err != nil {
         return "", err
     }
-    
+
     return buf.String(), nil
 }
 
@@ -349,7 +351,7 @@ func (cg *CodeGenerator) GenerateMessages(protocol *ProtocolDefinition) (string,
     if err := cg.templates["message"].Execute(&buf, protocol); err != nil {
         return "", err
     }
-    
+
     return buf.String(), nil
 }
 
@@ -358,7 +360,7 @@ func (cg *CodeGenerator) GenerateEnums(protocol *ProtocolDefinition) (string, er
     if err := cg.templates["enum"].Execute(&buf, protocol); err != nil {
         return "", err
     }
-    
+
     return buf.String(), nil
 }
 
@@ -420,38 +422,38 @@ func main() {
             },
         },
     }
-    
+
     // 生成代码
     generator := NewCodeGenerator()
-    
+
     // 生成服务代码
     serviceCode, err := generator.GenerateService(protocol, "userservice")
     if err != nil {
         fmt.Printf("Error generating service code: %v\n", err)
         return
     }
-    
+
     // 生成消息代码
     messageCode, err := generator.GenerateMessages(protocol)
     if err != nil {
         fmt.Printf("Error generating message code: %v\n", err)
         return
     }
-    
+
     // 生成枚举代码
     enumCode, err := generator.GenerateEnums(protocol)
     if err != nil {
         fmt.Printf("Error generating enum code: %v\n", err)
         return
     }
-    
+
     // 输出生成的代码
     fmt.Println("=== Generated Service Code ===")
     fmt.Println(serviceCode)
-    
+
     fmt.Println("\n=== Generated Message Code ===")
     fmt.Println(messageCode)
-    
+
     fmt.Println("\n=== Generated Enum Code ===")
     fmt.Println(enumCode)
 }
@@ -600,7 +602,7 @@ impl ProtocolDSLParser {
             parser: ProtocolParser::new(),
         }
     }
-    
+
     pub fn parse(&self, input: &str) -> Result<ProtocolDefinition, String> {
         let tokens = self.lexer.tokenize(input)?;
         let protocol = self.parser.parse(tokens)?;
@@ -671,18 +673,18 @@ impl ProtocolLexer {
         keywords.insert("bytes".to_string(), TokenType::Bytes);
         keywords.insert("returns".to_string(), TokenType::Returns);
         keywords.insert("stream".to_string(), TokenType::Stream);
-        
+
         Self { keywords }
     }
-    
+
     pub fn tokenize(&self, input: &str) -> Result<Vec<Token>, String> {
         let mut tokens = Vec::new();
         let mut chars = input.chars().peekable();
         let mut position = 0;
-        
+
         while let Some(ch) = chars.next() {
             position += 1;
-            
+
             match ch {
                 ' ' | '\t' | '\n' | '\r' => continue,
                 '{' => tokens.push(Token {
@@ -760,11 +762,11 @@ impl ProtocolLexer {
                             break;
                         }
                     }
-                    
+
                     let token_type = self.keywords.get(&value)
                         .cloned()
                         .unwrap_or(TokenType::Identifier);
-                    
+
                     tokens.push(Token {
                         token_type,
                         value,
@@ -774,7 +776,7 @@ impl ProtocolLexer {
                 _ => return Err(format!("Unexpected character: {}", ch)),
             }
         }
-        
+
         Ok(tokens)
     }
 }
@@ -792,42 +794,42 @@ impl ProtocolParser {
             position: 0,
         }
     }
-    
+
     pub fn parse(&mut self, tokens: Vec<Token>) -> Result<ProtocolDefinition, String> {
         self.tokens = tokens;
         self.position = 0;
         self.parse_protocol()
     }
-    
+
     fn parse_protocol(&mut self) -> Result<ProtocolDefinition, String> {
         self.expect(TokenType::Protocol)?;
         let name = self.expect_identifier()?;
-        
+
         let version = if self.peek() == Some(&TokenType::Version) {
             self.expect(TokenType::Version)?;
             self.expect_string()?
         } else {
             "1.0.0".to_string()
         };
-        
+
         let services = if self.peek() == Some(&TokenType::Services) {
             self.parse_services()?
         } else {
             Vec::new()
         };
-        
+
         let messages = if self.peek() == Some(&TokenType::Messages) {
             self.parse_messages()?
         } else {
             Vec::new()
         };
-        
+
         let enums = if self.peek() == Some(&TokenType::Enums) {
             self.parse_enums()?
         } else {
             Vec::new()
         };
-        
+
         Ok(ProtocolDefinition {
             name,
             version,
@@ -836,59 +838,59 @@ impl ProtocolParser {
             enums,
         })
     }
-    
+
     fn parse_services(&mut self) -> Result<Vec<Service>, String> {
         self.expect(TokenType::Services)?;
         self.expect(TokenType::LeftBrace)?;
-        
+
         let mut services = Vec::new();
         while self.peek() == Some(&TokenType::Service) {
             services.push(self.parse_service()?);
         }
-        
+
         self.expect(TokenType::RightBrace)?;
         Ok(services)
     }
-    
+
     fn parse_service(&mut self) -> Result<Service, String> {
         self.expect(TokenType::Service)?;
         let name = self.expect_identifier()?;
         self.expect(TokenType::LeftBrace)?;
-        
+
         let mut methods = Vec::new();
         while self.peek() == Some(&TokenType::Identifier) {
             methods.push(self.parse_method()?);
         }
-        
+
         self.expect(TokenType::RightBrace)?;
         Ok(Service { name, methods })
     }
-    
+
     fn parse_method(&mut self) -> Result<Method, String> {
         let name = self.expect_identifier()?;
         self.expect(TokenType::LeftParen)?;
-        
+
         // 解析输入参数
         let input_type = if self.peek() == Some(&TokenType::RightParen) {
             "Empty".to_string()
         } else {
             self.expect_identifier()?
         };
-        
+
         self.expect(TokenType::RightParen)?;
         self.expect(TokenType::Returns)?;
         self.expect(TokenType::LeftParen)?;
-        
+
         // 解析输出参数
         let output_type = if self.peek() == Some(&TokenType::RightParen) {
             "Empty".to_string()
         } else {
             self.expect_identifier()?
         };
-        
+
         self.expect(TokenType::RightParen)?;
         self.expect(TokenType::Semicolon)?;
-        
+
         Ok(Method {
             name,
             input_type,
@@ -896,41 +898,41 @@ impl ProtocolParser {
             stream: false,
         })
     }
-    
+
     fn parse_messages(&mut self) -> Result<Vec<Message>, String> {
         self.expect(TokenType::Messages)?;
         self.expect(TokenType::LeftBrace)?;
-        
+
         let mut messages = Vec::new();
         while self.peek() == Some(&TokenType::Message) {
             messages.push(self.parse_message()?);
         }
-        
+
         self.expect(TokenType::RightBrace)?;
         Ok(messages)
     }
-    
+
     fn parse_message(&mut self) -> Result<Message, String> {
         self.expect(TokenType::Message)?;
         let name = self.expect_identifier()?;
         self.expect(TokenType::LeftBrace)?;
-        
+
         let mut fields = Vec::new();
         while self.peek() == Some(&TokenType::Identifier) || self.is_type_token() {
             fields.push(self.parse_field()?);
         }
-        
+
         self.expect(TokenType::RightBrace)?;
         Ok(Message { name, fields })
     }
-    
+
     fn parse_field(&mut self) -> Result<Field, String> {
         let field_type = self.parse_field_type()?;
         let name = self.expect_identifier()?;
         self.expect(TokenType::Equals)?;
         let number = self.expect_number()?;
         self.expect(TokenType::Semicolon)?;
-        
+
         Ok(Field {
             name,
             field_type,
@@ -938,7 +940,7 @@ impl ProtocolParser {
             optional: false,
         })
     }
-    
+
     fn parse_field_type(&mut self) -> Result<FieldType, String> {
         match self.peek() {
             Some(TokenType::String) => {
@@ -976,52 +978,52 @@ impl ProtocolParser {
             _ => Err("Expected field type".to_string()),
         }
     }
-    
+
     fn parse_enums(&mut self) -> Result<Vec<Enum>, String> {
         self.expect(TokenType::Enums)?;
         self.expect(TokenType::LeftBrace)?;
-        
+
         let mut enums = Vec::new();
         while self.peek() == Some(&TokenType::Enum) {
             enums.push(self.parse_enum()?);
         }
-        
+
         self.expect(TokenType::RightBrace)?;
         Ok(enums)
     }
-    
+
     fn parse_enum(&mut self) -> Result<Enum, String> {
         self.expect(TokenType::Enum)?;
         let name = self.expect_identifier()?;
         self.expect(TokenType::LeftBrace)?;
-        
+
         let mut values = Vec::new();
         while self.peek() == Some(&TokenType::Identifier) {
             values.push(self.parse_enum_value()?);
         }
-        
+
         self.expect(TokenType::RightBrace)?;
         Ok(Enum { name, values })
     }
-    
+
     fn parse_enum_value(&mut self) -> Result<EnumValue, String> {
         let name = self.expect_identifier()?;
         self.expect(TokenType::Equals)?;
         let value = self.expect_number()?;
         self.expect(TokenType::Semicolon)?;
-        
+
         Ok(EnumValue { name, value })
     }
-    
+
     // 辅助方法
     fn peek(&self) -> Option<&TokenType> {
         self.tokens.get(self.position).map(|t| &t.token_type)
     }
-    
+
     fn advance(&mut self) {
         self.position += 1;
     }
-    
+
     fn expect(&mut self, expected: TokenType) -> Result<(), String> {
         if let Some(token) = self.tokens.get(self.position) {
             if std::mem::discriminant(&token.token_type) == std::mem::discriminant(&expected) {
@@ -1034,7 +1036,7 @@ impl ProtocolParser {
             Err("Unexpected end of input".to_string())
         }
     }
-    
+
     fn expect_identifier(&mut self) -> Result<String, String> {
         if let Some(token) = self.tokens.get(self.position) {
             if matches!(token.token_type, TokenType::Identifier) {
@@ -1048,7 +1050,7 @@ impl ProtocolParser {
             Err("Unexpected end of input".to_string())
         }
     }
-    
+
     fn expect_string(&mut self) -> Result<String, String> {
         if let Some(token) = self.tokens.get(self.position) {
             if matches!(token.token_type, TokenType::StringLiteral) {
@@ -1062,7 +1064,7 @@ impl ProtocolParser {
             Err("Unexpected end of input".to_string())
         }
     }
-    
+
     fn expect_number(&mut self) -> Result<u32, String> {
         if let Some(token) = self.tokens.get(self.position) {
             if matches!(token.token_type, TokenType::Number) {
@@ -1077,7 +1079,7 @@ impl ProtocolParser {
             Err("Unexpected end of input".to_string())
         }
     }
-    
+
     fn is_type_token(&self) -> bool {
         matches!(self.peek(), Some(TokenType::String | TokenType::Int32 | TokenType::Int64 | TokenType::Bool | TokenType::Double | TokenType::Float | TokenType::Bytes))
     }
@@ -1100,11 +1102,11 @@ messages {
     message GetUserRequest {
         string user_id = 1;
     }
-    
+
     message GetUserResponse {
         User user = 1;
     }
-    
+
     message User {
         string id = 1;
         string name = 2;
@@ -1120,7 +1122,7 @@ enums {
     }
 }
 "#;
-    
+
     let parser = ProtocolDSLParser::new();
     match parser.parse(input) {
         Ok(protocol) => {
@@ -1208,11 +1210,16 @@ WS: [ \t\r\n]+ -> skip;
 
 ## 8. 相关性跳转与引用
 
-- [00-软件工程理论与实践体系总论.md](00-软件工程理论与实践体系总论.md)
-- 进度追踪与上下文：
-  - [软件工程体系版本](进度追踪与上下文.md)
-  - [项目报告与总结版本](../13-项目报告与总结/进度追踪与上下文.md)
-  - [实践应用开发子目录版本](../08-实践应用开发/软件工程理论与实践体系/进度追踪与上下文.md)
+### 主题内相关文档
+
+- [03-协议_DSL_自动化生成](./03-协议_DSL_自动化生成/README.md)
+  - *本主题的README，包含完整的主题概述、内容索引和2025对齐信息*
+
+### 体系内相关文档
+
+- [00-软件工程理论与实践体系总论.md](00-体系总论.md)
+- [进度追踪与上下文](进度追踪与上下文.md)
+- [2025年11月标准对齐全面梳理报告](2025年11月标准对齐全面梳理报告.md)
 
 ---
 
