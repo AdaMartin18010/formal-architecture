@@ -16,20 +16,22 @@
 - 语义概念提取
 - 模型一致性检查
 
-**技术实现：**
+**技术说明：**
 
-- Python原型实现
-- 模块化架构设计
-- 可扩展的模型类型系统
-- 完整的错误处理机制
+- 理论设计说明（代码实现已移除）
+- 模块化架构设计文档
+- 可扩展的模型类型系统说明
+- 错误处理机制设计文档
 
 **文件结构：**
 
 ```text
 AI-Modeling-Engine/
 ├── README.md          # 详细说明文档
-└── prototype.py       # 核心实现代码
+└── index.md           # 索引文档
 ```
+
+**注意**：本项目已重新定位为"知识梳理项目"，代码实现文件已移除，仅保留理论说明和设计文档。
 
 ### 2. 模型可视化工具 (`FormalTools/`)
 
@@ -51,8 +53,10 @@ AI-Modeling-Engine/
 
 ```text
 FormalTools/
-└── model_visualizer.py  # 可视化核心代码
+└── README.md  # 可视化工具说明文档
 ```
+
+**注意**：代码实现文件已移除，仅保留设计说明文档。
 
 ### 3. 形式验证工具 (`VerificationTools/`)
 
@@ -74,8 +78,10 @@ FormalTools/
 
 ```text
 VerificationTools/
-└── formal_checker.py    # 验证引擎核心代码
+└── README.md    # 验证工具说明文档
 ```
+
+**注意**：代码实现文件已移除，仅保留设计说明文档。
 
 ### 4. 代码生成器框架 (`CodeGeneration/`)
 
@@ -86,11 +92,11 @@ VerificationTools/
 - 类型安全代码生成
 - 错误处理机制
 
-**技术实现：**
+**技术说明：**
 
-- 模板化代码生成
-- 语言特定优化
-- 可扩展的生成器架构
+- 代码生成理论设计（代码实现已移除）
+- 语言特定优化说明
+- 可扩展的生成器架构设计文档
 - 代码质量检查
 
 **文件结构：**
@@ -120,9 +126,11 @@ CodeGeneration/
 **文件结构：**
 
 ```text
-integrated_demo.py     # 综合演示脚本
-test_toolchain.py      # 功能测试脚本
+综合工具演示.md     # 综合演示说明文档
+SUMMARY.md          # 工具链完成总结
 ```
+
+**注意**：代码实现文件已移除，仅保留设计说明文档。
 
 ## 🏗️ 工具链架构设计
 
@@ -187,34 +195,30 @@ test_toolchain.py      # 功能测试脚本
 
 ```bash
 # 1. 运行综合演示
-python integrated_demo.py
+# 注意：代码实现文件已移除，本项目为知识梳理项目
 
 # 2. 运行功能测试
-python test_toolchain.py
+# 注意：代码实现文件已移除，本项目为知识梳理项目
 
 # 3. 单独使用工具
-python AI-Modeling-Engine/prototype.py
-python FormalTools/model_visualizer.py
-python VerificationTools/formal_checker.py
+# 注意：代码实现文件已移除，本项目为知识梳理项目
+# 各工具的理论说明文档位于对应目录的README.md
 ```
 
-### 编程接口
+### 理论接口设计
 
-```python
-from AI_Modeling_Engine.prototype import AIModelingEngine, ModelType
-from FormalTools.model_visualizer import ModelVisualizer
-from VerificationTools.formal_checker import FormalVerificationEngine
+**注意**：代码实现文件已移除，本项目为知识梳理项目。以下为理论接口设计说明：
 
-# 创建工具实例
-engine = AIModelingEngine()
-visualizer = ModelVisualizer()
-verifier = FormalVerificationEngine()
+**理论接口设计**：
 
-# 使用工具链
-result = engine.process_requirements(requirements, ModelType.STATE_MACHINE)
-visualizer.visualize_model(result['model_info'], "output.png")
-verification = verifier.verify_property(result['model_info'], property_spec)
-```
+- AI建模引擎接口理论：需求处理、模型生成、语义分析的理论接口设计
+- 模型可视化接口理论：图形展示、布局优化、格式导出的理论接口设计
+- 形式验证接口理论：性质验证、结果分析、报告生成的理论接口设计
+
+**理论应用说明**：
+
+- 各工具的理论接口设计文档位于对应目录的README.md
+- 理论接口设计说明如何将形式化理论转化为实践应用
 
 ## 🔧 扩展能力
 
@@ -293,6 +297,6 @@ verification = verifier.verify_property(result['model_info'], property_spec)
 
 ---
 
-**项目状态**: ✅ 核心功能完成，可投入使用  
-**最后更新**: 2024年12月  
+**项目状态**: ✅ 核心功能完成，可投入使用
+**最后更新**: 2024年12月
 **维护状态**: 积极维护中

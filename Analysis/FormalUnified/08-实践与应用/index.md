@@ -35,13 +35,11 @@
 - [真实世界案例](RealWorldCases/README.md) - 真实世界应用案例
 - [理论到实践](TheoryToPractice/README.md) - 理论到实践的映射
 
-### 核心文件
+### 核心文档
 
-- [综合演示](comprehensive_demo.py) - 综合功能演示
-- [跨理论验证引擎](CrossTheoryVerificationEngine.py) - 跨理论验证引擎
-- [集成运行器](integrated_runner.py) - 集成运行器
-- [智能分析平台](IntelligentAnalysisPlatform.py) - 智能分析平台
-- [综合工具演示](综合工具演示.md) - 综合工具演示文档
+- [综合工具演示](综合工具演示.md) - 综合功能演示说明
+- [实践应用推进进程](process.md) - 实践应用推进进程
+- [实践应用工具链完成总结](SUMMARY.md) - 工具链完成总结
 
 ## 进程文档
 

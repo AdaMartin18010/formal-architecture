@@ -37,13 +37,22 @@
 Analysis/
   _templates/
     topic-template.md
-  category-theory/
-    1-概览.md
-    2-核心概念.md
-    3-典型方法.md
-    4-案例与应用.md
+  02-数学理论体系/
+    00-数学理论体系总论.md
+    README.md
+    ...
+  03-形式语言理论体系/
+    00-形式语言理论体系总论.md
+    README.md
+    ...
+  06-软件架构理论体系/
+    00-软件架构理论体系总论.md
+    README.md
+    ...
   ...
 ```
+
+**注意**：`category-theory`、`formal-language`、`software-architecture` 目录已删除，相关内容已整合到对应的核心理论体系目录中。
 
 ## 操作规范
 
@@ -65,7 +74,13 @@ Analysis/
 
 ## 目录
 
-- [Analysis 目录总览与导航](#analysis-目录总览与导航)
+- [Analysis 目录说明](#analysis-目录说明)
+  - [目标](#目标)
+  - [2025 对齐框架（Alignment Framework）](#2025-对齐框架alignment-framework)
+  - [目录结构（示例）](#目录结构示例)
+  - [操作规范](#操作规范)
+  - [迁移流程](#迁移流程)
+  - [Analysis 目录总览与导航](#analysis-目录总览与导航)
   - [目录](#目录)
   - [1 哲学基础理论](#1-哲学基础理论)
   - [2 数学理论体系](#2-数学理论体系)
