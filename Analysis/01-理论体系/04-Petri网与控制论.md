@@ -30,6 +30,7 @@
     - [6.2 软件架构应用](#62-软件架构应用)
     - [6.3 工程实践](#63-工程实践)
   - [7. 相关性跳转与引用](#7-相关性跳转与引用)
+  - [2025 对齐](#2025-对齐)
 
 ---
 
@@ -208,16 +209,16 @@ impl DistributedPetriNet {
             })),
         }
     }
-    
+
     pub fn add_subnet(&mut self, subnet: PetriSubnet) {
         self.subnets.push(subnet);
     }
-    
+
     pub fn add_connection(&mut self, from: String, to: String, protocol: CommunicationProtocol) {
         self.communication.connections.push((from.clone(), to.clone()));
         self.communication.protocols.insert(format!("{}->{}", from, to), protocol);
     }
-    
+
     pub fn fire_transition(&mut self, subnet_id: &str, transition: &str) -> Result<(), String> {
         // 查找子网
         if let Some(subnet) = self.subnets.iter_mut().find(|s| s.id == subnet_id) {
@@ -225,13 +226,13 @@ impl DistributedPetriNet {
             if self.is_transition_enabled(subnet, transition) {
                 // 执行变迁
                 self.execute_transition(subnet, transition);
-                
+
                 // 更新全局状态
                 self.update_global_state();
-                
+
                 // 检查一致性
                 self.check_consistency();
-                
+
                 Ok(())
             } else {
                 Err(format!("Transition {} not enabled in subnet {}", transition, subnet_id))
@@ -240,25 +241,25 @@ impl DistributedPetriNet {
             Err(format!("Subnet {} not found", subnet_id))
         }
     }
-    
+
     fn is_transition_enabled(&self, subnet: &PetriSubnet, transition: &str) -> bool {
         // 简化实现：检查输入库所是否有足够的标记
         true
     }
-    
+
     fn execute_transition(&self, subnet: &mut PetriSubnet, transition: &str) {
         // 简化实现：更新标记
         println!("Executing transition {} in subnet {}", transition, subnet.id);
     }
-    
+
     fn update_global_state(&self) {
         let mut global_state = self.global_state.lock().unwrap();
-        
+
         // 更新子网状态
         for subnet in &self.subnets {
             global_state.subnet_states.insert(subnet.id.clone(), subnet.marking.clone());
         }
-        
+
         // 计算全局标记
         global_state.global_marking.clear();
         for subnet in &self.subnets {
@@ -267,44 +268,44 @@ impl DistributedPetriNet {
             }
         }
     }
-    
+
     fn check_consistency(&self) {
         let mut global_state = self.global_state.lock().unwrap();
-        
+
         // 计算一致性水平
         let mut total_variance = 0.0;
         let mut total_tokens = 0;
-        
+
         for (_, tokens) in &global_state.global_marking {
             total_tokens += tokens;
         }
-        
+
         if total_tokens > 0 {
             let mean = total_tokens as f64 / global_state.global_marking.len() as f64;
-            
+
             for (_, tokens) in &global_state.global_marking {
                 let variance = (*tokens as f64 - mean).powi(2);
                 total_variance += variance;
             }
-            
+
             global_state.consistency_level = 1.0 - (total_variance / total_tokens as f64).sqrt() / mean;
         }
     }
-    
+
     pub fn get_consistency_level(&self) -> f64 {
         let global_state = self.global_state.lock().unwrap();
         global_state.consistency_level
     }
-    
+
     pub fn apply_control(&mut self, subnet_id: &str, control_input: f64) {
         if let Some(subnet) = self.subnets.iter_mut().find(|s| s.id == subnet_id) {
             subnet.control_input = control_input;
-            
+
             // 基于控制输入调整变迁启用条件
             self.adjust_transition_enabling(subnet, control_input);
         }
     }
-    
+
     fn adjust_transition_enabling(&self, subnet: &mut PetriSubnet, control_input: f64) {
         // 基于控制输入调整标记分布
         // 简化实现
@@ -315,7 +316,7 @@ impl DistributedPetriNet {
 // 使用示例
 fn main() {
     let mut dpn = DistributedPetriNet::new();
-    
+
     // 创建子网
     let subnet1 = PetriSubnet {
         id: "subnet1".to_string(),
@@ -324,7 +325,7 @@ fn main() {
         marking: HashMap::new(),
         control_input: 0.0,
     };
-    
+
     let subnet2 = PetriSubnet {
         id: "subnet2".to_string(),
         places: vec!["p3".to_string(), "p4".to_string()],
@@ -332,23 +333,23 @@ fn main() {
         marking: HashMap::new(),
         control_input: 0.0,
     };
-    
+
     dpn.add_subnet(subnet1);
     dpn.add_subnet(subnet2);
-    
+
     // 添加通信连接
     dpn.add_connection(
         "subnet1".to_string(),
         "subnet2".to_string(),
         CommunicationProtocol::Synchronous,
     );
-    
+
     // 执行变迁
     let _ = dpn.fire_transition("subnet1", "t1");
-    
+
     // 应用控制
     dpn.apply_control("subnet1", 0.5);
-    
+
     // 检查一致性
     let consistency = dpn.get_consistency_level();
     println!("System consistency level: {}", consistency);
