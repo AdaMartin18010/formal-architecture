@@ -23,7 +23,15 @@
     - [3.2 反射式桥接（Reflective Bridging）](#32-反射式桥接reflective-bridging)
     - [3.3 混合范式（双向工程）](#33-混合范式双向工程)
   - [4. 实践中的嫁接模式](#4-实践中的嫁接模式)
+    - [4.1 语义化API契约](#41-语义化api契约)
+    - [4.2 事件驱动语义总线](#42-事件驱动语义总线)
+    - [4.3 低代码语义平台](#43-低代码语义平台)
+    - [4.4 语义中间件](#44-语义中间件)
   - [5. 2025 对齐](#5-2025-对齐)
+    - [5.1 国际Wiki](#51-国际wiki)
+    - [5.2 著名大学课程](#52-著名大学课程)
+    - [5.3 代表性论文（2023-2025）](#53-代表性论文2023-2025)
+    - [5.4 前沿技术与标准](#54-前沿技术与标准)
 
 ## 1. DSL的核心作用
 
@@ -150,24 +158,91 @@ DSL ←(同步)→ 技术实现
 
 ### 4.1 语义化API契约
 
-- **桥接点**：OpenAPI/Smithy IDL
-- **机制**：API定义即**业务语义接口**，后端实现是技术载体
+**桥接点**：OpenAPI/Smithy IDL
+
+**机制**：API定义即**业务语义接口**，后端实现是技术载体
+
+**示例**：
+
+```yaml
+# OpenAPI规范（业务语义）
+paths:
+  /orders:
+    post:
+      summary: "创建订单"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OrderItem'
+```
+
+**优势**：API契约与实现解耦，支持多语言后端实现
 
 ### 4.2 事件驱动语义总线
 
-- **桥接点**：CloudEvents规范
-- **机制**：事件是**跨系统语义原子**，技术实现通过事件总线解耦
+**桥接点**：CloudEvents规范
+
+**机制**：事件是**跨系统语义原子**，技术实现通过事件总线解耦
+
+**示例**：
+
+```json
+{
+  "specversion": "1.0",
+  "type": "order.paid",
+  "source": "payment-service",
+  "subject": "ORDER-123",
+  "data": {
+    "amount": 999.00,
+    "method": "wechat"
+  }
+}
+```
+
+**优势**：事件类型（`type`）即业务语义，技术实现通过事件总线解耦
 
 ### 4.3 低代码语义平台
 
-- **桥接点**：图形化语义建模器
-- **机制**：拖拽**业务实体与流程** → 自动生成全栈代码
-- **代表**：OutSystems, Mendix, 钉钉宜搭
+**桥接点**：图形化语义建模器
+
+**机制**：拖拽**业务实体与流程** → 自动生成全栈代码
+
+**代表**：OutSystems, Mendix, 钉钉宜搭
+
+**本质**：将[MSMFIT四要素](../01-IT语义世界基础理论/02-最小语义模型MSMFIT.md)可视化，技术实现完全隐藏
+
+**优势**：业务人员可直接操作语义模型，无需编写代码
 
 ### 4.4 语义中间件
 
-- **桥接点**：GraphQL Federation / DDD防腐层
-- **机制**：在遗留系统之上**嫁接统一语义层**
+**桥接点**：GraphQL Federation / DDD防腐层
+
+**机制**：在遗留系统之上**嫁接统一语义层**
+
+**示例**：
+
+```graphql
+# GraphQL Federation（统一语义层）
+type Order @key(fields: "id") {
+  id: ID!
+  items: [OrderItem!]!
+  total: Float!
+}
+
+# 后端服务（技术实现）
+extend type Order @key(fields: "id") {
+  id: ID! @external
+  items: [OrderItem!]! @requires(fields: "id")
+}
+```
+
+**优势**：遗留系统通过语义中间件统一暴露，客户端无需关心后端技术栈
 
 ## 5. 2025 对齐
 
@@ -200,6 +275,6 @@ DSL ←(同步)→ 技术实现
 
 ---
 
-**文档版本**：v1.0
-**最后更新**：2025-11-12
+**文档版本**：v1.1
+**最后更新**：2025-11-14
 **维护状态**：✅ 持续更新中
