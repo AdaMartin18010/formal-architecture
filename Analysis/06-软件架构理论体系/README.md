@@ -30,4 +30,4 @@
 - 名校课程：MIT 6.824/6.5840、Berkeley CS 294-147、CMU 17-313/17-356、Stanford CS 242/244
 - 代表性论文：ICSE/ASE/SEAMS 架构演化；SOSP/OSDI/NSDI 运行时与平台；CACM 专题（近3年）
 - 前沿技术：Kubernetes、Service Mesh、OpenTelemetry、Wasm/WASI、eBPF、Serverless、Supply-chain（SLSA/SBOM）
-- 对齐状态：进行中（最后更新：2025-09-07）
+- 对齐状态：进行中（最后更新：2025-01-15）

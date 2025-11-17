@@ -10,6 +10,7 @@
     - [2.2 生产者 (Producer UCU)](#22-生产者-producer-ucu)
     - [2.3 消费者 (Consumer UCU)](#23-消费者-consumer-ucu)
   - [3. 分析与结论](#3-分析与结论)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 问题背景
 
@@ -106,4 +107,4 @@
   - [Technology 2](https://example.com/tech2)
   - [Technology 3](https://example.com/tech3)
 
-- **对齐状态**：已完成（最后更新：2025-01-10）
+- **对齐状态**：已完成（最后更新：2025-01-15）
