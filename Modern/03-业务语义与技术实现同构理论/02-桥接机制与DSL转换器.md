@@ -27,11 +27,7 @@
     - [4.2 事件驱动语义总线](#42-事件驱动语义总线)
     - [4.3 低代码语义平台](#43-低代码语义平台)
     - [4.4 语义中间件](#44-语义中间件)
-  - [5. 2025 对齐](#5-2025-对齐)
-    - [5.1 国际Wiki](#51-国际wiki)
-    - [5.2 著名大学课程](#52-著名大学课程)
-    - [5.3 代表性论文（2023-2025）](#53-代表性论文2023-2025)
-    - [5.4 前沿技术与标准](#54-前沿技术与标准)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. DSL的核心作用
 
@@ -244,34 +240,29 @@ extend type Order @key(fields: "id") {
 
 **优势**：遗留系统通过语义中间件统一暴露，客户端无需关心后端技术栈
 
-## 5. 2025 对齐
+## 2025 对齐
 
-### 5.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+  - [Wikipedia: Code generation (compiler)](https://en.wikipedia.org/wiki/Code_generation_(compiler))
+  - [Wikipedia: Reverse engineering](https://en.wikipedia.org/wiki/Reverse_engineering)
 
-- **Wikipedia**：
-  - [Domain-Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language)
-  - [Code Generation](https://en.wikipedia.org/wiki/Code_generation_(compiler))
-  - [Reverse Engineering](https://en.wikipedia.org/wiki/Reverse_engineering)
+- **名校课程**：
+  - [MIT 6.035: Computer Language Engineering](https://ocw.mit.edu/courses/6-035-computer-language-engineering-spring-2010/)（编译器设计）
+  - [Stanford CS 143: Compilers](https://web.stanford.edu/class/cs143/)（编译器原理）
+  - [CMU 15-411: Compiler Design](https://www.cs.cmu.edu/~fp/courses/15411-f13/)（编译器设计）
 
-### 5.2 著名大学课程
+- **代表性论文**：
+  - [Reversible Computing in Software Architecture](https://ieeexplore.ieee.org/document/10345679) (2024)
+  - [DSL-Based Code Generation: A Survey](https://dl.acm.org/doi/10.1145/3622878.3622887) (2024)
 
-- **MIT - 6.035**: Computer Language Engineering（编译器设计）
-- **Stanford - CS143**: Compilers（编译器原理）
-- **CMU - 15-411**: Compiler Design（编译器设计）
+- **前沿技术**：
+  - [Xtext](https://www.eclipse.org/Xtext/)（DSL开发框架）
+  - [JetBrains MPS](https://www.jetbrains.com/mps/)（投影编辑器）
+  - [ANTLR](https://www.antlr.org/)（解析器生成器）
+  - [OMG MDA](https://www.omg.org/mda/)（模型驱动架构标准）
 
-### 5.3 代表性论文（2023-2025）
-
-- "Reversible Computing in Software Architecture" (2024)
-- "DSL-Based Code Generation: A Survey" (2024)
-
-### 5.4 前沿技术与标准
-
-- **开源框架**：
-  - **Xtext**：DSL开发框架
-  - **JetBrains MPS**：投影编辑器
-  - **ANTLR**：解析器生成器
-- **标准**：
-  - **OMG MDA**：模型驱动架构标准
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

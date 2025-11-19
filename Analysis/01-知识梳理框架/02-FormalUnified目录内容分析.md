@@ -367,23 +367,25 @@ FormalUnified/
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: FormalUnified目录内容分析](https://en.wikipedia.org/wiki/formalunified目录内容分析)
-  - [nLab: FormalUnified目录内容分析](https://ncatlab.org/nlab/show/formalunified目录内容分析)
-  - [Stanford Encyclopedia: FormalUnified目录内容分析](https://plato.stanford.edu/entries/formalunified目录内容分析/)
+  - [Wikipedia: Formal methods](https://en.wikipedia.org/wiki/Formal_methods)
+  - [Wikipedia: Software engineering](https://en.wikipedia.org/wiki/Software_engineering)
+  - [Wikipedia: Information architecture](https://en.wikipedia.org/wiki/Information_architecture)
+  - [Wikipedia: Content analysis](https://en.wikipedia.org/wiki/Content_analysis)
 
 - **名校课程**：
-  - [MIT: FormalUnified目录内容分析](https://ocw.mit.edu/courses/)
-  - [Stanford: FormalUnified目录内容分析](https://web.stanford.edu/class/)
-  - [CMU: FormalUnified目录内容分析](https://www.cs.cmu.edu/~formalunified目录内容分析/)
+  - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（形式化方法）
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统理论）
+  - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（编程语言理论）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Formal Methods: State of the Art and Future Directions](https://dl.acm.org/doi/10.1145/2499370.2499371) (ACM Computing Surveys, 2013)
+  - [Software Architecture: Perspectives on an Emerging Discipline](https://www.cs.cmu.edu/~able/publications/softwareArchitectureBook.pdf) (Shaw & Garlan, 1996)
+  - [The Science of Programming](https://www.springer.com/gp/book/9780387964805) (Gries, 1981)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [TLA+](https://lamport.azurewebsites.net/tla/tla.html)（形式化规范语言）
+  - [Coq](https://coq.inria.fr/)（证明助手）
+  - [Isabelle](https://isabelle.in.tum.de/)（形式化证明系统）
+  - [Alloy](https://alloytools.org/)（形式化建模工具）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

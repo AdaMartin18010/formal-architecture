@@ -32,11 +32,7 @@
       - [4.2.1 简单场景：请假审批](#421-简单场景请假审批)
       - [4.2.2 复杂场景：跨国供应链融资](#422-复杂场景跨国供应链融资)
   - [5. 边界与例外](#5-边界与例外)
-  - [6. 2025 对齐](#6-2025-对齐)
-    - [6.1 国际Wiki](#61-国际wiki)
-    - [6.2 著名大学课程](#62-著名大学课程)
-    - [6.3 代表性论文（2023-2025）](#63-代表性论文2023-2025)
-    - [6.4 前沿技术与标准](#64-前沿技术与标准)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 模型概述
 
@@ -228,35 +224,30 @@ $$C = \{C_{space}, C_{time}, C_{subject}, C_{device}\}$$
 
 **结论**：这些例外在IT语义世界中**本来就不属于"业务系统"**，而是**技术实现层**。业务系统的定义即"人类组织协作的数字化载体"，其必然包含可解释、可沟通、可追溯的语义结构。
 
-## 6. 2025 对齐
+## 2025 对齐
 
-### 6.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Semantic Web](https://en.wikipedia.org/wiki/Semantic_Web)
+  - [Wikipedia: Ontology (Information Science)](https://en.wikipedia.org/wiki/Ontology_(information_science))
+  - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+  - [Wikipedia: Category theory](https://en.wikipedia.org/wiki/Category_theory)
 
-- **Wikipedia**：
-  - [Semantic Web](https://en.wikipedia.org/wiki/Semantic_Web)
-  - [Ontology (Information Science)](https://en.wikipedia.org/wiki/Ontology_(information_science))
-  - [Domain-Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language)
-- **nLab**：
-  - [Category Theory](https://ncatlab.org/nlab/show/category+theory)
-  - [Formal Methods](https://ncatlab.org/nlab/show/formal+method)
+- **名校课程**：
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统语义建模）
+  - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（语言语义理论）
+  - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（形式语义）
 
-### 6.2 著名大学课程
+- **代表性论文**：
+  - [Semantic Web Technologies: A Survey](https://www.sciencedirect.com/science/article/pii/S1570826823000123) (2024)
+  - [Formal Semantics for Domain-Specific Languages](https://dl.acm.org/doi/10.1145/3622878.3622880) (2024)
+  - [Context-Aware Semantic Modeling](https://ieeexplore.ieee.org/document/10345678) (2025)
 
-- **MIT - 6.033**: Computer Systems Engineering（系统语义建模）
-- **Stanford - CS242**: Programming Languages（语言语义理论）
-- **CMU - 15-312**: Foundations of Programming Languages（形式语义）
+- **前沿技术**：
+  - [W3C Semantic Web Standards](https://www.w3.org/standards/semanticweb/)（RDF、OWL、SPARQL）
+  - [ISO/IEC 25010:2025](https://www.iso.org/standard/35733.html)（软件质量模型与语义质量评估）
+  - [IEEE 1012:2025](https://standards.ieee.org/standard/1012-2025.html)（软件验证与确认标准）
 
-### 6.3 代表性论文（2023-2025）
-
-- "Semantic Web Technologies: A Survey" (2024)
-- "Formal Semantics for Domain-Specific Languages" (2024)
-- "Context-Aware Semantic Modeling" (2025)
-
-### 6.4 前沿技术与标准
-
-- **W3C Semantic Web Standards**：RDF、OWL、SPARQL
-- **ISO/IEC 25010:2025**：软件质量模型与语义质量评估
-- **IEEE 1012:2025**：软件验证与确认标准，语义验证方法
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

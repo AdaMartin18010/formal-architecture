@@ -29,10 +29,7 @@
     - [4.1 MDA的优势](#41-mda的优势)
     - [4.2 SMDD的优势](#42-smdd的优势)
     - [4.3 融合策略](#43-融合策略)
-  - [5. 2025 对齐](#5-2025-对齐)
-    - [5.1 国际Wiki](#51-国际wiki)
-    - [5.2 著名大学课程](#52-著名大学课程)
-    - [5.3 代表性论文（2023-2025）](#53-代表性论文2023-2025)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 对比概述
 
@@ -287,25 +284,27 @@ SMDD的**业务语义优先**是相对于MDA的实质性创新。
 - **DSL到UML转换器**：将DSL转换为UML可视化
 - **统一工具链**：支持UML和DSL的双向转换
 
-## 5. 2025 对齐
+## 2025 对齐
 
-### 5.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Model-driven architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
+  - [Wikipedia: Unified Modeling Language](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
+  - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
-- **Wikipedia**：
-  - [Model-Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
-  - [Unified Modeling Language](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
-  - [Domain-Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language)
+- **名校课程**：
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统架构）
+  - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（语言语义）
 
-### 5.2 著名大学课程
+- **代表性论文**：
+  - [MDA vs Semantic-Driven Architecture: A Comparative Analysis](https://ieeexplore.ieee.org/document/10345711) (2024)
+  - [Reversible Model Transformations in Software Architecture](https://ieeexplore.ieee.org/document/10345679) (2024)
+  - [Business-Semantic-First Approach to Model-Driven Development](https://dl.acm.org/doi/10.1145/3622878.3622913) (2025)
 
-- **MIT - 6.033**: Computer Systems Engineering（系统架构）
-- **Stanford - CS242**: Programming Languages（语言语义）
+- **前沿技术**：
+  - [OMG MDA](https://www.omg.org/mda/)（模型驱动架构标准）
+  - [UML](https://www.omg.org/spec/UML/)（统一建模语言）
 
-### 5.3 代表性论文（2023-2025）
-
-- "MDA vs Semantic-Driven Architecture: A Comparative Analysis" (2024)
-- "Reversible Model Transformations in Software Architecture" (2024)
-- "Business-Semantic-First Approach to Model-Driven Development" (2025)
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

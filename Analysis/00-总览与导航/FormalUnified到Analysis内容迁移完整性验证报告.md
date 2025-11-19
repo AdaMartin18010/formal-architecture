@@ -178,23 +178,25 @@ FormalUnified到Analysis的内容迁移已100%完成。
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: FormalUnified到Analysis内容迁移完整性验证报告](https://en.wikipedia.org/wiki/formalunified到analysis内容迁移完整性验证报告)
-  - [nLab: FormalUnified到Analysis内容迁移完整性验证报告](https://ncatlab.org/nlab/show/formalunified到analysis内容迁移完整性验证报告)
-  - [Stanford Encyclopedia: FormalUnified到Analysis内容迁移完整性验证报告](https://plato.stanford.edu/entries/formalunified到analysis内容迁移完整性验证报告/)
+  - [Wikipedia: Data migration](https://en.wikipedia.org/wiki/Data_migration)
+  - [Wikipedia: Software verification and validation](https://en.wikipedia.org/wiki/Software_verification_and_validation)
+  - [Wikipedia: Quality assurance](https://en.wikipedia.org/wiki/Quality_assurance)
+  - [Wikipedia: Content management](https://en.wikipedia.org/wiki/Content_management)
 
 - **名校课程**：
-  - [MIT: FormalUnified到Analysis内容迁移完整性验证报告](https://ocw.mit.edu/courses/)
-  - [Stanford: FormalUnified到Analysis内容迁移完整性验证报告](https://web.stanford.edu/class/)
-  - [CMU: FormalUnified到Analysis内容迁移完整性验证报告](https://www.cs.cmu.edu/~formalunified到analysis内容迁移完整性验证报告/)
+  - [CMU 17-313: Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/17313/)（软件质量）
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统质量）
+  - [Stanford CS 244: Advanced Computer Systems](https://web.stanford.edu/class/cs244/)（质量保证）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Software Engineering: A Practitioner's Approach](https://www.mheducation.com/highered/product/software-engineering-practitioners-approach-pressman-maxim/M9781260547509.html) (Pressman & Maxim, 2019)
+  - [The Art of Software Testing](https://www.wiley.com/en-us/The+Art+of+Software+Testing%2C+3rd+Edition-p-9781118031964) (Myers et al., 2011)
+  - [IEEE 1012: Standard for System and Software Verification and Validation](https://standards.ieee.org/standard/1012-2016.html) (IEEE, 2016)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [Git](https://git-scm.com/)（版本控制系统）
+  - [GitHub](https://github.com/)（代码托管平台）
+  - [SonarQube](https://www.sonarqube.org/)（代码质量分析）
+  - [GitHub Actions](https://github.com/features/actions)（CI/CD）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

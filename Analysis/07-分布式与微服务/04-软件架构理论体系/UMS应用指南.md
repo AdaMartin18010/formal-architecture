@@ -485,23 +485,25 @@ impl VersionCompatibilityChecker {
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: UMS应用指南](https://en.wikipedia.org/wiki/ums应用指南)
-  - [nLab: UMS应用指南](https://ncatlab.org/nlab/show/ums应用指南)
-  - [Stanford Encyclopedia: UMS应用指南](https://plato.stanford.edu/entries/ums应用指南/)
+  - [Wikipedia: Component-based software engineering](https://en.wikipedia.org/wiki/Component-based_software_engineering)
+  - [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
+  - [Wikipedia: Software component](https://en.wikipedia.org/wiki/Software_component)
+  - [Wikipedia: Application framework](https://en.wikipedia.org/wiki/Application_framework)
 
 - **名校课程**：
-  - [MIT: UMS应用指南](https://ocw.mit.edu/courses/)
-  - [Stanford: UMS应用指南](https://web.stanford.edu/class/)
-  - [CMU: UMS应用指南](https://www.cs.cmu.edu/~ums应用指南/)
+  - [CMU 17-313: Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/17313/)（模块化系统应用）
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统模块化实践）
+  - [Stanford CS 244: Advanced Computer Systems](https://web.stanford.edu/class/cs244/)（模块化架构应用）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Component Software: Beyond Object-Oriented Programming](https://www.researchgate.net/publication/220424199_Component_Software_Beyond_Object-Oriented_Programming) (Szyperski, 2002)
+  - [Component-Based Software Engineering](https://ieeexplore.ieee.org/document/798182) (IEEE Software, 1998)
+  - [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns) (Gang of Four, 1994)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [Web Components](https://www.webcomponents.org/)（Web组件标准）
+  - [React Components](https://react.dev/)（React组件框架）
+  - [Vue Components](https://vuejs.org/)（Vue组件框架）
+  - [Angular Modules](https://angular.io/guide/architecture-modules)（Angular模块系统）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

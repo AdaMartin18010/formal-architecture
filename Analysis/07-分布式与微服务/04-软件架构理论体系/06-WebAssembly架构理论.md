@@ -559,23 +559,25 @@ impl TypeChecker {
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: WebAssembly架构理论](https://en.wikipedia.org/wiki/webassembly架构理论)
-  - [nLab: WebAssembly架构理论](https://ncatlab.org/nlab/show/webassembly架构理论)
-  - [Stanford Encyclopedia: WebAssembly架构理论](https://plato.stanford.edu/entries/webassembly架构理论/)
+  - [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
+  - [Wikipedia: WebAssembly System Interface](https://en.wikipedia.org/wiki/WebAssembly_System_Interface)
+  - [Wikipedia: WebAssembly Component Model](https://en.wikipedia.org/wiki/WebAssembly#Component_model)
+  - [MDN: WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
 
 - **名校课程**：
-  - [MIT: WebAssembly架构理论](https://ocw.mit.edu/courses/)
-  - [Stanford: WebAssembly架构理论](https://web.stanford.edu/class/)
-  - [CMU: WebAssembly架构理论](https://www.cs.cmu.edu/~webassembly架构理论/)
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统架构）
+  - [CMU 15-445: Database Systems](https://15445.courses.cs.cmu.edu/)（系统设计）
+  - [Stanford CS 244: Advanced Computer Systems](https://web.stanford.edu/class/cs244/)（Web架构）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Bringing the Web up to Speed with WebAssembly](https://dl.acm.org/doi/10.1145/3062341.3062363) (Haas et al., 2017)
+  - [WebAssembly: A New Compilation Target for the Web](https://www.w3.org/TR/wasm-core-1/) (W3C Specification, 2019)
+  - [The WebAssembly Component Model](https://component-model.bytecodealliance.org/) (Bytecode Alliance, 2023)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [WebAssembly](https://webassembly.org/)（WebAssembly官方）
+  - [WASI](https://wasi.dev/)（WebAssembly系统接口）
+  - [Wasmtime](https://wasmtime.dev/)（WebAssembly运行时）
+  - [WasmEdge](https://wasmedge.org/)（云原生WebAssembly运行时）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

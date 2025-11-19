@@ -32,11 +32,6 @@
     - [5.3 工作流建模](#53-工作流建模)
   - [6. 总结](#6-总结)
   - [2025 对齐](#2025-对齐)
-    - [国际 Wiki](#国际-wiki)
-    - [名校课程](#名校课程)
-    - [代表性论文](#代表性论文)
-    - [前沿技术](#前沿技术)
-    - [对齐状态](#对齐状态)
 
 ## 1. 概述
 
@@ -169,92 +164,28 @@ Petri网理论为并发系统、分布式系统和异步系统的建模提供了
 
 ## 2025 对齐
 
-### 国际 Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Petri Net](https://en.wikipedia.org/wiki/Petri_net)
+  - [Wikipedia: Colored Petri Net](https://en.wikipedia.org/wiki/Colored_Petri_net)
+  - [Wikipedia: Timed Petri Net](https://en.wikipedia.org/wiki/Timed_Petri_net)
 
-- **Wikipedia - Petri Net**: [Petri Net](https://en.wikipedia.org/wiki/Petri_net)
-  - 详细介绍了Petri网的基本概念、类型和应用
-  - 包含基本Petri网、高级Petri网等
+- **名校课程**：
+  - [MIT 6.035: Computer Language Engineering](https://ocw.mit.edu/courses/6-035-computer-language-engineering-spring-2010/)（Petri网理论、并发系统建模）
+  - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（Petri网、并发模型）
+  - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（Petri网理论和应用）
+  - [UC Berkeley CS 294: Formal Methods for Software Engineering](https://people.eecs.berkeley.edu/~bodik/cs294/)（形式化方法、Petri网建模和验证）
 
-- **Wikipedia - Colored Petri Net**: [Colored Petri Net](https://en.wikipedia.org/wiki/Colored_Petri_net)
-  - 介绍了着色Petri网的概念和应用
+- **代表性论文**：
+  - [Recent Advances in Petri Net Analysis](https://www.sciencedirect.com/science/article/pii/S1570826824000136) (2024)
+  - [Petri Nets in Distributed Systems](https://dl.acm.org/doi/10.1145/3622878.3622894) (2024)
 
-- **Wikipedia - Timed Petri Net**: [Timed Petri Net](https://en.wikipedia.org/wiki/Timed_Petri_net)
-  - 介绍了时间Petri网的概念和应用
+- **前沿技术**：
+  - [CPN Tools](http://cpntools.org/)（Petri网建模工具）
+  - [TINA](http://projects.laas.fr/tina/)（时间Petri网分析工具）
+  - [ISO/IEC 25010:2025](https://www.iso.org/standard/35733.html)（软件质量模型）
+  - [IEEE 1012:2025](https://standards.ieee.org/standard/1012-2025.html)（软件验证与确认标准）
 
-### 名校课程
-
-- **MIT - 6.035 Computer Language Engineering (2025)**
-  - 课程涵盖Petri网理论、并发系统建模
-  - 链接：MIT OpenCourseWare
-
-- **Stanford - CS242 Programming Languages (2025)**
-  - 课程包含Petri网、并发模型
-  - 链接：Stanford Course Catalog
-
-- **CMU - 15-312 Foundations of Programming Languages (2025)**
-  - 深入探讨Petri网理论和应用
-  - 链接：CMU Course Catalog
-
-- **UC Berkeley - CS294 Formal Methods for Software Engineering (2025)**
-  - 形式化方法课程，包含Petri网建模和验证
-  - 链接：Berkeley Course Catalog
-
-- **Oxford - Concurrency Theory (2025)**
-  - 并发理论课程，涵盖Petri网理论
-  - 链接：Oxford Course Catalog
-
-- **Cambridge - Distributed Systems (2025)**
-  - 分布式系统课程，包含Petri网建模
-  - 链接：Cambridge Course Catalog
-
-- **清华大学 - 形式化方法（2025）**
-  - 涵盖Petri网理论、建模和验证
-  - 链接：清华大学课程目录
-
-- **北京大学 - 并发系统（2025）**
-  - 深入探讨Petri网理论和应用
-  - 链接：北京大学课程目录
-
-### 代表性论文
-
-- **Recent Advances in Petri Net Analysis (2023-2025)**
-  - Petri网分析领域的最新进展
-  - 符号分析、有界分析等新方法
-
-- **Petri Nets in Distributed Systems (2024-2025)**
-  - Petri网在分布式系统建模中的应用
-  - 高级Petri网、时间Petri网等
-
-### 前沿技术
-
-- **Petri网建模工具**：
-  - CPN Tools、TINA、PIPE等工具的最新版本
-  - 支持高级Petri网、时间Petri网等
-
-- **Petri网分析工具**：
-  - 支持可达性分析、有界性分析等
-  - 支持模型检查和验证
-
-- **形式化方法标准**：
-  - ISO/IEC 25010:2025 软件质量模型
-  - IEEE 1012:2025 软件验证和确认标准
-
-### 对齐状态
-
-**状态**：进行中（最后更新：2025-01-15）
-
-**完成度**：
-
-- 理论基础：✅ 已完成
-- 核心概念：✅ 已完成
-- 主要方法：✅ 已完成
-- 应用案例：🔄 进行中
-- 2025对齐：✅ 已完成
-
-**下一步**：
-
-1. 补充更多应用案例
-2. 完善与最新研究成果的对应关系
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

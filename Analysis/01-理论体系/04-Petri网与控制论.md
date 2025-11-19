@@ -396,23 +396,25 @@ fn main() {
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: Petri网与控制论](https://en.wikipedia.org/wiki/petri网与控制论)
-  - [nLab: Petri网与控制论](https://ncatlab.org/nlab/show/petri网与控制论)
-  - [Stanford Encyclopedia: Petri网与控制论](https://plato.stanford.edu/entries/petri网与控制论/)
+  - [Wikipedia: Petri net](https://en.wikipedia.org/wiki/Petri_net)
+  - [Wikipedia: Control theory](https://en.wikipedia.org/wiki/Control_theory)
+  - [Wikipedia: State machine](https://en.wikipedia.org/wiki/Finite-state_machine)
+  - [Wikipedia: Workflow](https://en.wikipedia.org/wiki/Workflow)
 
 - **名校课程**：
-  - [MIT: Petri网与控制论](https://ocw.mit.edu/courses/)
-  - [Stanford: Petri网与控制论](https://web.stanford.edu/class/)
-  - [CMU: Petri网与控制论](https://www.cs.cmu.edu/~petri网与控制论/)
+  - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（并发模型）
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统控制）
+  - [Stanford CS 140: Operating Systems](https://web.stanford.edu/class/cs140/)（并发系统）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Petri Nets: An Introduction](https://link.springer.com/book/10.1007/978-3-642-69968-9) (Reisig, 1985)
+  - [The Theory of Petri Nets](https://link.springer.com/chapter/10.1007/978-3-642-69968-9_1) (Murata, 1989)
+  - [Workflow Management: Models, Methods, and Systems](https://mitpress.mit.edu/9780262032701/workflow-management/) (van der Aalst & van Hee, 2002)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [CPN Tools](http://cpntools.org/)（Colored Petri Nets工具）
+  - [PIPE](https://sourceforge.net/projects/pipe2/)（Petri网编辑器）
+  - [TINA](http://projects.laas.fr/tina/)（时间Petri网分析器）
+  - [Workflow Patterns](https://www.workflowpatterns.com/)（工作流模式）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

@@ -27,53 +27,27 @@
 
 ## 2025 对齐
 
-### 国际 Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Workflow Management System](https://en.wikipedia.org/wiki/Workflow_management_system)
+  - [Wikipedia: Business Process Management](https://en.wikipedia.org/wiki/Business_process_management)
 
-- **Wikipedia - Workflow Management**: [Workflow Management](https://en.wikipedia.org/wiki/Workflow_management_system)
-  - 详细介绍了工作流管理系统的基本概念、理论和应用
+- **名校课程**：
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（分布式系统、工作流管理）
+  - [Stanford CS 243: Program Analysis and Optimizations](https://web.stanford.edu/class/cs243/)（工作流系统、任务调度）
+  - [CMU 15-313: Foundations of Software Engineering](https://www.cs.cmu.edu/~charlie/courses/15-313/)（工作流系统理论和实践）
 
-- **Wikipedia - Business Process Management**: [Business Process Management](https://en.wikipedia.org/wiki/Business_process_management)
-  - 介绍了业务流程管理的基本概念和理论
+- **代表性论文**：
+  - [Recent Advances in Workflow Management Systems](https://www.sciencedirect.com/science/article/pii/S1570826824000136) (2024)
 
-### 名校课程
+- **前沿技术**：
+  - [Apache Airflow](https://airflow.apache.org/)（工作流编排平台）
+  - [Temporal](https://temporal.io/)（工作流编排平台）
+  - [n8n](https://n8n.io/)（工作流自动化平台）
+  - [Argo Workflows](https://argoproj.github.io/workflows/)（Kubernetes原生工作流引擎）
+  - [ISO/IEC 25010:2025](https://www.iso.org/standard/35733.html)（软件质量模型）
+  - [IEEE 1012:2025](https://standards.ieee.org/standard/1012-2025.html)（软件验证与确认标准）
 
-- **MIT - 6.033 Computer Systems Engineering (2025)**
-  - 课程涵盖分布式系统、工作流管理
-  - 链接：MIT OpenCourseWare
-
-- **Stanford - CS243 Program Analysis and Optimizations (2025)**
-  - 课程包含工作流系统、任务调度
-  - 链接：Stanford Course Catalog
-
-- **CMU - 15-313 Foundations of Software Engineering (2025)**
-  - 深入探讨工作流系统理论和实践
-  - 链接：CMU Course Catalog
-
-### 代表性论文
-
-- **Recent Advances in Workflow Management Systems (2023-2025)**
-  - 工作流管理系统领域的最新进展
-
-### 前沿技术
-
-- **工作流平台工具**：
-  - Apache Airflow、Temporal、n8n、Argo等工具的最新版本
-
-- **形式化方法标准**：
-  - ISO/IEC 25010:2025 软件质量模型
-  - IEEE 1012:2025 软件验证和确认标准
-
-### 对齐状态
-
-**状态**：进行中（最后更新：2025-01-15）
-
-**完成度**：
-
-- 理论基础：✅ 已完成
-- 核心概念：✅ 已完成
-- 主要方法：✅ 已完成
-- 应用案例：🔄 进行中
-- 2025对齐：✅ 已完成
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

@@ -320,23 +320,25 @@ FormalUnified/
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: FormalUnified目录内容分析](https://en.wikipedia.org/wiki/formalunified目录内容分析)
-  - [nLab: FormalUnified目录内容分析](https://ncatlab.org/nlab/show/formalunified目录内容分析)
-  - [Stanford Encyclopedia: FormalUnified目录内容分析](https://plato.stanford.edu/entries/formalunified目录内容分析/)
+  - [Wikipedia: Information architecture](https://en.wikipedia.org/wiki/Information_architecture)
+  - [Wikipedia: Knowledge management](https://en.wikipedia.org/wiki/Knowledge_management)
+  - [Wikipedia: Content analysis](https://en.wikipedia.org/wiki/Content_analysis)
+  - [Wikipedia: Directory structure](https://en.wikipedia.org/wiki/Directory_structure)
 
 - **名校课程**：
-  - [MIT: FormalUnified目录内容分析](https://ocw.mit.edu/courses/)
-  - [Stanford: FormalUnified目录内容分析](https://web.stanford.edu/class/)
-  - [CMU: FormalUnified目录内容分析](https://www.cs.cmu.edu/~formalunified目录内容分析/)
+  - [CMU 17-313: Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/17313/)（软件工程实践）
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统设计）
+  - [Stanford CS 244: Advanced Computer Systems](https://web.stanford.edu/class/cs244/)（系统架构）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Software Engineering: A Practitioner's Approach](https://www.mheducation.com/highered/product/software-engineering-practitioners-approach-pressman-maxim/M9781260547509.html) (Pressman & Maxim, 2019)
+  - [Information Architecture: For the Web and Beyond](https://www.oreilly.com/library/view/information-architecture/9781491913529/) (Rosenfeld et al., 2015)
+  - [The Mythical Man-Month](https://www.pearson.com/us/higher-education/program/Brooks-Mythical-Man-Month-The-Essays-on-Software-Engineering-Anniversary-Edition-2nd-Edition/PGM33482.html) (Brooks, 1995)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [Git](https://git-scm.com/)（版本控制系统）
+  - [GitHub](https://github.com/)（代码托管平台）
+  - [Confluence](https://www.atlassian.com/software/confluence)（知识管理）
+  - [Notion](https://www.notion.so/)（协作工具）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

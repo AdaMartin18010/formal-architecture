@@ -37,23 +37,25 @@ go on  激情澎湃的 <(￣︶￣)↗[GO!]
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: ai](https://en.wikipedia.org/wiki/ai)
-  - [nLab: ai](https://ncatlab.org/nlab/show/ai)
-  - [Stanford Encyclopedia: ai](https://plato.stanford.edu/entries/ai/)
+  - [Wikipedia: Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
+  - [Wikipedia: Machine learning](https://en.wikipedia.org/wiki/Machine_learning)
+  - [Wikipedia: Natural language processing](https://en.wikipedia.org/wiki/Natural_language_processing)
+  - [Wikipedia: Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 
 - **名校课程**：
-  - [MIT: ai](https://ocw.mit.edu/courses/)
-  - [Stanford: ai](https://web.stanford.edu/class/)
-  - [CMU: ai](https://www.cs.cmu.edu/~ai/)
+  - [MIT 6.034: Artificial Intelligence](https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/)（人工智能）
+  - [Stanford CS 224N: Natural Language Processing](https://web.stanford.edu/class/cs224n/)（自然语言处理）
+  - [CMU 15-445: Database Systems](https://15445.courses.cs.cmu.edu/)（数据库系统）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Artificial Intelligence: A Modern Approach](https://aima.cs.berkeley.edu/) (Russell & Norvig, 2020)
+  - [Attention Is All You Need](https://arxiv.org/abs/1706.03762) (Vaswani et al., 2017)
+  - [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165) (Brown et al., 2020)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [OpenAI](https://openai.com/)（人工智能研究）
+  - [TensorFlow](https://www.tensorflow.org/)（机器学习框架）
+  - [PyTorch](https://pytorch.org/)（深度学习框架）
+  - [Hugging Face](https://huggingface.co/)（自然语言处理）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

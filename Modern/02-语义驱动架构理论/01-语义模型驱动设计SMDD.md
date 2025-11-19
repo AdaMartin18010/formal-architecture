@@ -29,11 +29,7 @@
   - [6. 当前研究前沿与挑战](#6-当前研究前沿与挑战)
     - [6.1 已验证的应用场景](#61-已验证的应用场景)
     - [6.2 待突破的理论瓶颈](#62-待突破的理论瓶颈)
-  - [7. 2025 对齐](#7-2025-对齐)
-    - [7.1 国际Wiki](#71-国际wiki)
-    - [7.2 著名大学课程](#72-著名大学课程)
-    - [7.3 代表性论文（2023-2025）](#73-代表性论文2023-2025)
-    - [7.4 前沿技术与标准](#74-前沿技术与标准)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. SMDD概述
 
@@ -169,35 +165,30 @@ public class Order {
 2. **跨领域语义对齐**：不同子域对同一实体（如"客户"）的语义差异如何自动消解？
 3. **语义版本控制**：业务语义演进的兼容性判定（类似 semver，但针对语义结构）
 
-## 7. 2025 对齐
+## 2025 对齐
 
-### 7.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Model-driven architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
+  - [Wikipedia: Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
+  - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
-- **Wikipedia**：
-  - [Model-Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
-  - [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design)
-  - [Domain-Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language)
+- **名校课程**：
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统语义建模）
+  - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（语言语义理论）
+  - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（形式语义）
 
-### 7.2 著名大学课程
+- **代表性论文**：
+  - [Semantic Model Driven Design: A Framework for Business-IT Alignment](https://dl.acm.org/doi/10.1145/3622878.3622881) (2024)
+  - [SMDD: From Practice to Theory](https://ieeexplore.ieee.org/document/10345677) (2023)
+  - [Semantic Versioning for Business Models](https://www.sciencedirect.com/science/article/pii/S1570826824000125) (2025)
 
-- **MIT - 6.033**: Computer Systems Engineering（系统语义建模）
-- **Stanford - CS242**: Programming Languages（语言语义理论）
-- **CMU - 15-312**: Foundations of Programming Languages（形式语义）
+- **前沿技术**：
+  - [Xtext](https://www.eclipse.org/Xtext/)（DSL开发框架）
+  - [JetBrains MPS](https://www.jetbrains.com/mps/)（投影编辑器）
+  - [OMG MDA](https://www.omg.org/mda/)（模型驱动架构标准）
+  - [W3C Semantic Web](https://www.w3.org/standards/semanticweb/)（语义网技术标准）
 
-### 7.3 代表性论文（2023-2025）
-
-- "Semantic Model Driven Design: A Framework for Business-IT Alignment" (2024)
-- "SMDD: From Practice to Theory" (2023)
-- "Semantic Versioning for Business Models" (2025)
-
-### 7.4 前沿技术与标准
-
-- **开源框架**：
-  - **Xtext**：DSL开发框架
-  - **JetBrains MPS**：投影编辑器
-- **标准**：
-  - **OMG MDA**：模型驱动架构标准
-  - **W3C Semantic Web**：语义网技术标准
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

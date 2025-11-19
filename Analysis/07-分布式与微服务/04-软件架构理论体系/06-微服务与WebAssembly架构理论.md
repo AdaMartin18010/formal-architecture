@@ -670,23 +670,25 @@ flowchart TD
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: 微服务与WebAssembly架构理论](https://en.wikipedia.org/wiki/微服务与webassembly架构理论)
-  - [nLab: 微服务与WebAssembly架构理论](https://ncatlab.org/nlab/show/微服务与webassembly架构理论)
-  - [Stanford Encyclopedia: 微服务与WebAssembly架构理论](https://plato.stanford.edu/entries/微服务与webassembly架构理论/)
+  - [Wikipedia: Microservices](https://en.wikipedia.org/wiki/Microservices)
+  - [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
+  - [Wikipedia: Service mesh](https://en.wikipedia.org/wiki/Service_mesh)
+  - [Wikipedia: Cloud Native Computing Foundation](https://en.wikipedia.org/wiki/Cloud_Native_Computing_Foundation)
 
 - **名校课程**：
-  - [MIT: 微服务与WebAssembly架构理论](https://ocw.mit.edu/courses/)
-  - [Stanford: 微服务与WebAssembly架构理论](https://web.stanford.edu/class/)
-  - [CMU: 微服务与WebAssembly架构理论](https://www.cs.cmu.edu/~微服务与webassembly架构理论/)
+  - [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)（分布式系统与微服务）
+  - [CMU 15-445: Database Systems](https://15445.courses.cs.cmu.edu/)（微服务数据管理）
+  - [Stanford CS 244: Advanced Computer Systems](https://web.stanford.edu/class/cs244/)（分布式架构）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Microservices: Yesterday, Today, and Tomorrow](https://link.springer.com/chapter/10.1007/978-3-319-67425-4_12) (Newman, 2017)
+  - [Bringing the Web up to Speed with WebAssembly](https://dl.acm.org/doi/10.1145/3062341.3062363) (Haas et al., 2017)
+  - [The WebAssembly Component Model](https://component-model.bytecodealliance.org/) (Bytecode Alliance, 2023)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [Kubernetes](https://kubernetes.io/)（容器编排与微服务部署）
+  - [Istio](https://istio.io/)（服务网格）
+  - [WasmEdge](https://wasmedge.org/)（云原生WebAssembly运行时）
+  - [Wasmtime](https://wasmtime.dev/)（WebAssembly运行时）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

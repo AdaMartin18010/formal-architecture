@@ -88,23 +88,25 @@
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: UCU案例分析_生产者消费者模型](https://en.wikipedia.org/wiki/ucu案例分析_生产者消费者模型)
-  - [nLab: UCU案例分析_生产者消费者模型](https://ncatlab.org/nlab/show/ucu案例分析_生产者消费者模型)
-  - [Stanford Encyclopedia: UCU案例分析_生产者消费者模型](https://plato.stanford.edu/entries/ucu案例分析_生产者消费者模型/)
+  - [Wikipedia: Producer–consumer problem](https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem)
+  - [Wikipedia: Bounded buffer](https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem)
+  - [Wikipedia: Concurrency (computer science)](https://en.wikipedia.org/wiki/Concurrency_(computer_science))
+  - [Wikipedia: Synchronization (computer science)](https://en.wikipedia.org/wiki/Synchronization_(computer_science))
 
 - **名校课程**：
-  - [MIT: UCU案例分析_生产者消费者模型](https://ocw.mit.edu/courses/)
-  - [Stanford: UCU案例分析_生产者消费者模型](https://web.stanford.edu/class/)
-  - [CMU: UCU案例分析_生产者消费者模型](https://www.cs.cmu.edu/~ucu案例分析_生产者消费者模型/)
+  - [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)（并发系统）
+  - [CMU 15-213: Introduction to Computer Systems](https://www.cs.cmu.edu/~213/)（并发编程）
+  - [Stanford CS 140: Operating Systems](https://web.stanford.edu/class/cs140/)（并发模型）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Communicating Sequential Processes](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf) (Hoare, 1978)
+  - [The Art of Multiprocessor Programming](https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1) (Herlihy & Shavit, 2020)
+  - [Java Concurrency in Practice](https://jcip.net/) (Goetz et al., 2006)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [Go](https://go.dev/)（并发编程语言）
+  - [Rust](https://www.rust-lang.org/)（安全并发）
+  - [Erlang](https://www.erlang.org/)（并发编程语言）
+  - [Akka](https://akka.io/)（并发框架）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

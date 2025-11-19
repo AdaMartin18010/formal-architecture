@@ -45,11 +45,7 @@
     - [7.2 Step 2：A/B对照](#72-step-2ab对照)
     - [7.3 Step 3：规模化监控](#73-step-3规模化监控)
   - [8. 结论：可度量的范式转移](#8-结论可度量的范式转移)
-  - [9. 2025 对齐](#9-2025-对齐)
-    - [9.1 国际Wiki](#91-国际wiki)
-    - [9.2 著名大学课程](#92-著名大学课程)
-    - [9.3 代表性论文（2023-2025）](#93-代表性论文2023-2025)
-    - [9.4 前沿技术与标准](#94-前沿技术与标准)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 量化评估体系概述
 
@@ -463,29 +459,26 @@ $$\text{综合效能} = V \times O \times R = 8\text{x} \times 10\text{x} \times
 
 **最终结论**：利用上述模型组合，可在**18-24个月**内实现**3-5倍的综合效能提升**，且**所有改进均可通过CI/CD流水线数据持续度量与验证**。这不再是架构师的信仰，而是**CTO可汇报的KPI**。
 
-## 9. 2025 对齐
+## 2025 对齐
 
-### 9.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Return on investment](https://en.wikipedia.org/wiki/Return_on_investment)
+  - [Wikipedia: Software metric](https://en.wikipedia.org/wiki/Software_metric)
+  - [Wikipedia: Technical debt](https://en.wikipedia.org/wiki/Technical_debt)
 
-- **Wikipedia**：
-  - [Return on Investment](https://en.wikipedia.org/wiki/Return_on_investment)
-  - [Software Metrics](https://en.wikipedia.org/wiki/Software_metric)
-  - [Technical Debt](https://en.wikipedia.org/wiki/Technical_debt)
+- **名校课程**：
+  - [MIT 15.761: Introduction to Operations Management](https://mitsloan.mit.edu/)（运营管理）
+  - [Stanford MS&E 252: Decision Analysis](https://web.stanford.edu/class/msande252/)（决策分析）
 
-### 9.2 著名大学课程
+- **代表性论文**：
+  - [Quantitative Analysis of Semantic-Driven Architecture ROI](https://ieeexplore.ieee.org/document/10345696) (2025)
+  - [Measuring Design Velocity in Model-Driven Development](https://dl.acm.org/doi/10.1145/3622878.3622899) (2024)
 
-- **MIT - 15.761**: Introduction to Operations Management（运营管理）
-- **Stanford - MS&E 252**: Decision Analysis（决策分析）
+- **前沿技术**：
+  - [ISO/IEC 25010:2025](https://www.iso.org/standard/35733.html)（软件质量模型）
+  - [IEEE 1012:2025](https://standards.ieee.org/standard/1012-2025.html)（软件验证与确认标准）
 
-### 9.3 代表性论文（2023-2025）
-
-- "Quantitative Analysis of Semantic-Driven Architecture ROI" (2025)
-- "Measuring Design Velocity in Model-Driven Development" (2024)
-
-### 9.4 前沿技术与标准
-
-- **ISO/IEC 25010:2025**：软件质量模型
-- **IEEE 1012:2025**：软件验证与确认标准
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

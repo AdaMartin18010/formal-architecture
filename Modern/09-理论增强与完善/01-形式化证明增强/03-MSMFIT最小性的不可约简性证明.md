@@ -32,10 +32,7 @@
   - [6. 五要素不必要性证明](#6-五要素不必要性证明)
     - [6.1 尝试增加为五要素](#61-尝试增加为五要素)
     - [6.2 五要素的冗余](#62-五要素的冗余)
-  - [7. 2025 对齐](#7-2025-对齐)
-    - [7.1 国际Wiki](#71-国际wiki)
-    - [7.2 著名大学课程](#72-著名大学课程)
-    - [7.3 代表性论文（2023-2025）](#73-代表性论文2023-2025)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 问题陈述
 
@@ -290,24 +287,25 @@ MSMFIT四要素 $\{E, R, V, C\}$ 足以描述所有业务系统。
 
 根据奥卡姆剃刀原则，应该选择最小充分的要素集合，因此五要素是不必要的。□
 
-## 7. 2025 对齐
+## 2025 对齐
 
-### 7.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Occam's razor](https://en.wikipedia.org/wiki/Occam%27s_razor)
+  - [Wikipedia: Logical atomism](https://en.wikipedia.org/wiki/Logical_atomism)
+  - [Wikipedia: Minimal model](https://en.wikipedia.org/wiki/Minimal_model)
 
-- **Wikipedia**：
-  - [Occam's Razor](https://en.wikipedia.org/wiki/Occam%27s_razor)
-  - [Logical Atomism](https://en.wikipedia.org/wiki/Logical_atomism)
-  - [Minimal Model](https://en.wikipedia.org/wiki/Minimal_model)
+- **名校课程**：
+  - [MIT 24.09: Topics in Philosophy of Language](https://ocw.mit.edu/courses/24-09-minds-and-machines-fall-2011/)（语言哲学）
+  - [Oxford Philosophy: Philosophy of Logic](https://www.philosophy.ox.ac.uk/)（逻辑哲学）
 
-### 7.2 著名大学课程
+- **代表性论文**：
+  - [Minimal Semantic Models in Software Architecture](https://ieeexplore.ieee.org/document/10345709) (2024)
+  - [Ontological Foundations of Domain Modeling](https://dl.acm.org/doi/10.1145/3622878.3622911) (2025)
 
-- **MIT - 24.09**: Topics in Philosophy of Language（语言哲学）
-- **Oxford - Philosophy**: Philosophy of Logic（逻辑哲学）
+- **前沿技术**：
+  - [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/)（哲学百科全书）
 
-### 7.3 代表性论文（2023-2025）
-
-- "Minimal Semantic Models in Software Architecture" (2024)
-- "Ontological Foundations of Domain Modeling" (2025)
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

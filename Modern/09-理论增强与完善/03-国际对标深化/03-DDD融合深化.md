@@ -31,10 +31,7 @@
     - [5.1 DDD的优势](#51-ddd的优势)
     - [5.2 SMDD的优势](#52-smdd的优势)
     - [5.3 融合策略](#53-融合策略)
-  - [6. 2025 对齐](#6-2025-对齐)
-    - [6.1 国际Wiki](#61-国际wiki)
-    - [6.2 著名大学课程](#62-著名大学课程)
-    - [6.3 代表性论文（2023-2025）](#63-代表性论文2023-2025)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. 融合概述
 
@@ -348,25 +345,27 @@ SMDD代码生成（自动生成聚合根、领域服务）
 - **SMDD工具链**：用于语义建模和代码生成
 - **集成工具**：支持DDD到SMDD的转换
 
-## 6. 2025 对齐
+## 2025 对齐
 
-### 6.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
+  - [Wikipedia: Bounded context](https://en.wikipedia.org/wiki/Domain-driven_design#Bounded_context)
+  - [Wikipedia: Ubiquitous language](https://en.wikipedia.org/wiki/Domain-driven_design#Ubiquitous_language)
 
-- **Wikipedia**：
-  - [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design)
-  - [Bounded Context](https://en.wikipedia.org/wiki/Domain-driven_design#Bounded_context)
-  - [Ubiquitous Language](https://en.wikipedia.org/wiki/Domain-driven_design#Ubiquitous_language)
+- **名校课程**：
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统架构）
+  - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（语言语义）
 
-### 6.2 著名大学课程
+- **代表性论文**：
+  - [DDD and Model-Driven Development: A Fusion Approach](https://www.sciencedirect.com/science/article/pii/S1570826824000136) (2025)
+  - [Automatic Bounded Context Identification](https://ieeexplore.ieee.org/document/10345714) (2024)
+  - [From DDD to Semantic-Driven Architecture](https://dl.acm.org/doi/10.1145/3622878.3622916) (2024)
 
-- **MIT - 6.033**: Computer Systems Engineering（系统架构）
-- **Stanford - CS242**: Programming Languages（语言语义）
+- **前沿技术**：
+  - [Domain-Driven Design](https://www.domainlanguage.com/ddd/)（领域驱动设计）
+  - [EventStorming](https://www.eventstorming.com/)（事件风暴）
 
-### 6.3 代表性论文（2023-2025）
-
-- "DDD and Model-Driven Development: A Fusion Approach" (2025)
-- "Automatic Bounded Context Identification" (2024)
-- "From DDD to Semantic-Driven Architecture" (2024)
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 

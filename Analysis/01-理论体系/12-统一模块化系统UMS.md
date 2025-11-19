@@ -341,23 +341,26 @@ type UMS struct {
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: 统一模块化系统UMS](https://en.wikipedia.org/wiki/统一模块化系统ums)
-  - [nLab: 统一模块化系统UMS](https://ncatlab.org/nlab/show/统一模块化系统ums)
-  - [Stanford Encyclopedia: 统一模块化系统UMS](https://plato.stanford.edu/entries/统一模块化系统ums/)
+  - [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
+  - [Wikipedia: Component-based software engineering](https://en.wikipedia.org/wiki/Component-based_software_engineering)
+  - [Wikipedia: Software module](https://en.wikipedia.org/wiki/Modular_programming)
+  - [Wikipedia: Package manager](https://en.wikipedia.org/wiki/Package_manager)
 
 - **名校课程**：
-  - [MIT: 统一模块化系统UMS](https://ocw.mit.edu/courses/)
-  - [Stanford: 统一模块化系统UMS](https://web.stanford.edu/class/)
-  - [CMU: 统一模块化系统UMS](https://www.cs.cmu.edu/~统一模块化系统ums/)
+  - [CMU 17-313: Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/17313/)（模块化设计）
+  - [MIT 6.170: Software Studio](https://web.mit.edu/6.170/www/)（软件架构）
+  - [Stanford CS 108: Object-Oriented System Design](https://web.stanford.edu/class/cs108/)（模块化系统）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Component Software: Beyond Object-Oriented Programming](https://www.pearson.com/us/higher-education/program/Szyperski-Component-Software-Beyond-Object-Oriented-Programming-2nd-Edition/PGM33482.html) (Szyperski, 2002)
+  - [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns) (Gang of Four, 1994)
+  - [Software Architecture: Perspectives on an Emerging Discipline](https://www.cs.cmu.edu/~able/publications/softwareArchitectureBook.pdf) (Shaw & Garlan, 1996)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [Web Components](https://www.webcomponents.org/)（Web组件标准）
+  - [React](https://react.dev/)（组件化UI框架）
+  - [Vue](https://vuejs.org/)（渐进式框架）
+  - [Angular](https://angular.io/)（组件化框架）
+  - [npm](https://www.npmjs.com/)（包管理器）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

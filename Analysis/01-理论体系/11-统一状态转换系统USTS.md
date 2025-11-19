@@ -358,23 +358,25 @@ func NewUSTS() *USTS {
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: 统一状态转换系统USTS](https://en.wikipedia.org/wiki/统一状态转换系统usts)
-  - [nLab: 统一状态转换系统USTS](https://ncatlab.org/nlab/show/统一状态转换系统usts)
-  - [Stanford Encyclopedia: 统一状态转换系统USTS](https://plato.stanford.edu/entries/统一状态转换系统usts/)
+  - [Wikipedia: Finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine)
+  - [Wikipedia: State transition system](https://en.wikipedia.org/wiki/State_transition_system)
+  - [Wikipedia: State diagram](https://en.wikipedia.org/wiki/State_diagram)
+  - [Wikipedia: Automata theory](https://en.wikipedia.org/wiki/Automata_theory)
 
 - **名校课程**：
-  - [MIT: 统一状态转换系统USTS](https://ocw.mit.edu/courses/)
-  - [Stanford: 统一状态转换系统USTS](https://web.stanford.edu/class/)
-  - [CMU: 统一状态转换系统USTS](https://www.cs.cmu.edu/~统一状态转换系统usts/)
+  - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（状态机）
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统状态）
+  - [Stanford CS 140: Operating Systems](https://web.stanford.edu/class/cs140/)（状态管理）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Introduction to Automata Theory, Languages, and Computation](https://www.pearson.com/us/higher-education/program/Hopcroft-Introduction-to-Automata-Theory-Languages-and-Computation-3rd-Edition/PGM33482.html) (Hopcroft et al., 2006)
+  - [Statecharts: A Visual Formalism for Complex Systems](https://www.sciencedirect.com/science/article/pii/0167642387900359) (Harel, 1987)
+  - [Petri Nets: An Introduction](https://link.springer.com/book/10.1007/978-3-642-69968-9) (Reisig, 1985)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [XState](https://xstate.js.org/)（状态机库）
+  - [Statecharts](https://statecharts.github.io/)（状态图）
+  - [Petri Net Tools](https://www.informatik.uni-hamburg.de/TGI/PetriNets/tools/)（Petri网工具）
+  - [TLA+](https://lamport.azurewebsites.net/tla/tla.html)（状态转换规范）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

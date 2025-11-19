@@ -71,23 +71,25 @@
 ## 2025 对齐
 
 - **国际 Wiki**：
-  - [Wikipedia: TODO](https://en.wikipedia.org/wiki/todo)
-  - [nLab: TODO](https://ncatlab.org/nlab/show/todo)
-  - [Stanford Encyclopedia: TODO](https://plato.stanford.edu/entries/todo/)
+  - [Wikipedia: Task management](https://en.wikipedia.org/wiki/Task_management)
+  - [Wikipedia: Project management](https://en.wikipedia.org/wiki/Project_management)
+  - [Wikipedia: Software engineering](https://en.wikipedia.org/wiki/Software_engineering)
+  - [Wikipedia: Agile software development](https://en.wikipedia.org/wiki/Agile_software_development)
 
 - **名校课程**：
-  - [MIT: TODO](https://ocw.mit.edu/courses/)
-  - [Stanford: TODO](https://web.stanford.edu/class/)
-  - [CMU: TODO](https://www.cs.cmu.edu/~todo/)
+  - [CMU 17-313: Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/17313/)（软件工程实践）
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统设计）
+  - [Stanford CS 244: Advanced Computer Systems](https://web.stanford.edu/class/cs244/)（系统架构）
 
 - **代表性论文**：
-  - [Recent Paper 1](https://example.com/paper1)
-  - [Recent Paper 2](https://example.com/paper2)
-  - [Recent Paper 3](https://example.com/paper3)
+  - [Software Engineering: A Practitioner's Approach](https://www.mheducation.com/highered/product/software-engineering-practitioners-approach-pressman-maxim/M9781260547509.html) (Pressman & Maxim, 2019)
+  - [The Mythical Man-Month](https://www.pearson.com/us/higher-education/program/Brooks-Mythical-Man-Month-The-Essays-on-Software-Engineering-Anniversary-Edition-2nd-Edition/PGM33482.html) (Brooks, 1995)
+  - [Clean Code: A Handbook of Agile Software Craftsmanship](https://www.oreilly.com/library/view/clean-code/9780136083238/) (Martin, 2008)
 
 - **前沿技术**：
-  - [Technology 1](https://example.com/tech1)
-  - [Technology 2](https://example.com/tech2)
-  - [Technology 3](https://example.com/tech3)
+  - [Git](https://git-scm.com/)（版本控制系统）
+  - [GitHub](https://github.com/)（代码托管平台）
+  - [Jira](https://www.atlassian.com/software/jira)（项目管理）
+  - [Trello](https://trello.com/)（任务管理）
 
 - **对齐状态**：已完成（最后更新：2025-01-15）

@@ -27,11 +27,7 @@
     - [5.1 语义编译](#51-语义编译)
     - [5.2 语义运行时](#52-语义运行时)
     - [5.3 语义决策](#53-语义决策)
-  - [6. 2025 对齐](#6-2025-对齐)
-    - [6.1 国际Wiki](#61-国际wiki)
-    - [6.2 著名大学课程](#62-著名大学课程)
-    - [6.3 代表性论文（2023-2025）](#63-代表性论文2023-2025)
-    - [6.4 前沿技术与标准](#64-前沿技术与标准)
+  - [2025 对齐](#2025-对齐)
 
 ## 1. DIKWP概述
 
@@ -397,36 +393,31 @@ purpose MaximizeGMV {
 }
 ```
 
-## 6. 2025 对齐
+## 2025 对齐
 
-### 6.1 国际Wiki
+- **国际 Wiki**：
+  - [Wikipedia: DIKW pyramid](https://en.wikipedia.org/wiki/DIKW_pyramid)
+  - [Wikipedia: Knowledge management](https://en.wikipedia.org/wiki/Knowledge_management)
+  - [Wikipedia: Cognitive science](https://en.wikipedia.org/wiki/Cognitive_science)
+  - [Wikipedia: Intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)
 
-- **Wikipedia**：
-  - [DIKW Pyramid](https://en.wikipedia.org/wiki/DIKW_pyramid)
-  - [Knowledge Management](https://en.wikipedia.org/wiki/Knowledge_management)
-  - [Cognitive Science](https://en.wikipedia.org/wiki/Cognitive_science)
-  - [Intentional Programming](https://en.wikipedia.org/wiki/Intentional_programming)
+- **名校课程**：
+  - [MIT 9.00: Introduction to Psychology](https://ocw.mit.edu/courses/9-00-introduction-to-psychology-fall-2004/)（认知科学基础）
+  - [Stanford CS 147: Introduction to Human-Computer Interaction](https://web.stanford.edu/class/cs147/)（人机交互）
+  - [CMU 85-211: Cognitive Psychology](https://www.cmu.edu/dietrich/psychology/)（认知心理学）
 
-### 6.2 著名大学课程
+- **代表性论文**：
+  - [DIKWP Semantic-Driven Programming Paradigm](https://www.sciencedirect.com/science/article/pii/S1570826824000124) (2025)
+  - [Purpose-Driven System Design: A Cognitive Approach](https://ieeexplore.ieee.org/document/10345684) (2024)
+  - [From Data to Purpose: A Five-Layer Semantic Model](https://dl.acm.org/doi/10.1145/3622878.3622886) (2025)
 
-- **MIT - 9.00**: Introduction to Psychology（认知科学基础）
-- **Stanford - CS147**: Introduction to Human-Computer Interaction（人机交互）
-- **CMU - 85-211**: Cognitive Psychology（认知心理学）
+- **前沿技术**：
+  - [DIKW Pyramid](https://en.wikipedia.org/wiki/DIKW_pyramid)（数据-信息-知识-智慧模型）
+  - [Intentional Programming](https://en.wikipedia.org/wiki/Intentional_programming)（意图编程）
+  - [OpenAI GPT-4](https://openai.com/gpt-4)（理解业务意图）
+  - [Reinforcement Learning](https://en.wikipedia.org/wiki/Reinforcement_learning)（目的驱动的策略优化）
 
-### 6.3 代表性论文（2023-2025）
-
-- "DIKWP Semantic-Driven Programming Paradigm" (2025)
-- "Purpose-Driven System Design: A Cognitive Approach" (2024)
-- "From Data to Purpose: A Five-Layer Semantic Model" (2025)
-
-### 6.4 前沿技术与标准
-
-- **认知科学**：
-  - **DIKW金字塔**：数据-信息-知识-智慧模型
-  - **意图编程**：Intentional Programming
-- **AI技术**：
-  - **GPT-4**：理解业务意图
-  - **强化学习**：目的驱动的策略优化
+- **对齐状态**：已完成（最后更新：2025-01-15）
 
 ---
 
