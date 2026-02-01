@@ -1,4 +1,4 @@
-# 桥接机制与DSL转换器
+﻿# 桥接机制与DSL转换器
 
 [返回总论](./00-业务语义与技术实现同构理论总论.md) | [返回Modern总论](../00-现代语义驱动架构理论体系总论.md)
 
@@ -246,6 +246,7 @@ extend type Order @key(fields: "id") {
   - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
   - [Wikipedia: Code generation (compiler)](https://en.wikipedia.org/wiki/Code_generation_(compiler))
   - [Wikipedia: Reverse engineering](https://en.wikipedia.org/wiki/Reverse_engineering)
+  - [Stanford Encyclopedia of Philosophy: Semantics](https://plato.stanford.edu/entries/semantics/)
 
 - **名校课程**：
   - [MIT 6.035: Computer Language Engineering](https://ocw.mit.edu/courses/6-035-computer-language-engineering-spring-2010/)（编译器设计）
@@ -262,10 +263,10 @@ extend type Order @key(fields: "id") {
   - [ANTLR](https://www.antlr.org/)（解析器生成器）
   - [OMG MDA](https://www.omg.org/mda/)（模型驱动架构标准）
 
-- **对齐状态**：已完成（最后更新：2025-01-15）
+- **对齐状态**：已完成（最后更新：2025-02-02）
 
 ---
 
 **文档版本**：v1.2
-**最后更新**：2025-01-15
+**最后更新**：2025-02-02
 **维护状态**：✅ 持续更新中

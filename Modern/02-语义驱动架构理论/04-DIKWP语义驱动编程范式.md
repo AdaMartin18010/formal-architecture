@@ -1,4 +1,4 @@
-# DIKWP语义驱动编程范式
+﻿# DIKWP语义驱动编程范式
 
 [返回总论](./00-语义驱动架构理论总论.md) | [返回Modern总论](../00-现代语义驱动架构理论体系总论.md)
 
@@ -6,7 +6,7 @@
 >
 > - **项目定位**：本项目为"知识梳理与理论构建项目（非编程项目）"，专注于形式化架构理论体系的整理、构建和统一。
 > - **文档目标**：本文档详细阐述DIKWP语义驱动编程范式，将语义分层为数据(D)、信息(I)、知识(K)、智慧(W)、目的(P)，从认知科学角度扩展SMDD。
-> - **最后更新**：2025-01-15
+> - **最后更新**：2025-02-02
 
 ## 目录
 
@@ -400,6 +400,7 @@ purpose MaximizeGMV {
   - [Wikipedia: Knowledge management](https://en.wikipedia.org/wiki/Knowledge_management)
   - [Wikipedia: Cognitive science](https://en.wikipedia.org/wiki/Cognitive_science)
   - [Wikipedia: Intentional programming](https://en.wikipedia.org/wiki/Intentional_programming)
+  - [Stanford Encyclopedia of Philosophy: Semantics](https://plato.stanford.edu/entries/semantics/)
 
 - **名校课程**：
   - [MIT 9.00: Introduction to Psychology](https://ocw.mit.edu/courses/9-00-introduction-to-psychology-fall-2004/)（认知科学基础）
@@ -417,10 +418,10 @@ purpose MaximizeGMV {
   - [OpenAI GPT-4](https://openai.com/gpt-4)（理解业务意图）
   - [Reinforcement Learning](https://en.wikipedia.org/wiki/Reinforcement_learning)（目的驱动的策略优化）
 
-- **对齐状态**：已完成（最后更新：2025-01-15）
+- **对齐状态**：已完成（最后更新：2025-02-02）
 
 ---
 
 **文档版本**：v1.1
-**最后更新**：2025-01-15
+**最后更新**：2025-02-02
 **维护状态**：✅ 持续更新中

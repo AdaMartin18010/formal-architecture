@@ -1,4 +1,4 @@
-# 最小语义模型MSMFIT
+﻿# 最小语义模型MSMFIT
 
 [返回总论](./00-IT语义世界基础理论总论.md) | [返回Modern总论](../00-现代语义驱动架构理论体系总论.md)
 
@@ -53,7 +53,7 @@ MSMFIT是一个四元组：`{E, R, V, C}`，用于描述任何业务系统：
 **前置知识**：
 
 - 建议先阅读：[IT语义世界认知框架](./01-IT语义世界认知框架.md)
-- 形式化基础：参考[Analysis/01-哲学基础理论/](../../Analysis/01-哲学基础理论/)
+- 形式化基础：参考 [Analysis/01-哲学基础理论/](../../Analysis/01-哲学基础理论/)
 
 ---
 
@@ -227,6 +227,8 @@ $$C = \{C_{space}, C_{time}, C_{subject}, C_{device}\}$$
 
 **复杂度增长**：体现在实体类型数量、关系网络密度、事件编排逻辑、上下文参数维度，而非模型本身的扩展。
 
+**形式化证明**：MSMFIT四要素的不可约简性（独立性、完备性、最小性）的形式化证明见 [MSMFIT最小性的不可约简性证明](../09-理论增强与完善/01-形式化证明增强/03-MSMFIT最小性的不可约简性证明.md)。
+
 ## 5. 边界与例外
 
 该模型的**描述边界**恰好界定了"业务系统"的范畴：
@@ -254,9 +256,11 @@ $$C = \{C_{space}, C_{time}, C_{subject}, C_{device}\}$$
   - [Wikipedia: Ontology (Information Science)](https://en.wikipedia.org/wiki/Ontology_(information_science))
   - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
   - [Wikipedia: Category theory](https://en.wikipedia.org/wiki/Category_theory)
+  - [Stanford Encyclopedia of Philosophy: Semantics](https://plato.stanford.edu/entries/semantics/)
 
 - **名校课程**：
   - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统语义建模）
+  - [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)（分布式系统语义）
   - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（语言语义理论）
   - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（形式语义）
 
@@ -264,16 +268,23 @@ $$C = \{C_{space}, C_{time}, C_{subject}, C_{device}\}$$
   - [Semantic Web Technologies: A Survey](https://www.sciencedirect.com/science/article/pii/S1570826823000123) (2024)
   - [Formal Semantics for Domain-Specific Languages](https://dl.acm.org/doi/10.1145/3622878.3622880) (2024)
   - [Context-Aware Semantic Modeling](https://ieeexplore.ieee.org/document/10345678) (2025)
+  - [Semantic-Aware Knowledge Graph Foundation Model (SEMMA)](https://arxiv.org/abs/2505.20422) (2025)
+  - [LLM-Integrated Systems Architecture](https://arxiv.org/abs/2501.12904) (2025)
 
 - **前沿技术**：
   - [W3C Semantic Web Standards](https://www.w3.org/standards/semanticweb/)（RDF、OWL、SPARQL）
   - [ISO/IEC 25010:2025](https://www.iso.org/standard/35733.html)（软件质量模型与语义质量评估）
   - [IEEE 1012:2025](https://standards.ieee.org/standard/1012-2025.html)（软件验证与确认标准）
+  - [LinkML](https://linkml.io/)（语义建模语言）
+  - [Semantic-DSL](https://linkml.io/semantic-dsl/overview.html)（语义支持的DSL框架）
 
-- **对齐状态**：已完成（最后更新：2025-01-15）
+- **形式化证明**：
+  - [MSMFIT最小性的不可约简性证明](../09-理论增强与完善/01-形式化证明增强/03-MSMFIT最小性的不可约简性证明.md)
+
+- **对齐状态**：已完成（最后更新：2025-02-02）
 
 ---
 
-**文档版本**：v1.1
-**最后更新**：2025-01-15
+**文档版本**：v1.2
+**最后更新**：2025-02-02
 **维护状态**：✅ 持续更新中

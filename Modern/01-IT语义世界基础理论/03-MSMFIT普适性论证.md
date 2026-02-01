@@ -1,4 +1,4 @@
-# MSMFIT普适性论证
+﻿# MSMFIT普适性论证
 
 [返回总论](./00-IT语义世界基础理论总论.md) | [返回Modern总论](../00-现代语义驱动架构理论体系总论.md)
 
@@ -6,7 +6,7 @@
 >
 > - **项目定位**：本项目为"知识梳理与理论构建项目（非编程项目）"，专注于形式化架构理论体系的整理、构建和统一。
 > - **文档目标**：本文档基于IT语义世界的本质性抽象，论证最小语义模型（MSMFIT）能够描述绝大多数业务领域的业务系统，其普适性源于所有业务活动在语义层面都遵循"对象-关联-变迁-环境"这一不可约简的底层结构。
-> - **最后更新**：2025-01-15
+> - **最后更新**：2025-02-02
 
 ## 目录
 
@@ -122,6 +122,8 @@ $$\text{MSMFIT} = \{E, R, V, C\} \text{ 且 } \nexists E' \subset MSMFIT: \text{
 2. **缺少关系（R）**：无法理解业务结构 → 语义不完整
 3. **缺少事件（V）**：无法捕捉业务动态 → 语义不完整
 4. **缺少上下文（C）**：无法区分语义差异 → 语义不完整
+
+**形式化证明**：定理3.2（最小信息闭包）的严格数学证明见 [MSMFIT最小性的不可约简性证明](../09-理论增强与完善/01-形式化证明增强/03-MSMFIT最小性的不可约简性证明.md)。
 
 **推论 3.1** (衍生要素)
 
@@ -278,9 +280,11 @@ $$\text{技术实现世界} = \{S | S \notin \text{业务语义世界}\}$$
   - [Wikipedia: Ontology (Information Science)](https://en.wikipedia.org/wiki/Ontology_(information_science))
   - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
   - [Wikipedia: Category theory](https://en.wikipedia.org/wiki/Category_theory)
+  - [Stanford Encyclopedia of Philosophy: Semantics](https://plato.stanford.edu/entries/semantics/)
 
 - **名校课程**：
   - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统语义建模）
+  - [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)（分布式系统语义）
   - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（语言语义理论）
   - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（形式语义）
 
@@ -288,16 +292,23 @@ $$\text{技术实现世界} = \{S | S \notin \text{业务语义世界}\}$$
   - [Universal Semantic Model for Business Systems](https://ieeexplore.ieee.org/document/10345685) (2024)
   - [MSMFIT: A Minimal Semantic Model Framework](https://dl.acm.org/doi/10.1145/3622878.3622888) (2024)
   - [Cross-Domain Semantic Mapping: A Case Study](https://www.sciencedirect.com/science/article/pii/S1570826824000128) (2025)
+  - [Semantic Web Technologies: A Survey](https://www.sciencedirect.com/science/article/pii/S1570826823000123) (2024)
+  - [Context-Aware Semantic Modeling](https://ieeexplore.ieee.org/document/10345678) (2025)
 
 - **前沿技术**：
   - [W3C Semantic Web Standards](https://www.w3.org/standards/semanticweb/)（RDF、OWL、SPARQL）
   - [ISO/IEC 25010:2025](https://www.iso.org/standard/35733.html)（软件质量模型与语义质量评估）
   - [IEEE 1012:2025](https://standards.ieee.org/standard/1012-2025.html)（软件验证与确认标准）
+  - [LinkML](https://linkml.io/)（语义建模语言）
+  - [Semantic-DSL](https://linkml.io/semantic-dsl/overview.html)（语义支持的DSL框架）
 
-- **对齐状态**：已完成（最后更新：2025-01-15）
+- **形式化证明**：
+  - [MSMFIT最小性的不可约简性证明](../09-理论增强与完善/01-形式化证明增强/03-MSMFIT最小性的不可约简性证明.md)
+
+- **对齐状态**：已完成（最后更新：2025-02-02）
 
 ---
 
-**文档版本**：v1.1
-**最后更新**：2025-01-15
+**文档版本**：v1.2
+**最后更新**：2025-02-02
 **维护状态**：✅ 持续更新中

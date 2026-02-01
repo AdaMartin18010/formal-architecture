@@ -1,4 +1,4 @@
-# 语义模型驱动设计SMDD
+﻿# 语义模型驱动设计SMDD
 
 [返回总论](./00-语义驱动架构理论总论.md) | [返回Modern总论](../00-现代语义驱动架构理论体系总论.md)
 
@@ -171,9 +171,11 @@ public class Order {
   - [Wikipedia: Model-driven architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
   - [Wikipedia: Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
   - [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+  - [Stanford Encyclopedia of Philosophy: Semantics](https://plato.stanford.edu/entries/semantics/)
 
 - **名校课程**：
   - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)（系统语义建模）
+  - [MIT 6.824: Distributed Systems](https://pdos.csail.mit.edu/6.824/)（分布式系统语义）
   - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)（语言语义理论）
   - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)（形式语义）
 
@@ -187,11 +189,13 @@ public class Order {
   - [JetBrains MPS](https://www.jetbrains.com/mps/)（投影编辑器）
   - [OMG MDA](https://www.omg.org/mda/)（模型驱动架构标准）
   - [W3C Semantic Web](https://www.w3.org/standards/semanticweb/)（语义网技术标准）
+  - [LinkML](https://linkml.io/)（语义建模语言）
+  - [Nop Platform](https://github.com/entropy-cloud/nop-platform)（可逆计算DSL平台）
 
-- **对齐状态**：已完成（最后更新：2025-01-15）
+- **对齐状态**：已完成（最后更新：2025-02-02）
 
 ---
 
 **文档版本**：v1.2
-**最后更新**：2025-01-15
+**最后更新**：2025-02-02
 **维护状态**：✅ 持续更新中
