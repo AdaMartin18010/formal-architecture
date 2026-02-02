@@ -1,6 +1,6 @@
-﻿# 01-理论体系-Petri网与控制论
+# 01-理论体系-Petri网与控制论
 
-[返回主题树](../00-主题树与内容索引.md) | [主计划文档](../00-形式化架构理论统一计划.md) | [相关计划](../13-项目报告与总结/递归合并计划.md)
+[返回主题树](../00-主题树与内容索引.md) | [主计划文档](../00-形式化架构理论统一计划.md) | [项目报告](../13-项目报告与总结/README.md)
 
 > 本文档为理论体系分支Petri网与控制论，所有最新进展与结论以主计划文档为准，历史细节归档于archive/。
 
@@ -71,14 +71,14 @@ graph TD
 
 ### 2.1 核心文件
 
-- [PetriNet_Cybernetics_Distributed_Comprehensive.md](../Matter/Theory/PetriNet_Cybernetics_Distributed/PetriNet_Cybernetics_Distributed_Comprehensive.md)
+- [PetriNet_Cybernetics_Distributed_Comprehensive.md](../06-形式模型理论体系/02-Petri网理论.md)
 
 ### 2.2 相关文件
 
-- [Advanced_Petri_Net_Theory_Comprehensive.md](../Matter/Theory/Advanced_Petri_Net_Theory_Comprehensive.md)
-- [Advanced_Petri_Net_Theory_Extended.md](../Matter/Theory/Advanced_Petri_Net_Theory_Extended.md)
-- [Petri_Net_Theory.md](../Matter/Theory/Petri_Net_Theory.md)
-- [Petri网理论.md](../Matter/Theory/Petri网理论.md)
+- [Advanced_Petri_Net_Theory_Comprehensive.md](../06-形式模型理论体系/02-Petri网理论.md)
+- [Advanced_Petri_Net_Theory_Extended.md](../06-形式模型理论体系/02-Petri网理论.md)
+- [Petri_Net_Theory.md](../06-形式模型理论体系/02-Petri网理论.md)
+- [Petri网理论.md](../06-形式模型理论体系/02-Petri网理论.md)
 
 ---
 
@@ -382,12 +382,12 @@ fn main() {
 
 ## 7. 相关性跳转与引用
 
-- [01-理论体系总论.md](01-理论体系总论.md)
+- [../00-理论体系总论.md](../00-理论体系总论.md)
 - [01-统一形式理论综合.md](01-统一形式理论综合.md)
 - [02-类型理论深化.md](02-类型理论深化.md)
 - [03-时序逻辑控制深化.md](03-时序逻辑控制深化.md)
 - [00-主题树与内容索引.md](../00-主题树与内容索引.md)
-- [进度追踪与上下文.md](进度追踪与上下文.md)
+- [../13-项目报告与总结/进度追踪与上下文.md](../13-项目报告与总结/进度追踪与上下文.md)
 
 ---
 
