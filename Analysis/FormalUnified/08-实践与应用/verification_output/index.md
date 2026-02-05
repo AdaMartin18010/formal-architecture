@@ -8,9 +8,9 @@
 
 ### 1. 验证报告
 
-- [验证报告](verification_report.json) - 理论验证的总体报告
-- [详细结果](detailed_results.json) - 详细的验证结果数据
-- [跨理论映射](cross_theory_mappings.json) - 跨理论映射关系数据
+- **验证报告**（规划/占位，暂无 verification_report.json）— 理论验证的总体报告说明见「验证内容」。
+- **详细结果**（规划/占位，暂无 detailed_results.json）— 详细的验证结果数据说明见「输出格式」。
+- **跨理论映射**（规划/占位，暂无 cross_theory_mappings.json）— 跨理论映射关系数据说明见「验证方法」。
 
 ## 验证内容
 
