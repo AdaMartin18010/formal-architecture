@@ -1,0 +1,1970 @@
+{
+  "auto_fix": [
+    {
+      "num": 3,
+      "source": "00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md",
+      "line": 260,
+      "link_text": "05/02-微服务vs模块化单体-分布的代价与决策树",
+      "link_path": "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+      "suggested": "Change to `..\\05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md`",
+      "new_path": "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md"
+    },
+    {
+      "num": 4,
+      "source": "00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md",
+      "line": 261,
+      "link_text": "08/01-Little定律-分布无关的守恒量",
+      "link_path": "../../08-性能量化与容量规划模型/01-Little定律-分布无关的守恒量.md",
+      "suggested": "Change to `..\\08-性能量化与容量规划模型\\01-Little定律-分布无关的守恒量.md`",
+      "new_path": "../08-性能量化与容量规划模型/01-Little定律-分布无关的守恒量.md"
+    },
+    {
+      "num": 6,
+      "source": "00-元认知与系统思维框架\\04-认知负载理论-架构决策的心智边界.md",
+      "line": 258,
+      "link_text": "05/02-微服务vs模块化单体",
+      "link_path": "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+      "suggested": "Change to `..\\05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md`",
+      "new_path": "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md"
+    },
+    {
+      "num": 8,
+      "source": "00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md",
+      "line": 188,
+      "link_text": "02/05-灰色故障",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\05-灰色故障-形式化假设的失效条件.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md"
+    },
+    {
+      "num": 10,
+      "source": "01-形式化计算理论根基\\01-可计算性边界-停机问题与Rice定理.md",
+      "line": 132,
+      "link_text": "07/01-TLA+",
+      "link_path": "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md`",
+      "new_path": "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md"
+    },
+    {
+      "num": 11,
+      "source": "01-形式化计算理论根基\\01-可计算性边界-停机问题与Rice定理.md",
+      "line": 133,
+      "link_text": "09/02-可信计算",
+      "link_path": "../../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md",
+      "suggested": "Change to `..\\09-安全模型与可信计算\\02-可信计算-从形式验证到运行时可信.md`",
+      "new_path": "../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md"
+    },
+    {
+      "num": 13,
+      "source": "01-形式化计算理论根基\\01-图灵机与可计算性边界-Turing-Church论题.md",
+      "line": 147,
+      "link_text": "02/01-FLP",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\01-FLP不可能性-异步系统的绝对边界.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md"
+    },
+    {
+      "num": 14,
+      "source": "01-形式化计算理论根基\\01-图灵机与可计算性边界-Turing-Church论题.md",
+      "line": 148,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 15,
+      "source": "01-形式化计算理论根基\\02-λ演算-函数抽象与组合-Church.md",
+      "line": 123,
+      "link_text": "07/04-Rust类型系统",
+      "link_path": "../../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\04-Rust类型系统-借检查器作为轻量级分离逻辑.md`",
+      "new_path": "../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md"
+    },
+    {
+      "num": 17,
+      "source": "01-形式化计算理论根基\\03-时序逻辑-LTL与CTL的分类与应用.md",
+      "line": 130,
+      "link_text": "07/03-模型检测",
+      "link_path": "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\03-模型检测-UPPAAL与状态空间爆炸问题.md`",
+      "new_path": "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md"
+    },
+    {
+      "num": 18,
+      "source": "01-形式化计算理论根基\\03-时序逻辑-LTL与CTL的分类与应用.md",
+      "line": 131,
+      "link_text": "11/01-Petri网",
+      "link_path": "../../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+      "suggested": "Change to `..\\11-工作流与并发系统分析\\01-Petri网-并发系统的形式化建模.md`",
+      "new_path": "../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md"
+    },
+    {
+      "num": 20,
+      "source": "01-形式化计算理论根基\\03-进程代数家族-CSP-CCS-π演算.md",
+      "line": 160,
+      "link_text": "03/02-Raft",
+      "link_path": "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md`",
+      "new_path": "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md"
+    },
+    {
+      "num": 21,
+      "source": "01-形式化计算理论根基\\03-进程代数家族-CSP-CCS-π演算.md",
+      "line": 161,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 22,
+      "source": "01-形式化计算理论根基\\04-Actor模型-异步消息与状态封装-Hewitt.md",
+      "line": 132,
+      "link_text": "05/03-EDA",
+      "link_path": "../../05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md",
+      "suggested": "Change to `..\\05-架构模式与部署单元光谱\\03-事件驱动架构-解耦与一致性的设计哲学.md`",
+      "new_path": "../05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md"
+    },
+    {
+      "num": 23,
+      "source": "01-形式化计算理论根基\\05-可判定性光谱-从正则语言到停机问题.md",
+      "line": 128,
+      "link_text": "07/03-模型检测",
+      "link_path": "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\03-模型检测-UPPAAL与状态空间爆炸问题.md`",
+      "new_path": "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md"
+    },
+    {
+      "num": 24,
+      "source": "02-分布式系统不可能性与权衡定理\\01-FLP不可能性-异步系统的绝对边界.md",
+      "line": 300,
+      "link_text": "03/02-Raft",
+      "link_path": "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md`",
+      "new_path": "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md"
+    },
+    {
+      "num": 26,
+      "source": "02-分布式系统不可能性与权衡定理\\01-FLP不可能性-异步系统的绝对边界.md",
+      "line": 302,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 27,
+      "source": "02-分布式系统不可能性与权衡定理\\02-CAP定理-一致性可用性分区容错.md",
+      "line": 241,
+      "link_text": "03/02-Raft",
+      "link_path": "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md`",
+      "new_path": "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md"
+    },
+    {
+      "num": 28,
+      "source": "02-分布式系统不可能性与权衡定理\\02-CAP定理-一致性可用性分区容错.md",
+      "line": 242,
+      "link_text": "04/01-CRDT",
+      "link_path": "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+      "suggested": "Change to `..\\04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md`",
+      "new_path": "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md"
+    },
+    {
+      "num": 29,
+      "source": "02-分布式系统不可能性与权衡定理\\02-CAP定理-一致性可用性分区容错.md",
+      "line": 243,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 30,
+      "source": "02-分布式系统不可能性与权衡定理\\03-PACELC定理-延迟与一致性的连续权衡.md",
+      "line": 109,
+      "link_text": "04/01-CRDT",
+      "link_path": "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+      "suggested": "Change to `..\\04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md`",
+      "new_path": "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md"
+    },
+    {
+      "num": 31,
+      "source": "02-分布式系统不可能性与权衡定理\\04-一致性模型光谱-从严格一致到最终一致.md",
+      "line": 126,
+      "link_text": "04/01-CRDT",
+      "link_path": "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+      "suggested": "Change to `..\\04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md`",
+      "new_path": "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md"
+    },
+    {
+      "num": 32,
+      "source": "02-分布式系统不可能性与权衡定理\\04-一致性模型光谱-从严格一致到最终一致.md",
+      "line": 127,
+      "link_text": "04/02-向量时钟",
+      "link_path": "../../04-数据一致性代数结构/02-向量时钟-偏序关系与因果关系.md",
+      "suggested": "Change to `..\\04-数据一致性代数结构\\02-向量时钟-偏序关系与因果关系.md`",
+      "new_path": "../04-数据一致性代数结构/02-向量时钟-偏序关系与因果关系.md"
+    },
+    {
+      "num": 33,
+      "source": "02-分布式系统不可能性与权衡定理\\05-灰色故障-形式化假设的失效条件.md",
+      "line": 208,
+      "link_text": "03/02-Raft",
+      "link_path": "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md`",
+      "new_path": "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md"
+    },
+    {
+      "num": 34,
+      "source": "02-分布式系统不可能性与权衡定理\\05-灰色故障-形式化假设的失效条件.md",
+      "line": 209,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 39,
+      "source": "03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md",
+      "line": 274,
+      "link_text": "02/02-CAP定理",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\02-CAP定理-一致性可用性分区容错.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md"
+    },
+    {
+      "num": 40,
+      "source": "03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md",
+      "line": 275,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 41,
+      "source": "03-分布式共识算法完整谱系\\03-PBFT与BFT家族-拜占庭容错共识.md",
+      "line": 162,
+      "link_text": "09/02-可信计算",
+      "link_path": "../../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md",
+      "suggested": "Change to `..\\09-安全模型与可信计算\\02-可信计算-从形式验证到运行时可信.md`",
+      "new_path": "../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md"
+    },
+    {
+      "num": 42,
+      "source": "03-分布式共识算法完整谱系\\04-HotStuff-线性复杂度BFT共识.md",
+      "line": 151,
+      "link_text": "09/01-BAN逻辑",
+      "link_path": "../../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md",
+      "suggested": "Change to `..\\09-安全模型与可信计算\\01-BAN逻辑-安全协议的形式化分析.md`",
+      "new_path": "../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md"
+    },
+    {
+      "num": 43,
+      "source": "03-分布式共识算法完整谱系\\05-Bullshark-DAG共识与异步优势.md",
+      "line": 160,
+      "link_text": "02/01-FLP",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\01-FLP不可能性-异步系统的绝对边界.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md"
+    },
+    {
+      "num": 45,
+      "source": "04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md",
+      "line": 258,
+      "link_text": "02/04-一致性光谱",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/04-一致性模型光谱-从严格一致到最终一致.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\04-一致性模型光谱-从严格一致到最终一致.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/04-一致性模型光谱-从严格一致到最终一致.md"
+    },
+    {
+      "num": 46,
+      "source": "04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md",
+      "line": 259,
+      "link_text": "03/02-Raft",
+      "link_path": "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md`",
+      "new_path": "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md"
+    },
+    {
+      "num": 47,
+      "source": "04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md",
+      "line": 260,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 51,
+      "source": "04-数据一致性代数结构\\03-EventSourcing-不可变数据代数与版本诅咒.md",
+      "line": 283,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 52,
+      "source": "05-架构模式与部署单元光谱\\01-部署单元光谱-单体到Serverless的连续体.md",
+      "line": 133,
+      "link_text": "06/01-限界上下文",
+      "link_path": "../../06-领域驱动设计与组织动力学/01-限界上下文-架构原子的形式化定义.md",
+      "suggested": "Change to `..\\06-领域驱动设计与组织动力学\\01-限界上下文-架构原子的形式化定义.md`",
+      "new_path": "../06-领域驱动设计与组织动力学/01-限界上下文-架构原子的形式化定义.md"
+    },
+    {
+      "num": 55,
+      "source": "05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md",
+      "line": 284,
+      "link_text": "06/03-Conway定律",
+      "link_path": "../../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md",
+      "suggested": "Change to `..\\06-领域驱动设计与组织动力学\\03-Conway定律与逆Conway策略.md`",
+      "new_path": "../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md"
+    },
+    {
+      "num": 56,
+      "source": "05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md",
+      "line": 285,
+      "link_text": "08/03-微服务修正加速比",
+      "link_path": "../../08-性能量化与容量规划模型/03-微服务修正加速比模型-协调成本量化.md",
+      "suggested": "Change to `..\\08-性能量化与容量规划模型\\03-微服务修正加速比模型-协调成本量化.md`",
+      "new_path": "../08-性能量化与容量规划模型/03-微服务修正加速比模型-协调成本量化.md"
+    },
+    {
+      "num": 57,
+      "source": "05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md",
+      "line": 286,
+      "link_text": "00/04-认知负载",
+      "link_path": "../../00-元认知与系统思维框架/04-认知负载理论-架构决策的心智边界.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\04-认知负载理论-架构决策的心智边界.md`",
+      "new_path": "../00-元认知与系统思维框架/04-认知负载理论-架构决策的心智边界.md"
+    },
+    {
+      "num": 59,
+      "source": "05-架构模式与部署单元光谱\\03-事件驱动架构-解耦与一致性的设计哲学.md",
+      "line": 152,
+      "link_text": "11/01-Petri网",
+      "link_path": "../../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+      "suggested": "Change to `..\\11-工作流与并发系统分析\\01-Petri网-并发系统的形式化建模.md`",
+      "new_path": "../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md"
+    },
+    {
+      "num": 62,
+      "source": "05-架构模式与部署单元光谱\\04-Serverless-架构拐杖还是计算未来.md",
+      "line": 217,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 63,
+      "source": "05-架构模式与部署单元光谱\\04-微服务量化模型-Amdahl定律修正与协调成本.md",
+      "line": 144,
+      "link_text": "08/02-Amdahl-Gustafson",
+      "link_path": "../../08-性能量化与容量规划模型/02-Amdahl-Gustafson-并行加速的理论边界.md",
+      "suggested": "Change to `..\\08-性能量化与容量规划模型\\02-Amdahl-Gustafson-并行加速的理论边界.md`",
+      "new_path": "../08-性能量化与容量规划模型/02-Amdahl-Gustafson-并行加速的理论边界.md"
+    },
+    {
+      "num": 64,
+      "source": "06-领域驱动设计与组织动力学\\01-限界上下文-架构原子的形式化定义.md",
+      "line": 137,
+      "link_text": "12/01-电商场景",
+      "link_path": "../../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md",
+      "suggested": "Change to `..\\12-场景应用与决策框架\\01-电商场景-从初创到全球化的架构演进.md`",
+      "new_path": "../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md"
+    },
+    {
+      "num": 67,
+      "source": "06-领域驱动设计与组织动力学\\03-Conway定律与逆Conway策略.md",
+      "line": 209,
+      "link_text": "05/02-微服务vs模块化单体",
+      "link_path": "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+      "suggested": "Change to `..\\05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md`",
+      "new_path": "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md"
+    },
+    {
+      "num": 68,
+      "source": "06-领域驱动设计与组织动力学\\03-Conway定律与逆Conway策略.md",
+      "line": 210,
+      "link_text": "00/01-系统思维",
+      "link_path": "../../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md`",
+      "new_path": "../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md"
+    },
+    {
+      "num": 71,
+      "source": "07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md",
+      "line": 157,
+      "link_text": "03/02-Raft",
+      "link_path": "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md`",
+      "new_path": "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md"
+    },
+    {
+      "num": 72,
+      "source": "07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md",
+      "line": 158,
+      "link_text": "09/01-BAN逻辑",
+      "link_path": "../../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md",
+      "suggested": "Change to `..\\09-安全模型与可信计算\\01-BAN逻辑-安全协议的形式化分析.md`",
+      "new_path": "../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md"
+    },
+    {
+      "num": 77,
+      "source": "07-形式化方法与验证体系\\01-TLA+-统一规约框架与状态机数学.md",
+      "line": 341,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 78,
+      "source": "07-形式化方法与验证体系\\03-模型检测-UPPAAL与状态空间爆炸问题.md",
+      "line": 137,
+      "link_text": "11/01-Petri网",
+      "link_path": "../../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+      "suggested": "Change to `..\\11-工作流与并发系统分析\\01-Petri网-并发系统的形式化建模.md`",
+      "new_path": "../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md"
+    },
+    {
+      "num": 79,
+      "source": "07-形式化方法与验证体系\\04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+      "line": 164,
+      "link_text": "09/03-Rust安全",
+      "link_path": "../../09-安全模型与可信计算/03-Rust类型系统-内存安全的形式化保证.md",
+      "suggested": "Change to `..\\09-安全模型与可信计算\\03-Rust类型系统-内存安全的形式化保证.md`",
+      "new_path": "../09-安全模型与可信计算/03-Rust类型系统-内存安全的形式化保证.md"
+    },
+    {
+      "num": 80,
+      "source": "07-形式化方法与验证体系\\04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+      "line": 165,
+      "link_text": "01/01-可计算性",
+      "link_path": "../../01-形式化计算理论根基/01-可计算性边界-停机问题与Rice定理.md",
+      "suggested": "Change to `..\\01-形式化计算理论根基\\01-可计算性边界-停机问题与Rice定理.md`",
+      "new_path": "../01-形式化计算理论根基/01-可计算性边界-停机问题与Rice定理.md"
+    },
+    {
+      "num": 81,
+      "source": "07-形式化方法与验证体系\\05-AI辅助形式化验证-从代码到证明的自动化管道.md",
+      "line": 155,
+      "link_text": "10/02-LLM-TLA+",
+      "link_path": "../../10-AI时代的软件工程本体论/02-LLM到TLA+-AI生成代码的形式化验证管道.md",
+      "suggested": "Change to `..\\10-AI时代的软件工程本体论\\02-LLM到TLA+-AI生成代码的形式化验证管道.md`",
+      "new_path": "../10-AI时代的软件工程本体论/02-LLM到TLA+-AI生成代码的形式化验证管道.md"
+    },
+    {
+      "num": 83,
+      "source": "08-性能量化与容量规划模型\\01-Little定律-分布无关的守恒量.md",
+      "line": 293,
+      "link_text": "05/02-微服务",
+      "link_path": "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+      "suggested": "Change to `..\\05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md`",
+      "new_path": "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md"
+    },
+    {
+      "num": 84,
+      "source": "08-性能量化与容量规划模型\\01-Little定律-分布无关的守恒量.md",
+      "line": 294,
+      "link_text": "00/01-系统思维",
+      "link_path": "../../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md`",
+      "new_path": "../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md"
+    },
+    {
+      "num": 88,
+      "source": "08-性能量化与容量规划模型\\03-微服务修正加速比模型-协调成本量化.md",
+      "line": 288,
+      "link_text": "05/02-微服务",
+      "link_path": "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+      "suggested": "Change to `..\\05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md`",
+      "new_path": "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md"
+    },
+    {
+      "num": 89,
+      "source": "08-性能量化与容量规划模型\\03-微服务修正加速比模型-协调成本量化.md",
+      "line": 289,
+      "link_text": "00/01-系统思维",
+      "link_path": "../../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md`",
+      "new_path": "../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md"
+    },
+    {
+      "num": 90,
+      "source": "09-安全模型与可信计算\\01-BAN逻辑-安全协议的形式化分析.md",
+      "line": 151,
+      "link_text": "07/01-TLA+",
+      "link_path": "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md`",
+      "new_path": "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md"
+    },
+    {
+      "num": 91,
+      "source": "09-安全模型与可信计算\\01-BAN逻辑-安全协议的形式化分析.md",
+      "line": 152,
+      "link_text": "03/03-PBFT",
+      "link_path": "../../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\03-PBFT与BFT家族-拜占庭容错共识.md`",
+      "new_path": "../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md"
+    },
+    {
+      "num": 92,
+      "source": "09-安全模型与可信计算\\02-可信计算-从形式验证到运行时可信.md",
+      "line": 122,
+      "link_text": "07/01-TLA+",
+      "link_path": "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md`",
+      "new_path": "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md"
+    },
+    {
+      "num": 93,
+      "source": "09-安全模型与可信计算\\02-可信计算-从形式验证到运行时可信.md",
+      "line": 123,
+      "link_text": "03/03-PBFT",
+      "link_path": "../../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\03-PBFT与BFT家族-拜占庭容错共识.md`",
+      "new_path": "../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md"
+    },
+    {
+      "num": 94,
+      "source": "09-安全模型与可信计算\\03-Rust类型系统-内存安全的形式化保证.md",
+      "line": 197,
+      "link_text": "07/04-Rust类型系统",
+      "link_path": "../../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\04-Rust类型系统-借检查器作为轻量级分离逻辑.md`",
+      "new_path": "../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md"
+    },
+    {
+      "num": 96,
+      "source": "09-安全模型与可信计算\\04-侧信道攻击与防御-从缓存到推测执行.md",
+      "line": 153,
+      "link_text": "07/04-Rust类型系统",
+      "link_path": "../../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\04-Rust类型系统-借检查器作为轻量级分离逻辑.md`",
+      "new_path": "../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md"
+    },
+    {
+      "num": 98,
+      "source": "10-AI时代的软件工程本体论\\01-AI生成代码的范式冲击-构造性证明到归纳验证.md",
+      "line": 125,
+      "link_text": "07/01-TLA+",
+      "link_path": "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md`",
+      "new_path": "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md"
+    },
+    {
+      "num": 99,
+      "source": "10-AI时代的软件工程本体论\\01-AI生成代码的范式冲击-构造性证明到归纳验证.md",
+      "line": 126,
+      "link_text": "12/03-AI-Native应用",
+      "link_path": "../../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md",
+      "suggested": "Change to `..\\12-场景应用与决策框架\\03-AI-Native应用-从单体Agent到多Agent系统.md`",
+      "new_path": "../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md"
+    },
+    {
+      "num": 102,
+      "source": "10-AI时代的软件工程本体论\\01-构造性证明到归纳性验证-模式转移.md",
+      "line": 257,
+      "link_text": "07/01-TLA+",
+      "link_path": "../../07-形式化方法与验证体系/01-TLA+-统一规约框架与状态机数学.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\01-TLA+-统一规约框架与状态机数学.md`",
+      "new_path": "../07-形式化方法与验证体系/01-TLA+-统一规约框架与状态机数学.md"
+    },
+    {
+      "num": 103,
+      "source": "10-AI时代的软件工程本体论\\01-构造性证明到归纳性验证-模式转移.md",
+      "line": 258,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 104,
+      "source": "10-AI时代的软件工程本体论\\02-LLM到TLA+-AI生成代码的形式化验证管道.md",
+      "line": 136,
+      "link_text": "07/01-TLA+",
+      "link_path": "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md`",
+      "new_path": "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md"
+    },
+    {
+      "num": 105,
+      "source": "10-AI时代的软件工程本体论\\02-LLM到TLA+-AI生成代码的形式化验证管道.md",
+      "line": 137,
+      "link_text": "07/03-模型检测",
+      "link_path": "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\03-模型检测-UPPAAL与状态空间爆炸问题.md`",
+      "new_path": "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md"
+    },
+    {
+      "num": 108,
+      "source": "10-AI时代的软件工程本体论\\03-AI辅助开发模式选择-决策树.md",
+      "line": 242,
+      "link_text": "00/05-元认知批判",
+      "link_path": "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md`",
+      "new_path": "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md"
+    },
+    {
+      "num": 109,
+      "source": "10-AI时代的软件工程本体论\\03-AI辅助架构设计-LLM作为架构师的协作者.md",
+      "line": 123,
+      "link_text": "12/03-AI-Native应用",
+      "link_path": "../../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md",
+      "suggested": "Change to `..\\12-场景应用与决策框架\\03-AI-Native应用-从单体Agent到多Agent系统.md`",
+      "new_path": "../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md"
+    },
+    {
+      "num": 110,
+      "source": "10-AI时代的软件工程本体论\\03-AI辅助架构设计-LLM作为架构师的协作者.md",
+      "line": 124,
+      "link_text": "00/03-批判性思维",
+      "link_path": "../../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\03-批判性思维-识别认知偏误与逻辑谬误.md`",
+      "new_path": "../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md"
+    },
+    {
+      "num": 112,
+      "source": "11-工作流与并发系统分析\\01-Petri网-并发系统的形式化建模.md",
+      "line": 146,
+      "link_text": "07/03-模型检测",
+      "link_path": "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\03-模型检测-UPPAAL与状态空间爆炸问题.md`",
+      "new_path": "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md"
+    },
+    {
+      "num": 113,
+      "source": "11-工作流与并发系统分析\\02-定时自动机-工作流的形式化验证.md",
+      "line": 154,
+      "link_text": "07/02-UPPAAL",
+      "link_path": "../../07-形式化方法与验证体系/02-UPPAAL-实时系统模型检测.md",
+      "suggested": "Change to `..\\07-形式化方法与验证体系\\02-UPPAAL-实时系统模型检测.md`",
+      "new_path": "../07-形式化方法与验证体系/02-UPPAAL-实时系统模型检测.md"
+    },
+    {
+      "num": 115,
+      "source": "11-工作流与并发系统分析\\03-工作流引擎-状态机与Saga模式的形式化.md",
+      "line": 155,
+      "link_text": "12/01-电商场景",
+      "link_path": "../../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md",
+      "suggested": "Change to `..\\12-场景应用与决策框架\\01-电商场景-从初创到全球化的架构演进.md`",
+      "new_path": "../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md"
+    },
+    {
+      "num": 116,
+      "source": "12-场景应用与决策框架\\01-电商场景-从初创到全球化的架构演进.md",
+      "line": 150,
+      "link_text": "04/01-CRDT",
+      "link_path": "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+      "suggested": "Change to `..\\04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md`",
+      "new_path": "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md"
+    },
+    {
+      "num": 117,
+      "source": "12-场景应用与决策框架\\01-电商系统架构演进-四阶段场景树.md",
+      "line": 323,
+      "link_text": "02/02-CAP定理",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\02-CAP定理-一致性可用性分区容错.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md"
+    },
+    {
+      "num": 118,
+      "source": "12-场景应用与决策框架\\01-电商系统架构演进-四阶段场景树.md",
+      "line": 324,
+      "link_text": "03/02-Raft",
+      "link_path": "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md`",
+      "new_path": "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md"
+    },
+    {
+      "num": 119,
+      "source": "12-场景应用与决策框架\\01-电商系统架构演进-四阶段场景树.md",
+      "line": 325,
+      "link_text": "04/01-CRDT",
+      "link_path": "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+      "suggested": "Change to `..\\04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md`",
+      "new_path": "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md"
+    },
+    {
+      "num": 120,
+      "source": "12-场景应用与决策框架\\01-电商系统架构演进-四阶段场景树.md",
+      "line": 326,
+      "link_text": "05/02-微服务",
+      "link_path": "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+      "suggested": "Change to `..\\05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md`",
+      "new_path": "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md"
+    },
+    {
+      "num": 121,
+      "source": "12-场景应用与决策框架\\01-电商系统架构演进-四阶段场景树.md",
+      "line": 327,
+      "link_text": "06/03-Conway定律",
+      "link_path": "../../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md",
+      "suggested": "Change to `..\\06-领域驱动设计与组织动力学\\03-Conway定律与逆Conway策略.md`",
+      "new_path": "../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md"
+    },
+    {
+      "num": 122,
+      "source": "12-场景应用与决策框架\\02-IoT场景-边缘计算与数据一致性.md",
+      "line": 154,
+      "link_text": "02/02-CAP",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\02-CAP定理-一致性可用性分区容错.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md"
+    },
+    {
+      "num": 123,
+      "source": "12-场景应用与决策框架\\02-IoT场景-边缘计算与数据一致性.md",
+      "line": 155,
+      "link_text": "04/01-CRDT",
+      "link_path": "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+      "suggested": "Change to `..\\04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md`",
+      "new_path": "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md"
+    },
+    {
+      "num": 124,
+      "source": "12-场景应用与决策框架\\02-IoT场景-边缘计算与数据一致性.md",
+      "line": 156,
+      "link_text": "02/05-灰色故障",
+      "link_path": "../../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md",
+      "suggested": "Change to `..\\02-分布式系统不可能性与权衡定理\\05-灰色故障-形式化假设的失效条件.md`",
+      "new_path": "../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md"
+    },
+    {
+      "num": 125,
+      "source": "12-场景应用与决策框架\\02-IoT场景-边缘计算与数据一致性.md",
+      "line": 157,
+      "link_text": "08/04-容量规划",
+      "link_path": "../../08-性能量化与容量规划模型/03-容量规划-从排队论到云原生弹性.md",
+      "suggested": "Change to `..\\08-性能量化与容量规划模型\\03-容量规划-从排队论到云原生弹性.md`",
+      "new_path": "../08-性能量化与容量规划模型/03-容量规划-从排队论到云原生弹性.md"
+    },
+    {
+      "num": 126,
+      "source": "12-场景应用与决策框架\\03-AI-Native应用-从单体Agent到多Agent系统.md",
+      "line": 164,
+      "link_text": "10/01-AI本体论",
+      "link_path": "../../10-AI时代的软件工程本体论/01-AI生成代码的范式冲击-构造性证明到归纳验证.md",
+      "suggested": "Change to `..\\10-AI时代的软件工程本体论\\01-AI生成代码的范式冲击-构造性证明到归纳验证.md`",
+      "new_path": "../10-AI时代的软件工程本体论/01-AI生成代码的范式冲击-构造性证明到归纳验证.md"
+    },
+    {
+      "num": 127,
+      "source": "12-场景应用与决策框架\\03-AI-Native应用-从单体Agent到多Agent系统.md",
+      "line": 165,
+      "link_text": "10/03-AI辅助架构",
+      "link_path": "../../10-AI时代的软件工程本体论/03-AI辅助架构设计-LLM作为架构师的协作者.md",
+      "suggested": "Change to `..\\10-AI时代的软件工程本体论\\03-AI辅助架构设计-LLM作为架构师的协作者.md`",
+      "new_path": "../10-AI时代的软件工程本体论/03-AI辅助架构设计-LLM作为架构师的协作者.md"
+    },
+    {
+      "num": 128,
+      "source": "12-场景应用与决策框架\\03-AI-Native应用-从单体Agent到多Agent系统.md",
+      "line": 167,
+      "link_text": "03/03-PBFT",
+      "link_path": "../../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+      "suggested": "Change to `..\\03-分布式共识算法完整谱系\\03-PBFT与BFT家族-拜占庭容错共识.md`",
+      "new_path": "../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md"
+    },
+    {
+      "num": 129,
+      "source": "12-场景应用与决策框架\\04-决策框架-架构选择的形式化方法论.md",
+      "line": 219,
+      "link_text": "00/03-批判性思维",
+      "link_path": "../../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md",
+      "suggested": "Change to `..\\00-元认知与系统思维框架\\03-批判性思维-识别认知偏误与逻辑谬误.md`",
+      "new_path": "../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md"
+    }
+  ],
+  "manual": [
+    {
+      "num": 1,
+      "source": "00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md",
+      "line": 257,
+      "link_text": "00/02-Meadows杠杆点-从参数到范式",
+      "link_path": "02-Meadows杠杆点-从参数到范式.md",
+      "suggested": "Manual review required",
+      "found_match": "00-元认知与系统思维框架/02-系统动力学-反馈回路与杠杆点.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 2,
+      "source": "00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md",
+      "line": 258,
+      "link_text": "00/03-Senge第五项修炼-学习型组织",
+      "link_path": "03-Senge第五项修炼-学习型组织.md",
+      "suggested": "Manual review required",
+      "found_match": "00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 5,
+      "source": "00-元认知与系统思维框架\\04-认知负载理论-架构决策的心智边界.md",
+      "line": 257,
+      "link_text": "01/06-可判定性光谱",
+      "link_path": "../../01-形式化计算理论根基/06-可判定性光谱-从可判定到不可判定.md",
+      "suggested": "Manual review required",
+      "found_match": "01-形式化计算理论根基/05-可判定性光谱-从正则语言到停机问题.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 7,
+      "source": "00-元认知与系统思维框架\\04-认知负载理论-架构决策的心智边界.md",
+      "line": 259,
+      "link_text": "06/01-边界上下文",
+      "link_path": "../../06-领域驱动设计与组织动力学/01-边界上下文-BoundedContext的形式化.md",
+      "suggested": "Manual review required",
+      "found_match": "06-领域驱动设计与组织动力学/01-限界上下文-架构原子的形式化定义.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 9,
+      "source": "01-形式化计算理论根基\\01-可计算性边界-停机问题与Rice定理.md",
+      "line": 131,
+      "link_text": "01/02-计算模型谱系",
+      "link_path": "02-计算模型谱系-从λ演算到进程代数.md",
+      "suggested": "Manual review required",
+      "found_match": "01-形式化计算理论根基/00-总览-可计算性与计算模型谱系.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 12,
+      "source": "01-形式化计算理论根基\\01-图灵机与可计算性边界-Turing-Church论题.md",
+      "line": 146,
+      "link_text": "01/06-可判定性光谱",
+      "link_path": "06-可判定性光谱-从可判定到不可判定.md",
+      "suggested": "Manual review required",
+      "found_match": "01-形式化计算理论根基/05-可判定性光谱-从正则语言到停机问题.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 16,
+      "source": "01-形式化计算理论根基\\03-时序逻辑-LTL与CTL的分类与应用.md",
+      "line": 129,
+      "link_text": "01/02-计算模型谱系",
+      "link_path": "02-计算模型谱系-从λ演算到进程代数.md",
+      "suggested": "Manual review required",
+      "found_match": "01-形式化计算理论根基/00-总览-可计算性与计算模型谱系.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 19,
+      "source": "01-形式化计算理论根基\\03-进程代数家族-CSP-CCS-π演算.md",
+      "line": 159,
+      "link_text": "01/05-时序逻辑",
+      "link_path": "05-时序逻辑-LTL-CTL-Safety与Liveness.md",
+      "suggested": "Manual review required",
+      "found_match": "01-形式化计算理论根基/03-时序逻辑-LTL与CTL的分类与应用.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 25,
+      "source": "02-分布式系统不可能性与权衡定理\\01-FLP不可能性-异步系统的绝对边界.md",
+      "line": 301,
+      "link_text": "03/05-异步安全共识",
+      "link_path": "../../03-分布式共识算法完整谱系/05-异步安全共识-BenOr-HoneyBadgerBFT.md",
+      "suggested": "Manual review required",
+      "found_match": "02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 35,
+      "source": "03-分布式共识算法完整谱系\\01-Paxos与MultiPaxos-经典问题与现代工程演进.md",
+      "line": 173,
+      "link_text": "07/02-TLA+验证",
+      "link_path": "../../07-形式化方法与验证体系/02-TLA+-时序逻辑与规范验证.md",
+      "suggested": "Manual review required",
+      "found_match": "07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 36,
+      "source": "03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md",
+      "line": 271,
+      "link_text": "03/01-Paxos家族",
+      "link_path": "01-Paxos家族-MultiPaxos-FlexiblePaxos.md",
+      "suggested": "Manual review required",
+      "found_match": "03-分布式共识算法完整谱系/01-Paxos与MultiPaxos-经典问题与现代工程演进.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 37,
+      "source": "03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md",
+      "line": 272,
+      "link_text": "03/03-拜占庭容错",
+      "link_path": "03-拜占庭容错-PBFT-HotStuff-Tendermint.md",
+      "suggested": "Manual review required",
+      "found_match": "03-分布式共识算法完整谱系/00-总览-共识问题与算法家族树.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 38,
+      "source": "03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md",
+      "line": 273,
+      "link_text": "03/06-共识算法形式化验证",
+      "link_path": "06-共识算法形式化验证-TLA+规约.md",
+      "suggested": "Manual review required",
+      "found_match": "06-领域驱动设计与组织动力学/00-总览-DDD作为架构原子.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 44,
+      "source": "04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md",
+      "line": 256,
+      "link_text": "04/02-向量时钟",
+      "link_path": "02-向量时钟与偏序集-HappensBefore关系.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/02-向量时钟-偏序关系与因果关系.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 48,
+      "source": "04-数据一致性代数结构\\02-向量时钟-偏序关系与因果关系.md",
+      "line": 130,
+      "link_text": "04/04-EventSourcing",
+      "link_path": "04-EventSourcing-事件溯源与左折叠代数.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 49,
+      "source": "04-数据一致性代数结构\\03-EventSourcing-不可变数据代数与版本诅咒.md",
+      "line": 281,
+      "link_text": "04/02-向量时钟",
+      "link_path": "02-向量时钟与偏序集-HappensBefore关系.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/02-向量时钟-偏序关系与因果关系.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 50,
+      "source": "04-数据一致性代数结构\\03-EventSourcing-不可变数据代数与版本诅咒.md",
+      "line": 282,
+      "link_text": "05/03-事件驱动架构",
+      "link_path": "../../05-架构模式与部署单元光谱/03-事件驱动架构-EDA-Saga-CQRS.md",
+      "suggested": "Manual review required",
+      "found_match": "05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 53,
+      "source": "05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md",
+      "line": 282,
+      "link_text": "05/01-部署单元光谱",
+      "link_path": "01-部署单元光谱-从单体到Serverless.md",
+      "suggested": "Manual review required",
+      "found_match": "05-架构模式与部署单元光谱/01-部署单元光谱-单体到Serverless的连续体.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 54,
+      "source": "05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md",
+      "line": 283,
+      "link_text": "05/03-事件驱动架构",
+      "link_path": "03-事件驱动架构-EDA-Saga-CQRS.md",
+      "suggested": "Manual review required",
+      "found_match": "05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 58,
+      "source": "05-架构模式与部署单元光谱\\03-事件驱动架构-解耦与一致性的设计哲学.md",
+      "line": 151,
+      "link_text": "04/04-EventSourcing",
+      "link_path": "../../04-数据一致性代数结构/04-EventSourcing-事件溯源与左折叠代数.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 60,
+      "source": "05-架构模式与部署单元光谱\\04-Serverless-架构拐杖还是计算未来.md",
+      "line": 214,
+      "link_text": "05/01-部署单元光谱",
+      "link_path": "01-部署单元光谱-从单体到Serverless.md",
+      "suggested": "Manual review required",
+      "found_match": "05-架构模式与部署单元光谱/01-部署单元光谱-单体到Serverless的连续体.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 61,
+      "source": "05-架构模式与部署单元光谱\\04-Serverless-架构拐杖还是计算未来.md",
+      "line": 216,
+      "link_text": "08/04-排队论",
+      "link_path": "../../08-性能量化与容量规划模型/04-排队论在架构中的多层映射.md",
+      "suggested": "Manual review required",
+      "found_match": "05-架构模式与部署单元光谱/00-总览-架构模式的工程组织映射.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 65,
+      "source": "06-领域驱动设计与组织动力学\\03-Conway定律与逆Conway策略.md",
+      "line": 207,
+      "link_text": "06/01-边界上下文",
+      "link_path": "01-边界上下文-BoundedContext的形式化.md",
+      "suggested": "Manual review required",
+      "found_match": "06-领域驱动设计与组织动力学/01-限界上下文-架构原子的形式化定义.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 66,
+      "source": "06-领域驱动设计与组织动力学\\03-Conway定律与逆Conway策略.md",
+      "line": 208,
+      "link_text": "06/02-上下文映射",
+      "link_path": "02-上下文映射-图同态与组织沟通结构.md",
+      "suggested": "Manual review required",
+      "found_match": "02-分布式系统不可能性与权衡定理/00-总览-分布式系统第一性原理.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 69,
+      "source": "06-领域驱动设计与组织动力学\\03-战术设计-实体值对象聚合与领域事件.md",
+      "line": 170,
+      "link_text": "04/04-EventSourcing",
+      "link_path": "../../04-数据一致性代数结构/04-EventSourcing-事件溯源与左折叠代数.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 70,
+      "source": "07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md",
+      "line": 156,
+      "link_text": "07/02-模型检测",
+      "link_path": "02-模型检测-UPPAAL与状态空间爆炸.md",
+      "suggested": "Manual review required",
+      "found_match": "07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 73,
+      "source": "07-形式化方法与验证体系\\01-TLA+-统一规约框架与状态机数学.md",
+      "line": 337,
+      "link_text": "07/02-模型检测工具谱系",
+      "link_path": "02-模型检测工具谱系-TLC-SPIN-UPPAAL.md",
+      "suggested": "Manual review required",
+      "found_match": "07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 74,
+      "source": "07-形式化方法与验证体系\\01-TLA+-统一规约框架与状态机数学.md",
+      "line": 338,
+      "link_text": "07/03-定理证明",
+      "link_path": "03-定理证明-Coq-Isabelle-Z3-SMT.md",
+      "suggested": "Manual review required",
+      "found_match": "03-分布式共识算法完整谱系/00-总览-共识问题与算法家族树.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 75,
+      "source": "07-形式化方法与验证体系\\01-TLA+-统一规约框架与状态机数学.md",
+      "line": 339,
+      "link_text": "03/06-共识算法形式化验证",
+      "link_path": "../../03-分布式共识算法完整谱系/06-共识算法形式化验证-TLA+规约.md",
+      "suggested": "Manual review required",
+      "found_match": "06-领域驱动设计与组织动力学/00-总览-DDD作为架构原子.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 76,
+      "source": "07-形式化方法与验证体系\\01-TLA+-统一规约框架与状态机数学.md",
+      "line": 340,
+      "link_text": "10/05-AI代码生成与形式化验证",
+      "link_path": "../../10-AI时代的软件工程本体论/05-AI代码生成与形式化验证的融合前景.md",
+      "suggested": "Manual review required",
+      "found_match": "07-形式化方法与验证体系/05-AI辅助形式化验证-从代码到证明的自动化管道.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 82,
+      "source": "08-性能量化与容量规划模型\\01-Little定律-分布无关的守恒量.md",
+      "line": 292,
+      "link_text": "08/04-排队论",
+      "link_path": "04-排队论在架构中的多层映射.md",
+      "suggested": "Manual review required",
+      "found_match": "05-架构模式与部署单元光谱/00-总览-架构模式的工程组织映射.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 85,
+      "source": "08-性能量化与容量规划模型\\01-排队论基础-Little定律与M_M_1队列.md",
+      "line": 133,
+      "link_text": "08/04-容量规划",
+      "link_path": "04-容量规划-从排队论到云原生弹性.md",
+      "suggested": "Manual review required",
+      "found_match": "08-性能量化与容量规划模型/03-容量规划-从排队论到云原生弹性.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 86,
+      "source": "08-性能量化与容量规划模型\\03-容量规划-从排队论到云原生弹性.md",
+      "line": 139,
+      "link_text": "12/02-容量规划场景",
+      "link_path": "../../12-场景应用与决策框架/02-容量规划场景-从峰值到常态的弹性设计.md",
+      "suggested": "Manual review required",
+      "found_match": "08-性能量化与容量规划模型/03-容量规划-从排队论到云原生弹性.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 87,
+      "source": "08-性能量化与容量规划模型\\03-微服务修正加速比模型-协调成本量化.md",
+      "line": 287,
+      "link_text": "08/02-AmdahlvsGustafson",
+      "link_path": "02-Amdahl定律vsGustafson定律-扩展的失效.md",
+      "suggested": "Manual review required",
+      "found_match": "08-性能量化与容量规划模型/02-Amdahl-Gustafson-并行加速的理论边界.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 95,
+      "source": "09-安全模型与可信计算\\03-Rust类型系统-内存安全的形式化保证.md",
+      "line": 198,
+      "link_text": "01/02-计算模型",
+      "link_path": "../../01-形式化计算理论根基/02-计算模型谱系-从λ演算到进程代数.md",
+      "suggested": "Manual review required",
+      "found_match": "01-形式化计算理论根基/00-总览-可计算性与计算模型谱系.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 97,
+      "source": "10-AI时代的软件工程本体论\\01-AI生成代码的范式冲击-构造性证明到归纳验证.md",
+      "line": 124,
+      "link_text": "10/02-AI辅助架构",
+      "link_path": "02-AI辅助架构设计-LLM作为架构师的协作者.md",
+      "suggested": "Manual review required",
+      "found_match": "10-AI时代的软件工程本体论/03-AI辅助架构设计-LLM作为架构师的协作者.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 100,
+      "source": "10-AI时代的软件工程本体论\\01-构造性证明到归纳性验证-模式转移.md",
+      "line": 255,
+      "link_text": "10/04-架构师角色演进",
+      "link_path": "04-架构师角色演进-从作者到策展人.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/00-总览-从直觉到半格理论.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 101,
+      "source": "10-AI时代的软件工程本体论\\01-构造性证明到归纳性验证-模式转移.md",
+      "line": 256,
+      "link_text": "10/05-AI代码生成与形式化验证",
+      "link_path": "05-AI代码生成与形式化验证的融合前景.md",
+      "suggested": "Manual review required",
+      "found_match": "07-形式化方法与验证体系/05-AI辅助形式化验证-从代码到证明的自动化管道.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 106,
+      "source": "10-AI时代的软件工程本体论\\03-AI辅助开发模式选择-决策树.md",
+      "line": 240,
+      "link_text": "10/04-架构师角色演进",
+      "link_path": "04-架构师角色演进-从作者到策展人.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/00-总览-从直觉到半格理论.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 107,
+      "source": "10-AI时代的软件工程本体论\\03-AI辅助开发模式选择-决策树.md",
+      "line": 241,
+      "link_text": "09/02-类型系统安全",
+      "link_path": "../../09-安全模型与可信计算/02-类型系统安全-Rust-精化类型-View类型.md",
+      "suggested": "Manual review required",
+      "found_match": "02-分布式系统不可能性与权衡定理/00-总览-分布式系统第一性原理.md",
+      "match_method": "prefix_match"
+    },
+    {
+      "num": 111,
+      "source": "11-工作流与并发系统分析\\01-Petri网-并发系统的形式化建模.md",
+      "line": 144,
+      "link_text": "11/02-工作流引擎",
+      "link_path": "02-工作流引擎-状态机与 Saga 模式的形式化.md",
+      "suggested": "Manual review required",
+      "found_match": "11-工作流与并发系统分析/03-工作流引擎-状态机与Saga模式的形式化.md",
+      "match_method": "fuzzy_basename"
+    },
+    {
+      "num": 114,
+      "source": "11-工作流与并发系统分析\\03-工作流引擎-状态机与Saga模式的形式化.md",
+      "line": 154,
+      "link_text": "04/04-EventSourcing",
+      "link_path": "../../04-数据一致性代数结构/04-EventSourcing-事件溯源与左折叠代数.md",
+      "suggested": "Manual review required",
+      "found_match": "04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md",
+      "match_method": "fuzzy_basename"
+    }
+  ],
+  "replacements_by_file": {
+    "00-元认知与系统思维框架\\01-系统思维-存量流量与反馈循环.md": [
+      [
+        "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        3
+      ],
+      [
+        "../../08-性能量化与容量规划模型/01-Little定律-分布无关的守恒量.md",
+        "../08-性能量化与容量规划模型/01-Little定律-分布无关的守恒量.md",
+        4
+      ],
+      [
+        "02-Meadows杠杆点-从参数到范式.md",
+        "02-系统动力学-反馈回路与杠杆点.md",
+        1
+      ],
+      [
+        "03-Senge第五项修炼-学习型组织.md",
+        "03-批判性思维-识别认知偏误与逻辑谬误.md",
+        2
+      ]
+    ],
+    "00-元认知与系统思维框架\\04-认知负载理论-架构决策的心智边界.md": [
+      [
+        "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        6
+      ],
+      [
+        "../../01-形式化计算理论根基/06-可判定性光谱-从可判定到不可判定.md",
+        "../01-形式化计算理论根基/05-可判定性光谱-从正则语言到停机问题.md",
+        5
+      ],
+      [
+        "../../06-领域驱动设计与组织动力学/01-边界上下文-BoundedContext的形式化.md",
+        "../06-领域驱动设计与组织动力学/01-限界上下文-架构原子的形式化定义.md",
+        7
+      ]
+    ],
+    "00-元认知与系统思维框架\\05-元认知批判-模型的隐含假设与失效条件.md": [
+      [
+        "../../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md",
+        "../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md",
+        8
+      ]
+    ],
+    "01-形式化计算理论根基\\01-可计算性边界-停机问题与Rice定理.md": [
+      [
+        "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        10
+      ],
+      [
+        "../../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md",
+        "../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md",
+        11
+      ],
+      [
+        "02-计算模型谱系-从λ演算到进程代数.md",
+        "00-总览-可计算性与计算模型谱系.md",
+        9
+      ]
+    ],
+    "01-形式化计算理论根基\\01-图灵机与可计算性边界-Turing-Church论题.md": [
+      [
+        "../../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md",
+        "../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md",
+        13
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        14
+      ],
+      [
+        "06-可判定性光谱-从可判定到不可判定.md",
+        "05-可判定性光谱-从正则语言到停机问题.md",
+        12
+      ]
+    ],
+    "01-形式化计算理论根基\\02-λ演算-函数抽象与组合-Church.md": [
+      [
+        "../../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+        "../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+        15
+      ]
+    ],
+    "01-形式化计算理论根基\\03-时序逻辑-LTL与CTL的分类与应用.md": [
+      [
+        "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        17
+      ],
+      [
+        "../../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+        "../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+        18
+      ],
+      [
+        "02-计算模型谱系-从λ演算到进程代数.md",
+        "00-总览-可计算性与计算模型谱系.md",
+        16
+      ]
+    ],
+    "01-形式化计算理论根基\\03-进程代数家族-CSP-CCS-π演算.md": [
+      [
+        "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        20
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        21
+      ],
+      [
+        "05-时序逻辑-LTL-CTL-Safety与Liveness.md",
+        "03-时序逻辑-LTL与CTL的分类与应用.md",
+        19
+      ]
+    ],
+    "01-形式化计算理论根基\\04-Actor模型-异步消息与状态封装-Hewitt.md": [
+      [
+        "../../05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md",
+        "../05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md",
+        22
+      ]
+    ],
+    "01-形式化计算理论根基\\05-可判定性光谱-从正则语言到停机问题.md": [
+      [
+        "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        23
+      ]
+    ],
+    "02-分布式系统不可能性与权衡定理\\01-FLP不可能性-异步系统的绝对边界.md": [
+      [
+        "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        24
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        26
+      ],
+      [
+        "../../03-分布式共识算法完整谱系/05-异步安全共识-BenOr-HoneyBadgerBFT.md",
+        "05-灰色故障-形式化假设的失效条件.md",
+        25
+      ]
+    ],
+    "02-分布式系统不可能性与权衡定理\\02-CAP定理-一致性可用性分区容错.md": [
+      [
+        "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        27
+      ],
+      [
+        "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        28
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        29
+      ]
+    ],
+    "02-分布式系统不可能性与权衡定理\\03-PACELC定理-延迟与一致性的连续权衡.md": [
+      [
+        "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        30
+      ]
+    ],
+    "02-分布式系统不可能性与权衡定理\\04-一致性模型光谱-从严格一致到最终一致.md": [
+      [
+        "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        31
+      ],
+      [
+        "../../04-数据一致性代数结构/02-向量时钟-偏序关系与因果关系.md",
+        "../04-数据一致性代数结构/02-向量时钟-偏序关系与因果关系.md",
+        32
+      ]
+    ],
+    "02-分布式系统不可能性与权衡定理\\05-灰色故障-形式化假设的失效条件.md": [
+      [
+        "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        33
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        34
+      ]
+    ],
+    "03-分布式共识算法完整谱系\\02-Raft-状态机复制与模块化工程化.md": [
+      [
+        "../../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+        "../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+        39
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        40
+      ],
+      [
+        "01-Paxos家族-MultiPaxos-FlexiblePaxos.md",
+        "01-Paxos与MultiPaxos-经典问题与现代工程演进.md",
+        36
+      ],
+      [
+        "03-拜占庭容错-PBFT-HotStuff-Tendermint.md",
+        "00-总览-共识问题与算法家族树.md",
+        37
+      ],
+      [
+        "06-共识算法形式化验证-TLA+规约.md",
+        "../06-领域驱动设计与组织动力学/00-总览-DDD作为架构原子.md",
+        38
+      ]
+    ],
+    "03-分布式共识算法完整谱系\\03-PBFT与BFT家族-拜占庭容错共识.md": [
+      [
+        "../../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md",
+        "../09-安全模型与可信计算/02-可信计算-从形式验证到运行时可信.md",
+        41
+      ]
+    ],
+    "03-分布式共识算法完整谱系\\04-HotStuff-线性复杂度BFT共识.md": [
+      [
+        "../../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md",
+        "../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md",
+        42
+      ]
+    ],
+    "03-分布式共识算法完整谱系\\05-Bullshark-DAG共识与异步优势.md": [
+      [
+        "../../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md",
+        "../02-分布式系统不可能性与权衡定理/01-FLP不可能性-异步系统的绝对边界.md",
+        43
+      ]
+    ],
+    "04-数据一致性代数结构\\01-CRDT-JoinSemilattice与强最终一致性.md": [
+      [
+        "../../02-分布式系统不可能性与权衡定理/04-一致性模型光谱-从严格一致到最终一致.md",
+        "../02-分布式系统不可能性与权衡定理/04-一致性模型光谱-从严格一致到最终一致.md",
+        45
+      ],
+      [
+        "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        46
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        47
+      ],
+      [
+        "02-向量时钟与偏序集-HappensBefore关系.md",
+        "02-向量时钟-偏序关系与因果关系.md",
+        44
+      ]
+    ],
+    "04-数据一致性代数结构\\03-EventSourcing-不可变数据代数与版本诅咒.md": [
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        51
+      ],
+      [
+        "02-向量时钟与偏序集-HappensBefore关系.md",
+        "02-向量时钟-偏序关系与因果关系.md",
+        49
+      ],
+      [
+        "../../05-架构模式与部署单元光谱/03-事件驱动架构-EDA-Saga-CQRS.md",
+        "../05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md",
+        50
+      ]
+    ],
+    "05-架构模式与部署单元光谱\\01-部署单元光谱-单体到Serverless的连续体.md": [
+      [
+        "../../06-领域驱动设计与组织动力学/01-限界上下文-架构原子的形式化定义.md",
+        "../06-领域驱动设计与组织动力学/01-限界上下文-架构原子的形式化定义.md",
+        52
+      ]
+    ],
+    "05-架构模式与部署单元光谱\\02-微服务vs模块化单体-分布的代价与决策树.md": [
+      [
+        "../../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md",
+        "../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md",
+        55
+      ],
+      [
+        "../../08-性能量化与容量规划模型/03-微服务修正加速比模型-协调成本量化.md",
+        "../08-性能量化与容量规划模型/03-微服务修正加速比模型-协调成本量化.md",
+        56
+      ],
+      [
+        "../../00-元认知与系统思维框架/04-认知负载理论-架构决策的心智边界.md",
+        "../00-元认知与系统思维框架/04-认知负载理论-架构决策的心智边界.md",
+        57
+      ],
+      [
+        "01-部署单元光谱-从单体到Serverless.md",
+        "01-部署单元光谱-单体到Serverless的连续体.md",
+        53
+      ],
+      [
+        "03-事件驱动架构-EDA-Saga-CQRS.md",
+        "03-事件驱动架构-解耦与一致性的设计哲学.md",
+        54
+      ]
+    ],
+    "05-架构模式与部署单元光谱\\03-事件驱动架构-解耦与一致性的设计哲学.md": [
+      [
+        "../../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+        "../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+        59
+      ],
+      [
+        "../../04-数据一致性代数结构/04-EventSourcing-事件溯源与左折叠代数.md",
+        "../04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md",
+        58
+      ]
+    ],
+    "05-架构模式与部署单元光谱\\04-Serverless-架构拐杖还是计算未来.md": [
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        62
+      ],
+      [
+        "01-部署单元光谱-从单体到Serverless.md",
+        "01-部署单元光谱-单体到Serverless的连续体.md",
+        60
+      ],
+      [
+        "../../08-性能量化与容量规划模型/04-排队论在架构中的多层映射.md",
+        "00-总览-架构模式的工程组织映射.md",
+        61
+      ]
+    ],
+    "05-架构模式与部署单元光谱\\04-微服务量化模型-Amdahl定律修正与协调成本.md": [
+      [
+        "../../08-性能量化与容量规划模型/02-Amdahl-Gustafson-并行加速的理论边界.md",
+        "../08-性能量化与容量规划模型/02-Amdahl-Gustafson-并行加速的理论边界.md",
+        63
+      ]
+    ],
+    "06-领域驱动设计与组织动力学\\01-限界上下文-架构原子的形式化定义.md": [
+      [
+        "../../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md",
+        "../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md",
+        64
+      ]
+    ],
+    "06-领域驱动设计与组织动力学\\03-Conway定律与逆Conway策略.md": [
+      [
+        "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        67
+      ],
+      [
+        "../../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+        "../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+        68
+      ],
+      [
+        "01-边界上下文-BoundedContext的形式化.md",
+        "01-限界上下文-架构原子的形式化定义.md",
+        65
+      ],
+      [
+        "02-上下文映射-图同态与组织沟通结构.md",
+        "../02-分布式系统不可能性与权衡定理/00-总览-分布式系统第一性原理.md",
+        66
+      ]
+    ],
+    "07-形式化方法与验证体系\\01-TLA+-时序逻辑规范与系统验证.md": [
+      [
+        "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        71
+      ],
+      [
+        "../../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md",
+        "../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md",
+        72
+      ],
+      [
+        "02-模型检测-UPPAAL与状态空间爆炸.md",
+        "03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        70
+      ]
+    ],
+    "07-形式化方法与验证体系\\01-TLA+-统一规约框架与状态机数学.md": [
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        77
+      ],
+      [
+        "02-模型检测工具谱系-TLC-SPIN-UPPAAL.md",
+        "03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        73
+      ],
+      [
+        "03-定理证明-Coq-Isabelle-Z3-SMT.md",
+        "../03-分布式共识算法完整谱系/00-总览-共识问题与算法家族树.md",
+        74
+      ],
+      [
+        "../../03-分布式共识算法完整谱系/06-共识算法形式化验证-TLA+规约.md",
+        "../06-领域驱动设计与组织动力学/00-总览-DDD作为架构原子.md",
+        75
+      ],
+      [
+        "../../10-AI时代的软件工程本体论/05-AI代码生成与形式化验证的融合前景.md",
+        "05-AI辅助形式化验证-从代码到证明的自动化管道.md",
+        76
+      ]
+    ],
+    "07-形式化方法与验证体系\\03-模型检测-UPPAAL与状态空间爆炸问题.md": [
+      [
+        "../../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+        "../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md",
+        78
+      ]
+    ],
+    "07-形式化方法与验证体系\\04-Rust类型系统-借检查器作为轻量级分离逻辑.md": [
+      [
+        "../../09-安全模型与可信计算/03-Rust类型系统-内存安全的形式化保证.md",
+        "../09-安全模型与可信计算/03-Rust类型系统-内存安全的形式化保证.md",
+        79
+      ],
+      [
+        "../../01-形式化计算理论根基/01-可计算性边界-停机问题与Rice定理.md",
+        "../01-形式化计算理论根基/01-可计算性边界-停机问题与Rice定理.md",
+        80
+      ]
+    ],
+    "07-形式化方法与验证体系\\05-AI辅助形式化验证-从代码到证明的自动化管道.md": [
+      [
+        "../../10-AI时代的软件工程本体论/02-LLM到TLA+-AI生成代码的形式化验证管道.md",
+        "../10-AI时代的软件工程本体论/02-LLM到TLA+-AI生成代码的形式化验证管道.md",
+        81
+      ]
+    ],
+    "08-性能量化与容量规划模型\\01-Little定律-分布无关的守恒量.md": [
+      [
+        "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        83
+      ],
+      [
+        "../../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+        "../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+        84
+      ],
+      [
+        "04-排队论在架构中的多层映射.md",
+        "../05-架构模式与部署单元光谱/00-总览-架构模式的工程组织映射.md",
+        82
+      ]
+    ],
+    "08-性能量化与容量规划模型\\03-微服务修正加速比模型-协调成本量化.md": [
+      [
+        "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        88
+      ],
+      [
+        "../../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+        "../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md",
+        89
+      ],
+      [
+        "02-Amdahl定律vsGustafson定律-扩展的失效.md",
+        "02-Amdahl-Gustafson-并行加速的理论边界.md",
+        87
+      ]
+    ],
+    "09-安全模型与可信计算\\01-BAN逻辑-安全协议的形式化分析.md": [
+      [
+        "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        90
+      ],
+      [
+        "../../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+        "../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+        91
+      ]
+    ],
+    "09-安全模型与可信计算\\02-可信计算-从形式验证到运行时可信.md": [
+      [
+        "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        92
+      ],
+      [
+        "../../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+        "../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+        93
+      ]
+    ],
+    "09-安全模型与可信计算\\03-Rust类型系统-内存安全的形式化保证.md": [
+      [
+        "../../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+        "../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+        94
+      ],
+      [
+        "../../01-形式化计算理论根基/02-计算模型谱系-从λ演算到进程代数.md",
+        "../01-形式化计算理论根基/00-总览-可计算性与计算模型谱系.md",
+        95
+      ]
+    ],
+    "09-安全模型与可信计算\\04-侧信道攻击与防御-从缓存到推测执行.md": [
+      [
+        "../../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+        "../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md",
+        96
+      ]
+    ],
+    "10-AI时代的软件工程本体论\\01-AI生成代码的范式冲击-构造性证明到归纳验证.md": [
+      [
+        "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        98
+      ],
+      [
+        "../../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md",
+        "../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md",
+        99
+      ],
+      [
+        "02-AI辅助架构设计-LLM作为架构师的协作者.md",
+        "03-AI辅助架构设计-LLM作为架构师的协作者.md",
+        97
+      ]
+    ],
+    "10-AI时代的软件工程本体论\\01-构造性证明到归纳性验证-模式转移.md": [
+      [
+        "../../07-形式化方法与验证体系/01-TLA+-统一规约框架与状态机数学.md",
+        "../07-形式化方法与验证体系/01-TLA+-统一规约框架与状态机数学.md",
+        102
+      ],
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        103
+      ],
+      [
+        "04-架构师角色演进-从作者到策展人.md",
+        "../04-数据一致性代数结构/00-总览-从直觉到半格理论.md",
+        100
+      ],
+      [
+        "05-AI代码生成与形式化验证的融合前景.md",
+        "../07-形式化方法与验证体系/05-AI辅助形式化验证-从代码到证明的自动化管道.md",
+        101
+      ]
+    ],
+    "10-AI时代的软件工程本体论\\02-LLM到TLA+-AI生成代码的形式化验证管道.md": [
+      [
+        "../../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        104
+      ],
+      [
+        "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        105
+      ]
+    ],
+    "10-AI时代的软件工程本体论\\03-AI辅助开发模式选择-决策树.md": [
+      [
+        "../../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        "../00-元认知与系统思维框架/05-元认知批判-模型的隐含假设与失效条件.md",
+        108
+      ],
+      [
+        "04-架构师角色演进-从作者到策展人.md",
+        "../04-数据一致性代数结构/00-总览-从直觉到半格理论.md",
+        106
+      ],
+      [
+        "../../09-安全模型与可信计算/02-类型系统安全-Rust-精化类型-View类型.md",
+        "../02-分布式系统不可能性与权衡定理/00-总览-分布式系统第一性原理.md",
+        107
+      ]
+    ],
+    "10-AI时代的软件工程本体论\\03-AI辅助架构设计-LLM作为架构师的协作者.md": [
+      [
+        "../../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md",
+        "../12-场景应用与决策框架/03-AI-Native应用-从单体Agent到多Agent系统.md",
+        109
+      ],
+      [
+        "../../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md",
+        "../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md",
+        110
+      ]
+    ],
+    "11-工作流与并发系统分析\\01-Petri网-并发系统的形式化建模.md": [
+      [
+        "../../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        "../07-形式化方法与验证体系/03-模型检测-UPPAAL与状态空间爆炸问题.md",
+        112
+      ],
+      [
+        "02-工作流引擎-状态机与 Saga 模式的形式化.md",
+        "03-工作流引擎-状态机与Saga模式的形式化.md",
+        111
+      ]
+    ],
+    "11-工作流与并发系统分析\\02-定时自动机-工作流的形式化验证.md": [
+      [
+        "../../07-形式化方法与验证体系/02-UPPAAL-实时系统模型检测.md",
+        "../07-形式化方法与验证体系/02-UPPAAL-实时系统模型检测.md",
+        113
+      ]
+    ],
+    "11-工作流与并发系统分析\\03-工作流引擎-状态机与Saga模式的形式化.md": [
+      [
+        "../../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md",
+        "../12-场景应用与决策框架/01-电商场景-从初创到全球化的架构演进.md",
+        115
+      ],
+      [
+        "../../04-数据一致性代数结构/04-EventSourcing-事件溯源与左折叠代数.md",
+        "../04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md",
+        114
+      ]
+    ],
+    "12-场景应用与决策框架\\01-电商场景-从初创到全球化的架构演进.md": [
+      [
+        "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        116
+      ]
+    ],
+    "12-场景应用与决策框架\\01-电商系统架构演进-四阶段场景树.md": [
+      [
+        "../../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+        "../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+        117
+      ],
+      [
+        "../../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        "../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md",
+        118
+      ],
+      [
+        "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        119
+      ],
+      [
+        "../../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        "../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md",
+        120
+      ],
+      [
+        "../../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md",
+        "../06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md",
+        121
+      ]
+    ],
+    "12-场景应用与决策框架\\02-IoT场景-边缘计算与数据一致性.md": [
+      [
+        "../../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+        "../02-分布式系统不可能性与权衡定理/02-CAP定理-一致性可用性分区容错.md",
+        122
+      ],
+      [
+        "../../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        "../04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md",
+        123
+      ],
+      [
+        "../../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md",
+        "../02-分布式系统不可能性与权衡定理/05-灰色故障-形式化假设的失效条件.md",
+        124
+      ],
+      [
+        "../../08-性能量化与容量规划模型/03-容量规划-从排队论到云原生弹性.md",
+        "../08-性能量化与容量规划模型/03-容量规划-从排队论到云原生弹性.md",
+        125
+      ]
+    ],
+    "12-场景应用与决策框架\\03-AI-Native应用-从单体Agent到多Agent系统.md": [
+      [
+        "../../10-AI时代的软件工程本体论/01-AI生成代码的范式冲击-构造性证明到归纳验证.md",
+        "../10-AI时代的软件工程本体论/01-AI生成代码的范式冲击-构造性证明到归纳验证.md",
+        126
+      ],
+      [
+        "../../10-AI时代的软件工程本体论/03-AI辅助架构设计-LLM作为架构师的协作者.md",
+        "../10-AI时代的软件工程本体论/03-AI辅助架构设计-LLM作为架构师的协作者.md",
+        127
+      ],
+      [
+        "../../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+        "../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md",
+        128
+      ]
+    ],
+    "12-场景应用与决策框架\\04-决策框架-架构选择的形式化方法论.md": [
+      [
+        "../../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md",
+        "../00-元认知与系统思维框架/03-批判性思维-识别认知偏误与逻辑谬误.md",
+        129
+      ]
+    ],
+    "03-分布式共识算法完整谱系\\01-Paxos与MultiPaxos-经典问题与现代工程演进.md": [
+      [
+        "../../07-形式化方法与验证体系/02-TLA+-时序逻辑与规范验证.md",
+        "../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md",
+        35
+      ]
+    ],
+    "04-数据一致性代数结构\\02-向量时钟-偏序关系与因果关系.md": [
+      [
+        "04-EventSourcing-事件溯源与左折叠代数.md",
+        "03-EventSourcing-不可变数据代数与版本诅咒.md",
+        48
+      ]
+    ],
+    "06-领域驱动设计与组织动力学\\03-战术设计-实体值对象聚合与领域事件.md": [
+      [
+        "../../04-数据一致性代数结构/04-EventSourcing-事件溯源与左折叠代数.md",
+        "../04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md",
+        69
+      ]
+    ],
+    "08-性能量化与容量规划模型\\01-排队论基础-Little定律与M_M_1队列.md": [
+      [
+        "04-容量规划-从排队论到云原生弹性.md",
+        "03-容量规划-从排队论到云原生弹性.md",
+        85
+      ]
+    ],
+    "08-性能量化与容量规划模型\\03-容量规划-从排队论到云原生弹性.md": [
+      [
+        "../../12-场景应用与决策框架/02-容量规划场景-从峰值到常态的弹性设计.md",
+        "03-容量规划-从排队论到云原生弹性.md",
+        86
+      ]
+    ]
+  }
+}
