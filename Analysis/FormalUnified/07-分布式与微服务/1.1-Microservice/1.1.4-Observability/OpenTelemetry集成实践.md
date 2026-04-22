@@ -75,7 +75,7 @@ impl TracingService {
         let tracer = global::tracer("microservice");
         Self { tracer }
     }
-    
+
     fn start_span(&self, name: &str) -> Span {
         self.tracer.start(name)
     }
@@ -102,7 +102,7 @@ impl MetricsService {
         let response_time = meter.f64_histogram("http_response_time")
             .with_description("HTTP response time")
             .init();
-        
+
         Self {
             meter,
             request_counter,
@@ -129,15 +129,15 @@ async fn init_opentelemetry() -> Result<(), Box<dyn std::error::Error>> {
         agent_endpoint: "http://localhost:14268/api/traces".to_string(),
         service_name: "microservice".to_string(),
     };
-    
+
     // 创建Tracer
     let tracer = opentelemetry_jaeger::new_pipeline()
         .with_config(exporter_config)
         .install_batch(opentelemetry::runtime::Tokio)?;
-    
+
     // 设置全局Tracer
     global::set_text_map_propagator(Propagator::new());
-    
+
     Ok(())
 }
 ```
@@ -162,7 +162,7 @@ async fn tracing_middleware(
         .span_builder(format!("{} {}", req.method(), req.path()))
         .with_kind(SpanKind::Server)
         .start(&tracer);
-    
+
     // 注入Trace ID到请求头
     let trace_id = span.span_context().trace_id();
     let mut req = req;
@@ -170,14 +170,14 @@ async fn tracing_middleware(
         "x-trace-id",
         trace_id.to_string().parse().unwrap(),
     );
-    
+
     // 执行请求
     let res = srv.call(req).await?;
-    
+
     // 记录响应信息
     span.set_attribute("http.status_code", res.status().as_u16() as i64);
     span.set_attribute("http.response_size", res.response().body().size() as i64);
-    
+
     Ok(res)
 }
 ```
@@ -202,25 +202,25 @@ impl HttpClient {
             tracer: global::tracer("http_client"),
         }
     }
-    
+
     async fn get(&self, url: &str) -> Result<String, Box<dyn std::error::Error>> {
         let span = self.tracer.start(format!("GET {}", url));
-        
+
         // 注入Trace上下文到请求头
         let mut headers = reqwest::header::HeaderMap::new();
         global::get_text_map_propagator(|propagator| {
             propagator.inject(&mut headers, &mut global::get_text_map_propagator(|p| p));
         });
-        
+
         let response = self.client
             .get(url)
             .headers(headers)
             .send()
             .await?;
-        
+
         span.set_attribute("http.status_code", response.status().as_u16() as i64);
         span.set_attribute("http.response_size", response.content_length().unwrap_or(0) as i64);
-        
+
         let body = response.text().await?;
         Ok(body)
     }
@@ -244,16 +244,16 @@ impl DatabaseService {
         T: for<'r> sqlx::FromRow<'r, sqlx::Postgres>,
     {
         let span = self.tracer.start(format!("DB Query: {}", sql));
-        
+
         span.set_attribute("db.system", "postgresql");
         span.set_attribute("db.statement", sql);
         span.set_attribute("db.parameters", format!("{:?}", params));
-        
+
         let result = sqlx::query_as::<_, T>(sql)
             .bind_all(params)
             .fetch_all(&self.pool)
             .await;
-        
+
         match &result {
             Ok(rows) => {
                 span.set_attribute("db.rows_affected", rows.len() as i64);
@@ -263,7 +263,7 @@ impl DatabaseService {
                 span.set_attribute("error.message", e.to_string());
             }
         }
-        
+
         result
     }
 }
@@ -299,28 +299,28 @@ async fn get_user(
     state: web::Data<Arc<AppState>>,
 ) -> Result<HttpResponse, Error> {
     let start_time = std::time::Instant::now();
-    
+
     // 创建Span
     let span = state.tracer.start("get_user");
     span.set_attribute("user.id", path.as_str());
-    
+
     // 增加请求计数
     state.request_counter.add(1, &[("endpoint", "get_user")]);
-    
+
     // 模拟数据库查询
     let user = User {
         id: path.to_string(),
         name: "John Doe".to_string(),
         email: "john@example.com".to_string(),
     };
-    
+
     // 记录响应时间
     let duration = start_time.elapsed().as_secs_f64();
     state.response_time.record(duration, &[("endpoint", "get_user")]);
-    
+
     span.set_attribute("http.status_code", 200);
     span.set_attribute("response.size", serde_json::to_string(&user).unwrap().len() as i64);
-    
+
     Ok(HttpResponse::Ok().json(user))
 }
 
@@ -329,25 +329,25 @@ async fn create_user(
     state: web::Data<Arc<AppState>>,
 ) -> Result<HttpResponse, Error> {
     let start_time = std::time::Instant::now();
-    
+
     let span = state.tracer.start("create_user");
     span.set_attribute("user.email", &user.email);
-    
+
     state.request_counter.add(1, &[("endpoint", "create_user")]);
-    
+
     // 模拟用户创建
     let created_user = User {
         id: uuid::Uuid::new_v4().to_string(),
         name: user.name.clone(),
         email: user.email.clone(),
     };
-    
+
     let duration = start_time.elapsed().as_secs_f64();
     state.response_time.record(duration, &[("endpoint", "create_user")]);
-    
+
     span.set_attribute("http.status_code", 201);
     span.set_attribute("user.id", &created_user.id);
-    
+
     Ok(HttpResponse::Created().json(created_user))
 }
 
@@ -355,7 +355,7 @@ async fn create_user(
 async fn main() -> std::io::Result<()> {
     // 初始化OpenTelemetry
     init_opentelemetry().await.expect("Failed to initialize OpenTelemetry");
-    
+
     // 创建应用状态
     let state = Arc::new(AppState {
         tracer: global::tracer("user_service"),
@@ -367,7 +367,7 @@ async fn main() -> std::io::Result<()> {
             .f64_histogram("http_response_time")
             .init(),
     });
-    
+
     HttpServer::new(move || {
         App::new()
             .app_data(web::Data::new(state.clone()))
@@ -415,16 +415,16 @@ impl BusinessMetrics {
                 .init(),
         }
     }
-    
+
     fn record_order(&self, value: f64, user_type: &str) {
         self.order_counter.add(1, &[("user_type", user_type)]);
         self.order_value.record(value, &[("user_type", user_type)]);
     }
-    
+
     fn record_user_registration(&self, user_type: &str) {
         self.user_registration_counter.add(1, &[("user_type", user_type)]);
     }
-    
+
     fn update_active_users(&self, count: f64) {
         self.active_users_gauge.record(count, &[]);
     }
@@ -440,13 +440,13 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 #[instrument]
 async fn process_order(order_id: &str, amount: f64) -> Result<(), Box<dyn std::error::Error>> {
     info!("Processing order", order_id = order_id, amount = amount);
-    
+
     // 验证订单
     if amount <= 0.0 {
         error!("Invalid order amount", order_id = order_id, amount = amount);
         return Err("Invalid amount".into());
     }
-    
+
     // 处理支付
     match process_payment(order_id, amount).await {
         Ok(_) => {
@@ -504,7 +504,7 @@ impl Sampler for CustomSampler {
                 trace_state: trace_state.clone(),
             };
         }
-        
+
         // 对其他请求按比例采样
         if rand::random::<f64>() < self.sample_rate {
             SamplingResult {
@@ -534,7 +534,7 @@ fn configure_batch_export() -> Result<(), Box<dyn std::error::Error>> {
         agent_endpoint: "http://localhost:14268/api/traces".to_string(),
         service_name: "microservice".to_string(),
     };
-    
+
     let tracer = opentelemetry_jaeger::new_pipeline()
         .with_config(exporter_config)
         .with_batch_processor(config::BatchConfig::default()
@@ -542,7 +542,7 @@ fn configure_batch_export() -> Result<(), Box<dyn std::error::Error>> {
             .with_max_concurrent_exports(5)
             .with_scheduled_delay(std::time::Duration::from_secs(1)))
         .install_batch(opentelemetry::runtime::Tokio)?;
-    
+
     Ok(())
 }
 ```
@@ -563,7 +563,7 @@ impl SecureSpan {
         let span = global::tracer("secure").start(name);
         Self { span }
     }
-    
+
     fn set_attribute(&self, key: &str, value: &str) {
         // 过滤敏感信息
         if self.is_sensitive(key) {
@@ -572,7 +572,7 @@ impl SecureSpan {
             self.span.set_attribute(key, value);
         }
     }
-    
+
     fn is_sensitive(&self, key: &str) -> bool {
         let sensitive_keys = ["password", "token", "secret", "key"];
         sensitive_keys.iter().any(|k| key.to_lowercase().contains(k))
@@ -598,31 +598,31 @@ impl AlertingService {
         let registry = Registry::new();
         let error_rate = Counter::new("error_rate", "Error rate").unwrap();
         let response_time = Histogram::new("response_time", "Response time").unwrap();
-        
+
         registry.register(Box::new(error_rate.clone())).unwrap();
         registry.register(Box::new(response_time.clone())).unwrap();
-        
+
         Self {
             error_rate,
             response_time,
             registry,
         }
     }
-    
+
     fn check_alerts(&self) {
         // 检查错误率
         let error_count = self.error_rate.get();
         if error_count > 100 {
             self.send_alert("High error rate detected", &format!("Error count: {}", error_count));
         }
-        
+
         // 检查响应时间
         let p95 = self.response_time.get_sample_sum() / self.response_time.get_sample_count();
         if p95 > 1.0 {
             self.send_alert("High response time detected", &format!("P95: {}s", p95));
         }
     }
-    
+
     fn send_alert(&self, title: &str, message: &str) {
         // 发送告警通知
         println!("ALERT: {} - {}", title, message);

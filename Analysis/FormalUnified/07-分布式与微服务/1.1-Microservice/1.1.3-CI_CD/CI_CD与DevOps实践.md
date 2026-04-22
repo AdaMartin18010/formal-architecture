@@ -133,7 +133,7 @@ jobs:
 ```mermaid
 graph TD
     A[开发人员 Push/PR] --> B{触发CI/CD平台};
-    
+
     subgraph "CI/CD Pipeline"
         B --> C[1. Lint];
         C --> D[2. Test & Coverage];

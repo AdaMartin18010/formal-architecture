@@ -159,7 +159,7 @@ graph TD
         E -- gRPC --> F[gRPC Service];
         D --> F;
     end
-    
+
     subgraph "Connect-go模式"
         B -- HTTP/JSON --> G[Connect-go Handler];
         D -- gRPC --> G;

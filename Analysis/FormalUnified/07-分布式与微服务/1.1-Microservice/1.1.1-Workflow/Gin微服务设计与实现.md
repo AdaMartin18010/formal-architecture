@@ -5,6 +5,7 @@
 ## 目录
 
 - [1.1.1 Gin微服务设计与实现](#111-gin微服务设计与实现)
+  - [目录](#目录)
   - [1.1.1.1 引言](#1111-引言)
   - [1.1.1.2 核心概念与定义](#1112-核心概念与定义)
     - [1.1.1.2.1 工作流视角](#11121-工作流视角)
@@ -384,7 +385,7 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, req *PaymentRequest
     if err := req.Validate(); err != nil {
         return nil, fmt.Errorf("invalid payment request: %w", err)
     }
-    
+
     // 调用外部支付服务
     resp, err := s.paymentClient.Charge(ctx, req.Amount, req.PaymentMethod)
     if err != nil {
@@ -394,7 +395,7 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, req *PaymentRequest
         }
         return nil, fmt.Errorf("payment processing failed: %w", err)
     }
-    
+
     // 保存交易记录
     if err := s.repository.SaveTransaction(ctx, &Transaction{
         ID:     resp.TransactionID,
@@ -405,7 +406,7 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, req *PaymentRequest
         s.logger.Error("Failed to save transaction", "error", err)
         // 可以触发补偿流程或重试机制
     }
-    
+
     return &PaymentResult{
         TransactionID: resp.TransactionID,
         Status:        "completed",
@@ -428,7 +429,7 @@ func RegisterService(client *clientv3.Client, serviceName, serviceAddr string, t
     if err != nil {
         return err
     }
-    
+
     _, err = client.Put(
         context.Background(),
         fmt.Sprintf("/services/%s/%s", serviceName, serviceAddr),
@@ -438,13 +439,13 @@ func RegisterService(client *clientv3.Client, serviceName, serviceAddr string, t
     if err != nil {
         return err
     }
-    
+
     // 创建保持活跃的通道
     keepAliveCh, err := client.KeepAlive(context.Background(), lease.ID)
     if err != nil {
         return err
     }
-    
+
     // 后台goroutine保持租约活跃
     go func() {
         for {
@@ -457,7 +458,7 @@ func RegisterService(client *clientv3.Client, serviceName, serviceAddr string, t
             }
         }
     }()
-    
+
     return nil
 }
 ```
@@ -473,7 +474,7 @@ func RegisterService(client *clientv3.Client, serviceName, serviceAddr string, t
 func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
     logger := workflow.GetLogger(ctx)
     logger.Info("OrderProcessing workflow started", "orderID", orderID)
-    
+
     // 设置工作流超时
     ctx = workflow.WithActivityOptions(ctx, workflow.ActivityOptions{
         StartToCloseTimeout: 10 * time.Minute,
@@ -485,7 +486,7 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
             NonRetryableErrorTypes: []string{"InvalidOrderError"},
         },
     })
-    
+
     // 验证订单
     var orderDetails OrderDetails
     err := workflow.ExecuteActivity(ctx, ValidateOrderActivity, orderID).Get(ctx, &orderDetails)
@@ -493,7 +494,7 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
         logger.Error("Order validation failed", "error", err)
         return err
     }
-    
+
     // 处理支付
     var paymentResult PaymentResult
     err = workflow.ExecuteActivity(ctx, ProcessPaymentActivity, orderID, orderDetails.TotalAmount).Get(ctx, &paymentResult)
@@ -503,7 +504,7 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
         _ = workflow.ExecuteActivity(ctx, CancelOrderActivity, orderID).Get(ctx, nil)
         return err
     }
-    
+
     // 更新库存
     err = workflow.ExecuteActivity(ctx, UpdateInventoryActivity, orderID, orderDetails.Items).Get(ctx, nil)
     if err != nil {
@@ -513,7 +514,7 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
         _ = workflow.ExecuteActivity(ctx, CancelOrderActivity, orderID).Get(ctx, nil)
         return err
     }
-    
+
     // 安排物流
     err = workflow.ExecuteActivity(ctx, ArrangeShippingActivity, orderID, orderDetails.ShippingAddress).Get(ctx, nil)
     if err != nil {
@@ -521,10 +522,10 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
         // 这里可能选择继续，而不是取消订单，因为支付和库存已处理
         return err
     }
-    
+
     // 通知客户
     _ = workflow.ExecuteActivity(ctx, NotifyCustomerActivity, orderID, "ORDER_PROCESSED").Get(ctx, nil)
-    
+
     logger.Info("OrderProcessing workflow completed successfully", "orderID", orderID)
     return nil
 }
@@ -552,7 +553,7 @@ import (
     "os/signal"
     "syscall"
     "time"
-    
+
     "github.com/gin-gonic/gin"
     "go.uber.org/zap"
     "go.etcd.io/etcd/clientv3"
@@ -562,7 +563,7 @@ func main() {
     // 初始化日志
     logger, _ := zap.NewProduction()
     defer logger.Sync()
-    
+
     // 连接服务发现
     etcdClient, err := clientv3.New(clientv3.Config{
         Endpoints:   []string{"localhost:2379"},
@@ -572,7 +573,7 @@ func main() {
         logger.Fatal("Failed to connect to etcd", zap.Error(err))
     }
     defer etcdClient.Close()
-    
+
     // 注册服务
     serviceName := "order-service"
     serviceAddr := "localhost:8080"
@@ -583,41 +584,41 @@ func main() {
             logger.Fatal("Failed to register service", zap.Error(err))
         }
     }()
-    
+
     // 设置路由
     router := gin.Default()
     router.POST("/orders", createOrderHandler)
     router.GET("/orders/:id", getOrderHandler)
     // 更多路由...
-    
+
     // 创建HTTP服务器
     srv := &http.Server{
         Addr:    serviceAddr,
         Handler: router,
     }
-    
+
     // 优雅关闭
     go func() {
         if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
             logger.Fatal("Failed to start server", zap.Error(err))
         }
     }()
-    
+
     // 等待中断信号
     quit := make(chan os.Signal, 1)
     signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
     <-quit
-    
+
     // 关闭前清理
     cancel() // 停止服务注册续约
-    
+
     // 优雅关闭服务器
     ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
     defer cancel()
     if err := srv.Shutdown(ctx); err != nil {
         logger.Fatal("Server forced to shutdown", zap.Error(err))
     }
-    
+
     logger.Info("Server exiting")
 }
 
@@ -684,7 +685,7 @@ func (cb *CircuitBreaker) Execute(ctx context.Context, command func(context.Cont
     cb.mutex.RLock()
     state := cb.state
     cb.mutex.RUnlock()
-    
+
     if state == StateOpen {
         if time.Since(cb.openTime) > cb.resetTimeout {
             cb.mutex.Lock()
@@ -695,12 +696,12 @@ func (cb *CircuitBreaker) Execute(ctx context.Context, command func(context.Cont
             return nil, ErrCircuitOpen
         }
     }
-    
+
     result, err := command(ctx)
-    
+
     cb.mutex.Lock()
     defer cb.mutex.Unlock()
-    
+
     if err != nil {
         if cb.state == StateClosed {
             cb.failureCount++
@@ -714,7 +715,7 @@ func (cb *CircuitBreaker) Execute(ctx context.Context, command func(context.Cont
         }
         return nil, err
     }
-    
+
     if cb.state == StateHalfOpen {
         cb.halfOpenSuccess++
         if cb.halfOpenSuccess >= cb.halfOpenThreshold {
@@ -724,7 +725,7 @@ func (cb *CircuitBreaker) Execute(ctx context.Context, command func(context.Cont
     } else if cb.state == StateClosed {
         cb.failureCount = 0
     }
-    
+
     return result, nil
 }
 ```
@@ -767,24 +768,24 @@ func NewTokenBucket(rate float64, capacity int) *TokenBucket {
 func (tb *TokenBucket) Allow() bool {
     tb.mutex.Lock()
     defer tb.mutex.Unlock()
-    
+
     now := time.Now()
     elapsed := now.Sub(tb.lastRefill).Seconds()
     tb.lastRefill = now
-    
+
     // 计算新生成的令牌
     newTokens := elapsed * tb.rate
     tb.tokens += newTokens
     if tb.tokens > float64(tb.capacity) {
         tb.tokens = float64(tb.capacity)
     }
-    
+
     // 尝试获取令牌
     if tb.tokens >= 1 {
         tb.tokens--
         return true
     }
-    
+
     return false
 }
 
@@ -818,7 +819,7 @@ import (
     "context"
     "sync"
     "time"
-    
+
     "github.com/go-redis/redis/v8"
 )
 
@@ -842,25 +843,25 @@ func NewSingleFlight() *SingleFlight {
 
 func (sf *SingleFlight) Do(key string, fn func() (interface{}, error)) (interface{}, error) {
     sf.mutex.Lock()
-    
+
     if c, ok := sf.group[key]; ok {
         sf.mutex.Unlock()
         c.wg.Wait()
         return c.result, c.err
     }
-    
+
     c := &call{}
     c.wg.Add(1)
     sf.group[key] = c
     sf.mutex.Unlock()
-    
+
     c.result, c.err = fn()
     c.wg.Done()
-    
+
     sf.mutex.Lock()
     delete(sf.group, key)
     sf.mutex.Unlock()
-    
+
     return c.result, c.err
 }
 
@@ -886,12 +887,12 @@ func (s *CacheService) GetOrCompute(ctx context.Context, key string, compute fun
         // 缓存命中
         return val, nil
     }
-    
+
     if err != redis.Nil {
         // 非缓存未命中的错误
         return nil, err
     }
-    
+
     // 缓存未命中，使用单飞模式计算结果
     return s.singleFlight.Do(key, func() (interface{}, error) {
         // 再次检查缓存（双重检查锁定模式）
@@ -899,13 +900,13 @@ func (s *CacheService) GetOrCompute(ctx context.Context, key string, compute fun
         if err == nil {
             return val, nil
         }
-        
+
         // 计算结果
         result, err := compute()
         if err != nil {
             return nil, err
         }
-        
+
         // 将结果存入缓存
         // 使用随机过期时间避免缓存雪崩
         expiration := s.expiration + time.Duration(rand.Intn(60))*time.Second
@@ -913,7 +914,7 @@ func (s *CacheService) GetOrCompute(ctx context.Context, key string, compute fun
             // 记录错误但不影响返回结果
             log.Printf("Failed to set cache: %v", err)
         }
-        
+
         return result, nil
     })
 }
@@ -978,21 +979,21 @@ func (s *Saga) rollback(ctx context.Context, originalErr error) error {
     for i := len(s.executed) - 1; i >= 0; i-- {
         stepIndex := s.executed[i]
         compensate := s.steps[stepIndex].Compensate
-        
+
         if err := compensate(ctx); err != nil {
             // 补偿操作失败，记录错误但继续执行其他补偿
             // 在实际系统中，可能需要更复杂的错误处理或人工干预
             fmt.Printf("Compensation failed for step %d: %v\n", stepIndex, err)
         }
     }
-    
+
     return fmt.Errorf("saga execution failed: %w", originalErr)
 }
 
 // 使用示例
 func CreateOrderSaga(orderSvc OrderService, paymentSvc PaymentService, inventorySvc InventoryService) *Saga {
     saga := NewSaga()
-    
+
     // 创建订单
     var orderID string
     saga.AddStep(
@@ -1010,7 +1011,7 @@ func CreateOrderSaga(orderSvc OrderService, paymentSvc PaymentService, inventory
             return orderSvc.CancelOrder(ctx, orderID)
         },
     )
-    
+
     // 扣减库存
     saga.AddStep(
         // 执行
@@ -1022,7 +1023,7 @@ func CreateOrderSaga(orderSvc OrderService, paymentSvc PaymentService, inventory
             return inventorySvc.RestoreInventory(ctx, orderID, items)
         },
     )
-    
+
     // 处理支付
     saga.AddStep(
         // 执行
@@ -1034,7 +1035,7 @@ func CreateOrderSaga(orderSvc OrderService, paymentSvc PaymentService, inventory
             return paymentSvc.RefundPayment(ctx, orderID)
         },
     )
-    
+
     return saga
 }
 ```
@@ -1058,7 +1059,7 @@ import (
     "encoding/json"
     "fmt"
     "time"
-    
+
     "github.com/go-redis/redis/v8"
 )
 
@@ -1067,12 +1068,12 @@ func IdempotencyKey(method string, path string, body interface{}) string {
     h := sha256.New()
     h.Write([]byte(method))
     h.Write([]byte(path))
-    
+
     if body != nil {
         bodyBytes, _ := json.Marshal(body)
         h.Write(bodyBytes)
     }
-    
+
     return hex.EncodeToString(h.Sum(nil))
 }
 
@@ -1093,51 +1094,51 @@ func NewIdempotencyService(redisClient *redis.Client) *IdempotencyService {
 
 func (s *IdempotencyService) Process(ctx context.Context, key string, fn func() (interface{}, error)) (interface{}, error) {
     redisKey := s.keyPrefix + key
-    
+
     // 检查操作是否已执行
     exists, err := s.redisClient.Exists(ctx, redisKey).Result()
     if err != nil {
         return nil, fmt.Errorf("failed to check idempotency key: %w", err)
     }
-    
+
     if exists == 1 {
         // 操作已执行，获取缓存的结果
         resultJSON, err := s.redisClient.Get(ctx, redisKey).Result()
         if err != nil {
             return nil, fmt.Errorf("failed to get idempotent result: %w", err)
         }
-        
+
         var result struct {
             Success bool
             Data    interface{}
             Error   string
         }
-        
+
         if err := json.Unmarshal([]byte(resultJSON), &result); err != nil {
             return nil, fmt.Errorf("failed to unmarshal result: %w", err)
         }
-        
+
         if !result.Success {
             return nil, fmt.Errorf(result.Error)
         }
-        
+
         return result.Data, nil
     }
-    
+
     // 添加处理中标记（使用锁确保并发安全）
     locked, err := s.redisClient.SetNX(ctx, redisKey+":lock", "processing", time.Minute).Result()
     if err != nil {
         return nil, fmt.Errorf("failed to acquire lock: %w", err)
     }
-    
+
     if !locked {
         // 另一个并发请求正在处理
         return nil, fmt.Errorf("concurrent request is being processed")
     }
-    
+
     // 执行操作
     result, err := fn()
-    
+
     // 存储结果
     resultData := struct {
         Success bool
@@ -1147,13 +1148,13 @@ func (s *IdempotencyService) Process(ctx context.Context, key string, fn func() 
         Success: err == nil,
         Data:    result,
     }
-    
+
     if err != nil {
         resultData.Error = err.Error()
     }
-    
+
     resultJSON, _ := json.Marshal(resultData)
-    
+
     // 清除锁并存储结果
     pipe := s.redisClient.Pipeline()
     pipe.Del(ctx, redisKey+":lock")
@@ -1162,7 +1163,7 @@ func (s *IdempotencyService) Process(ctx context.Context, key string, fn func() 
         // 记录错误但继续返回操作结果
         fmt.Printf("Failed to store idempotent result: %v\n", err)
     }
-    
+
     return result, err
 }
 
@@ -1173,25 +1174,25 @@ func CreateOrderHandler(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
-    
+
     // 使用请求唯一标识确保幂等性
     idempotencyKey := req.RequestID
     if idempotencyKey == "" {
         // 如果客户端未提供，根据请求内容生成
         idempotencyKey = IdempotencyKey("POST", "/orders", req)
     }
-    
+
     // 使用幂等服务处理请求
     result, err := idempotencyService.Process(c.Request.Context(), idempotencyKey, func() (interface{}, error) {
         // 实际的订单创建逻辑
         return orderService.CreateOrder(c.Request.Context(), req)
     })
-    
+
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
         return
     }
-    
+
     c.JSON(http.StatusCreated, result)
 }
 ```
@@ -1238,25 +1239,25 @@ func NewWeightedRandomLoadBalancer() *WeightedRandomLoadBalancer {
         instances:      make([]*ServiceInstance, 0),
         updateInterval: time.Minute,
     }
-    
+
     // 定期更新权重
     go lb.updateWeights()
-    
+
     return lb
 }
 
 func (lb *WeightedRandomLoadBalancer) updateWeights() {
     ticker := time.NewTicker(lb.updateInterval)
     defer ticker.Stop()
-    
+
     for range ticker.C {
         lb.mutex.Lock()
-        
+
         // 根据响应时间和错误率调整权重
         for _, instance := range lb.instances {
             // 基本权重
             weight := 100
-            
+
             // 根据响应时间调整（响应时间越长，权重越低）
             if instance.ResponseTime > 0 {
                 rtFactor := float64(1000) / float64(instance.ResponseTime)
@@ -1265,7 +1266,7 @@ func (lb *WeightedRandomLoadBalancer) updateWeights() {
                 }
                 weight = int(float64(weight) * rtFactor / 10)
             }
-            
+
             // 根据错误率调整（错误率越高，权重越低）
             if instance.ErrorRate > 0 {
                 errFactor := 1 - instance.ErrorRate
@@ -1274,15 +1275,15 @@ func (lb *WeightedRandomLoadBalancer) updateWeights() {
                 }
                 weight = int(float64(weight) * errFactor)
             }
-            
+
             // 设置最小权重
             if weight < 10 {
                 weight = 10
             }
-            
+
             instance.Weight = weight
         }
-        
+
         lb.mutex.Unlock()
     }
 }
@@ -1290,7 +1291,7 @@ func (lb *WeightedRandomLoadBalancer) updateWeights() {
 func (lb *WeightedRandomLoadBalancer) UpdateInstance(instance *ServiceInstance) {
     lb.mutex.Lock()
     defer lb.mutex.Unlock()
-    
+
     // 更新已有实例或添加新实例
     for i, existing := range lb.instances {
         if existing.ID == instance.ID {
@@ -1299,7 +1300,7 @@ func (lb *WeightedRandomLoadBalancer) UpdateInstance(instance *ServiceInstance) 
             return
         }
     }
-    
+
     instance.LastUpdated = time.Now()
     lb.instances = append(lb.instances, instance)
 }
@@ -1307,7 +1308,7 @@ func (lb *WeightedRandomLoadBalancer) UpdateInstance(instance *ServiceInstance) 
 func (lb *WeightedRandomLoadBalancer) RemoveInstance(instanceID string) {
     lb.mutex.Lock()
     defer lb.mutex.Unlock()
-    
+
     for i, instance := range lb.instances {
         if instance.ID == instanceID {
             // 删除实例
@@ -1320,28 +1321,28 @@ func (lb *WeightedRandomLoadBalancer) RemoveInstance(instanceID string) {
 func (lb *WeightedRandomLoadBalancer) Select() (*ServiceInstance, error) {
     lb.mutex.RLock()
     defer lb.mutex.RUnlock()
-    
+
     if len(lb.instances) == 0 {
         return nil, fmt.Errorf("no service instances available")
     }
-    
+
     // 计算总权重
     totalWeight := 0
     for _, instance := range lb.instances {
         totalWeight += instance.Weight
     }
-    
+
     // 选择实例
     targetWeight := rand.Intn(totalWeight) + 1
     currentWeight := 0
-    
+
     for _, instance := range lb.instances {
         currentWeight += instance.Weight
         if currentWeight >= targetWeight {
             return instance, nil
         }
     }
-    
+
     // 理论上不应该到达这里
     return lb.instances[0], nil
 }
@@ -1352,10 +1353,10 @@ func CallService(ctx context.Context, lb *WeightedRandomLoadBalancer, request in
     if err != nil {
         return nil, err
     }
-    
+
     startTime := time.Now()
     success := false
-    
+
     // 记录指标
     defer func() {
         instance.ResponseTime = (instance.ResponseTime*9 + time.Since(startTime).Milliseconds()) / 10
@@ -1366,15 +1367,15 @@ func CallService(ctx context.Context, lb *WeightedRandomLoadBalancer, request in
         }
         lb.UpdateInstance(instance)
     }()
-    
+
     // 发起RPC调用
     client := getClient(instance.Host, instance.Port)
     result, err := client.Call(ctx, request)
-    
+
     if err != nil {
         return nil, err
     }
-    
+
     success = true
     return result, nil
 }
@@ -1426,24 +1427,24 @@ func CallService(ctx context.Context, lb *WeightedRandomLoadBalancer, request in
 func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
     logger := workflow.GetLogger(ctx)
     logger.Info("订单处理工作流开始", "orderID", orderID)
-    
+
     // 1. 检查订单状态
     var order Order
     err := workflow.ExecuteActivity(ctx, GetOrderActivity, orderID).Get(ctx, &order)
     if err != nil {
         return fmt.Errorf("获取订单信息失败: %w", err)
     }
-    
+
     if order.Status != "created" {
         return fmt.Errorf("订单状态不正确: %s", order.Status)
     }
-    
+
     // 2. 预留库存
     err = workflow.ExecuteActivity(ctx, ReserveInventoryActivity, orderID, order.Items).Get(ctx, nil)
     if err != nil {
         return workflow.NewNonRetryableApplicationError("库存不足", "INVENTORY_ERROR", err, nil)
     }
-    
+
     // 3. 处理支付
     var paymentResult PaymentResult
     err = workflow.ExecuteActivity(ctx, ProcessPaymentActivity, orderID, order.TotalAmount).Get(ctx, &paymentResult)
@@ -1456,24 +1457,24 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
         }
         return fmt.Errorf("支付处理失败: %w", err)
     }
-    
+
     // 4. 确认订单
     err = workflow.ExecuteActivity(ctx, ConfirmOrderActivity, orderID, paymentResult.TransactionID).Get(ctx, nil)
     if err != nil {
         logger.Error("订单确认失败", "error", err)
         // 这里可以添加补偿逻辑，但支付已成功，可能需要特殊处理
     }
-    
+
     // 5. 分配物流
     err = workflow.ExecuteActivity(ctx, AssignShippingActivity, orderID).Get(ctx, nil)
     if err != nil {
         logger.Error("物流分配失败", "error", err)
         // 可以继续，因为支付已成功，物流可以后续处理
     }
-    
+
     // 6. 发送订单确认通知
     _ = workflow.ExecuteActivity(ctx, SendOrderConfirmationActivity, orderID).Get(ctx, nil)
-    
+
     logger.Info("订单处理工作流完成", "orderID", orderID)
     return nil
 }
@@ -1502,10 +1503,10 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
 └─────────────┘      └─────────────┘      └─────────────┘      └─────────────┘
                             │                    ▲
                             ▼                    │
-                     ┌─────────────┐      ┌─────────────┐      
-                     │ 通道适配    │      │ 对账服务    │      
-                     │(Channel)    │◀────▶│(Reconcile)  │      
-                     └─────────────┘      └─────────────┘      
+                     ┌─────────────┐      ┌─────────────┐
+                     │ 通道适配    │      │ 对账服务    │
+                     │(Channel)    │◀────▶│(Reconcile)  │
+                     └─────────────┘      └─────────────┘
                             │
                    ┌────────┴─────────┐
                    ▼                  ▼
@@ -1522,7 +1523,7 @@ func OrderProcessingWorkflow(ctx workflow.Context, orderID string) error {
 func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*PaymentResult, error) {
     logger := workflow.GetLogger(ctx)
     logger.Info("支付交易处理工作流开始", "merchantOrderID", request.MerchantOrderID)
-    
+
     options := workflow.ActivityOptions{
         StartToCloseTimeout: 5 * time.Second,
         RetryPolicy: &temporal.RetryPolicy{
@@ -1533,7 +1534,7 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
         },
     }
     ctx = workflow.WithActivityOptions(ctx, options)
-    
+
     // 1. 交易请求验证
     var validationResult ValidationResult
     err := workflow.ExecuteActivity(ctx, ValidatePaymentRequestActivity, request).Get(ctx, &validationResult)
@@ -1544,7 +1545,7 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
             Message: fmt.Sprintf("交易验证失败: %v", validationResult.Reason),
         }, nil
     }
-    
+
     // 2. 风控检查
     var riskResult RiskAssessmentResult
     err = workflow.ExecuteActivity(ctx, AssessRiskActivity, request).Get(ctx, &riskResult)
@@ -1556,7 +1557,7 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
             RiskInfo: riskResult,
         }, nil
     }
-    
+
     // 3. 账户检查（如果是账户支付）
     if request.PaymentMethod.Type == "account" {
         var accountResult AccountCheckResult
@@ -1569,7 +1570,7 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
             }, nil
         }
     }
-    
+
     // 4. 路由选择最佳支付通道
     var routeResult PaymentRouteResult
     err = workflow.ExecuteActivity(ctx, SelectPaymentRouteActivity, request).Get(ctx, &routeResult)
@@ -1580,19 +1581,19 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
             Message: "支付路由选择失败",
         }, nil
     }
-    
+
     // 5. 执行支付
     var paymentResult PaymentChannelResult
     err = workflow.ExecuteActivity(ctx, ExecutePaymentActivity, routeResult.ChannelID, request).Get(ctx, &paymentResult)
     if err != nil || !paymentResult.Success {
         // 记录失败，可能需要重试或切换其他通道
         logger.Error("支付执行失败", "error", err, "channel", routeResult.ChannelID)
-        
+
         // 如果有备选通道，尝试使用备选通道
         if len(routeResult.FallbackChannels) > 0 {
             fallbackChannel := routeResult.FallbackChannels[0]
             logger.Info("尝试备选通道", "channel", fallbackChannel)
-            
+
             err = workflow.ExecuteActivity(ctx, ExecutePaymentActivity, fallbackChannel, request).Get(ctx, &paymentResult)
             if err != nil || !paymentResult.Success {
                 return &PaymentResult{
@@ -1609,7 +1610,7 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
             }, nil
         }
     }
-    
+
     // 6. 更新交易记录
     transactionID := paymentResult.TransactionID
     err = workflow.ExecuteActivity(ctx, UpdateTransactionActivity, transactionID, paymentResult).Get(ctx, nil)
@@ -1617,12 +1618,12 @@ func PaymentProcessingWorkflow(ctx workflow.Context, request PaymentRequest) (*P
         logger.Error("交易记录更新失败", "error", err, "transactionID", transactionID)
         // 记录错误但不影响支付结果，可以通过对账补偿
     }
-    
+
     // 7. 发送通知
     _ = workflow.ExecuteActivity(ctx, SendPaymentNotificationActivity, request.MerchantID, transactionID, paymentResult).Get(ctx, nil)
-    
+
     logger.Info("支付交易处理工作流完成", "merchantOrderID", request.MerchantOrderID, "transactionID", transactionID)
-    
+
     return &PaymentResult{
         Success:       true,
         TransactionID: transactionID,

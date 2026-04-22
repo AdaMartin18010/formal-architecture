@@ -2,8 +2,8 @@
 
 [返回主题树](../00-总览与导航/00-主题树与内容索引.md) | [标准条款与文档映射表](00-标准条款与文档映射表.md) | [项目报告与总结](README.md)
 
-> **用途**：SWEBOK V4.0 知识域 2（Software Architecture）的条款/主题与本仓库文档/小节的逐项映射，便于季度复审与覆盖度检查。  
-> **依据**：Guide to the Software Engineering Body of Knowledge V4.0（IEEE Computer Society，2024年10月）。  
+> **用途**：SWEBOK V4.0 知识域 2（Software Architecture）的条款/主题与本仓库文档/小节的逐项映射，便于季度复审与覆盖度检查。
+> **依据**：Guide to the Software Engineering Body of Knowledge V4.0（IEEE Computer Society，2024年10月）。
 > **维护**：每季度与 SWEBOK 版本同步复审；与 [2025-对齐资源库 第六节](../2025-对齐资源库-最新版.md#六swebok-v4-对齐矩阵2025-09) 及 [00-标准条款与文档映射表](00-标准条款与文档映射表.md) 联动。
 
 ## 1. Software Architecture Fundamentals
@@ -48,6 +48,6 @@
 - **不覆盖**：无；KA 2 范围内无明确“不覆盖”项。
 - **复审**：每季度选 1–2 条核对文档是否仍为最新路径；SWEBOK 版本更新时同步本表结构。
 
-**文档版本**：v1.0  
-**创建日期**：2025-02-10  
+**文档版本**：v1.0
+**创建日期**：2025-02-10
 **建议复审**：每季度
