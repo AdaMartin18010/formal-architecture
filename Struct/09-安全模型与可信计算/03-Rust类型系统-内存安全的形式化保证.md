@@ -47,7 +47,7 @@ Rust映射：
   let x = String::new();  // 获得资源 x: String
   let y = x;              // move：x的所有权转移到y
   // x 不再可用（编译错误若使用x）
-  
+
   → 线性类型保证：资源不被隐式复制（除非实现Copy trait）
 
 借用检查 ≈ 分离逻辑（Separation Logic）
@@ -60,7 +60,7 @@ Rust映射：
   let mut data = vec![1, 2, 3];
   let r1 = &data;        // 借用检查器验证：&data有效
   let r2 = &mut data;    // 编译错误！已有不可变借用
-  
+
   → 分离逻辑保证：&T 和 &mut T 不能同时存在（读写互斥）
 ```
 
@@ -74,7 +74,7 @@ Rust映射：
 fn main() {
     let s1 = String::from("hello");
     let s2 = s1;  // s1的所有权move到s2
-    
+
     // println!("{}", s1);  // 编译错误！s1已失效
     println!("{}", s2);     // OK
 }
@@ -100,12 +100,12 @@ fn main() {
 
 fn main() {
     let mut data = vec![1, 2, 3];
-    
+
     // 场景1：多个不可变借用
     let r1 = &data;
     let r2 = &data;
     println!("{} {}", r1[0], r2[0]);  // OK
-    
+
     // 场景2：可变借用后不可再用不可变借用
     let r3 = &mut data;
     // println!("{}", r1);  // 编译错误！r1和r3的生命周期重叠
@@ -167,7 +167,7 @@ unsafe块的使用原则：
   extern "C" {
       fn c_function(ptr: *const u8, len: usize);
   }
-  
+
   pub fn safe_wrapper(data: &[u8]) {
       unsafe {
           c_function(data.as_ptr(), data.len());
@@ -192,7 +192,7 @@ unsafe块的使用原则：
 
 ## 七、交叉引用
 
-- → [09-总览](../00-总览-安全的形式化边界.md)
+- → [09-总览](./00-总览-安全的形式化边界.md)
 - → [09/02-可信计算](02-可信计算-从形式验证到运行时可信.md)
 - → [07/04-Rust类型系统](../../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md)
 - ↓ [01/02-计算模型](../../01-形式化计算理论根基/02-计算模型谱系-从λ演算到进程代数.md)

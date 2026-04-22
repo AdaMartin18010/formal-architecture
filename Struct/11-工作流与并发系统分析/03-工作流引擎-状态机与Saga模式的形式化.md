@@ -148,7 +148,7 @@ func OrderWorkflow(ctx workflow.Context, orderID string) error {
 
 ## 六、交叉引用
 
-- → [11-总览](../00-总览-Petri网与工作流引擎.md)
+- → [11-总览](./00-总览-Petri网与工作流引擎.md)
 - → [11/01-Petri网](01-Petri网-并发系统的形式化建模.md)
 - → [05/03-EDA](../05-架构模式与部署单元光谱/03-事件驱动架构-解耦与一致性的设计哲学.md)
 - → [04/04-EventSourcing](../../04-数据一致性代数结构/04-EventSourcing-事件溯源与左折叠代数.md)

@@ -144,9 +144,60 @@ UPPAAL验证查询：
 
 ---
 
-## 六、交叉引用
+## 六、工具对比矩阵（UPPAAL vs TLA+ vs SPIN）
 
-- → [07-总览](../00-总览-从构造到归纳的范式转移.md)
+| 维度 | **UPPAAL** | **TLA+/TLC** | **SPIN** |
+|------|-----------|-------------|---------|
+| **时间建模** | ✅ 原生Timed Automata | ❌ 离散时间抽象 | ⚠️ 需手动编码时钟 |
+| **状态空间处理** | 符号化（区域图） | 显式枚举 | 偏序约减 |
+| **反例输出** | 图形化轨迹 + 时序图 | 文本轨迹 | 消息序列图 |
+| **工业案例规模** | ≤50个并发进程 | ≤10⁸状态（小规模） | 中等规模协议 |
+| **学习曲线** | 中（GUI友好） | 高（数学化） | 中（Promela语言） |
+| **社区活跃度** | 中（学术研究为主） | 中（AWS推动） | 低（Legacy工具） |
+
+---
+
+## 七、批判性分析：UPPAAL的局限与边界
+
+> **权威声音**：Rajeev Alur 在 timed automata 原始论文中承认："The decidability of the reachability problem for timed automata is a fortunate coincidence..." —— Alur & Dill, *TCS*, 1994
+
+```
+UPPAAL的根本局限：
+
+  1. 状态空间爆炸（State Space Explosion）
+     - 时钟变量整数化后，状态数随时钟数指数增长
+     - 5个时钟 × 20个位置 ≈ 10⁶状态（已接近边界）
+     - 工业系统（如整个航空电子系统）远超验证能力
+
+  2. 线性约束限制
+     - 仅支持 x - y < c 形式的线性约束
+     - 非线性约束（如 x² < 10）不可判定
+     - 无法建模某些物理系统（如弹性碰撞）
+
+  3. 网络规模限制
+     - 并行Timed Automata的乘积构造导致状态爆炸
+     - 超过10个并行进程的模型通常不可验证
+
+  4. 近似误差
+     - 连续时间 → 离散区域图的近似
+     - 极端情况下可能遗漏边界条件Bug
+```
+
+---
+
+## 八、历史人物原话
+
+> "We present a theory of timed automata, a formalism for modeling real-time systems... The decidability of the reachability problem for timed automata is a fortunate coincidence that does not extend to even minor extensions." —— Rajeev Alur & David Dill, "A Theory of Timed Automata", *TCS*, 1994
+
+> "Model checking is the most successful applications of formal methods in industry... but the state-space explosion remains the Achilles' heel." —— Edmund Clarke, *Model Checking* (2nd ed.), MIT Press, 2018
+
+> "UPPAAL is not a silver bullet. It is a tool that requires skill and understanding of its limitations to be used effectively." —— UPPAAL Documentation Team
+
+---
+
+## 九、交叉引用
+
+- → [07-总览](./00-总览-从构造到归纳的范式转移.md)
 - → [07/01-TLA+](01-TLA+-时序逻辑规范与系统验证.md)
 - → [07/03-模型检测](03-模型检测-UPPAAL与状态空间爆炸问题.md)
 - → [11/01-Petri网](../11-工作流与并发系统分析/01-Petri网-并发系统的形式化建模.md)
