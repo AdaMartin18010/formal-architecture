@@ -1,5 +1,7 @@
 # 排队论基础：Little定律与M/M/1队列
 
+> **来源映射**: [08-总览] → 排队论基础 → Little定律与M/M/1队列解析
+
 > **定位**：排队论是性能工程的数学基础。Little定律（L = λW）看似简单，却是一切容量规划的基石——从线程池到K8s Pod，从数据库连接池到微服务链。
 >
 > **核心命题**：系统中的平均请求数 = 到达率 × 平均停留时间。这个关系在任何稳定的排队系统中成立，无论到达分布和服务分布如何。
@@ -132,6 +134,20 @@ M/M/1模型假设：
 - → [08/02-Amdahl-Gustafson](02-Amdahl-Gustafson-并行加速的理论边界.md)
 - → [08/04-容量规划](03-容量规划-从排队论到云原生弹性.md)
 - ↓ [05/04-微服务量化](../05-架构模式与部署单元光谱/04-微服务量化模型-Amdahl定律修正与协调成本.md)
+
+---
+
+## 八、权威引用
+
+> **J.D.C. Little** (1961): "Given a queueing system in steady state, the average number of customers in the system is equal to the average arrival rate multiplied by the average time spent in the system."
+
+> **Leonard Kleinrock** (1975): "Queueing theory is the primary methodological framework for analyzing resource sharing systems. Its power lies in the ability to predict system behavior before it is built."
+
+---
+
+## 九、批判性总结
+
+M/M/1队列作为排队论教学的经典入门模型，在工程实践中却是最常被误用的工具之一。其泊松到达和指数服务的假设在真实软件系统中几乎从不成立：HTTP请求 arrival 往往呈现突发性和重尾分布，而服务时间受GC停顿、缓存失效和IO抖动影响，远非指数分布。工程师若盲目套用L = ρ/(1-ρ)公式，会在高负载时严重低估实际队列长度——因为重尾服务分布的方差会使等待时间呈超指数增长。与更现实的M/G/1模型（Pollaczek-Khinchine公式）相比，M/M/1的解析简洁性是以牺牲准确性为代价的；与负载测试相比，排队论模型提供预测能力却依赖于分布假设的校验。未来，随着eBPF和实时追踪技术的普及，工程师将能够直接测量实际到达间隔和服务时间分布，从而选择更合适的排队模型（如M/G/1、G/G/1的扩散近似），而非默认使用M/M/1。Little定律作为不依赖分布的守恒量仍将成立，但M/M/1的闭式解应被视为教学工具而非工程真理。
 
 ---
 

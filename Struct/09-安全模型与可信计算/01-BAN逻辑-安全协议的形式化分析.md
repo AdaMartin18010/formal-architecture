@@ -1,5 +1,7 @@
 # BAN逻辑：安全协议的形式化分析
 
+> **来源映射**: [09-总览] → 安全协议形式化分析 → BAN逻辑与信念推理
+
 > **定位**：BAN逻辑是分析认证协议（如Kerberos、Needham-Schroeder）的"思维透镜"——它将协议的复杂性简化为信念推理，让设计者发现隐蔽的攻击路径。
 >
 > **核心命题**：协议"看起来正确"不等于"可证明安全"。BAN逻辑提供了一套规则，从协议消息推导参与者"应当相信"什么——但Lowe攻击证明，BAN的假设可能过于乐观。
@@ -150,6 +152,20 @@ Lowe攻击（1995）：
 - → [09/02-可信计算](02-可信计算-从形式验证到运行时可信.md)
 - → [07/01-TLA+](../07-形式化方法与验证体系/01-TLA+-时序逻辑规范与系统验证.md)
 - ↓ [03/03-PBFT](../03-分布式共识算法完整谱系/03-PBFT与BFT家族-拜占庭容错共识.md)
+
+---
+
+## 八、权威引用
+
+> **Burrows, Abadi, Needham** (1990): "We present a logic for analyzing authentication protocols. The logic is based on a simple model of belief, and allows the goals of protocols to be specified precisely."
+
+> **Gavin Lowe** (1995): "We present an attack on the Needham-Schroeder public-key authentication protocol. This attack was found by analyzing the protocol using a model checker, and could not be found using the BAN logic."
+
+---
+
+## 九、批判性总结
+
+BAN逻辑作为安全协议分析的先驱工具，其历史地位毋庸置疑，但当代安全工程师应将其视为"教学工具"而非"验证工具"。BAN的核心缺陷在于其理想化假设——加密完美、主体诚实、攻击者被动——这些假设在真实网络环境中几乎全不成立。Lowe攻击的发现不仅揭示了Needham-Schroeder协议的漏洞，更揭示了BAN逻辑本身的系统性盲区：它无法建模Dolev-Yao攻击者的主动能力，因此"BAN证明安全"绝不等于"协议安全"。与现代工具（Tamarin Prover、ProVerif）相比，BAN的手工推导过程既冗长又易错，而自动化工具能在几分钟内完成BAN需要数小时的手工推理。与类型化密码学（如F*验证的TLS 1.3实现）相比，BAN的逻辑粗糙度更是无法比拟。然而，BAN的真正遗产不在于其验证能力，而在于它开创了"用形式化逻辑分析安全协议"的研究范式——这一范式经Dolev-Yao模型、strand spaces发展到今天的自动化解密约束求解，构成了现代密码协议工程的理论根基。
 
 ---
 

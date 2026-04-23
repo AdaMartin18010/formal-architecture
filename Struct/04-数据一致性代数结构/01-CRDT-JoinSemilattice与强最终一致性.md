@@ -1,5 +1,7 @@
 # CRDT：Join-Semilattice 与强最终一致性
 
+> **来源映射**: Struct/04-数据一致性代数结构/01-CRDT-JoinSemilattice与强最终一致性.md
+>
 > **定位**：本文件将CRDT从"最终一致的魔法"还原为**半格（Join-Semilattice）代数的实例化**。理解半格公理是区分"盲目使用CRDT"与"理解为何CRDT有效"的关键。
 >
 > **核心命题**：当数据操作满足交换律、结合律、幂等律时，CRDT提供了**无需协调（Coordination-Free）**的一致性保证——这是分布式系统中最强的可用性承诺。
@@ -272,6 +274,18 @@ OR-Set解决方案：
 | Sebastian Burckhardt | "Principles of Eventual Consistency" | *Foundations and Trends in Programming Languages* | 2014 |
 | Mihai Letia et al. | "Causality Tracking in Causal Message Logging Protocols" | *ACM Computing Surveys* | 2022 |
 | Riak Docs | "Data Types" (Basho/RIAK) | docs.riak.com | 持续更新 |
+
+## 九、权威引用
+
+> **Marc Shapiro et al.** (2011): "A conflict-free replicated data type (CRDT) is a data structure which can be replicated across multiple computers in a network, where the replicas can be updated independently and concurrently without coordination between the replicas, and where it is always mathematically possible to resolve inconsistencies which might result."
+
+> **Sebastian Burckhardt** (2014): "Eventual consistency is a liveness property: it promises that if updates stop, then all replicas will eventually converge. Strong eventual consistency adds the safety property that correct replicas that have received the same updates have the same state."
+
+---
+
+## 十、批判性总结
+
+CRDT的代数优雅建立在一个关键隐含假设之上：业务操作天然满足交换律、结合律与幂等律。这一假设在计数器、集合等简单数据类型上成立，却在一经遇到账户转账、库存扣减等需要严格语义约束的场景时立即失效。CRDT无法表达"先检查余额再扣款"这类前置条件，因为这本质上要求协调（Coordination）。此外，State-based CRDT存在状态膨胀风险，OR-Set中的墓碑集合会随时间无限增长，工程上必须引入垃圾回收机制。与Paxos/Raft等强一致性协议相比，CRDT放弃了线性一致性以换取可用性，但并非所有业务都能承受这种放弃。未来趋势上，Delta-State CRDT显著改善了带宽效率，而Byzantine CRDT开始探索拜占庭容错场景下的收敛保证，这将进一步拓展CRDT在区块链和去中心化系统中的应用边界。
 
 ---
 

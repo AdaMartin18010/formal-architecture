@@ -1,5 +1,7 @@
 # Event Sourcing：不可变数据代数与版本诅咒
 
+> **来源映射**: Struct/04-数据一致性代数结构/03-EventSourcing-不可变数据代数与版本诅咒.md
+>
 > **定位**：本文件分析Event Sourcing的代数美感与工程诅咒。将状态定义为事件日志的折叠（fold）是函数式编程的优雅表达，但在长生命周期系统中，版本链永存和Upcasting线性增重构成了严峻的维护挑战。
 >
 > **核心命题**：Event Sourcing的不可变性与CRDT的收敛性存在深层张力——CRDT允许状态合并（重写历史视角），而Event Sourcing禁止任何历史重写。在>5年长生命周期系统中，维护成本呈超线性增长。
@@ -295,6 +297,18 @@ Event Sourcing的不可变性要求：
 | Marc Shapiro et al. | CRDT论文（对比参考） | INRIA | 2011 |
 | Michiel Overeem et al. | "An Empirical Characterization of Event Sourced Systems..." | *IEEE Software* | 2022 |
 | GDPR Regulation | Article 17: Right to erasure ('right to be forgotten') | EU Regulation | 2016 |
+
+## 九、权威引用
+
+> **Martin Fowler** (2005): "The fundamental idea of Event Sourcing is that we should ensure that every change to the state of an application is captured in an event object, and that these event objects are themselves stored in the sequence they were applied for the same lifetime as the application state itself."
+
+> **Greg Young** (2012): "Events are facts. A fact is something that happened; it cannot be changed, only reinterpreted. This is the single most important concept in event sourcing."
+
+---
+
+## 十、批判性总结
+
+Event Sourcing将系统状态建模为不可变事件流的左折叠，这种函数式美学在理论上无懈可击，却在长周期工程中暴露出结构性诅咒。其隐含假设——事件模式演化是低频且可控的——与现实业务的高速迭代存在根本张力：每新增一个业务字段，整个Upcasting链就延长一环，测试矩阵呈M×N爆炸。版本链永存导致存储膨胀和重放缓存恶化，而GDPR"被遗忘权"与不可变性的冲突至今没有完美解法。与CRDT的收敛性哲学相比，Event Sourcing坚守历史神圣性，提供了无可比拟的审计能力，却丧失了状态合并的灵活性。与快照型数据库相比，时间旅行能力以超线性维护成本为代价。未来趋势上，加密删除（Crypto-Shredding）和差分事件压缩正在缓解合规与存储压力，而"事件溯源+物化视图"的混合模式正在成为工业界的主流务实选择。
 
 ---
 

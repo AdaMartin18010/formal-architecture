@@ -1,5 +1,7 @@
 # Amdahl-Gustafson：并行加速的理论边界
 
+> **来源映射**: [08-总览] → 并行加速理论 → Amdahl定律与Gustafson定律
+
 > **定位**：Amdahl定律和Gustafson定律代表了并行计算的两种世界观——前者悲观（固定问题规模），后者乐观（扩展问题规模）。理解两者的边界条件，才能正确评估并行化的收益。
 >
 > **核心命题**：微服务架构的并行化收益不仅受Amdahl定律限制，还受协调成本（网络延迟、序列化、一致性）的额外惩罚。
@@ -160,6 +162,20 @@ Gustafson定律：
 - → [08/01-Little定律](01-排队论基础-Little定律与M_M_1队列.md)
 - → [05/04-微服务量化](../05-架构模式与部署单元光谱/04-微服务量化模型-Amdahl定律修正与协调成本.md)
 - ↓ [08/03-容量规划](03-容量规划-从排队论到云原生弹性.md)
+
+---
+
+## 八、权威引用
+
+> **Gene Amdahl** (1967): "For over a decade prophets have voiced the contention that the organization of a single computer has reached its limits and that truly significant advances can be made only by interconnection of a multiplicity of computers... The nature of this overhead appears to be sequential so that it is unlikely to be amenable to parallel processing techniques."
+
+> **John Gustafson** (1988): "Amdahl's law does not apply to problems where the answer must be obtained in a fixed time... The amount of work that can be done in parallel varies linearly with the number of processors."
+
+---
+
+## 九、批判性总结
+
+Amdahl定律与Gustafson定律的辩论本质上是对"问题规模是否固定"这一假设的不同回答，但两者都忽略了一个在微服务时代愈发关键的因素：协调成本。Amdahl的悲观结论（无限处理器加速上限1/(1-p)）在单芯片多核时代被证明过于保守，因为缓存一致性硬件将部分协调成本从软件转移到了硬件；而Gustafson的乐观结论（问题可线性扩展）在固定延迟SLA的在线服务面前又显得不切实际——用户不会等待更长时间只是因为服务器增加了。与原始定律相比，微服务修正模型（引入c×N²协调成本项）更贴近分布式系统的现实，但其参数c的测量困难限制了实用性。未来，随着无服务器计算和自动并行编译器的发展，"串行部分"和"协调成本"的界限将变得模糊：函数级自动并行可能让p趋近于1，而智能编排可能让c趋近于0——但这需要硬件-编译器-运行时的协同进化，而非单一层次的优化。
 
 ---
 

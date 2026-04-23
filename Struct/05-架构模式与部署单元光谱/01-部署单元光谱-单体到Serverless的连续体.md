@@ -1,5 +1,7 @@
 # 部署单元光谱：单体到Serverless的连续体
 
+> **来源映射**: Struct/05-架构模式与部署单元光谱/01-部署单元光谱-单体到Serverless的连续体.md
+>
 > **定位**：架构模式不是"选择一种"，而是理解连续光谱上的位置。每种模式都是特定约束下的最优解，理解光谱才能做出知情决策。
 >
 > **核心命题**：微服务不是银弹。从单体到Serverless，每种部署单元都有最优的团队规模、变更频率和组织成熟度区间。
@@ -142,6 +144,18 @@
 | Sam Newman | *Building Microservices* (2nd ed.) | O'Reilly | 2021 |
 | Simon Brown | "Modular Monoliths" | devoxx talks | 持续更新 |
 | Werner Vogels | "Working Backwards" | Amazon | 持续更新 |
+
+## 八、权威引用
+
+> **Martin Fowler** (2014): "Microservices are a approach to developing a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms. The microservice approach has nothing to do with size; it's about the boundaries."
+
+> **Sam Newman** (2021): "Microservices aren't magic. They aren't the answer to every problem. They are a specific approach to solving a specific set of problems, and they come with their own set of challenges."
+
+---
+
+## 九、批判性总结
+
+部署单元光谱揭示了软件架构选择本质上是组织约束与技术需求的多维耦合优化，而非从"落后"到"先进"的线性演进。其隐含假设是团队规模、DevOps成熟度和变更频率与部署粒度正相关，但这一假设忽视了技术异构性、合规要求和遗留系统债务的干扰变量。失效条件包括：组织变革能力不足以支撑微服务所需的认知负载、平台工程投资缺失导致"分布式单体"陷阱、以及为简历驱动开发而过度拆分服务。与"一刀切"架构 evangelism 相比，光谱思维提供了情境化决策框架，但其量化模型（如决策函数）仍缺乏大规模实证校准。未来趋势上，WebAssembly正在模糊单体与微服务的边界——编译时模块化与运行时轻量隔离的结合可能创造一种"可弹性重构的模块化单体"，从根本上改变光谱的拓扑结构。
 
 ---
 

@@ -1,5 +1,7 @@
 # 分布式事务：2PC、Saga与TCC的比较
 
+> **来源映射**: Struct/04-数据一致性代数结构/04-分布式事务-2PC-Saga与TCC的比较.md
+>
 > **定位**：分布式事务是数据一致性在工程中的最复杂体现——从强一致的2PC到最终一致的Saga，每种模式都是对CAP权衡的不同回答。
 >
 > **核心命题**：没有"最好的"分布式事务模式，只有"最适合当前一致性需求和性能约束"的模式。
@@ -182,6 +184,44 @@ TCC模式：业务层实现的三阶段补偿
 | Jim Gray | "Notes on Data Base Operating Systems" | *LNCS* | 1978 |
 | Pat Helland | "Life beyond Distributed Transactions" | *CACM* | 2016 |
 | Chris Richardson | *Microservices Patterns* | Manning | 2018 |
+
+## 九、分布式事务的形式化定义
+
+```
+定义（分布式事务）：
+  设事务 T 跨越参与者集合 P = {p₁, p₂, ..., pₙ}，
+  每个参与者维护本地状态 Sᵢ 和本地事务日志 Wᵢ。
+
+  分布式事务要求满足扩展的ACID属性：
+    原子性（Atomicity）：∀pᵢ ∈ P, T在pᵢ上提交 ⟹ T在所有pⱼ ∈ P上提交
+    一致性（Consistency）：∪Sᵢ(T后) 满足全局不变量
+    隔离性（Isolation）：调度等价于某个串行调度（可串行化）
+    持久性（Durability）：提交后，∀pᵢ, Wᵢ已持久化
+
+  2PC的阻塞形式化：
+    若协调者在Phase 1后崩溃，参与者持有锁等待决策，
+    ∃pᵢ: State(pᵢ) = " prepared" ∧ 决策 ∈ {COMMIT, ABORT} 未知
+    → 全局阻塞直到协调者恢复
+
+  Saga的最终一致形式化：
+    Saga = 本地事务序列 ⟨T₁, T₂, ..., Tₙ⟩ 及补偿序列 ⟨C₁, C₂, ..., Cₙ₋₁⟩
+    若 Tₖ 失败，则执行 Cₖ₋₁, ..., C₁
+    保证：∀i < k, Tᵢ 的效果被 Cᵢ 逻辑撤销（非技术回滚）
+```
+
+---
+
+## 十、权威引用
+
+> **Jim Gray** (1978): "The transaction concept is a mechanism that frees the application programmer from the need to manage consistency—the programmer simply brackets his computation with BEGIN and COMMIT, and the system guarantees atomicity and durability."
+
+> **Pat Helland** (2016): "Life beyond Distributed Transactions: an Apostate's Opinion. In a system that cannot count on distributed transactions, the management of uncertainty must be implemented in the business logic."
+
+---
+
+## 十一、批判性总结
+
+分布式事务模式（2PC/Saga/TCC）本质上是对CAP定理中一致性-可用性权衡的工程回应，而非普适解决方案。2PC的强一致性承诺以协调者单点和全局阻塞为代价，其隐含假设——网络分区罕见且协调者高可用——在跨区域部署中往往不成立。Saga和TCC通过放弃隔离性和即时一致性来换取可用性，但假设补偿操作语义上可逆且无副作用，这一假设在金融交易、物理库存等域中经常失效（例如"已发货"无法真正撤销）。与CRDT的协调自由哲学相比，分布式事务保留了更强的一致性语义，却引入了复杂的协调拓扑。未来趋势上，确定性数据库（如Calvin、FaunaDB）通过预排序消除分布式协调的运行时不确定性，而Saga编排的自动化（Temporal、Netflix Conductor）正在降低补偿逻辑的工程负担。
 
 ---
 

@@ -1,5 +1,7 @@
 # Rust类型系统：借检查器作为轻量级分离逻辑
 
+> **来源映射**: [07-总览] → 形式化方法轻量级化 → Rust类型系统与分离逻辑
+
 > **定位**：Rust的借用检查器是形式化方法走向主流的里程碑——它将分离逻辑（Separation Logic）的核心思想嵌入到日常编程语言中，让数百万开发者在不知情的情况下使用形式化验证。
 >
 > **核心命题**：Rust不是"让系统编程变难"，而是"将内存安全的认知负担从运行时转移到编译时"——一次性学习，终身受益。
@@ -163,6 +165,20 @@ Sync trait：
 - → [07/01-TLA+](01-TLA+-时序逻辑规范与系统验证.md)
 - → [09/03-Rust安全](../09-安全模型与可信计算/03-Rust类型系统-内存安全的形式化保证.md)
 - ↓ [01/01-可计算性](../01-形式化计算理论根基/01-可计算性边界-停机问题与Rice定理.md)
+
+---
+
+## 八、权威引用
+
+> **John C. Reynolds** (2002): "Separation logic is an extension of Hoare logic that permits reasoning about shared mutable data structures. It is based on the separating conjunction, which asserts that its conjuncts hold for disjoint portions of the store."
+
+> **Ralf Jung et al.** (2018): "We have developed RustBelt, the first formal (and machine-checked) foundations for safe Rust. RustBelt formalizes a large subset of Rust, including its ownership and borrowing system, and proves the safety of the standard library."
+
+---
+
+## 九、批判性总结
+
+Rust将分离逻辑从学术殿堂带入日常编程的成就是形式化方法史上最重要的普及事件之一，但这一成功的背后有着严格的边界条件。借用检查器本质是"可判定子集"的分离逻辑——它只验证那些能在多项式时间内推断的内存安全属性，这意味着它拒绝大量在运行时完全安全的程序（即"过度保守"）。与C++的RAII相比，Rust的所有权模型在系统级编程中引入了显著的学习曲线和架构约束；与垃圾回收语言相比，它消除了运行时开销却增加了编译时斗争。更深层的问题是，unsafe Rust构成了形式化保证的"阿喀琉斯之踵"——标准库中约1-2%的unsafe代码是安全抽象的基石，但任何一处不变式违反都会级联破坏整个安全保证。未来，随着形式化验证工具（如Kani、Prusti）的成熟，Rust社区正在探索将机械证明从unsafe边界扩展到更多应用领域，但"轻量级"与"完全保证"之间的张力将持续存在。
 
 ---
 

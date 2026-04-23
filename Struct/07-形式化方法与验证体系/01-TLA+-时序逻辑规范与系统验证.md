@@ -1,5 +1,7 @@
 # TLA+：时序逻辑规范与系统验证
 
+> **来源映射**: [07-总览] → TLA+时序逻辑 → 系统验证实践
+
 > **定位**：TLA+是Leslie Lamport创造的规格说明语言，它将时序逻辑与集合论结合，让工程师在写代码之前先"写清楚系统该做什么"。亚马逊AWS用TLA+发现了DynamoDB等系统的十几个严重Bug——在代码编写之前。
 >
 > **核心命题**：测试可以发现Bug的存在，但无法证明Bug的缺席。形式化规范是通向"无Bug"的最短路径。
@@ -156,6 +158,20 @@ TLC Model Checker可验证：
 - → [07/02-模型检测](02-模型检测-UPPAAL与状态空间爆炸.md)
 - → [03/02-Raft](../03-分布式共识算法完整谱系/02-Raft-状态机复制与模块化工程化.md)
 - → [09/01-BAN逻辑](../09-安全模型与可信计算/01-BAN逻辑-安全协议的形式化分析.md)
+
+---
+
+## 八、权威引用
+
+> **Leslie Lamport** (2002): "TLA+ is a language for specifying the behavior of concurrent and distributed systems. It is based on the idea that the best way to describe what a system is supposed to do is to write a single formula that asserts a relationship between the values of variables in the current state and the values in the next state."
+
+> **Chris Newcombe** (2015): "In every case, TLA+ has added significant value, either finding subtle bugs that we are sure we would not have found by other means, or giving us enough understanding and confidence to make aggressive performance optimizations."
+
+---
+
+## 九、批判性总结
+
+TLA+的价值被工业界广泛认可，但其成功建立在几个隐含假设之上：首先，系统必须能被建模为离散状态转换——这对事件驱动架构自然适用，但对流式计算或连续控制系统则显得笨拙；其次，TLA+的抽象层级要求设计者具备相当的数学成熟度，这形成了 Adoption Barrier，许多团队宁愿写更多测试也不愿学习时序逻辑。更为根本的是，TLC模型检测器只能验证有限实例，TLAPS定理证明虽可处理无限状态但成本极高，这意味着"形式化验证"与"完全保证"之间仍存在鸿沟。与Coq/Isabelle等交互式定理证明相比，TLA+更侧重规约而非实现级证明；与单元测试相比，它又要求更高的前期投入。未来趋势上，LLM辅助生成TLA+规约正在降低入门门槛，但Safety不变式的定义权仍必须保留在人类架构师手中——因为错误的规约比没有规约更危险。
 
 ---
 

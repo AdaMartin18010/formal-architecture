@@ -1,5 +1,7 @@
 # Hybrid Logical Clocks：物理与逻辑时钟的统一
 
+> **来源映射**: Struct/04-数据一致性代数结构/03-HybridLogicalClocks-物理与逻辑时钟的统一.md
+>
 > **定位**：HLC（混合逻辑时钟）解决了向量时钟的O(n)空间开销问题，同时保留了因果关系的捕获能力。它是CockroachDB等分布式数据库的底层机制，证明了"近似因果"在工程中的巨大价值。
 >
 > **核心命题**：HLC用O(1)空间实现了接近向量时钟的因果推理能力——通过将物理时钟（毫秒级）与逻辑计数器（微秒级）结合。
@@ -145,6 +147,18 @@ CockroachDB中的HLC：
 | Kulkarni et al. | "Logical Physical Clocks and Consistent Snapshots..." | *OPODIS* | 2014 |
 | CockroachDB团队 | CockroachDB文档（HLC使用） | cockroachlabs.com | 持续更新 |
 | Leslie Lamport | "Time, Clocks..." | *CACM* | 1978 |
+
+## 八、权威引用
+
+> **Sandeep Kulkarni et al.** (2014): "We present a new clock mechanism called Hybrid Logical Clock (HLC). HLC captures the causality relationship like logical clocks, but it also provides the ability to compare events in a distributed system in terms of physical time."
+
+> **Leslie Lamport** (1978): "The concept of one event happening before another in a distributed system is a partial ordering, and physical clocks cannot be used to establish this ordering with certainty."
+
+---
+
+## 九、批判性总结
+
+HLC以O(1)空间实现了对因果关系的近似捕获，是工程实用主义对理论精确性的成功妥协。其核心隐含假设是节点间物理时钟漂移存在有界上限（通常<500ms），且NTP同步机制可靠运行。一旦该假设被破坏——如节点陷入网络分区后时钟漂移加剧、或恶意NTP服务器攻击——HLC可能产生因果倒置的伪序关系。与向量时钟的精确偏序相比，HLC只保证单向因果（e₁→e₂ ⇒ HLC₁<HLC₂，逆命题不成立），这意味着并发检测存在假阴性；与TrueTime的区间语义相比，HLC无需GPS/原子钟硬件，但放弃了外部一致性保证。未来趋势上，自适应HLC正结合机器学习预测时钟漂移模式，而在边缘计算场景中，HLC与CRDT的融合正在催生新的"轻量级因果存储"范式。
 
 ---
 

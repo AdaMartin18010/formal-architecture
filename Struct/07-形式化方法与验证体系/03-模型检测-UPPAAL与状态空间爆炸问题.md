@@ -1,5 +1,7 @@
 # 模型检测：UPPAAL与状态空间爆炸问题
 
+> **来源映射**: [07-总览] → 模型检测技术谱系 → 状态空间爆炸与缓解策略
+
 > **定位**：模型检测是自动验证有限状态系统的方法——穷举所有可能状态，检查是否违反属性。UPPAAL是实时系统模型检测的代表工具，基于Timed Automata。
 >
 > **核心命题**：状态空间爆炸是模型检测的根本限制，但抽象、对称性约减和符号模型检测让实际验证成为可能。
@@ -138,7 +140,21 @@ Timed Automata的形式化：
 
 ---
 
-## 七、参考文献
+## 七、权威引用
+
+> **Edmund Clarke** (2018): "Model checking is the most successful application of formal methods in industry... but the state-space explosion remains the Achilles' heel."
+
+> **Rajeev Alur** (1994): "The decidability of the reachability problem for timed automata is a fortunate coincidence that does not extend to even minor extensions."
+
+---
+
+## 八、批判性总结
+
+模型检测的工业成功（Intel用它来验证芯片设计、NASA用它来验证火星探测器软件）掩盖了一个根本性矛盾：它承诺"全自动验证"，但这一承诺仅在状态空间足够小时成立。状态空间爆炸不是工程问题，而是计算复杂性理论中的PSPACE-complete本质——无论硬件多强大，指数增长的墙永远存在。抽象和符号模型检测虽能推远这堵墙，却引入了新的风险：过度抽象可能隐藏真实Bug，而欠抽象则让验证无法终止。与定理证明相比，模型检测的优势在于全自动和反例输出，劣势在于无法处理参数化系统（如"对任意N个节点"）；与测试相比，它能穷尽有限状态空间，却无法覆盖无限行为。未来，组合验证（Compositional Verification）和AI引导的抽象精化（CEGAR）是两条有希望的路线，但模型检测的根本限制——有限状态假设——不会消失，它只会被更巧妙地规避。
+
+---
+
+## 九、参考文献
 
 | 作者 | 标题 | 出处 | 年份 |
 |------|------|------|------|

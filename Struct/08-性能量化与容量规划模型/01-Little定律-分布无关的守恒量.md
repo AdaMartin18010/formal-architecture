@@ -1,5 +1,7 @@
 # Little定律：分布无关的守恒量
 
+> **来源映射**: [08-总览] → 排队论基础 → Little定律的软件工程映射
+
 > **定位**：本文件将排队论中最基本的守恒定律映射到软件工程各层级。Little定律（L = λW）不依赖到达分布、不依赖服务时间分布，是**容量规划的第一性原理工具**。
 >
 > **核心命题**：在回答"系统能支持多少QPS"或"需要多少服务器"之前，首先用Little定律建立量化框架，而非依赖经验猜测或负载测试的外推。
@@ -292,6 +294,20 @@ Little定律验证：
 - → [08/04-排队论](04-排队论在架构中的多层映射.md)
 - ↓ [05/02-微服务](../05-架构模式与部署单元光谱/02-微服务vs模块化单体-分布的代价与决策树.md)
 - ↑ [00/01-系统思维](../00-元认知与系统思维框架/01-系统思维-存量流量与反馈循环.md)
+
+---
+
+## 八、权威引用
+
+> **John D.C. Little** (1961): "The long-run average number of customers in a stable system L is equal to the long-run average effective arrival rate, λ, multiplied by the average time a customer spends in the system, W."
+
+> **Mor Harchol-Balter** (2013): "Little's Law is probably the most widely used law in queueing theory. What is amazing about it is that it makes no assumptions about the arrival process, the service distribution, the number of servers, or the service discipline."
+
+---
+
+## 九、批判性总结
+
+Little定律的普适性既是其最大优势也是其最大陷阱。作为"分布无关的守恒量"，它适用于任何稳态系统——但这一"稳态"假设在分布式软件工程中几乎从未严格成立：系统启动、流量突增、故障恢复、版本发布都破坏稳态条件，而工程师往往在这些非稳态时刻最需要容量决策支持。定律的另一个隐含假设是"封闭系统"或至少"到达率可测量"，但在微服务架构中，级联故障导致上游拒绝请求时，有效到达率会动态变化，使L = λW的因果方向变得模糊。与排队论中更精确的M/M/c模型相比，Little定律不给出方差或尾延迟信息，仅提供均值关系——这意味着它告诉你"平均有200个并发请求"，却不告诉你"P99队列长度是多少"。未来，随着自适应系统和混沌工程的发展，Little定律的非稳态扩展（如流体近似和扩散近似）将获得更多关注，但在工程实践中，它仍将作为第一性原理工具持续发挥价值——前提是工程师理解其稳态假设的边界。
 
 ---
 

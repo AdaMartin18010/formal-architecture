@@ -1,5 +1,7 @@
 # Rust类型系统：内存安全的形式化保证
 
+> **来源映射**: [09-总览] → 内存安全形式化 → Rust类型系统与所有权模型
+
 > **定位**：Rust将内存安全从"程序员的责任"转变为"编译器的保证"——通过所有权、借用和生命周期，在编译期消除整类运行时错误。这不是类型系统的渐进改进，而是软件工程范式的转变。
 >
 > **核心命题**：Rust的借用检查器是轻量级分离逻辑（Separation Logic）的自动定理证明器——它证明了你的程序不会同时读写同一内存。
@@ -196,6 +198,20 @@ unsafe块的使用原则：
 - → [09/02-可信计算](02-可信计算-从形式验证到运行时可信.md)
 - → [07/04-Rust类型系统](../07-形式化方法与验证体系/04-Rust类型系统-借检查器作为轻量级分离逻辑.md)
 - ↓ [01/02-计算模型](../../01-形式化计算理论根基/02-计算模型谱系-从λ演算到进程代数.md)
+
+---
+
+## 八、权威引用
+
+> **Ralf Jung et al.** (2018): "RustBelt is the first formal and machine-checked foundation for safe Rust. It proves that a large subset of Rust's type system soundly guarantees memory safety and data-race freedom."
+
+> **Nicholas Matsakis and Aaron Turon** (2014): "Ownership is Rust's most unique feature. It enables Rust to make memory safety guarantees without a garbage collector, and it is the key to Rust's zero-cost abstractions."
+
+---
+
+## 九、批判性总结
+
+Rust类型系统对内存安全的保证是编程语言设计中形式化方法最成功的工业应用之一，但其保证范围有着精确的边界。借用检查器消除了数据竞争、use-after-free和双重释放等整类错误，但它不消除死锁、逻辑错误和资源泄漏（除内存外）；unsafe Rust的存在意味着安全保证的传递性依赖于人工对不变式的维护，而标准库中约1.5%的unsafe代码构成了整个安全沙堡的基石。与C++的RAII相比，Rust的所有权模型在运行时零开销但编译时高摩擦；与Java等GC语言相比，它消除了GC停顿但增加了学习曲线和重构成本。与形式化验证的语言（如F*或SPARK Ada）相比，Rust的借用检查器是一个自动但保守的验证器——它拒绝大量安全程序以换取可判定的检查。未来，随着Rust在操作系统内核（Linux驱动、Android系统组件）和关键基础设施中的渗透，对unsafe代码的机械验证（如Kani、SMACK）将成为社区重点，但Rust的核心价值主张——"大多数人不需要写unsafe"——仍将是其区别于其他系统语言的关键。
 
 ---
 
