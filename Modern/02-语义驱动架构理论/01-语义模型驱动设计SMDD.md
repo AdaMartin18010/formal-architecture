@@ -196,6 +196,35 @@ SMDD作为语义驱动架构的核心理论，其"语义模型是核心，DSL只
 
 > **来源映射**: View/04.md（软件架构：模式与风格分析）、View/05.md（编程语言理论：抽象机制演进）
 
+## 10. 形式化定义
+
+**定义 10.1** (SMDD设计空间的形式化)
+
+SMDD 的设计空间可形式化为带约束的生成系统：
+
+$$SMDD = (\mathcal{D}, \mathcal{R}_{feasible}, \mathcal{O}_{objective})$$
+
+其中：
+
+- $\mathcal{D}$：**设计决策空间**，$\mathcal{D} = \mathcal{D}_{entity} \times \mathcal{D}_{relation} \times \mathcal{D}_{event} \times \mathcal{D}_{context}$
+- $\mathcal{R}_{feasible}$：**可行域约束**，由语义保真原则与可组合性原则联合定义
+  $$\mathcal{R}_{feasible} = \{d \in \mathcal{D} | \text{Fidelity}(d) \geq \theta_F \land \text{Composability}(d) \geq \theta_C\}$$
+- $\mathcal{O}_{objective}$：**目标函数**，$\mathcal{O}_{objective}: \mathcal{R}_{feasible} \rightarrow \mathbb{R}^{+}$
+
+**语义保真度量**：
+
+$$\text{Fidelity}(d) = \frac{|\text{semantics}(d) \cap \text{requirements}|}{|\text{requirements}|}$$
+
+**可组合性度量**：
+
+$$\text{Composability}(d) = \frac{\text{atomic}(d)}{\text{total}(d)} \times \text{interface}_{\text{purity}}(d)$$
+
+**最优设计**：
+
+$$d^{*} = \arg\max_{d \in \mathcal{R}_{feasible}} \mathcal{O}_{objective}(d)$$
+
+该形式化框架将 SMDD 从启发式设计提升为约束优化问题。
+
 ## 2025 对齐
 
 - **国际 Wiki**：

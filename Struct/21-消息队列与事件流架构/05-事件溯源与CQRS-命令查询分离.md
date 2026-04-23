@@ -50,15 +50,15 @@
 ```text
 定义 (事件溯源系统 ES):
   ES = ⟨E, S, apply, State₀⟩
-  
+
   E: 领域事件集合, e ∈ E = ⟨event_id, event_type, payload, timestamp, aggregate_id, version⟩
   S: 状态空间
   apply: S × E → S   (状态转移函数)
-  
+
   当前状态计算:
     State(t) = foldl(apply, State₀, [e₁, e₂, ..., eₙ])
     其中 [e₁..eₙ] 是 aggregate_id 对应的全部有序事件
-  
+
   不可变约束:
     ∀e ∈ E: e 一旦写入不可修改
     修正只能通过写入补偿事件: e_compensate = ⟨..., "Correction", delta, ...⟩
@@ -69,15 +69,15 @@
 ```text
 定义 (CQRS 系统):
   传统 CRUD:  ⟨Command, Query⟩ → 同一模型 M → 同一存储
-  
+
   CQRS 分离:
     Command Side: C → M_write → Event Store
     Query Side:   Q → M_read ← Projection(Event Store)
-    
+
   一致性模型:
     写侧: 强一致 (Aggregate 验证保证不变式)
     读侧: 最终一致 (Projection 滞后于 Event Store)
-    
+
   延迟边界:
     ∀q ∈ Query: |time(write(e)) - time(read_projection(e))| ≤ δ
 ```
@@ -87,12 +87,12 @@
 ```text
 定义 (投影函数 Projection):
   Projection: [E] → View
-  
+
   典型投影类型:
     (1) 单 Aggregate 投影: View = apply_all(State₀, events_for_aggregate)
     (2) 跨 Aggregate 投影: View = join(project(a₁), project(a₂), ...)
     (3) 时序投影: View(t) = foldl(apply, State₀, events_before(t))
-  
+
   投影一致性条件:
     若 Event Store 保证分区顺序，则 Projection 按顺序应用事件
     最终: lim(t→∞) View(t) = Projection(all_events)
@@ -137,7 +137,7 @@ public class BankAccount {
     private String accountId;
     private long balance;
     private List<DomainEvent> uncommittedEvents = new ArrayList<>();
-    
+
     // 命令处理
     public void withdraw(long amount) {
         if (balance < amount) {
@@ -145,7 +145,7 @@ public class BankAccount {
         }
         apply(new MoneyWithdrawn(accountId, amount, Instant.now()));
     }
-    
+
     // 状态应用 (纯函数)
     public void apply(DomainEvent event) {
         if (event instanceof MoneyDeposited) {
@@ -155,7 +155,7 @@ public class BankAccount {
         }
         uncommittedEvents.add(event);
     }
-    
+
     // 从事件流重建
     public static BankAccount reconstitute(String id, List<DomainEvent> history) {
         BankAccount account = new BankAccount(id);

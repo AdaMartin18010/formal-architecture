@@ -489,20 +489,30 @@ $$\text{综合效能} = V \times O \times R = 8\text{x} \times 10\text{x} \times
 **最后更新**：2025-02-02
 **维护状态**：✅ 持续更新中
 
-
 ---
-
-> **来源映射**: 本文件理论来源与现代语义架构知识体系
 
 ## 批判性总结
 
-本节内容从理论与实践双重维度审视了相关概念的核心价值与适用边界。从理论层面看，当前框架仍存在形式化程度不足、边界条件定义模糊等问题；从实践层面看，工程落地中需警惕过度抽象导致的认知负载增加。未来发展方向应聚焦于与具体业务场景的深度融合，以及形式化方法与工程实践的持续迭代优化。在应用过程中，需始终保持批判性思维，警惕模型的隐含假设与失效条件，避免将理论工具教条化。
-
+本文档提供了一套详尽的 ROI 量化模型，从三维评估体系到投资回收期计算，再到弹性极限与验证路径，逻辑链条完整且具备财务可操作性。其最大贡献在于将"语义驱动"从理念转化为可汇报的 KPI。然而，模型中的关键参数（如 800 人天的初期投入、每需求 0.5 周的交付周期）对组织规模、领域复杂度和技术债务水平高度敏感。理论承诺的 480 倍综合效能提升与实际验证的 3-5 倍之间存在数量级落差，这种坦诚虽值得肯定，但也暗示了模型在高阶项上的乘数效应可能被放大。此外，定理 6.2 关于 DSL 失效条件（规则不确定性 >70% 且日变）的界定极具实践价值，但缺乏判定"不确定性"的客观度量方法。总体而言，该文档是优秀的"内部商业计划模板"，但在对外承诺时应采用保守估计。
 
 ## 权威引用
 
-> **Martin Fowler** (2002): "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+> **Barry Boehm** (2008): "The analysis shows that, after normalizing for the effects of other cost drivers, the cost difference between projects doing a minimal job of software systems engineering and projects doing a very thorough job was 18% for small projects and 92% for very large software projects."
 
-> **Fred Brooks** (1975): "Adding manpower to a late software project makes it later."
+> **Peter Drucker** (1954): "What gets measured gets managed."
 
-> **Leslie Lamport** (2012): "A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable."
+## 形式化定义
+
+**定义** (投资回报率与回收期). 设初期投入为 $I_0$，年度节省为 $S_{annual}$，则**投资回报率**（ROI）为：
+
+$$ROI = \frac{S_{annual}}{I_0} \times 100\%$$
+
+**投资回收期**（月）为：
+
+$$P_{payback} = \frac{I_0}{S_{annual}} \times 12$$
+
+设综合效能理论值为 $E_{theory}$，实际验证值为 $E_{actual}$，则**承诺折扣因子** $\delta = E_{actual} / E_{theory}$，用于校准对外承诺。
+
+## 来源映射
+
+> **来源映射**: Barry Boehm, Ricardo Valerdi, Eric Honour《The ROI of systems engineering》(Systems Engineering, 2008); Peter Drucker《The Practice of Management》(1954); IEEE 1012:2025 软件验证与确认标准; 决策分析理论（Stanford MS&E 252）; DORA《Accelerate》效能研究框架。

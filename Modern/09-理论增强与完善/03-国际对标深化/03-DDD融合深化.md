@@ -376,19 +376,30 @@ SMDD代码生成（自动生成聚合根、领域服务）
 **维护状态**：✅ 持续更新中
 
 
----
-
-> **来源映射**: 本文件理论来源与现代语义架构知识体系
-
 ## 批判性总结
 
-本节内容从理论与实践双重维度审视了相关概念的核心价值与适用边界。从理论层面看，当前框架仍存在形式化程度不足、边界条件定义模糊等问题；从实践层面看，工程落地中需警惕过度抽象导致的认知负载增加。未来发展方向应聚焦于与具体业务场景的深度融合，以及形式化方法与工程实践的持续迭代优化。在应用过程中，需始终保持批判性思维，警惕模型的隐含假设与失效条件，避免将理论工具教条化。
+本文档提供了从DDD到SMDD的迁移指南，重点讨论了限界上下文的自动识别和两种方法的互补关系。迁移指南的步骤描述清晰，DSL示例有助于理解，但文档在几个关键问题上过于乐观。首先是**限界上下文自动识别**的算法可行性：文档提出的基于实体关系图聚类的方法（K-means或层次聚类）面临一个根本困难——限界上下文的边界不仅是技术问题，更是组织问题和政治问题。Evans在原始DDD著作中反复强调，限界上下文的划分需要领域专家和开发团队的深度协作与共识，而非单纯从技术结构推导。一个关系密度高的模块可能因组织原因被拆分到不同团队，而关系稀疏的模块可能因安全合规要求被强制合并。算法无法捕捉这些非技术约束。其次，"互补关系"的论述倾向于将DDD定位为"战略设计"、SMDD定位为"战术实现"，这种分工虽然便利，但可能过度简化了DDD的战术设计价值——DDD的聚合、值对象、领域服务等战术模式不仅是实现细节，更是深刻的设计智慧，SMDD的自动生成是否能等价替代这些模式仍需证明。第三，迁移指南中的DSL示例将统一语言直接映射为entity/relation/event结构，但DDD的统一语言包含丰富的行为描述（如"订单在支付后进入待发货状态"），这些状态机行为在DSL中如何表达？文档未给出对应的状态迁移形式化机制。最后，互补关系的论证缺少实证支撑：有多少团队成功实践了"DDD战略 + SMDD战术"的分层方法？文档未引用任何案例。
 
 
 ## 权威引用
 
-> **Martin Fowler** (2002): "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+> **Miller, J. & Mukerji, J.** (2003): *MDA Guide Version 1.0.1*. Object Management Group (OMG).
+>
+> **Eric Evans** (2003): *Domain-Driven Design: Tackling Complexity in the Heart of Software*. Addison-Wesley.
+>
+> **Thomas Gruber** (1993): "A Translation Approach to Portable Ontology Specifications." *Knowledge Acquisition*, 5(2), 199–220.
 
-> **Fred Brooks** (1975): "Adding manpower to a late software project makes it later."
 
-> **Leslie Lamport** (2012): "A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable."
+## 形式化定义
+
+**定义 M.3** (限界上下文自动识别)
+设 $G = (E, R, w)$ 为带权实体关系图，其中 $w: R \to \mathbb{R}^+$ 为关系强度函数。限界上下文识别为图划分问题：
+$$\text{Find } \{BC_1, BC_2, \dots, BC_k\} \text{ s.t. } \bigcup_{i=1}^k BC_i = E, \quad BC_i \cap BC_j = \emptyset (i \neq j)$$
+最小化跨上下文关系权重和：
+$$\min \sum_{i \neq j} \sum_{\substack{e_p \in BC_i \text{ or } e_q \in BC_j}} w(r_{pq})$$
+约束条件：$|BC_i| \leq \tau_{max}$（上下文规模上限），$\text{density}(BC_i) \geq \delta_{min}$（内部密度下限）。
+
+
+## 来源映射
+
+> **来源映射**: OMG MDA标准 (2003) → 平台无关/特定模型分离；Evans DDD (2003) → 领域驱动设计与限界上下文；Gruber本体论 (1993) → 语义概念显式化规范。

@@ -146,19 +146,30 @@ DDD 项目迁移决策
 **维护状态**：✅ 持续更新中
 
 
----
-
-> **来源映射**: 本文件理论来源与现代语义架构知识体系
-
 ## 批判性总结
 
-本节内容从理论与实践双重维度审视了相关概念的核心价值与适用边界。从理论层面看，当前框架仍存在形式化程度不足、边界条件定义模糊等问题；从实践层面看，工程落地中需警惕过度抽象导致的认知负载增加。未来发展方向应聚焦于与具体业务场景的深度融合，以及形式化方法与工程实践的持续迭代优化。在应用过程中，需始终保持批判性思维，警惕模型的隐含假设与失效条件，避免将理论工具教条化。
+本文档对DDD的战略设计模式（限界上下文、上下文映射、子域划分）和战术模式（实体、值对象、聚合、领域服务、领域事件）进行了与MSMFIT/SMDD的逐项深度对比，并提供了模式映射矩阵和迁移决策树。这种系统性对比在架构迁移决策中具有较高的实用价值，但也存在一些批判性盲点。首先，映射矩阵将DDD的"仓储"（Repository）映射为"生成或防腐层"，将"工厂"（Factory）映射为"生成"，这种映射过于粗糙——仓储的本质是聚合的持久化抽象，它不仅是代码生成问题，更涉及事务边界、乐观锁、查询优化等深层技术决策，SMDD的生成器是否能自动处理这些复杂性？文档未给出证据。其次，决策树中"遗留代码存在？→ 是 → 防腐层 + 渐进式迁移"的分支虽然合理，但"遗留代码存在"这一节点的判断标准未定义——是代码行数>10万行？是技术债务密度>阈值？还是团队对遗留系统的知识流失程度？缺乏可操作的标准使得决策树在实际中难以落地。第三，战术模式对比中，DDD的"不变式"（Invariant）被映射为"DSL验证规则、SHACL"，但SHACL是W3C的约束语言，主要用于RDF数据验证，与业务层不变式（如"订单金额必须大于0"）的抽象层级不同。将两者等同可能掩盖了从业务规则到SHACL约束的语义距离。最后，文档未讨论DDD的战略模式中最具争议的"核心域识别"问题——SMDD是否有方法辅助判断哪个子域应被识别为核心域？这一战略决策对企业的资源分配至关重要。
 
 
 ## 权威引用
 
-> **Martin Fowler** (2002): "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+> **Miller, J. & Mukerji, J.** (2003): *MDA Guide Version 1.0.1*. Object Management Group (OMG).
+>
+> **Eric Evans** (2003): *Domain-Driven Design: Tackling Complexity in the Heart of Software*. Addison-Wesley.
+>
+> **Thomas Gruber** (1993): "A Translation Approach to Portable Ontology Specifications." *Knowledge Acquisition*, 5(2), 199–220.
 
-> **Fred Brooks** (1975): "Adding manpower to a late software project makes it later."
 
-> **Leslie Lamport** (2012): "A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable."
+## 形式化定义
+
+**定义 M.4** (模式映射保真性)
+设 $\mathcal{D}$ 为DDD模式集合，$\mathcal{S}$ 为SMDD构造集合。模式映射 $\Psi: \mathcal{D} \to \mathcal{S} \cup \{	ext{保留}, \text{混合}\}$ 满足**保真性**当且仅当：
+$$\forall d \in \mathcal{D}, \quad \text{behaviour}(d) \subseteq \text{behaviour}(\Psi(d))$$
+即SMDD构造的行为语义包含原DDD模式的行为语义。映射的**保真度**定义为：
+$$\text{Fidelity}(\Psi) = \frac{|\{d \in \mathcal{D} \mid \text{behaviour}(d) = \text{behaviour}(\Psi(d))\}|}{|\mathcal{D}|}$$
+当前目标：$\text{Fidelity}(\Psi) \geq 0.85$。
+
+
+## 来源映射
+
+> **来源映射**: OMG MDA标准 (2003) → 平台无关/特定模型分离；Evans DDD (2003) → 领域驱动设计与限界上下文；Gruber本体论 (1993) → 语义概念显式化规范。

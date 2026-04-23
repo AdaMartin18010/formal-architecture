@@ -45,14 +45,14 @@ Exactly-Once 语义实现
 定义 (幂等操作):
   设操作 f: S → S 作用于状态 S
   f 是幂等的 ⟺ ∀s ∈ S: f(f(s)) = f(s)
-  
+
 Kafka 幂等生产者:
   设 Producer 状态 = ⟨PID, seq_num_per_partition⟩
   Broker 维护每个分区的已接收序列号集合: Received[PID][partition]
-  
+
   去重条件:
     accept(msg) ⟺ msg.seq_num > max(Received[PID][partition])
-    
+
   幂等性保证:
     若网络重传导致同一消息发送多次，仅第一次被接受
     形式化: send(m) retry N 次 ⟹ append(m) 执行恰好 1 次
@@ -63,15 +63,15 @@ Kafka 幂等生产者:
 ```text
 定义 (Kafka 事务 T):
   T = ⟨TransactionalId, PID, partitions, state⟩
-  
+
   状态机:
     Init → Ongoing → PrepareCommit → Committed
                         ↘ PrepareAbort  → Aborted
-  
+
   原子性保证:
     ∀msg ∈ T: commit(T) → all msgs visible
               abort(T) → no msgs visible
-  
+
   隔离级别:
     read_uncommitted: 消费者看到所有消息 (包括未提交的)
     read_committed:   消费者仅看到已提交消息 (过滤 abort 的)
@@ -81,11 +81,11 @@ Kafka 幂等生产者:
 
 ```text
 定理 (Exactly-Once = At-Least-Once + Idempotency + Transactions):
-  
+
   (1) At-Least-Once: acks=all + 生产者重试 保证消息不丢失
   (2) Idempotency: PID + SeqNum 保证 Broker 端不重复写入
   (3) Transactions: 保证跨分区、跨 Topic 的原子可见性
-  
+
   推论:
     在 Kafka 内部流转中: Exactly-Once 可达
     在 Kafka ↔ 外部系统: 需要外部系统支持幂等写入 (idempotent consumer)
@@ -153,4 +153,4 @@ try {
 
 ## 六、批判性总结
 
-Kafka 的 Exactly-Once 实现是分布式消息系统领域最重要的工程突破之一，但它常被误解为"魔法般的保证"。**Kafka EOS 仅在 Kafka 内部流转时成立**——一旦数据离开 Kafka 进入外部数据库、缓存或第三方系统，EOS 的保证边界即被打破。此时需要依赖外部系统的幂等性（如数据库 UPSERT、带条件的写入等）来实现端到端的 Exactly-Once。更深层的问题是：事务 API 基于简化的两阶段提交协议，事务协调器是单点瓶颈，高并发事务场景下可能成为吞吐量瓶颈。此外，`read_committed` 隔离级别引入了"事务消息可见性延迟"（消费者需等待事务提交才能读取），这在实时性要求高的场景下不可接受。幂等生产者的会话绑定（PID 与 broker 连接关联）意味着** Producer 重启后旧会话的幂等窗口丢失**，需要 TransactionalId 机制跨会话恢复状态，这进一步增加了运维复杂度。
+Kafka 的 Exactly-Once 实现是分布式消息系统领域最重要的工程突破之一，但它常被误解为"魔法般的保证"。**Kafka EOS 仅在 Kafka 内部流转时成立**——一旦数据离开 Kafka 进入外部数据库、缓存或第三方系统，EOS 的保证边界即被打破。此时需要依赖外部系统的幂等性（如数据库 UPSERT、带条件的写入等）来实现端到端的 Exactly-Once。更深层的问题是：事务 API 基于简化的两阶段提交协议，事务协调器是单点瓶颈，高并发事务场景下可能成为吞吐量瓶颈。此外，`read_committed` 隔离级别引入了"事务消息可见性延迟"（消费者需等待事务提交才能读取），这在实时性要求高的场景下不可接受。幂等生产者的会话绑定（PID 与 broker 连接关联）意味着**Producer 重启后旧会话的幂等窗口丢失**，需要 TransactionalId 机制跨会话恢复状态，这进一步增加了运维复杂度。

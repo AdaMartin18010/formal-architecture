@@ -55,10 +55,10 @@ Kafka 分布式日志核心机制
 定义 (分区日志):
   Partition p 是一个有序、不可变、追加的消息序列:
     p = [m₀, m₁, m₂, ..., mₙ]
-    
+
   消息结构:
     mᵢ = ⟨offset=i, key, value, timestamp, headers⟩
-    
+
   关键性质:
     1. 顺序性: ∀i < j, mᵢ 在 mⱼ 之前写入
     2. 不可变性: mᵢ 一旦写入不可修改
@@ -71,17 +71,17 @@ Kafka 分布式日志核心机制
 ```text
 定义 (ISR - In-Sync Replicas):
   设 Partition p 的副本集合 R = {r₀, r₁, ..., rₖ}，其中 r₀ 是 Leader
-  
+
   ISR(p) = {r ∈ R | lag(r, r₀) ≤ replica.lag.time.max.ms}
-  
+
   即: ISR 是与 Leader 的日志延迟在可接受时间窗口内的副本
-  
+
   提交条件 (acks=all):
     消息 m 被提交 ⟺ m 已写入 ISR 中的所有副本
-    
+
   可用性条件:
     Partition 可写 ⟺ |ISR(p)| ≥ min.insync.replicas
-    
+
   Leader 选举:
     若 Leader 失效，从 ISR 中选举新 Leader
     若 ISR 为空，根据 unclean.leader.election.enable 决定:
@@ -147,7 +147,7 @@ producer.send(new ProducerRecord<>("orders", orderId, orderJson));
   - RequestLatency: 生产/消费延迟
   - ISRShrink/ISRExpand: ISR 变化频率
   - LogEndOffset - HighWatermark: 未提交消息数
-  
+
 告警规则:
   - UnderReplicatedPartitions > 0 → 立即告警
   - OfflinePartitions > 0 → 紧急告警
@@ -158,6 +158,6 @@ producer.send(new ProducerRecord<>("orders", orderId, orderJson));
 
 ## 六、批判性总结
 
-Kafka 的 ISR 机制是** CAP 定理**的工程实现：当网络分区发生时，Kafka 选择**一致性**（等待 ISR 恢复）还是**可用性**（允许 unclean leader election）由配置决定。默认配置 `unclean.leader.election.enable=false` 表明 Kafka 的设计偏好是**一致性优先**——这与 Redis Cluster 的可用性优先形成鲜明对比。
+Kafka 的 ISR 机制是**CAP 定理**的工程实现：当网络分区发生时，Kafka 选择**一致性**（等待 ISR 恢复）还是**可用性**（允许 unclean leader election）由配置决定。默认配置 `unclean.leader.election.enable=false` 表明 Kafka 的设计偏好是**一致性优先**——这与 Redis Cluster 的可用性优先形成鲜明对比。
 
 KRaft 模式（Kafka 3.0+ 默认）是 Kafka 架构的**自我革命**：用 Raft 共识替代 ZooKeeper，消除了外部依赖的运维复杂性。这验证了分布式系统的**内聚性原则**——将元数据管理纳入系统自身，减少跨系统协调的故障面。但 KRaft 的推进也意味着 ZooKeeper 在 Kafka 生态中的角色逐步退出，这是技术债务清理的典型案例。

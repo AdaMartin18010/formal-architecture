@@ -133,6 +133,26 @@ RSC 下的组合分析:
 
 ---
 
+## 八、权威引用
+
+> **Dan Abramov** (2023): "Server Components allows the server and the client to collaborate in rendering your React application. This is not just about performance — it's about expanding the React model to allow each component to fetch the data it needs."
+
+> **Sebastian Markbage** (2021): "Our preferred solution is to use `<link rel="stylesheet">` for statically extracted styles and plain inline styles for dynamic values. With Server Components, we start caring a bit more about performance."
+
+> **React RFC** (2020): "React Server Components are designed to let developers build apps that span the server and client, combining the rich interactivity of client-side apps with the improved performance of server rendering."
+
+> **Kent C. Dodds** (2023): "The primary benefit of React Server Components is not bundle size reduction — it's the ability to access server-side resources directly from your components."
+
+## 九、批判性总结
+
+React Server Components (RSC) 代表了前端架构的一次根本性范式转变，但其形式化边界仍存在显著争议。从理论层面审视，RSC 打破了传统组件代数的封闭性公理——服务端组件 (SC) 与客户端组件 (CC) 的异构组合不再保持同态映射，而是形成一种"粘合层"(Glue Layer) 的临时性结构。这种异构性引入了新的心智模型熵：开发者必须在编译时和运行时同时维护两套类型系统和执行语义，这在形式上违背了代数简洁性原则。
+
+从工程实践角度，RSC 的概念泄漏问题尤为突出。服务端代码（如数据库查询、文件系统访问）通过 props 隐式传递到客户端边界，导致类型系统的完整性在跨运行时传输中被破坏。Next.js App Router 的实现进一步放大了这一问题——其流式传输协议虽提升了感知性能，却将网络延迟的不确定性注入了组件渲染的确定性模型中。
+
+更深层的问题在于生态锁定。RSC 的协议设计与 React 内部实现深度耦合，使得其他框架（如 Vue、Svelte）难以实现互操作。这种"框架即平台"的倾向与 Web 标准的开放性原则存在张力。未来发展方向应聚焦于：标准化 RSC 传输协议、建立跨框架的服务端组件互操作规范、以及开发形式化验证工具来证明 SC/CC 边界的类型安全性。
+
+---
+
 ## 三、多维矩阵对比
 
 | 维度 | RSC (Next.js App Router) | SSR (Next.js Pages) | Islands (Astro) | SPA (React Client) |
@@ -145,87 +165,3 @@ RSC 下的组合分析:
 | **类型安全** | ⚠️ 概念泄漏 | ✅ 清晰边界 | ✅ 清晰边界 | ✅ 单一环境 |
 | **调试复杂度** | **高** (跨运行时) | 中 | 低 | 低 |
 | **心智模型熵** | **高** | 中 | 低 | 低 |
-
----
-
-## 四、权威引用
-
-> **React Team** (RSC RFC, 2020):
-> "Server Components allow developers to build apps that span the server and client, combining the rich interactivity of client-side apps with the improved performance of server rendering."
-
-> **Leslie Lamport** ("Time, Clocks, and the Ordering of Events", 1978):
-> "A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable." — RSC 将网络引入组件模型，使前端从单机计算变为分布式系统。
-
-> **Sebastian Markbåge** (React 架构师, RSC 设计者):
-> "The boundary between server and client should be a choice that the developer makes, not a technical limitation of the framework."
-
-> **社区批判** (ThePrimeagen 等, 2024):
-> "RSC 制造了'两个 React'——同一个 JSX 表达式在服务端和客户端有不同的运行时语义，调试器无法跨越这个边界。"
-
----
-
-## 五、工程实践与代码示例
-
-### 5.1 Server/Client 边界标记与隐式规则
-
-```tsx
-// app/page.tsx —— 默认 Server Component (无指令)
-import { db } from "@/lib/db";           // ✅ 服务端可直接访问 DB
-import { ClientButton } from "./ClientButton";
-
-export default async function Page() {
-  const data = await db.query("SELECT * FROM posts"); // ✅ 直接 SQL
-  return (
-    <main>
-      <h1>{data.title}</h1>              {/* ✅ 服务端渲染为 HTML */}
-      <ClientButton initial={data.likes} /> {/* ⚠️ 隐式网络边界 */}
-    </main>
-  );
-}
-
-// ClientButton.tsx —— 必须标记 "use client"
-"use client";
-import { useState } from "react";
-
-export function ClientButton({ initial }) {
-  const [likes, setLikes] = useState(initial);
-  return <button onClick={() => setLikes(l => l + 1)}>{likes}</button>;
-}
-```
-
-### 5.2 Server Actions 的渐进增强
-
-```tsx
-// app/form.tsx —— Server Component 中嵌入 Server Action
-export default function Form() {
-  // Server Action: 在服务端执行的函数，但可从客户端表单调用
-  async function createPost(formData: FormData) {
-    "use server";
-    await db.insert("posts", {
-      title: formData.get("title"),
-      content: formData.get("content"),
-    });
-    revalidatePath("/");
-  }
-
-  return (
-    <form action={createPost}>
-      <input name="title" />
-      <textarea name="content" />
-      <button type="submit">提交</button> {/* JS 禁用时仍可提交! */}
-    </form>
-  );
-}
-```
-
-> **工程洞察**: Server Actions 的「渐进增强」特性是 RSC 最具理论价值的贡献——表单在无 JavaScript 时退化为标准 HTML form POST，有 JavaScript 时升级为异步交互，实现了「优雅降级」的现代复兴。
-
----
-
-## 六、批判性总结
-
-React Server Components 是前端计算模型向分布式系统理论靠拢的里程碑式尝试，但其设计决策中蕴含的概念泄漏问题值得进行严苛的形式化审视。RSC 的核心创新在于将「组件」这一原本纯粹属于客户端运行时空间的抽象，扩展为横跨服务端与客户端的「网络计算单元」。然而，这种扩展并非无缝的——它要求同一语法实体（`.tsx` 文件中的 JSX 组件）在两种不同的运行时语义下执行，而区分它们的唯一机制是文件顶部的字符串指令（`"use client"`）。从类型论视角审视，这是一种**名义类型标注的缺失**：TypeScript 的类型系统无法表达「此组件仅在服务端可执行」或「此 props 必须通过序列化协议传输」的约束，导致大量错误只能在运行时暴露。
-
-定理 T2 揭示了 RSC 更深层的理论困境：组件代数 ⟨C, ∘⟩ 的组合封闭性被网络边界无情破坏。当 Server Component 导入 Client Component 时，组合语义在服务端退化为「序列化引用生成」，在客户端退化为「反序列化与再执行」——同一种语法结构产生了异构的计算行为。这与传统分布式系统中的「远程过程调用透明性」谬误如出一辙：网络边界的存在不可能被完全抽象掉，任何试图掩盖它的努力终将转化为「泄漏的抽象」。
-
-尽管如此，RSC 的流式传输（Streaming）机制与 Suspense 边界的结合，在工程实践中提供了无可替代的 TTFB 优化能力。服务端直接访问数据库消除了客户端瀑布请求（Waterfall）的延迟累积，而 RSC Payload 的渐进式交付使浏览器能够在完整数据到达前就开始渲染骨架屏。2026 年的技术共识是：RSC 不应被理解为「组件模型的普适升级」，而应被视为「网络计算边界上的特定领域解决方案」——它在数据密集型、内容驱动型应用中表现卓越，但在高交互密度的纯客户端应用中，其概念泄漏的代价可能超过收益。前端架构的未来不是「所有应用 RSC 化」，而是「按边界特性选择计算模型」的理性多元主义。

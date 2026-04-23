@@ -52,7 +52,7 @@
     t_event(e) = e.timestamp         (事件自带时间戳)
     t_ingestion(e) = time(entry(e))  (进入系统的时间)
     t_processing(e) = time(process(e)) (算子处理的时间)
-  
+
   关系:
     t_event(e) ≤ t_ingestion(e) ≤ t_processing(e)
     (假设时钟单调，忽略时钟回拨)
@@ -63,13 +63,13 @@
 ```text
 定义 (窗口分配函数):
   WindowAssigner: Event → Set(Window)
-  
+
   Tumbling Window (大小 Δ):
     W(e) = { [⌊t/Δ⌋·Δ, (⌊t/Δ⌋+1)·Δ) }
-  
+
   Sliding Window (大小 Δ, 滑动步长 σ):
     W(e) = { [k·σ, k·σ+Δ) | k ∈ ℤ, t ∈ [k·σ, k·σ+Δ) }
-  
+
   Session Window (超时间隙 γ):
     W = 由事件序列的间隙 > γ 划分的连续区间
     形式化: 会话结束条件 = (tᵢ₊₁ - tᵢ) > γ
@@ -81,7 +81,7 @@
 定义 (分布式快照):
   设流处理拓扑为 DAG G = (V, E)
   V = {算子}, E = {数据流边}
-  
+
   Checkpoint 过程:
     (1) Checkpoint Coordinator 向所有 Source 注入 Barrier
     (2) Source 在消息流中广播 Barrier，保存自身状态
@@ -89,7 +89,7 @@
         - 保存当前 Keyed/Operator State
         - 向下游广播 Barrier
     (4) Sink 收到 Barrier 后保存状态，向 Coordinator 确认
-    
+
   Exactly-Once 保证:
     恢复时从最近 Checkpoint 重启: State_checkpoint + 从 Barrier 位置重放
 ```

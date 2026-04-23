@@ -59,24 +59,24 @@ CRDT: 无冲突复制数据类型
   状态型 CRDT (CvRDT):
     S: 状态集合
     merge: S × S → S (偏序集的并/上确界)
-    
+
     公理:
       1. 交换律: merge(a, b) = merge(b, a)
       2. 结合律: merge(merge(a, b), c) = merge(a, merge(b, c))
       3. 幂等律: merge(a, a) = a
-      
+
     更新:
       update: S × Op → S
       更新后状态传播到其他副本，通过 merge 合并
-      
+
   操作型 CRDT (CmRDT):
     Op: 操作集合
     apply: S × Op → S
-    
+
     公理:
       ∀op₁, op₂ ∈ Op:
         apply(apply(s, op₁), op₂) = apply(apply(s, op₂), op₁)
-      
+
     即: 操作应用顺序不影响最终状态
 ```
 
@@ -88,19 +88,19 @@ CRDT: 无冲突复制数据类型
     c = ⟨id, origin, content⟩
     id: 全局唯一标识 (node_id, sequence_number)
     origin: 左邻字符的 id
-    
+
   插入操作:
     insert(pos, content) → 生成新字符 c
     c.origin = document[pos-1].id  // 记录左邻
-    
+
   并发插入排序:
     若两个字符 c₁, c₂ 有相同 origin:
       按 (node_id, sequence_number) 字典序排序
-      
+
   删除操作:
     逻辑删除: 标记字符为已删除 (墓碑)
     不物理移除，以保持 origin 引用有效
-    
+
   内存优化:
     状态向量 (State Vector): 每个节点的已接收操作计数
     可安全删除已知所有副本都接收的操作历史
@@ -111,21 +111,21 @@ CRDT: 无冲突复制数据类型
 ```text
 定义 (CRDT 的代数结构):
   状态型 CRDT 的状态集合 S 配备偏序 ≤，形成 join-半格:
-    
+
   偏序 ≤:
     a ≤ b ⟺ merge(a, b) = b
     即: a 是 b 的"子状态"
-    
+
   半格性质:
     1. 交换律: a ⊔ b = b ⊔ a
     2. 结合律: (a ⊔ b) ⊔ c = a ⊔ (b ⊔ c)
     3. 幂等律: a ⊔ a = a
     4. 最小元: ⊥ (空状态), ⊥ ⊔ a = a
-    
+
   单调性:
     所有操作都是单调的: apply(s, op) ≥ s
     因此状态永不"回退"
-    
+
   收敛定理:
     若所有副本最终收到相同的操作集 (可能顺序不同)
     则所有副本的状态收敛到该操作集的上确界
@@ -138,19 +138,19 @@ CRDT: 无冲突复制数据类型
 定义 (Delta-State CRDT):
   传统 State-based CRDT: 传输完整状态，带宽 O(|state|)
   Delta-State CRDT: 仅传输状态差异 δ
-  
+
   形式化:
     设副本状态 s，执行操作 op 后:
       s' = apply(s, op)
       δ(s, s') = s' \ s  (集合差，或半格意义上的差异)
-      
+
     传输: 广播 δ 而非 s'
     合并: s_recv ⊔ δ = s_recv ⊔ s' (由结合律保证)
-    
+
   优势:
     - 带宽与操作复杂度成正比，而非状态大小
     - 对于大文档中的小修改，δ 极小
-    
+
   Yjs 实现:
     Y.encodeStateAsUpdate(ydoc, remoteStateVector)
     → 仅编码 remoteStateVector 之后的新操作
@@ -202,7 +202,7 @@ const ytext = ydoc.getText('my-text');
 
 // 绑定到编辑器 (如 ProseMirror, Monaco, Quill)
 const provider = new WebsocketProvider(
-  'wss://demo.yjs.dev', 
+  'wss://demo.yjs.dev',
   'my-document-room',
   ydoc
 );

@@ -22,6 +22,8 @@
   - [2025 对齐](#2025-对齐)
   - [批判性总结](#批判性总结)
   - [权威引用](#权威引用)
+  - [形式化定义](#形式化定义)
+  - [来源映射](#来源映射)
 
 ---
 
@@ -117,19 +119,34 @@
 **维护状态**：✅ 持续更新中
 
 
----
-
-> **来源映射**: 本文件理论来源与现代语义架构知识体系
-
 ## 批判性总结
 
-本节内容从理论与实践双重维度审视了相关概念的核心价值与适用边界。从理论层面看，当前框架仍存在形式化程度不足、边界条件定义模糊等问题；从实践层面看，工程落地中需警惕过度抽象导致的认知负载增加。未来发展方向应聚焦于与具体业务场景的深度融合，以及形式化方法与工程实践的持续迭代优化。在应用过程中，需始终保持批判性思维，警惕模型的隐含假设与失效条件，避免将理论工具教条化。
+本文档对比了MDA与SMDD的工具链成熟度，并提供了实践案例对比矩阵和选型决策矩阵。工具链对比在事实层面基本准确——Xtext、MPS、Nop Platform等确实代表了SMDD生态的主流工具，而Enterprise Architect、Acceleo等是MDA的典型代表。然而，文档在案例对比维度上存在严重的**可验证性危机**。对比表中列出的"概念到代码：MDA 2-4周 vs SMDD 1-3天"、"需求变更响应：MDA 3-7天 vs SMDD 2-8小时"等数据没有提供任何引用来源或方法论说明。这些数据若是基于作者个人经验，则应明确标注为"经验估计"而非"典型值"；若是基于文献，则应给出具体引用。在学术写作中，这种缺乏来源的量化对比会严重损害文档的可信度。其次，"代码生成率"的对比（MDA 30-60% vs SMDD 60-90%）存在定义模糊问题——"代码生成率"是按行数计算还是按功能点计算？是否包含测试代码、配置代码、基础设施代码？不同计算方式下结果可能截然不同。第三，选型决策矩阵虽然提供了场景化建议，但建议的置信度未量化。例如，"遗留UML资产多 → MDA或防腐层+SMDD"这一建议在什么程度的遗留资产下适用？如果遗留资产占总代码库的80% vs 20%，策略是否应该不同？文档未提供阈值。最后，实践案例对比中提到的"中兴Nop Platform"等案例虽然是真实存在的工业实践，但未公开披露经过审计的量化数据，难以作为严格的科学证据。
 
 
 ## 权威引用
 
-> **Martin Fowler** (2002): "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+> **Miller, J. & Mukerji, J.** (2003): *MDA Guide Version 1.0.1*. Object Management Group (OMG).
+>
+> **Eric Evans** (2003): *Domain-Driven Design: Tackling Complexity in the Heart of Software*. Addison-Wesley.
+>
+> **Thomas Gruber** (1993): "A Translation Approach to Portable Ontology Specifications." *Knowledge Acquisition*, 5(2), 199–220.
 
-> **Fred Brooks** (1975): "Adding manpower to a late software project makes it later."
 
-> **Leslie Lamport** (2012): "A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable."
+## 形式化定义
+
+**定义 M.5** (工具链成熟度)
+设工具 $t$ 的成熟度 $M(t)$ 由以下维度加权计算：
+$$M(t) = w_1 \cdot S_{stable} + w_2 \cdot S_{docs} + w_3 \cdot S_{community} + w_4 \cdot S_{ecosystem}$$
+其中：
+
+- $S_{stable} \in [0,1]$：API稳定性与向后兼容性得分；
+- $S_{docs} \in [0,1]$：官方文档完整性与示例丰富度得分；
+- $S_{community} \in [0,1]$：社区活跃度（GitHub stars、StackOverflow标签数、年会议数）；
+- $S_{ecosystem} \in [0,1]$：插件/扩展/第三方集成丰富度。
+权重满足 $w_1 + w_2 + w_3 + w_4 = 1$。工具链整体成熟度为 $\bar{M} = \frac{1}{|T|} \sum_{t \in T} M(t)$。
+
+
+## 来源映射
+
+> **来源映射**: OMG MDA标准 (2003) → 平台无关/特定模型分离；Evans DDD (2003) → 领域驱动设计与限界上下文；Gruber本体论 (1993) → 语义概念显式化规范。

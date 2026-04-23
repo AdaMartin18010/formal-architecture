@@ -315,19 +315,30 @@ SMDD的**业务语义优先**是相对于MDA的实质性创新。
 **维护状态**：✅ 持续更新中
 
 
----
-
-> **来源映射**: 本文件理论来源与现代语义架构知识体系
-
 ## 批判性总结
 
-本节内容从理论与实践双重维度审视了相关概念的核心价值与适用边界。从理论层面看，当前框架仍存在形式化程度不足、边界条件定义模糊等问题；从实践层面看，工程落地中需警惕过度抽象导致的认知负载增加。未来发展方向应聚焦于与具体业务场景的深度融合，以及形式化方法与工程实践的持续迭代优化。在应用过程中，需始终保持批判性思维，警惕模型的隐含假设与失效条件，避免将理论工具教条化。
+本文档对OMG的模型驱动架构（MDA）与SMDD进行了多维度深度对比，识别出核心载体（UML vs DSL）、抽象层级（三层PIM→PSM→Code vs 两层语义→代码）、语义保障（OCL附加约束 vs 语义模型即规范）和可逆性（单向 vs 双向）四项实质性差异。对比分析在结构上是系统的，但在批判性层面存在几个值得警惕的倾向。首先，对比表格中的部分结论带有一定的**价值判断色彩**——例如将MDA的"技术导向"标注为"业务人员参与度低"，将SMDD的"业务导向"标注为"参与度高"，但这种参与度差异并未经过实证测量，而是基于DSL文本"可能更易读"的推测。事实上，MPS等投影编辑器可以让业务人员以表格/表单方式编辑DSL，但同样的，UML配置文件（UML Profile）也可以被业务人员理解，两种载体的可读性差异并非必然。其次，文档将MDA的"不支持可逆性"作为关键差异，但MDA的QVT标准中的 Relations 语言确实支持双向转换，只是工业实现成熟度不足。将标准能力与实现成熟度混为一谈，可能低估了MDA生态的潜在能力。第三，"融合路径"部分提出的分层融合策略（SMDD DSL → MDA UML → Code）在概念上合理，但未讨论两层可视化之间的同步一致性问题——当DSL和UML同时作为"单一事实来源"的不同视图时，若出现视图间不一致，应以何者为准？文档未提供冲突解决机制。最后，对MDA工具链成熟度的承认（Enterprise Architect、MagicDraw等）与SMDD工具链的相对薄弱形成对比，但文档未量化这种成熟度差距对采纳决策的实际影响。
 
 
 ## 权威引用
 
-> **Martin Fowler** (2002): "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+> **Miller, J. & Mukerji, J.** (2003): *MDA Guide Version 1.0.1*. Object Management Group (OMG).
+>
+> **Eric Evans** (2003): *Domain-Driven Design: Tackling Complexity in the Heart of Software*. Addison-Wesley.
+>
+> **Thomas Gruber** (1993): "A Translation Approach to Portable Ontology Specifications." *Knowledge Acquisition*, 5(2), 199–220.
 
-> **Fred Brooks** (1975): "Adding manpower to a late software project makes it later."
 
-> **Leslie Lamport** (2012): "A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable."
+## 形式化定义
+
+**定义 M.1** (MDA抽象层级)
+OMG MDA定义三层抽象模型：
+- **PIM** (Platform-Independent Model): $M_{PIM} = \langle C, A, O \rangle$，其中 $C$ 为类集合，$A$ 为关联集合，$O$ 为OCL约束集合；
+- **PSM** (Platform-Specific Model): $M_{PSM} = \langle C', A', O', P \rangle$，其中 $P$ 为平台描述模型；
+- **Code**: $M_{Code} = \langle T, D, I \rangle$，其中 $T$ 为类型系统，$D$ 为数据声明，$I$ 为指令序列。
+转换关系为 $T_{PIM\to PSM}: M_{PIM} \to M_{PSM}$ 和 $T_{PSM\to Code}: M_{PSM} \to M_{Code}$。
+
+
+## 来源映射
+
+> **来源映射**: OMG MDA标准 (2003) → 平台无关/特定模型分离；Evans DDD (2003) → 领域驱动设计与限界上下文；Gruber本体论 (1993) → 语义概念显式化规范。
