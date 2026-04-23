@@ -146,7 +146,7 @@
 
 ## 四、工程实践与代码示例
 
-### 5.1 IndexedDB 结构化数据管理
+### 4.1 IndexedDB 结构化数据管理
 
 ```javascript
 import { openDB } from 'idb';
@@ -187,7 +187,7 @@ const frontendDocs = await db.getAllFromIndex(
 );
 ```
 
-### 5.2 OPFS 大文件随机读写
+### 4.2 OPFS 大文件随机读写
 
 ```javascript
 // 在 Web Worker 中使用同步 OPFS API
@@ -222,7 +222,7 @@ self.onmessage = async (event) => {
 };
 ```
 
-### 5.3 存储配额监控与清理策略
+### 4.3 存储配额监控与清理策略
 
 ```javascript
 async function monitorStorage() {
@@ -265,7 +265,7 @@ async function cleanupOldCache() {
 
 ---
 
-## 权威引用
+## 五、权威引用
 
 > **Joshua Bell** (2015): "IndexedDB was designed to be the database for the web platform. It supports transactions, indexes, and cursors—everything you need for complex client-side data."
 

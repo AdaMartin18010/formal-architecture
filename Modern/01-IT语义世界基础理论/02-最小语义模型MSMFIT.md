@@ -257,6 +257,26 @@ $$C = \{C_{space}, C_{time}, C_{subject}, C_{device}\}$$
 
 **结论**：这些例外在IT语义世界中**本来就不属于"业务系统"**，而是**技术实现层**。业务系统的定义即"人类组织协作的数字化载体"，其必然包含可解释、可沟通、可追溯的语义结构。
 
+## 6. 批判性总结
+
+MSMFIT作为最小语义模型的理论建构具有清晰的数学形式，但其"最小性"与"完备性"仍需批判性审视：
+
+1. **四元组的充分性质疑**：事件(V)与关系(R)的区分在静态业务描述中有效，但在流式处理与复杂事件处理(CEP)场景中，事件序列的时序关系、因果关系可能要求超越四元组的建模能力。
+2. **可逆性的条件限制**：文档声称支持"DSL与多种表象双向转换"，但未明确可逆转换的充分必要条件。并非所有技术实现都能无损反解析为DSL（如手写优化代码、嵌入式SQL）。
+3. **分形性的递归终止**：模型声称可"递归应用于不同抽象层级"，但未提供递归终止条件与复杂度控制机制，实践中可能导致语义模型无限细化。
+
+## 7. 权威引用
+
+> **John Sowa** (1984): "Conceptual graphs are a system of logic based on the existential graphs of Charles Sanders Peirce and the semantic networks of artificial intelligence."
+
+> **David Parnas** (1972): "The criteria for decomposition are the secrets that the module hides."
+
+> **Grady Booch** (1994): "The entire history of software engineering is that of the rise in levels of abstraction."
+
+## 8. 来源映射
+
+> **来源映射**: View/02.md（数学基础：模型论与形式系统）、View/04.md（形式模型：最小完备性分析）
+
 ## 2025 对齐
 
 - **国际 Wiki**：

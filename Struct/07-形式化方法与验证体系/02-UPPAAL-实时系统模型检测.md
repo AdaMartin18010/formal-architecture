@@ -159,7 +159,7 @@ UPPAAL验证查询：
 
 ---
 
-## 七、批判性分析：UPPAAL的局限与边界
+## 七、批判性总结
 
 > **权威声音**：Rajeev Alur 在 timed automata 原始论文中承认："The decidability of the reachability problem for timed automata is a fortunate coincidence..." —— Alur & Dill, *TCS*, 1994
 
@@ -187,7 +187,7 @@ UPPAAL的根本局限：
 
 ---
 
-## 八、历史人物原话
+## 八、权威引用
 
 > "We present a theory of timed automata, a formalism for modeling real-time systems... The decidability of the reachability problem for timed automata is a fortunate coincidence that does not extend to even minor extensions." —— Rajeev Alur & David Dill, "A Theory of Timed Automata", *TCS*, 1994
 
@@ -206,7 +206,7 @@ UPPAAL的根本局限：
 
 ---
 
-## 七、参考文献
+## 十、参考文献
 
 | 作者 | 标题 | 出处 | 年份 |
 |------|------|------|------|

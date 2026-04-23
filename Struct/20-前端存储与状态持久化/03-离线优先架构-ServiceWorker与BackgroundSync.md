@@ -150,7 +150,7 @@
 
 ## 四、工程实践与代码示例
 
-### 5.1 Service Worker 缓存策略实现
+### 4.1 Service Worker 缓存策略实现
 
 ```javascript
 // sw.js - Workbox 风格的缓存策略
@@ -198,7 +198,7 @@ self.addEventListener('fetch', (event) => {
 });
 ```
 
-### 5.2 Background Sync 可靠提交
+### 4.2 Background Sync 可靠提交
 
 ```javascript
 // 注册后台同步 (主线程)
@@ -246,7 +246,7 @@ async function processOutbox() {
 
 ---
 
-## 权威引用
+## 五、权威引用
 
 > **Eric A. Brewer** (2000): "In any distributed system, you can only guarantee two of the three: Consistency, Availability, and Partition Tolerance."
 

@@ -176,6 +176,26 @@ public class Order {
 2. **跨领域语义对齐**：不同子域对同一实体（如"客户"）的语义差异如何自动消解？
 3. **语义版本控制**：业务语义演进的兼容性判定（类似 semver，但针对语义结构）
 
+## 7. 批判性总结
+
+SMDD作为语义驱动架构的核心理论，其"语义模型是核心，DSL只是附属品"的论断具有范式革命色彩，但亦面临实践层面的严峻挑战：
+
+1. **语义保真原则的可操作性困境**："模型语义必须精确映射问题域"在简单域中可行，但在高度不确定、快速演化的业务域（如互联网运营活动）中，"精确映射"本身可能成为瓶颈——需求变更频率可能超过DSL迭代速度。
+2. **可组合性的粒度悖论**：原子语义的"原子性"缺乏形式化定义。若粒度过细（如"创建订单"拆分为"验证库存→扣减库存→生成记录"），组合爆炸将抵消可组合性的收益；若粒度过粗，则退化为传统模块化。
+3. **SMDD的原创性争议**：文档承认低代码平台（钉钉宜搭、OutSystems）"实为SMDD的商业化封装"，这反而削弱了SMDD作为独立理论的必要性——若商业产品已先于理论存在，理论的"指导价值"需重新定位。
+
+## 8. 权威引用
+
+> **Martin Fowler** (2010): "Domain-specific languages allow domain experts to participate in the development process by using a language that is natural to them."
+
+> **Fred Brooks** (1987): "No silver bullet—essential complexity cannot be removed, only managed."
+
+> **Grady Booch** (2006): "The building blocks of software architecture are not algorithms and data structures, but patterns and decisions."
+
+## 9. 来源映射
+
+> **来源映射**: View/04.md（软件架构：模式与风格分析）、View/05.md（编程语言理论：抽象机制演进）
+
 ## 2025 对齐
 
 - **国际 Wiki**：
