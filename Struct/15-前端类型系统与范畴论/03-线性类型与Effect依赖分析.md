@@ -230,3 +230,288 @@ const bind = <S, A, B>(
 然而，这种映射存在根本性的**表达力缺口**。真正的线性类型系统（如 Rust 的 Borrow Checker）能够追踪资源的生命周期和所有权转移，而 React Compiler 只能追踪值的读取依赖，无法阻止诸如"事件监听器未清理"或"竞态条件"等更复杂的资源管理错误。此外，JavaScript 的闭包捕获语义使得"使用一次"的静态分析极其困难——一个被闭包捕获的变量可能在任意 future tick 中被使用，这使得线性性检查在 JS 运行时模型中只能是**近似而非精确**的。
 
 Effect-TS 等库尝试将代数效果 (Algebraic Effects) 引入前端，通过显式的 `Effect` 类型来追踪 IO、异常、并发等副作用。这在理论上比 React 的依赖数组更强大，但在实践中面临**学习曲线陡峭**和**与现有生态集成困难**的双重挑战。2026 年的务实结论是：对于绝大多数前端应用，React Compiler 的自动推断加上 ESLint 的规则检查已经足够；只有在高可靠性要求的金融或医疗前端系统中，才值得引入完整的 Effect 类型系统。线性类型的"资源即真理"哲学正在缓慢但确定地改变前端工程，但其完全采纳仍需等待 JavaScript 运行时语义的根本变革——或者 WebAssembly 的成熟。
+
+
+---
+
+## 七、概念属性关系网络
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    线性类型与Effect依赖分析：概念属性网络                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   线性逻辑 (Girard 1987)                                                      │
+│   ├─ 线性蕴含 A ⊸ B                                                          │
+│   │   ├─ 属性: 消耗 A 恰好一次以产生 B                                        │
+│   │   ├─ 属性: 上下文必须不相交 (dom(Γ₁) ∩ dom(Γ₂) = ∅)                      │
+│   │   └─ 属性: 无弱化 (weakening) 和收缩 (contraction)                       │
+│   │                                                                          │
+│   ├─ 指数模态 !A (ofCourse)                                                  │
+│   │   ├─ 属性: A 可被任意次复制和使用                                         │
+│   │   ├─ 属性: 引入需要显式 "提升" (promotion)                                │
+│   │   └─ 前端映射: useRef — 可无限读取的引用                                  │
+│   │                                                                          │
+│   ├─ 加法合取 (&) vs 乘法合取 (⊗)                                            │
+│   │   ├─ A & B: 选择使用 A 或 B (如 if-else 分支)                            │
+│   │   └─ A ⊗ B: 同时使用 A 和 B (如并行资源)                                 │
+│   │                                                                          │
+│   └─ 对偶性: 资源生产者 ⟷ 资源消费者                                          │
+│       └─ 前端映射: Provider ⟷ Consumer 模式                                  │
+│                                                                              │
+│   Effect 系统 (Lucassen & Gifford 1988)                                       │
+│   ├─ 效果签名 Σ                                                              │
+│   │   ├─ 属性: 操作集合 {read, write, io, exc}                               │
+│   │   ├─ 属性: 效果多态 ∀α.E.τ                                               │
+│   │   └─ 属性: 效果子效果关系 ε₁ ≤ ε₂                                        │
+│   │                                                                          │
+│   └─ 前端映射                                                                 │
+│       ├─ useEffect deps 数组 ≈ 效果集合显式声明                               │
+│       ├─ useState ≈ 状态资源的一次性分配                                      │
+│       └─ React Compiler ≈ 自动效果推断器                                      │
+│                                                                              │
+│   Monad 结构 (Moggi 1991)                                                     │
+│   ├─ Reader<R, A>: R → A                                                     │
+│   │   └─ 前端: React Context Provider, 环境读取                               │
+│   ├─ Writer<W, A>: A × W                                                     │
+│   │   └─ 前端: Redux Action Log, 日志累积                                     │
+│   ├─ State<S, A>: S → (A, S)                                                 │
+│   │   └─ 前端: useState, 状态转换                                             │
+│   └─ IO<A>: World → (A, World)                                               │
+│       └─ 前端: fetch, localStorage, DOM 操作                                  │
+│                                                                              │
+│   React Hooks 规则作为仿射类型系统                                             │
+│   ├─ 规则 H1 (顺序线性): Hooks 必须按相同顺序每次调用                          │
+│   ├─ 规则 H2 (依赖显式化): deps 数组 = 效果集合                               │
+│   └─ 规则 H3 (条件禁用): Hooks 不可在条件分支中调用                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 八、形式化推理链
+
+### 推理链 R15.3.1：React Hooks 作为仿射类型系统
+
+```
+前提 P1: 仿射类型系统规则:
+         (a) 弱化禁止: 变量不可丢弃 (weakening 不成立)
+         (b) 收缩允许: 变量可使用至多一次 (contraction 不成立)
+         (c) 交换允许: 使用顺序可交换
+
+前提 P2: React Hooks 规则 (官方文档):
+         H1: Hooks 必须按相同顺序每次调用
+         H2: useEffect deps 数组必须包含所有被读取的外部变量
+         H3: Hooks 不可在 if/for/while 等条件分支中调用
+
+前提 P3: 设 hook_sequence = [h₁, h₂, ..., hₙ] 为组件每次渲染时的 hooks 调用序列
+
+推理步骤:
+  Step 1: H1 (顺序线性) ⟷ 仿射类型的 "无弱化" + "固定顺序"
+          在仿射类型中，每个资源必须被使用，不能丢弃
+          在 React 中，每个 hook 声明 (useState, useEffect) 必须被调用，
+          不能有条件地 "跳过"
+          ∴ H1 对应仿射类型的弱化禁止
+
+  Step 2: H3 (条件禁用) ⟷ 强化 "无弱化"
+          如果 Hooks 允许在 if 分支中:
+          if (condition) { useState(0) }
+          则 condition = false 时，该 hook 被 "丢弃"
+          这直接违反了仿射类型的 "每个资源必须被使用" 原则
+          ∴ H3 是 H1 的推论，确保弱化不可能发生
+
+  Step 3: H2 (依赖显式化) ⟷ 效果追踪
+          设 useEffect body 读取变量集合 V = {v₁, v₂, ..., vₙ}
+          deps 数组 D 必须满足: V ⊆ closure(D)
+          其中 closure(D) 是 D 中变量的依赖闭包
+
+          违反 H2 的例子:
+          const [count, setCount] = useState(0);
+          useEffect(() => { console.log(count) }, []);
+          // V = {count}, D = ∅
+          // count ∉ closure(∅)
+          // ∴ 违反 H2
+
+  Step 4: 从线性类型视角:
+          count 是类型为 number 的"资源"
+          useEffect body 是一次 "使用" 该资源的操作
+          deps 数组是"资源使用注册表"
+          未注册的使用 = 线性错误 (linear violation)
+
+  Step 5: React Compiler 自动推断:
+          构建数据流图 G = (Nodes, Edges)
+          对每条 effect body → v 的边:
+            若 v ∉ deps，自动插入 v 到 deps
+          这等价于自动补全线性上下文的完整注册
+
+结论 C1: React Hooks 规则 (H1-H3) 构成一个工程化、简化的仿射类型系统，
+         其中 Hooks 调用序列对应线性资源声明序列，
+         deps 数组对应效果/使用注册表 ∎
+```
+
+### 推理链 R15.3.2：Effect-TS 的代数效果类型系统
+
+```
+前提 P1: 代数效果 (Algebraic Effects) 由 Plotkin & Power (2001) 提出:
+         效果操作符 Σ = { op₁: A₁ → B₁, op₂: A₂ → B₂, ... }
+         效果处理程序 (handler): 解释每个 op 的具体行为
+
+前提 P2: Effect-TS 类型签名:
+         Effect.Effect<R, E, A> = 需求环境 R × 错误类型 E × 返回值 A
+
+推理步骤:
+  Step 1: 类型分解:
+          R (Requirements): 该 effect 需要的外部能力/服务
+          E (Errors): 该 effect 可能产生的错误类型
+          A (Value): 成功时的返回值类型
+
+  Step 2: 对应代数效果的 Σ:
+          R 对应 Σ 中操作所需的能力上下文
+          E 对应 Σ 中操作的异常出口
+          A 对应 Σ 中操作的正常返回值
+
+  Step 3: Effect 组合子的范畴语义:
+          flatMap (bind): Effect<R, E, A> → (A → Effect<R, E, B>) → Effect<R, E, B>
+          对应 Kleisli 组合: (A → T B) ∘ (B → T C) = A → T C
+          其中 T = Effect<R, E, ->
+
+  Step 4: 与 Monad 的关系:
+          Effect-TS 的 Effect<R, E, A> 是一个带环境参数的 Monad
+          即 ReaderT R (ExceptT E Identity) A
+          在 Haskell 类型类中:
+          type Effect r e a = ReaderT r (ExceptT e Identity) a
+
+  Step 5: 前端工程价值:
+          传统 Promise<A> 丢失了错误类型信息 (统一为 Error)
+          Effect<R, E, A> 在类型层面保留了完整的错误语义
+          ∴ 调用者必须显式处理或传播错误类型 E
+
+结论 C2: Effect-TS 的 Effect<R, E, A> 是 Reader + Except 的 Monad Transformer
+         组合，在类型层面实现了代数效果的完全追踪 ∎
+```
+
+### 推理链 R15.3.3：线性类型到 Rust Borrow Checker 的推理
+
+```
+前提 P1: 线性类型规则 (Girard 1987; Wadler 1990):
+         Γ₁ ⊢ t: A ⊸ B    Γ₂ ⊢ u: A
+         ───────────────────────────── (⊸-elim)
+               Γ₁, Γ₂ ⊢ t u: B
+         约束: dom(Γ₁) ∩ dom(Γ₂) = ∅
+
+前提 P2: Rust 所有权规则:
+         (a) 每个值有且只有一个所有者
+         (b) 当所有者离开作用域，值被释放
+         (c) 可变借用 (&mut T) 要求独占访问
+         (d) 不可变借用 (&T) 允许多个并发读取
+
+推理步骤:
+  Step 1: Rust 所有权 ⟷ 线性类型的 "恰好一次使用"
+          let x = String::from("hello");
+          let y = x;  // x 的所有权移动到 y
+          // x 此后不可使用 —— 线性消耗
+
+  Step 2: Rust &mut T ⟷ 线性类型的 ⊸
+          fn consume(s: String) -> usize { s.len() }
+          // s: String 被线性消耗，调用后 s 不可用
+
+  Step 3: Rust &T ⟷ 指数模态 !A
+          let x = String::from("hello");
+          let r1 = &x;
+          let r2 = &x;
+          // x 被 "提升" 为不可变引用，允许多次读取
+          // 对应 !String —— 可无限复制的视图
+
+  Step 4: React Compiler 的局限:
+          React Compiler 只能追踪值的读取依赖，
+          不能追踪所有权转移或生命周期
+          ∴ React Compiler ≈ 仿射类型推断，而非完整的线性类型系统
+
+  Step 5: 根本差异:
+          Rust Borrow Checker: 编译期追踪内存所有权和生命周期
+          React Compiler: 编译期追踪值读取和 memo 依赖
+          前者保证内存安全，后者保证渲染一致性
+
+结论 C3: Rust 的 Borrow Checker 是线性类型系统的完全实现，
+         React Compiler 是其在前端渲染领域的弱化近似 (仿射类型推断) ∎
+```
+
+---
+
+## 九、推理判定树/决策树
+
+### 决策树 DT15.3：Effect 管理与类型系统选择
+
+```text
+              ┌─────────────────────────────────────┐
+              │   应用是否需要追踪副作用类型?         │
+              └───────────────┬─────────────────────┘
+                              │
+              ┌───────────────┴───────────────┐
+              ▼                               ▼
+        ┌───────────┐                   ┌───────────┐
+        │    是     │                   │     否    │
+        └─────┬─────┘                   └─────┬─────┘
+              │                               │
+              ▼                               ▼
+    ┌─────────────────┐               ┌───────────────┐
+    │ 副作用复杂度?    │               │ React Hooks    │
+    │                 │               │ + ESLint规则   │
+    └────────┬────────┘               │ 足够           │
+             │                        └───────────────┘
+    ┌────────┼────────┐
+    ▼        ▼        ▼
+ ┌──────┐ ┌──────┐ ┌──────────┐
+ │ 简单  │ │ 中等  │ │ 复杂     │
+ │ IO   │ │ 组合  │ │ 分布式  │
+ └──┬───┘ └──┬───┘ └────┬─────┘
+    │        │          │
+    ▼        ▼          ▼
+ ┌──────┐ ┌──────┐ ┌──────────┐
+ │Effect│ │Effect│ │Effect-TS │
+ │-TS   │ │-TS   │ │ +        │
+ │单效  │ │多效  │ │ 自定义   │
+ └──────┘ │组合  │ │ Algebra  │
+          └──────┘ └──────────┘
+```
+
+### 判定规则集：Effect 管理策略选择
+
+| 判定节点 | 条件 | 是 → | 否 → |
+|---------|------|------|------|
+| N1 | 需要编译期效果追踪? | N2 | React Hooks + ESLint |
+| N2 | 单效果类型 (IO/Error)? | Effect-TS 简单模式 | N3 |
+| N3 | 需要效果组合 (Reader + Writer + State)? | Effect-TS 完整模式 | N4 |
+| N4 | 需要自定义代数效果? | Effect-TS 自定义 Algebra | 无原生方案 |
+
+---
+
+## 十、国际课程对齐标注
+
+### 课程映射矩阵
+
+| 本节内容 | Stanford CS 242 | CMU 15-312 | MIT 6.170 |
+|---------|----------------|------------|-----------|
+| 线性类型系统 | Week 7: Linear Types & Rust Ownership | Advanced Type Systems | N/A |
+| Effect 系统 | Week 8: Session Types & Effects | Semantics of Effects | N/A |
+| Monad 语义 | Week 5: Monads [Moggi 1991, Wadler] | Monad Theory & Applications | N/A |
+| 代数效果 | 研讨: Plotkin & Power (2001) | Algebraic Effects (高级) | N/A |
+| React Compiler 推断 | 项目实践 (未标准化) | N/A | Software Studio |
+
+### 权威来源引用索引
+
+| 学者 | 年份 | 贡献 | 本文件引用点 |
+|------|------|------|-------------|
+| Jean-Yves Girard | 1987 | Linear Logic | 线性逻辑理论基础 |
+| Philip Wadler | 1990 | Linear Types can Change the World | 线性类型资源管理 |
+| David Lucassen & David Gifford | 1988 | Polymorphic Effect Systems | 效果系统理论起源 |
+| Eugenio Moggi | 1991 | Notions of Computation and Monads | 计算的单子范畴语义 |
+| Gordon Plotkin & John Power | 2001 | Semantics for Algebraic Operations | 代数效果理论 |
+| React Labs Team | 2024 | React Compiler Documentation | 自动依赖推断工程实践 |
+| Daan Leijen | 2014+ | Koka: Programming with Row Polymorphic Effects | 行多态效果系统 |
+
+### 课程深度对齐
+
+- **Stanford CS 242**: 本节的线性类型内容对应 CS242 第7周关于 Linear Types 和 Rust Ownership 的讨论。Wadler (1990) 的 "Linear Types can Change the World" 是 CS242 的推荐阅读。CS242 近年由 Will Crichton 教授设计，强调从理论到系统的桥梁，本节将线性类型映射到 React Compiler 的做法与 CS242 的教学理念一致。
+- **CMU 15-312**: CMU 课程深入探讨 Effect 系统的形式化语义，包括 FX 语言 (Lucassen & Gifford) 和 Koka (Leijen) 的行多态效果。本节中的 Effect-TS 映射与 CMU 课程中关于 effect polymorphism 和 row types 的内容对齐。
+- **MIT 6.170**: MIT 课程不涉及线性类型或 Effect 系统的理论，但 React Hooks 的工程实践是 MIT 6.170 的常见项目主题。本节中的 Hooks 规则形式化可作为 MIT 学生的类型理论补充材料。

@@ -245,3 +245,112 @@ function Profile({ userId }) {
 然而，Staleness（陈旧性）是这类库无法根本消除的原罪。SWR 的命名本身就揭示了其哲学立场：「首先返回缓存（可能是陈旧的），然后在后台重新验证」。这意味着用户在某些时刻看到的必然是「过时的真相」，而框架对此的唯一补偿是「尽快让它不那么过时」。这种「最终一致性」的语义与金融交易、实时协作等对强一致性有严格要求的场景存在结构性冲突。乐观更新（Optimistic Update）虽然在 UI 层面提供了即时反馈，但其回滚机制在复杂并发场景下（如用户快速连续操作、网络抖动导致的乱序响应）可能产生令人困惑的状态跳跃。
 
 从更宏观的架构视角审视，React Query 和 SWR 实际上扮演了「客户端-服务端边界上的缓存协调器」角色，这与操作系统中的「分布式文件系统缓存」或「数据库连接池」具有同构的职责。2026 年的演进趋势表明，这一层正在与 RSC（React Server Components）和 Server Actions 发生融合：当数据获取逻辑迁移到服务端组件内部时，客户端「服务端状态管理」的适用范围将被重新定义——它不再是「如何缓存 REST API 响应」，而是「如何协调服务端渲染流与客户端交互状态的边界」。无论技术形态如何变迁，「服务端状态的不确定性公理」将永远成立：客户端永远无法在本地严格证明其缓存与服务端一致，这是分布式系统本质的不可约命题。
+
+
+---
+
+## 七、概念属性关系网络
+
+| 概念A | 关系 | 概念B | 关系说明 |
+|-------|------|-------|----------|
+| **服务端状态** | **对立** | 客户端状态 | 所有权(服务端/客户端)、持久性(持久/内存)、并发修改(多用户/单用户) |
+| **SWR** | **包含** | stale-while-revalidate 策略 | 缓存优先 → 后台重新验证，RFC 5861 的 HTTP 缓存语义 |
+| **React Query** | **包含** | QueryClient · useQuery · useMutation · invalidateQueries | 规范化缓存 + 查询状态机 + 乐观更新 |
+| **Query 状态机** | **包含** | idle → loading → success/error | 自动管理查询生命周期的状态转移 |
+| **乐观更新** | **依赖** | 可逆性公理 | ∃rollback : State → State，失败时恢复原始状态 |
+| **去重机制** | **依赖** | dedupingInterval | 相同 key 的并发请求在间隔内自动合并 |
+| **窗口聚焦重验** | **依赖** | visibilitychange/focus 事件 | 用户返回页面时自动后台重新验证 |
+| **staleTime** | **对立** | gcTime | staleTime: 多久后视为 stale；gcTime: 多久无引用后垃圾回收 |
+| **React Query** | **演化** | TanStack Query | 从 React 专用扩展到框架无关（Vue/Svelte/Solid） |
+| **缓存策略** | **包含** | cache-first · network-first · stale-while-revalidate · cache-only · network-only | 五种策略对应不同数据新鲜度与性能需求 |
+
+---
+
+## 八、形式化推理链
+
+```text
+公理 A1 (状态闭包): ∀s ∈ State, ∃!ui ∈ DOM : ui = f(s)
+        ↓
+引理 L1 (服务端状态不确定性): ∀s ∈ ServerState, □(s_now = s_server) 不可判定
+                             永远无法在本地严格证明缓存与服务端一致
+        ↓
+引理 L2 (SWR 最终一致性): SWR 首先返回缓存（可能是陈旧的），然后在后台重新验证，
+                          用户在某些时刻看到的必然是「过时的真相」
+        ↓
+定理 T24 (陈旧性原罪): Staleness 是服务端状态管理库无法根本消除的原罪；
+                       其唯一补偿是「尽快让它不那么过时」
+        ↓
+推论 C1 (强一致冲突): SWR 的「最终一致性」语义与金融交易、实时协作等
+                      对强一致性有严格要求的场景存在结构性冲突
+```
+
+```text
+公理 A3 (变更最小化): Δs → min(|ΔDOM|)
+        ↓
+引理 L3 (乐观更新可逆性): 乐观更新必须满足 ∃rollback : State → State，
+                           若 mutation 失败，rollback(optimisticState) = originalState
+        ↓
+引理 L4 (并发乱序风险): 用户快速连续操作或网络抖动导致乱序响应时，
+                        乐观更新的回滚机制可能产生令人困惑的状态跳跃
+        ↓
+定理 T25 (React Query 协调器角色): React Query / SWR 扮演「客户端-服务端边界上的缓存协调器」，
+                                    与操作系统「分布式文件系统缓存」或「数据库连接池」同构
+        ↓
+推论 C2 (RSC 融合趋势): 当数据获取逻辑迁移到 RSC 内部时，客户端「服务端状态管理」的适用范围
+                        将被重新定义为「服务端渲染流与客户端交互状态的边界协调」
+```
+
+---
+
+## 九、推理判定树：SWR vs React Query vs Apollo Client？
+
+```text
+                    [开始: 服务端状态管理库选型]
+                          │
+                          ▼
+                ┌─────────────────┐
+                │ Q1: 数据协议?   │
+                │ REST / GraphQL  │
+                └────────┬────────┘
+                         │
+        ┌────────────────┼────────────────┐
+        ▼                ▼                ▼
+      [REST]          [GraphQL]         [混合]
+        │                │                │
+        ▼                ▼                ▼
+┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+│ Q2: 项目规模? │ │ Q2: 离线需求? │ │ Q2: 类型安全? │
+│ 小 / 中 / 大  │ │ 强 / 弱       │ │ 需要 / 不需要 │
+└───────┬───────┘ └───────┬───────┘ └───────┬───────┘
+        │                 │                 │
+   ┌────┴────┐       ┌────┴────┐       ┌────┴────┐
+   ▼    ▼    ▼       ▼         ▼       ▼         ▼
+  [小]  [中]  [大]   [强]      [弱]    [需要]    [不需要]
+   │     │     │      │         │       │         │
+   ▼     ▼     ▼      ▼         ▼       ▼         ▼
+  SWR  React React  Apollo    Apollo  Apollo   React
+       Query Query  Client    Client  Client   Query
+       v5    v5     (持久化)  (标准)  (强类型) (灵活)
+```
+
+---
+
+## 十、国际课程对齐标注
+
+| 课程代码 | 课程名称 | 对齐章节 | 映射内容 |
+|----------|----------|----------|----------|
+| **Stanford CS 142** | Web Applications (Rosenblum, 2023) | Lecture: Browser/Server Communication (Week 5); Lecture: Sessions and Caching (Week 7) | SWR 的 HTTP 缓存语义与浏览器缓存机制；React Query 的查询状态机与 REST API 错误处理；乐观更新的用户体验设计 |
+| **CMU 15-213** | Computer Systems (Bryant & O'Hallaron, 2016) | Chapter 6: Memory Hierarchy; Chapter 12: Concurrent Programming | 服务端状态的本地缓存对应 CPU 缓存层次结构（L1/L2/L3）；缓存失效策略对应缓存一致性协议（MESI）；去重机制对应连接池与请求合并 |
+| **MIT 6.170** | Software Studio (Daniel Jackson, 2013) | Lecture: RESTful APIs; Lecture: Web Servers and Web Apps | SWR 的 stale-while-revalidate 策略与 HTTP Cache-Control 语义；React Query 的规范化缓存与关系数据库范式对比；服务端状态与客户端状态的「范畴错误」分离 |
+
+> **学术溯源**: SWR 的命名直接引用 **RFC 5861** (2010) «HTTP Cache-Control Extensions for Stale Content» 中 "stale-while-revalidate" 响应指令；React Query 的规范化缓存设计受 **Roy Fielding** (2000) REST 论文中「统一接口」与「无状态通信」原则的间接启发；服务端状态管理的不确定性公理受 **Leslie Lamport** (1978) «Time, Clocks, and the Ordering of Events in a Distributed System» 中「分布式系统不存在全局时钟」的深刻影响——客户端与服务端的缓存状态不存在全局一致性时钟；乐观更新的可逆性约束受 **Jim Gray** (1981) 事务处理理论中 ACID 原子性与补偿事务 (Compensating Transaction) 思想的工程映射。
+
+---
+
+## 十一、深度批判性形式化总结（增强版）
+
+服务端状态管理库的崛起标志着前端架构对「状态本体论」认知的成熟：开发者终于意识到，「来自服务端的数据」与「客户端的 UI 状态」在所有权、生命周期、一致性要求等维度上存在本质差异，强行将二者纳入同一套 Redux Store 管理是一种「范畴错误」。**Tanner Linsley** (TanStack Query 作者) 将服务端状态定义为「完全不同的野兽——它是异步的、共享的、持久化在别处的」——这一洞见的形式化内涵在于：服务端状态空间与客户端状态空间具有不同的拓扑结构，需要专用抽象来管理其不确定性。**Guillermo Rauch** (Vercel CEO) 将 SWR 策略概括为「首先返回缓存（stale），然后发送请求（revalidate），最后带回最新数据」——这一描述在数学上对应于一个近似一致性的收敛过程，而非严格的一致性保证。
+
+然而，Staleness（陈旧性）是这类库无法根本消除的原罪。SWR 的命名本身就揭示了其哲学立场：「首先返回缓存（可能是陈旧的），然后在后台重新验证」。这意味着用户在某些时刻看到的必然是「过时的真相」，而框架对此的唯一补偿是「尽快让它不那么过时」。这种「最终一致性」的语义与金融交易、实时协作等对强一致性有严格要求的场景存在结构性冲突。乐观更新（Optimistic Update）虽然在 UI 层面提供了即时反馈，但其回滚机制在复杂并发场景下——用户快速连续操作、网络抖动导致的乱序响应——可能产生令人困惑的状态跳跃。**Jim Gray** (1981) 的事务处理理论要求原子操作满足「全有或全无」的语义，但前端乐观更新仅是「尽最大努力」的近似，其回滚函数 rollback: State → State 在工程实践中往往无法保证严格的可逆性。
+
+从更宏观的架构视角审视，React Query 和 SWR 实际上扮演了「客户端-服务端边界上的缓存协调器」角色，这与操作系统中的「分布式文件系统缓存」或「数据库连接池」具有同构的职责。2026 年的演进趋势表明，这一层正在与 RSC（React Server Components）和 Server Actions 发生融合：当数据获取逻辑迁移到服务端组件内部时，客户端「服务端状态管理」的适用范围将被重新定义——它不再是「如何缓存 REST API 响应」，而是「如何协调服务端渲染流与客户端交互状态的边界」。无论技术形态如何变迁，**Leslie Lamport** (1978) 的洞察将永远成立：分布式系统不存在全局时钟，客户端永远无法在本地严格证明其缓存与服务端一致——这是分布式系统本质的不可约命题，也是服务端状态管理理论永远无法跨越的形式化边界。
