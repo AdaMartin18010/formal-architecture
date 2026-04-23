@@ -344,6 +344,14 @@ CCF的验证策略：Smart Casual Verification
 
 ---
 
+## 九、权威引用
+
+> **Leslie Lamport** (1994): "TLA gave me, for the first time, a formalism in which it was possible to write completely formal proofs without first having to add an additional layer of formal semantics."
+
+> **Chris Newcombe** (2015): "In every case, TLA+ has added significant value, either finding subtle bugs that we are sure we would not have found by other means, or giving us enough understanding and confidence to make aggressive performance optimizations."
+
+---
+
 ## 十、批判性总结
 
 TLA+作为统一规约框架的核心优势在于其"最小化时序逻辑"设计哲学——Lamport将时序推理降至最低，仅在必要时引入□和◇算子，这使得规约更接近普通数学而非抽象的逻辑学。然而，这一优雅性背后存在显著的工程张力：Primed变量（x'）虽简洁，却要求工程师在写规约时同时思考当前状态和下一状态，认知负载远高于过程式编程；Stuttering不变性虽使精化理论成立，却让新手难以直观理解"系统为何可以什么都不做"。与Event-B等精化方法论相比，TLA+的模块系统更灵活但缺乏严格的精化证明义务；与Alloy等轻量级建模语言相比，TLA+表达能力更强但学习曲线更陡。在AI辅助生成规约的时代，TLA+面临新的挑战：LLM擅长生成语法正确的公式，却难以把握"规约应比实现更抽象"这一核心原则——自动生成的规约往往过度具体，丧失了形式化的根本价值。未来，TLA+的成功将取决于能否在保持数学严谨性的同时，进一步降低工具链的使用门槛。

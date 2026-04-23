@@ -3,6 +3,8 @@
 > **定位**：本文件建立计算理论的绝对边界。图灵机不是"一种计算机"，而是**"可有效计算"的数学定义**。理解可计算性边界，是理解为什么某些问题（如完美静态分析、最优调度）在理论上不可解的基础。
 >
 > **核心命题**：所有实用程序都是可判定问题的子集；工程师的价值不在于解决不可解问题，而在于**识别问题的可判定子集并设计近似解**。
+>
+> **来源映射**：Turing(1936) → Church(1936) → Kleene(1952) → 计算理论教育
 
 ---
 
@@ -158,6 +160,16 @@ Turing-Church论题：
 | Henry Rice | "Classes of Recursively Enumerable Sets..." | *Trans. AMS* | 1953 |
 | Stephen Kleene | *Introduction to Metamathematics* | North-Holland | 1952 |
 | Michael Sipser | *Introduction to the Theory of Computation* | Cengage | 1996 |
+
+## 七、权威引用
+
+> **Alan Turing** (1936): "We may compare a man in the process of computing a real number to a machine which is only capable of a finite number of conditions..."
+
+> **Alonzo Church** (1936): "The effective calculability of a function can be identified with its recursiveness."
+
+## 八、批判性总结
+
+Turing-Church论题历经80余年未被推翻，已成为计算科学的基石公理，但其本质是论题（Thesis）而非定理——它无法被数学证明，只能被证据不断加固。这一微妙区别隐含假设了"可有效计算"的直观概念在物理世界中具有唯一性；量子计算和生物计算的出现正在边缘地带试探这一假设。失效条件包括：将论题误解为"图灵机是终极计算模型"（忽视专用硬件的加速比）、以及在设计领域特定语言（DSL）时未刻意保持Turing不完备（如Solidity的图灵完备性导致智能合约漏洞不可判定）。与λ演算和递归函数论相比，图灵机模型更贴近物理计算机的直觉，但不如λ演算优雅；未来趋势是超图灵（Hypercomputation）概念在特定物理假设下的探索，以及神经网络作为"近似计算"对传统可计算性框架的补充。
 
 ---
 

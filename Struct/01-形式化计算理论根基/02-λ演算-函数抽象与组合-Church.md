@@ -3,6 +3,8 @@
 > **定位**：λ演算是计算理论的"原子"——图灵机证明了什么是可计算的，λ演算证明了计算本质上就是函数应用。它是Lisp、Haskell、ML等函数式语言的理论根基。
 >
 > **核心命题**：λ演算只有三种构造（变量、抽象、应用），却足以表达所有可计算函数。这种极简主义揭示了计算的深层统一性。
+>
+> **来源映射**：Church(1936) → Barendregt(1984) → Pierce《TAPL》(2002) → 函数式编程语言
 
 ---
 
@@ -132,6 +134,16 @@ Curry-Howard同构：
 | Henk Barendregt | *The Lambda Calculus: Its Syntax and Semantics* | North-Holland | 1984 |
 | Benjamin Pierce | *Types and Programming Languages* | MIT Press | 2002 |
 | Sørensen, Urzyczyn | *Lectures on the Curry-Howard Isomorphism* | Elsevier | 2006 |
+
+## 七、权威引用
+
+> **Alonzo Church** (1936): "The λ-calculus is a system for expressing functions and their application, with the property that all computable functions can be represented."
+
+> **Henk Barendregt** (1984): "The lambda calculus is a type-free theory about functions as rules, rather than as graphs."
+
+## 八、批判性总结
+
+λ演算以三种构造表达的普适性揭示了计算的深层统一性，但其纯函数抽象与物理计算机的状态ful本质之间存在持久张力。隐含假设是：所有计算都可以无状态地表达为函数应用，这在理论上是成立的，但在工程实践中，I/O、副作用和mutable状态是性能与可理解性的关键。失效条件包括：将λ演算的纯粹性强加于所有编程范式（导致Haskell在系统编程领域的边缘化）、忽视Y组合子在严格求值语言中的栈溢出风险、以及类型系统过度限制（如STLC的强规范化牺牲了图灵完备性）。与命令式编程模型相比，λ演算提供了更简洁的语义基础和更强大的类型推理能力，但学习曲线陡峭；未来趋势是效应系统（Effect Systems）和代数效应（Algebraic Effects）的兴起，它们试图在λ演算的纯粹框架内形式化地容纳副作用，弥合理论与工程之间的鸿沟。
 
 ---
 

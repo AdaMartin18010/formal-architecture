@@ -3,6 +3,8 @@
 > **定位**：Actor模型是并发计算的"面向对象"——每个Actor是一个独立的计算实体，通过异步消息传递通信。它是Erlang、Akka、 Orleans等系统的理论基础。
 >
 > **核心命题**：共享状态是并发Bug的根源；Actor模型通过"不共享任何东西"（shared-nothing）从根本上消除了数据竞争。
+>
+> **来源映射**：Hewitt et al.(1973) → Agha(1986) → Erlang/OTP → 分布式系统设计
 
 ---
 
@@ -141,6 +143,16 @@ Erlang/OTP的监督树：
 | Gul Agha | *Actors: A Model of Concurrent Computation* | MIT Press | 1986 |
 | Joe Armstrong | *Programming Erlang* (2nd ed.) | Pragmatic Bookshelf | 2013 |
 | Roland Kuhn et al. | *Reactive Design Patterns* | Manning | 2017 |
+
+## 八、权威引用
+
+> **Carl Hewitt** (1973): "An actor is a computational entity that, in response to a message it receives, can concurrently send messages to other actors, create new actors, and designate the behavior to be used for the next message it receives."
+
+> **Gul Agha** (1986): "The actor model provides a flexible framework for understanding and implementing open distributed systems."
+
+## 九、批判性总结
+
+Actor模型通过共享状态禁令从根本上消除了数据竞争，这一优雅设计使其成为高可用分布式系统的首选范式（Erlang、Akka）。然而，其隐含假设——消息传递是可靠的且最终有序的——在真实网络中频繁失效：消息丢失、重复、乱序和延迟波动是常态而非异常。失效条件包括：邮箱无界增长导致内存溢出（缺乏反压机制）、消息丢失使状态机永久阻塞（等待永远不会到达的响应）、以及跨Actor事务的缺失迫使开发者自行实现Saga模式（引入新的复杂性）。与CSP的同步握手相比，Actor的异步模型更接近物理网络但更难推理；未来趋势是Akka Typed和类似系统将静态类型检查引入Actor接口，在保持位置透明的同时，于编译期捕获部分消息协议错误。
 
 ---
 

@@ -3,6 +3,8 @@
 > **定位**：CAP是分布式系统领域最具知名度的不可能性定理。但"三选二"的流行表述是对Gilbert & Lynch形式化证明的过度简化。本文件还原CAP的数学本质，澄清常见误解，并建立2026年的现代共识认知。
 >
 > **核心命题**：CAP不是"三选二"的静态标签，而是**连续光谱**；P不是"可选项"而是"现实约束"；真正的工程智慧在于理解"在何种操作粒度、何种故障条件下选择何种一致性级别"。
+>
+> **来源映射**：Brewer(2000) → Gilbert & Lynch(2002) → Abadi(2012) → 分布式数据库设计
 
 ---
 
@@ -256,6 +258,16 @@ PACELC分类
 | James Corbett et al. | "Spanner: Google's Globally-Distributed Database" | *OSDI* | 2012 |
 | Seth Gilbert, Nancy Lynch | "Perspectives on the CAP Theorem" | *IEEE Computer* | 2012 |
 | Martin Kleppmann | "Please stop calling databases CP or AP" | *Martin Kleppmann's Blog* | 2015 |
+
+## 十、权威引用
+
+> **Eric Brewer** (2000): "In a distributed system, you can have at most two of the following properties: Consistency, Availability, and Partition tolerance."
+
+> **Seth Gilbert and Nancy Lynch** (2002): "Brewer's conjecture and the feasibility of consistent, available, partition-tolerant web services is a fundamental theorem of distributed computing."
+
+## 十一、批判性总结
+
+CAP定理是分布式系统领域传播最广的不可能性结果，但其"三选二"的简化表述已造成深远误解。CAP的真正价值在于揭示：网络分区时系统必须在一致性与可用性之间做出选择；然而，现代工程实践早已超越这种二元对立——Tunable Consistency允许按操作动态选择，PACELC将权衡扩展到正常工况的延迟维度。CAP隐含假设了分区是二元事件、一致性等于线性一致性、以及可用性要求100%请求响应；灰色故障、因果一致性和概率可用性都挑战了这些简化。失效条件包括：将系统静态标签为"CP"或"AP"（忽视Cassandra的ONE/QUORUM/ALL动态配置）、以及假设分区罕见而忽视P（实际上节点故障即等价于分区）。与FLP的绝对不可能性相比，CAP更像是一个设计约束而非边界；未来趋势是细粒度一致性合约（Fine-Grained Consistency Contracts），允许同一系统内不同数据子集采用不同一致性级别。
 
 ---
 

@@ -3,6 +3,8 @@
 > **定位**：本文件深入Raft共识算法——分布式系统领域从"理论可理解"到"工程可实现"的里程碑。Raft通过将共识分解为Leader选举、日志复制、安全性三个子问题，使Paxos的理论成果转化为可教育、可验证、可生产的工程实践。
 >
 > **核心命题**：Raft的价值不仅是算法本身，更是其**模块化分解方法论**——将不可理解的复杂问题拆分为可独立理解的子问题，这一思想适用于所有复杂系统设计。
+>
+> **来源映射**：Ongaro & Ousterhout(2014) → Howard et al.(2015) → etcd/TiKV → 云原生基础设施
 
 ---
 
@@ -287,6 +289,16 @@ Safety ==
 | etcd Authors | "etcd Raft Design" | etcd Docs | 持续更新 |
 | TiKV Authors | "Multi-Raft: Design and Implementation" | PingCAP Blog | 2017 |
 | John Ousterhout et al. | "The RAMCloud Storage System" | *ACM TOCS* | 2015 |
+
+## 十、权威引用
+
+> **Diego Ongaro and John Ousterhout** (2014): "Raft is a consensus algorithm for managing a replicated log. It produces a result equivalent to (multi-)Paxos, and it is as efficient as Paxos, but its structure is different from Paxos."
+
+> **Heidi Howard et al.** (2015): "Do we have consensus? A critical examination of Raft and its variants reveals subtle safety concerns in corner cases."
+
+## 十一、批判性总结
+
+Raft通过模块化分解（Leader选举、日志复制、安全性、成员变更）使共识算法首次成为计算机科学教育的标准内容，这一工程可读性成就不可低估。然而，其隐含假设——网络分区是短暂的、Leader是稳定的、Follower是有序的——在跨地域部署中频繁失效：跨AZ网络抖动导致频繁的假阳性Leader重选，使系统陷入活锁而非前进。失效条件包括：选举超时设置不当（无法区分网络分区与Leader故障）、日志膨胀未加控制（快照恢复期间新请求堆积）、以及Pre-Vote机制缺失（网络分区恢复时的 disruptive 投票风暴）。与Paxos相比，Raft的强Leader连续性简化了理解但牺牲了部分灵活性（不允许日志空洞）；未来趋势是Multi-Raft架构（如TiKV）将共识域拆分为多个独立Raft组，在保持模块化简洁的同时实现水平扩展，以及将Raft与确定性时钟（如RDMA）结合，从根本上消除超时猜测的不确定性。
 
 ---
 

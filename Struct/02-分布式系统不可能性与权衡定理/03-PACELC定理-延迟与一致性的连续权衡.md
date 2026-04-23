@@ -3,6 +3,8 @@
 > **定位**：PACELC是CAP定理的必要补充。CAP描述分区时的极端选择，而PACELC揭示**正常工况下的延迟-一致性权衡**——这才是工程中最常面对的决策场景。
 >
 > **核心命题**：分区是年故障分钟级的异常状态；Latency-Consistency权衡是每毫秒都在发生的常态。忽略PACELC的系统设计，会在"无分区时"做出次优选择。
+>
+> **来源映射**：Abadi(2012) → CAP证明(2002) → 现代分布式系统权衡框架
 
 ---
 
@@ -117,6 +119,16 @@ PACELC定理：
 | Daniel J. Abadi | "Consistency Tradeoffs in Modern Distributed Database..." | *IEEE Computer* | 2012 |
 | Seth Gilbert, Nancy Lynch | CAP原始证明 | *ACM SIGACT News* | 2002 |
 | Werner Vogels | "Eventually Consistent" | *ACM Queue* | 2008 |
+
+## 八、权威引用
+
+> **Daniel J. Abadi** (2012): "CAP is only part of the story. In the normal case of no partitions, systems must still trade off consistency and latency."
+
+> **Werner Vogels** (2008): "Eventually consistent is a fundamental property of distributed systems that trade consistency for availability and performance."
+
+## 九、批判性总结
+
+PACELC定理是对CAP的必要补充，它将分布式系统的权衡分析从"异常状态的分区"延伸到"常态的延迟-一致性选择"。这一扩展隐含假设了延迟与一致性之间存在可量化的连续光谱；然而，实际系统的权衡曲线往往非线性且受硬件拓扑强烈影响（如跨AZ延迟是同城延迟的10倍以上）。失效条件包括：将PACELC分类视为系统静态属性（忽视MongoDB等系统的动态可调配置）、以及低估网络拓扑变化对延迟税的影响（峰值期间跨地域Quorum读延迟可能暴增）。与CAP的二元思维相比，PACELC更接近工程现实，但仍低估了操作粒度的重要性——同一系统的读操作可用最终一致，写操作却必须线性一致。未来趋势是AI驱动的自适应一致性选择，根据实时网络状况、业务优先级和历史访问模式，自动为每个请求选择最优一致性级别，使PACELC从静态分类进化为动态优化问题。
 
 ---
 

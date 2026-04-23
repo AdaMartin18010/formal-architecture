@@ -1,5 +1,7 @@
 # 工作流引擎：状态机与Saga模式的形式化
 
+> **来源映射**: View/01.md §2.2, Struct/04-数据一致性代数结构/04-EventSourcing.md
+>
 > **定位**：工作流引擎是分布式系统的"编排大脑"——它将 Saga 模式、状态机和补偿事务封装为可运行、可监控、可回滚的基础设施。Temporal、Camunda 等现代工作流引擎让复杂长事务的实现从"手写状态机"提升到"声明式编排"。
 >
 > **核心命题**：工作流引擎的本质是持久化状态机——每个工作流实例的状态被持久化，确保即使进程崩溃，工作流也能从断点恢复。
@@ -164,6 +166,22 @@ func OrderWorkflow(ctx workflow.Context, orderID string) error {
 | Temporal团队 | Temporal文档与架构 | temporal.io | 持续更新 |
 | Camunda团队 | Camunda BPMN引擎文档 | camunda.com | 持续更新 |
 | Netflix | Conductor文档 | github.com/Netflix/conductor | 持续更新 |
+
+---
+
+## 八、权威引用
+
+> **Hector Garcia-Molina** (1987): "A saga is a Long Lived Transaction that can be written as a sequence of transactions that can be interleaved with other transactions."
+
+> **Jim Gray** (1981): "A transaction is a transformation of state that has the properties of atomicity, consistency, isolation, and durability."
+
+> **Pat Helland** (2007): "Data on the Outside vs. Data on the Inside: The distinction between data inside a service boundary and data shared between services is fundamental to building scalable distributed systems."
+
+---
+
+## 九、批判性总结
+
+工作流引擎将Saga模式从理论构想转化为可运行、可监控、可恢复的基础设施，但其形式化保证与工程实现之间存在不可忽视的语义鸿沟。技术洞察在于：工作流引擎的本质是"持久化状态机"——通过事件溯源和快照机制将状态转换持久化，确保进程崩溃后能从断点恢复，这本质上是用确定性重放（Deterministic Replay）来对抗部分故障（Partial Failure）。隐含假设方面，Saga模式预设"补偿操作总是可执行的"，但真实业务中补偿可能失败（如退款时支付渠道故障），而补偿的补偿（二阶补偿）引入了无限回归的风险；此外，编排式模式假设"协调器本身不会成为单点故障"，但协调器的状态库若不可用，整个长事务将停滞。失效条件包括：补偿操作的业务副作用不可逆（如已发送的邮件无法撤回）、超时配置不一致导致活动超时与补偿超时的竞态、以及跨服务事务的隔离性缺失引发脏读。与2PC分布式事务相比，Saga在可用性上具有绝对优势，但牺牲了隔离性；与纯编舞式EDA相比，编排式提供了更好的可观测性和控制流清晰度，但引入了协调器耦合。未来趋势上，工作流引擎将向"自适应Saga"演进——基于运行时状态自动选择编排式或编舞式执行路径，并结合AI辅助的根因分析来诊断补偿失败。
 
 ---
 

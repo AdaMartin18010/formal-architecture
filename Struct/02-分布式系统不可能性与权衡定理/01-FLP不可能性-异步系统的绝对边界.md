@@ -3,6 +3,8 @@
 > **定位**：本文件是分布式系统理论中最深刻的不可能性结果。FLP证明不仅是数学定理，更是工程哲学的分水岭——它告诉我们在何种边界内可以工作，以及为何所有实用共识算法都必须"绕过"而非"克服"这一限制。
 >
 > **核心命题**：FLP不是分布式系统的"死刑判决"，而是**工程假设的精确校准器**。任何声称"突破FLP"的系统，要么在撒谎，要么悄悄引入了FLP之外的假设。
+>
+> **来源映射**：FLP(1985) → Lynch《Distributed Algorithms》(1996) → Dwork et al.(1988) → 实用共识算法设计
 
 ---
 
@@ -314,6 +316,16 @@ Raft的FLP绕过机制
 | Michael Ben-Or | "Another Advantage of Free Choice" | *PODC* | 1983 |
 | Seth Gilbert, Nancy Lynch | "Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services" | *ACM SIGACT News* | 2002 |
 | Henry Robinson | "FLP and CAP aren't the same thing" | *The Paper Trail* (Blog) | 2012 |
+
+## 十、权威引用
+
+> **M.J. Fischer, N.A. Lynch, M.S. Paterson** (1985): "It is shown that every protocol for this problem has the possibility of nontermination, even with only one faulty process."
+
+> **Cynthia Dwork, Nancy Lynch, Larry Stockmeyer** (1988): "Consensus is achievable in partially synchronous systems, where the system is asynchronous but with known bounds on message delays after some unknown time."
+
+## 十一、批判性总结
+
+FLP不可能性是分布式计算的最深刻边界定理之一，它迫使所有实用共识算法必须在安全性与活性之间做出非对称取舍——Safety永远不可妥协，而Liveness只能依赖超时、随机化或故障探测器等额外假设。然而，FLP证明的隐含假设（纯异步消息传递、Fail-stop故障、确定性算法）在实践中很少同时成立：真实网络呈现部分同步性，故障往往是拜占庭型而非简单停止，而随机化在加密协议中已是标配。失效条件包括：将FLP误解为"共识不可能"（从而放弃所有一致性努力）、以及忽视部分同步假设的脆弱性（网络抖动导致Raft频繁重选）。与CAP相比，FLP更精确地刻画了异步共识的边界；未来趋势是结合物理时钟（如Spanner TrueTime）和可验证延迟函数（VDF）的新同步假设，在保持安全性的同时缩小FLP限制的影响范围。
 
 ---
 

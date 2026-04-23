@@ -1,5 +1,7 @@
 # Conway定律与逆Conway策略
 
+> **来源映射**: Struct/06-领域驱动设计与组织动力学/03-Conway定律与逆Conway策略.md
+>
 > **定位**：本文件是软件架构与组织动力学交叉点的核心文档。Conway定律不是社会学观察，而是**具有预测力的系统定理**——组织沟通结构必然映射为系统设计结构。逆Conway策略则提供了主动利用这一定律的架构工具。
 >
 > **核心命题**：如果团队边界与技术架构不一致，会产生"图同态的伪影"——物理分布式但逻辑紧耦合的分布式单体。微服务拆分的本质是**组织图同态的求解问题**。
@@ -222,6 +224,18 @@ Conway定律的形式化表述：
 | Nicole Forsgren et al. | *Accelerate* | IT Revolution | 2018 |
 | Ruth Malan | "Conway's Law" (详细图解分析) | Bredemeyer Consulting | 2008 |
 | Jonny LeRoy, Matt Simons | "Evolving a Mature Organization..." | ThoughtWorks | 2016 |
+
+## 九、权威引用
+
+> **Melvin E. Conway** (1968): "The larger an organization is, the less flexibility it has to undertake the design of large systems. The very communication structure of the organization constrains the design alternatives available."
+
+> **Eric Evans** (2003): "When a close relationship is required between the business organization and the software design, the alignment of the two can be a powerful force for good, or, if neglected, a source of perpetual friction."
+
+---
+
+## 十、批判性总结
+
+将Conway定律形式化为图同态 φ: G_org → G_sys 是数学直觉与社会观察的漂亮结合，但这一抽象忽略了组织动力学中最关键的变量：权力、激励与人的认知局限。其隐含假设——组织结构调整成本低于系统重构成本，且存在愿意承担短期效率损失的"变革牺牲品"——在大多数企业中都是奢侈品。失效条件包括：矩阵组织结构天然阻碍流对齐团队形成、中心化的预算审批流程强制共享资源池、以及KPI体系激励团队维护局部优化而非全局架构健康。与Team Topologies相比，图同态形式化提供了分析语言却缺乏实施路线图；与社会技术系统理论相比，它过度简化了组织文化的惯性。未来趋势上，"内部开发者平台"（IDP）作为逆Conway的新载体正在兴起：通过将基础设施能力产品化，平台团队使流对齐团队获得自治权而无需改变汇报结构，从而在不变动组织图的前提下改善系统依赖图。
 
 ---
 

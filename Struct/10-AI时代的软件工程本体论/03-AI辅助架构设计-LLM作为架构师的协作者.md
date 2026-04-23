@@ -1,5 +1,7 @@
 # AI辅助架构设计：LLM作为架构师的协作者
 
+> **来源映射**: View/00.md §3, View/01.md §5, Struct/05-架构模式与部署单元光谱/00-总览.md
+>
 > **定位**：LLM不会取代架构师，但会改变架构师的工作方式——从"手绘全部"到"与AI共同探索设计空间"。AI是强大的模式检索和生成工具，但架构决策的最终责任仍在于人类。
 >
 > **核心命题**：AI辅助架构设计的最佳模式是"人类主导决策，AI辅助生成和验证"——而非相反。
@@ -133,6 +135,45 @@ AI建议可信度评估：
 | Michael Feathers | *Working Effectively with Legacy Code* | Prentice Hall | 2004 |
 | Gregor Hohpe | "Architectural Decision Records (ADR)" | gihohpe.com | 持续更新 |
 | O'Reilly | "Software Architecture Patterns" | O'Reilly | 2015 |
+
+---
+
+## 八、架构决策的形式化模型
+
+**AI辅助架构设计的形式化约束**：
+
+设设计空间为 D = {d₁, d₂, ..., dₙ}，约束集合为 C = {c₁, ..., cₘ}，评估维度为 E = {e₁, ..., eₖ}。
+
+AI推荐函数 Rec: C → 2ᴰ 的输出满足：
+  ∀d ∈ Rec(C), ∃ c ∈ C : d ⊨ c（推荐方案至少满足一项显式约束）
+
+但AI推荐存在固有偏差：
+  Bias(Rec) = argmax_{d ∈ D} P_train(d)
+  即AI倾向于推荐训练数据中最常见的方案，而非约束下的最优解
+
+人类架构师的决策函数 Human: Rec(C) × Context → D 引入了：
+
+- 组织政治因素
+- 长期演进考量
+- 隐性约束识别
+
+形式化保证：最终决策 d* = Human(Rec(C), Context) 的可靠性上界由人类对约束完备性的判断决定，而非AI的推荐置信度。
+
+---
+
+## 九、权威引用
+
+> **Grady Booch** (1995): "The function of good software is to make the complex appear to be simple."
+
+> **Melvin Conway** (1968): "Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations."
+
+> **David Parnas** (1972): "The most important property of a module is the extent to which it hides the design decisions within it."
+
+---
+
+## 十、批判性总结
+
+AI辅助架构设计的核心价值不在于替代人类判断，而在于将架构师从信息检索的机械劳动中解放出来，使其聚焦于不可自动化的约束推理。技术洞察在于：LLM在架构设计中的优势局限于"模式检索"——即从历史训练数据中提取与当前约束相似的最佳实践，而其盲区在于"创新架构"——训练分布外的领域特定约束组合。隐含假设方面，"人类主导决策，AI辅助生成"模式预设人类架构师具备识别AI幻觉和模式匹配偏差的能力，但在技术快速迭代的领域（如云原生、AI基础设施），人类专家的知识更新速度可能滞后于AI训练数据的时效性。失效条件包括：AI推荐过时技术栈、忽视跨领域约束（安全、合规、可访问性）、以及多轮对话后的上下文丢失导致早期关键约束被遗忘。与纯人工架构设计相比，AI辅助将方案探索阶段从数周压缩至数天，但将"验证方案可行性"的认知负担显著增加；与完全依赖AI决策相比，人类终审机制是不可或缺的安全阀。未来趋势上，架构设计工具将演变为"人机共创的白板"——AI实时生成方案对比矩阵、自动检查约束冲突、模拟架构演进的成本曲线，而人类负责最终的价值判断和风险承担。
 
 ---
 

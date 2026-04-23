@@ -3,6 +3,8 @@
 > **定位**：时序逻辑是描述系统"随时间变化的行为"的形式化语言。它是模型检测（Model Checking）和形式化验证的理论基础——让"系统永远不会死锁"这样的属性变得可数学表述。
 >
 > **核心命题**：LTL描述线性时间路径上的属性，CTL描述分支时间树上的属性。理解它们的表达力差异，是选择验证工具的关键。
+>
+> **来源映射**：Pnueli(1977) → Clarke & Emerson(1981) → Baier & Katoen(2008) → 模型检测工具
 
 ---
 
@@ -140,6 +142,16 @@ CTL公式语法：
 | Clarke, Emerson | "Design and Synthesis of Synchronization Skeletons" | *Logic of Programs* | 1981 |
 | Baier, Katoen | *Principles of Model Checking* | MIT Press | 2008 |
 | Huth, Ryan | *Logic in Computer Science* (2nd ed.) | Cambridge | 2004 |
+
+## 八、权威引用
+
+> **Amir Pnueli** (1977): "The temporal logic of programs provides a unified approach to the verification of both sequential and parallel programs."
+
+> **E.M. Clarke and E.A. Emerson** (1981): "We have shown that the model checking problem for CTL is decidable in polynomial time."
+
+## 九、批判性总结
+
+时序逻辑为并发系统的验证提供了精确的数学语言，但其工业应用长期受困于状态空间爆炸问题。隐含假设是：待验证系统的状态空间可以被有效枚举或抽象；当面对百万行代码的分布式系统时，这一假设迅速瓦解。失效条件包括：模型与实现之间的语义鸿沟（验证通过的形式模型与实际代码行为不一致）、LTL/CTL表达力不足（无法捕捉概率性属性和实时约束）、以及验证工具的学习成本过高导致团队放弃使用。与测试和监控相比，时序逻辑验证提供更强的正确性保证，但覆盖范围有限；未来趋势是符号模型检测与SMT求解器结合，以及时序逻辑属性的运行时监控（Runtime Verification），将形式化保证从设计时延伸到生产环境。
 
 ---
 

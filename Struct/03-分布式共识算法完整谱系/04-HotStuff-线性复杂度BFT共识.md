@@ -3,6 +3,8 @@
 > **定位**：HotStuff是BFT共识从"学术可证明"到"工业可部署"的关键突破——它用阈值签名将PBFT的O(n²)消息复杂度降到O(n)，同时保留了可证明的安全性。DiemBFT（原Libra）和多个主流区块链采用了HotStuff。
 >
 > **核心命题**：消息复杂度不是理论细节，而是工程瓶颈。O(n²)意味着100个节点的BFT系统每轮需要10,000条消息；O(n)意味着仅需100条。
+>
+> **来源映射**：Yin et al.(2018) → DiemBFT → BLS阈值签名(2003) → 高吞吐量BFT系统
 
 ---
 
@@ -160,6 +162,16 @@ HotStuff三阶段（简化版）：
 | Diem团队 | DiemBFT技术文档 | developers.diem.com | 持续更新 |
 | Boneh et al. | BLS阈值签名论文 | 密码学会议 | 2003 |
 | Castro, Liskov | PBFT原始论文 | *OSDI* | 1999 |
+
+## 八、权威引用
+
+> **Maofan Yin et al.** (2018): "HotStuff achieves linear communication complexity in Byzantine fault-tolerant consensus through threshold signatures and a chained structure."
+
+> **Dan Boneh et al.** (2003): "Short signatures from the Weil pairing enable efficient threshold cryptography for distributed systems."
+
+## 九、批判性总结
+
+HotStuff通过阈值签名将BFT共识的消息复杂度从O(n²)降至O(n)，这一突破使百节点级BFT集群首次具备工业可行性（DiemBFT、Celo）。然而，其隐含假设——阈值签名方案是安全的且密钥管理是可操作的——在实践中引入了新风险：密钥分发 ceremony 的复杂性、私钥泄露后的恢复难题、以及聚合签名验证的库依赖（大多数团队不具备审计BLS实现的能力）。失效条件包括：阈值签名库的实现漏洞（如配对曲线选择不当）、网络抖动导致链式结构的视图切换频繁（Pacemaker参数调优困难）、以及3δ延迟在跨大洲部署中仍显缓慢。与PBFT相比，HotStuff在消息效率上取得了质的飞跃，但将复杂性从网络层转移到了密码学层；未来趋势是阈值签名的硬件加速（ASIC/GPU）和更简洁的BFT变体（如Streamlet），进一步降低BFT的工程门槛，使其从区块链专属走向通用分布式系统。
 
 ---
 

@@ -1,5 +1,7 @@
 # 微服务量化模型：Amdahl定律修正与协调成本
 
+> **来源映射**: Struct/05-架构模式与部署单元光谱/04-微服务量化模型-Amdahl定律修正与协调成本.md
+>
 > **定位**：微服务不是"越多越好"——存在一个最优服务数量，超过这个数量后协调成本的增加会超过并行化的收益。本文件提供一个量化框架来估计这个最优边界。
 >
 > **核心命题**：微服务的协调成本是"隐形的串行部分"——它不体现在业务逻辑中，但体现在每次跨服务调用中。
@@ -153,6 +155,18 @@
 | John Ousterhout | "The Role of Distributed State" | *LADIS Keynote* | 2008 |
 | Sam Newman | *Building Microservices* (2nd ed.) | O'Reilly | 2021 |
 | Brendan Gregg | *Systems Performance* (2nd ed.) | Addison-Wesley | 2020 |
+
+## 八、权威引用
+
+> **Gene Amdahl** (1967): "The speedup of a program using multiple processors in parallel computing is limited by the time needed for the sequential fraction of the program."
+
+> **John Ousterhout** (2008): "The problem with distributed systems is not that they are slow, but that they introduce new classes of failures and new sources of complexity that are fundamentally different from those in non-distributed systems."
+
+---
+
+## 九、批判性总结
+
+Amdahl修正公式为微服务拆分提供了罕见的分析性视角，将"隐形的串行部分"量化为协调成本，这是超越经验主义的重要一步。然而，该模型的隐含假设——协调成本是同质、静态且可精确测量——在现实组织中几乎从未成立。不同服务间的协调成本差异巨大：同AZ的gRPC调用与跨Region的HTTPS调用相差两个数量级；技术协调（API变更）与组织协调（需求对齐）更是不同维度的成本。失效条件包括：服务边界语义不稳定导致N持续变动、政治因素驱动的"伪微服务"拆分、以及协调成本系数c随组织规模非线性增长。与Team Topologies的认知负载理论相比，Amdahl模型提供了数学直觉却忽略了人类因素；与Conway定律相比，它关注运行时性能而非组织映射。未来趋势上，AI辅助的服务边界检测（基于代码变更共现和团队协作模式）正在尝试动态优化N，而服务网格的零信任架构可能通过标准化安全通信将c降低一个数量级。
 
 ---
 

@@ -3,6 +3,8 @@
 > **定位**：Paxos是分布式共识算法的"相对论"——优美、正确，但难懂。Raft和HotStuff的存在，恰恰证明工程可读性（与正确性）并不矛盾。
 >
 > **核心命题**：理解Paxos不仅是历史兴趣，更是理解所有后续共识算法（Raft, PBFT, HotStuff）的共同祖先。
+>
+> **来源映射**：Lamport(1998, 2001) → Ongaro & Ousterhout(2014) → Chubby/OSDI 2006 → 分布式锁与配置服务
 
 ---
 
@@ -182,6 +184,16 @@ Raft的设计哲学：可理解性优先
 | Leslie Lamport | "Paxos Made Simple" | *ACM SIGACT News* | 2001 |
 | Diego Ongaro, John Ousterhout | "In Search of an Understandable Consensus Algorithm" | *ATC* | 2014 |
 | Mike Burrows | "The Chubby lock service..." | *OSDI* | 2006 |
+
+## 八、权威引用
+
+> **Leslie Lamport** (2001): "The Paxos algorithm, when presented in plain English, is very simple."
+
+> **Diego Ongaro and John Ousterhout** (2014): "We designed Raft to be easier to understand than Paxos, while providing the same guarantees."
+
+## 九、批判性总结
+
+Paxos作为共识算法的理论基石，其正确性已历经25年工业验证（Chubby、Spanner），但其工程实现难度与理论简洁性之间的鸿沟从未被真正弥合。Lamport的"Paxos Made Simple"反讽地证明了这一点：即便简化到"plain English"，实现者仍会在Leader选举、成员变更和日志压缩等"未指定"细节上踩坑。隐含假设是：协议的数学正确性自动保证工程鲁棒性；事实上，Chubby论文花了大量篇幅描述工程优化（如租约、快照、批处理），这些才是生产系统的关键。失效条件包括：将基础Paxos直接用于日志复制（忽略Multi-Paxos的Leader优化）、在动态成员环境中硬编码Quorum大小、以及缺乏租约机制导致脑裂。与Raft相比，Paxos更灵活（允许日志空洞），但灵活性本身成为理解负担；未来趋势是共识算法的"编译器化"——高层声明式规范自动生成为特定网络拓扑优化的共识实现，消除手工实现中的人为错误。
 
 ---
 

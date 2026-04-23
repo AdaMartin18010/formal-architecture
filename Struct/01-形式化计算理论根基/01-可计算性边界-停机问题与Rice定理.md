@@ -3,6 +3,8 @@
 > **定位**：可计算性理论是软件工程的"物理学"——它告诉我们什么是可能的、什么是不可能的。停机问题和Rice定理不是抽象的数学游戏，而是直接影响我们每天使用的工具（静态分析、类型检查、测试）的根本约束。
 >
 > **核心命题**：接受"有些事情不可判定"，让我们把注意力放在可判定的问题和实用的近似解上。
+>
+> **来源映射**：Turing(1936) → Rice(1953) → Sipser《ITC》(2012) → 静态分析工具设计
 
 ---
 
@@ -142,6 +144,16 @@ Rice定理：
 | Henry Rice | "Classes of Recursively Enumerable Sets..." | *Trans. AMS* | 1953 |
 | Michael Sipser | *Introduction to the Theory of Computation* (3rd ed.) | Cengage | 2012 |
 | Hopcroft, Motwani, Ullman | *Introduction to Automata Theory* (3rd ed.) | Pearson | 2006 |
+
+## 八、权威引用
+
+> **Alan Turing** (1936): "We may compare a man in the process of computing a real number to a machine which is only capable of a finite number of conditions."
+
+> **Henry G. Rice** (1953): "For any non-trivial property of partial functions, there is no general and effective method to decide whether an arbitrary algorithm computes a partial function with that property."
+
+## 九、批判性总结
+
+停机问题与Rice定理构成了软件工程的理论天花板，迫使行业接受静态分析、测试和验证工具的固有局限性。然而，这一不可判定性结论隐含假设了程序运行在通用图灵机上且允许无界计算；当语言被刻意限制为可判定子集（如正则表达式、Simply Typed Lambda Calculus）时，精确分析完全可行。失效条件包括：工程师误以为"不可判定"等于"不可分析"（从而放弃所有形式化努力）、以及工具厂商隐瞒近似算法的不完备性（宣称"智能检测所有Bug"）。与完全形式化验证相比，可判定子集方法牺牲表达力换取自动化，是工业界更务实的路径；未来趋势是依赖类型（Dependent Types）和精炼类型（Refinement Types）在"可判定边界"上扩展安全保证，使更多程序属性进入机器可验证范围。
 
 ---
 

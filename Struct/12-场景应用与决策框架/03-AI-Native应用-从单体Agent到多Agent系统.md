@@ -1,5 +1,7 @@
 # AI-Native应用：从单体Agent到多Agent系统
 
+> **来源映射**: View/01.md §5, Struct/10-AI时代的软件工程本体论/00-总览.md
+>
 > **定位**：AI-Native不是"加个AI功能"，而是"AI作为系统核心"——从单体大模型到多Agent协作，AI正在重新定义应用架构。
 >
 > **核心命题**：多Agent系统的核心挑战不是"让AI更聪明"，而是"让多个AI有效协作"——这与分布式系统中多节点协作的挑战惊人地相似。
@@ -176,6 +178,50 @@ RAG（Retrieval-Augmented Generation）管道：
 | Lewis et al. | "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" | *NeurIPS* | 2020 |
 | Hong et al. | "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework" | *arXiv* | 2023 |
 | OpenAI | "Function Calling" docs | openai.com | 持续更新 |
+
+---
+
+## 八、多Agent系统的形式化模型
+
+**多Agent协作的形式化框架**：
+
+设Agent集合为 A = {a₁, a₂, ..., aₙ}，共享状态空间为 S，消息通道为 M。
+
+Agent的局部状态转移：
+  δᵢ: Sᵢ × M → Sᵢ × M
+  其中 Sᵢ ⊆ S 为Agent aᵢ的可见状态子集
+
+系统全局状态为各局部状态的组合：
+  S_global = (S₁, S₂, ..., Sₙ)
+
+与分布式系统的同构映射：
+  ├─ Agent通信 ≡ 消息传递（异步 mailbox）
+  ├─ 共享状态 ≡ 最终一致的数据副本
+  ├─ 共识需求 ≡ Agent决策一致性（投票/仲裁）
+  └─ 故障恢复 ≡ Agent失败时的备用/重试
+
+多Agent编排的形式化约束：
+  Orchestration: 中央协调器 C 维护全局状态图
+    ∀aᵢ ∈ A, action(aᵢ) = C(schedule, context)
+
+  Choreography: 各Agent自主响应事件
+    ∀aᵢ ∈ A, action(aᵢ) = δᵢ(local_state, subscribed_events)
+
+---
+
+## 九、权威引用
+
+> **Marvin Minsky** (1986): "The mind is a society of agents, each with its own goals and capabilities. Intelligence emerges from the interaction of these simple agents."
+
+> **Alan Turing** (1950): "We can only see a short distance ahead, but we can see plenty there that needs to be done."
+
+> **Michael Wooldridge** (2009): "An agent is a computer system that is situated in some environment, and that is capable of autonomous action in this environment in order to meet its delegated objectives."
+
+---
+
+## 十、批判性总结
+
+AI-Native应用从单体Agent到多Agent系统的演进，本质上是将分布式系统的经典挑战（共识、一致性、故障恢复）重新引入到AI应用架构中。技术洞察在于：多Agent系统的核心瓶颈不是"单个AI不够聪明"，而是"多个AI如何有效协作"——这与分布式系统中多节点协调的挑战惊人地同构，意味着我们可以将Raft共识、CRDT合并、Saga补偿等成熟理论迁移到Agent协作设计中。隐含假设方面，"更多Agent带来更好结果"的直觉预设了Agent间的协作收益大于协调开销，但实践中Agent间的循环依赖（A等B，B等A）和意见冲突（不同Agent给出矛盾建议）会导致系统性能随Agent数量增加而下降。失效条件包括：上下文窗口限制导致共享状态截断、Agent幻觉的级联传播（一个Agent的错误被其他Agent放大）、以及多Agent系统的可解释性随参与者数量指数下降。与单体大模型相比，多Agent系统在任务分解和专业化方面具有优势，但引入了分布式一致性的全新挑战；与纯规则引擎相比，Agent系统更具灵活性，但牺牲了确定性和可预测性。未来趋势上，多Agent系统将借鉴"服务网格"的思想形成"Agent网格"——标准化的Agent间通信协议、自动化的任务路由与负载均衡、以及嵌入式的伦理与安全护栏，使AI应用架构从"单体智能"迈向"群体智能"。
 
 ---
 

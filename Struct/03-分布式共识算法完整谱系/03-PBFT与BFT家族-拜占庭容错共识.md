@@ -3,6 +3,8 @@
 > **定位**：从Crash Fault Tolerance（CFT）到Byzantine Fault Tolerance（BFT），是共识算法从"可信任数据中心"到"开放对抗环境"的跃迁。BFT的代价是3f+1节点（vs CFT的2f+1），但区块链和跨组织协作使BFT成为必需。
 >
 > **核心命题**：BFT不是区块链专属；任何需要容忍恶意行为的场景（跨组织数据共享、外包计算验证）都需要BFT。
+>
+> **来源映射**：Castro & Liskov(1999) → Tendermint/DiemBFT → 区块链与跨组织共识
 
 ---
 
@@ -171,6 +173,16 @@ PBFT三阶段协议（正常工况）：
 | Yin et al. | "HotStuff: BFT Consensus in the Lens of Blockchain" | *arXiv* | 2018 |
 | Spiegelman et al. | "Bullshark: DAG BFT Protocols Made Practical" | *arXiv* | 2022 |
 | Buchman et al. | "Tendermint: Byzantine Fault Tolerance in the Age of Blockchains" | Thesis | 2016 |
+
+## 八、权威引用
+
+> **Miguel Castro and Barbara Liskov** (1999): "Practical Byzantine Fault Tolerance achieves consensus in asynchronous distributed systems where less than one-third of the replicas may behave arbitrarily."
+
+> **Ethan Buchman et al.** (2016): "Tendermint combines Byzantine fault tolerance with blockchain semantics to provide a practical consensus engine for proof-of-stake systems."
+
+## 九、批判性总结
+
+PBFT将拜占庭容错从理论可能性转化为工程现实，但其O(n²)消息复杂度和3f+1的节点成本使其长期局限于学术和小规模联盟链场景。隐含假设是：恶意节点的行为是任意的但计算能力有限（无法破解密码学承诺）；随着量子计算的发展，这一假设可能被动摇。失效条件包括：视图变更期间的网络风暴（新Leader需收集并验证大量VIEW-CHANGE消息）、密码学签名验证的CPU瓶颈（在高吞吐场景成为主要延迟来源）、以及f+1诚实节点假设在网络分区中的脆弱性（分区可能使诚实节点分散到无法形成Quorum的子集）。与CFT共识（Raft/Paxos）相比，BFT的代价是50%额外节点和显著更高的实现复杂度；未来趋势是HotStuff及其DAG后继者通过阈值签名和流水线将BFT消息复杂度降至O(n)，以及硬件可信执行环境（TEE）的兴起可能重新定义"拜占庭"的边界——将部分容错责任从软件协议转移到硬件保障。
 
 ---
 

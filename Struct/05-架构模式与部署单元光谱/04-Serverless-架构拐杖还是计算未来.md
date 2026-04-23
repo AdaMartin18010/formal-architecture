@@ -1,5 +1,7 @@
 # Serverless：架构拐杖还是计算未来
 
+> **来源映射**: Struct/05-架构模式与部署单元光谱/04-Serverless-架构拐杖还是计算未来.md
+>
 > **定位**：本文件聚焦2026年最具争议的架构范式之一。Serverless（FaaS）承诺免运维和自动扩展，但强制所有计算适配请求-响应模型。争议本质是"谁拥有架构控制权"——开发者让渡运行时控制权以换取运维简化。
 >
 > **核心命题**：Serverless不是万能的，也不是万恶的。它是**特定工作负载特征下的帕累托最优解**，而非所有系统的默认选择。
@@ -230,6 +232,18 @@ Serverful更优条件：
 | Jeremy Daly | "Serverless Best Practices" | Off-by-none Newsletter | 持续更新 |
 | Amazon Prime Video | 成本优化案例（微服务+Serverless→单体） | AWS Blog | 2023 |
 | CNCF | Serverless Working Group Whitepapers | cncf.io | 2023 |
+
+## 十、权威引用
+
+> **Simon Wardley** (2016): "Serverless is the future of software architecture not because it's a better way of doing what we already do, but because it enables a new way of building systems that wasn't economically feasible before."
+
+> **Mike Roberts** (2018): "Serverless architectures are application designs that incorporate third-party 'Backend as a Service' (BaaS) services, and/or that include custom code run in managed, ephemeral containers on a 'Functions as a Service' (FaaS) platform."
+
+---
+
+## 十一、批判性总结
+
+Serverless的本质是架构控制权的让渡：开发者以放弃运行时拓扑控制权为代价，换取平台托管的弹性与运维简化。其隐含假设——工作负载是无状态的、短生命周期的、且事件触发的——与大量企业应用（有状态长连接、常驻进程、强一致性事务）存在根本错配。失效条件包括：冷启动敏感型延迟要求、执行时长超出平台限制（如15分钟）、以及状态外置导致的每次调用重新初始化成本。与容器编排相比，Serverless牺牲了可移植性和调试能力；与传统VM相比，它牺牲了环境控制力和常驻状态性能。Amazon Prime Video的成本优化案例证明，当工作负载特征与FaaS假设错配时，回迁单体可带来90%成本节约。未来趋势上，Cloudflare Workers的V8 Isolate模型和WASM运行时正在重塑Serverless边界——接近零冷启动和更细粒度资源控制可能使Serverless从"特定工作负载优化"走向"通用计算层"。
 
 ---
 

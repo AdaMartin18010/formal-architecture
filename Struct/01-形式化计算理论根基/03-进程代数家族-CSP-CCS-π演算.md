@@ -3,6 +3,8 @@
 > **定位**：本文件对比三大进程代数——CSP（同步通信）、CCS（观察等价）、π-演算（移动进程）。它们提供了描述并发交互的数学语言，是理解Go goroutine、Erlang Actor、服务网格动态路由的形式化根基。
 >
 > **核心命题**：同步通信（CSP）使死锁可判定；异步通信（Actor）更接近物理现实但牺牲部分可分析性；π-演算是两者的元理论，通过名称传递统一了通信与迁移。
+>
+> **来源映射**：Hoare(1978) → Milner(1980, 1992) → Roscoe(1997) → 并发编程语言设计
 
 ---
 
@@ -172,6 +174,16 @@ ServiceA现在可以：
 | Robin Milner | *Communicating and Mobile Systems: The π-Calculus* | CUP | 1999 |
 | Joachim Parrow | "An Introduction to the π-Calculus" | *Handbook of Process Algebra* | 2001 |
 | A.W. Roscoe | *The Theory and Practice of Concurrency* | Prentice Hall | 1997 |
+
+## 七、权威引用
+
+> **C.A.R. Hoare** (1978): "Communicating Sequential Processes offers a mathematical theory for specifying and implementing concurrent systems."
+
+> **Robin Milner** (1999): "A calculus is a way of calculating; the π-calculus is a way of calculating with processes whose communication topology changes as they interact."
+
+## 八、批判性总结
+
+进程代数为并发系统提供了严格的数学基础，但从学术优雅到工业代码的映射充满摩擦。CSP的同步通信假设在现实中很少严格成立（网络延迟和缓冲区无处不在），而π-演算的名称传递虽然强大，但其图灵完备性导致大多数分析问题是不可判定的。隐含假设是：进程间的交互可以被精确建模为离散事件；对于连续物理系统（如自动驾驶传感器融合）这一假设失效。失效条件包括：工程师将CSP的双模拟等价直接等同于"可安全替换"（忽视性能差异和内存布局）、π-演算的动态拓扑使静态分析不可行、以及进程代数工具（如FDR）的扩展性限制。与类型系统和模型检测相比，进程代数更擅长描述通信协议结构，但难以处理数据密集型计算；未来趋势是将会话类型（Session Types）与π-演算结合，在保持动态拓扑表达能力的同时恢复部分静态可检查性。
 
 ---
 
