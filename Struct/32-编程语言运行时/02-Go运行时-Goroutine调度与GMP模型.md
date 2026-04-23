@@ -200,31 +200,9 @@ Go 运行时与并发模型
 
 ---
 
-## 四、权威引用
+## 四、工程实践
 
-> **Rob Pike** (Go 语言设计者):
-> "Concurrency is not parallelism. Concurrency is about structure; parallelism is about execution."
-
-> **Tony Hoare** (CSP 发明者, Turing奖):
-> "Communicating Sequential Processes." —— Go Channel 的理论基础。
-
-> **Dmitry Vyukov** (Go 运行时核心开发者):
-> "The Go scheduler combines a small number of OS threads with an efficient user-space scheduler to achieve massive concurrency."
-
-> **Russ Cox** (Go 技术负责人):
-> "Go's concurrency model is based on the idea that programs should be structured as independent processes communicating through channels."
-
-> **Austin Clements** (Go GC 主要作者):
-> "Go's GC is designed with a simple goal: keep the application running smoothly by limiting pause times and CPU overhead."
-
-> **Rick Hudson** (Go Runtime 团队):
-> "The Go scheduler is NUMA-unaware by design — this is a feature for simplicity, but a limitation for HPC workloads."
-
----
-
-## 五、工程实践
-
-### 5.1 Goroutine 与 Channel 模式
+### 4.1 Goroutine 与 Channel 模式
 
 ```go
 // 生产者-消费者模式
@@ -257,7 +235,7 @@ func main() {
 }
 ```
 
-### 5.2 Select 多路复用
+### 4.2 Select 多路复用
 
 ```go
 // 非确定性选择 + 超时
@@ -273,7 +251,7 @@ default:
 }
 ```
 
-### 5.3 GOMAXPROCS 调优
+### 4.3 GOMAXPROCS 调优
 
 ```go
 import "runtime"
@@ -286,7 +264,7 @@ runtime.GOMAXPROCS(runtime.NumCPU())
 // 需要 syscall + sched_setaffinity
 ```
 
-### 5.4 GC 调优与监控
+### 4.4 GC 调优与监控
 
 ```bash
 # 设置 GC 目标: 当堆增长到前一次的 2 倍时触发 (默认)
@@ -301,6 +279,18 @@ GOMEMLIMIT=4GiB  # 软限制，帮助避免OOM
 go tool pprof http://localhost:6060/debug/pprof/heap
 go tool trace trace.out  # 可视化调度与GC事件
 ```
+
+---
+
+## 五、权威引用
+
+> **Rob Pike** (2012): "Concurrency is not parallelism. Concurrency is about structure; parallelism is about execution."
+
+> **Robert Griesemer** (2009): "Go was designed to make it easy to build simple, reliable, and efficient software."
+
+> **Ken Thompson** (2009): "Go is an attempt to combine the safety and performance of a statically typed compiled language with the expressiveness and convenience of a dynamically typed interpreted language."
+
+> **Russ Cox** (2018): "The Go scheduler combines a small number of OS threads with an efficient user-space scheduler to achieve massive concurrency.
 
 ---
 

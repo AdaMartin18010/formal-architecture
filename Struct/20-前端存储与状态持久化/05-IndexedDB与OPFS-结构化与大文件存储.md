@@ -53,22 +53,22 @@
 ```text
 定义 (IndexedDB 数据库):
   数据库 DB = (objectStores, version)
-  
+
   对象存储 OS = (records, keyPath, autoIncrement, indexes)
     records ⊆ Key × Value
     keyPath: Value → Key (可选，从值中提取键)
     autoIncrement: Boolean (自动生成整数键)
-    
+
   索引 Index = (name, keyPath, unique, multiEntry)
     索引将 keyPath 映射到 Record 集合
     unique: 是否要求 keyPath 值唯一
     multiEntry: 数组值是否展开为多个索引条目
-    
+
   事务 T = (mode, scope, operations)
     mode ∈ {readonly, readwrite, versionchange}
     scope: 本次事务涉及的对象存储集合
     operations: 原子执行的操作序列
-    
+
   ACID 保证:
     Atomic: 事务内所有操作全成功或全回滚
     Consistent: 索引与主数据始终一致
@@ -83,19 +83,19 @@
   OPFS 是浏览器内的沙箱文件系统:
     根目录: await navigator.storage.getDirectory()
     路径: 纯逻辑路径，与真实 OS 文件系统隔离
-    
+
   同步访问句柄 (Worker only):
     handle = await fileHandle.createSyncAccessHandle()
     handle.read(buffer, { at: offset })  // 随机读
     handle.write(buffer, { at: offset }) // 随机写
     handle.truncate(newSize)
     handle.flush()
-    
+
   性能特征:
     - 绕过主线程事件循环
     - 直接映射到磁盘 I/O (通过 WASM/Worker)
     - 吞吐量: 可达 1 GB/s (取决于磁盘)
-    
+
   与 IndexedDB 的形式化差异:
     IndexedDB: Record-oriented, 事务边界, 结构化克隆序列化
     OPFS: Byte-oriented, 无事务 (需应用层保证), 零拷贝读写
@@ -106,22 +106,22 @@
 ```text
 定义 (存储配额):
   浏览器为每个 origin 分配存储配额 Q:
-    
+
   Q = f(disk_space, origin_usage, user_preferences, browser_policy)
-  
+
   典型策略:
     Chrome: 配额 ≈ 磁盘剩余空间的 60%
     Safari: 配额 ≈ 1 GB (桌面), 更严格 (移动)
     Firefox: 动态调整，提示用户
-    
+
   持久化请求:
     persistent = await navigator.storage.persist()
     persistent = true → 浏览器不会自动清理 (但仍可能被用户手动删除)
-    
+
   配额监控:
     { usage, quota } = await navigator.storage.estimate()
     usageDetails 可细分为: indexedDB, serviceWorkerRegistrations, webSQL
-    
+
   驱逐策略 (Eviction):
     当磁盘空间不足时，浏览器按 LRU 清理临时存储
     持久化存储 (persisted=true) 不会被自动清理
@@ -144,20 +144,7 @@
 
 ---
 
-## 四、权威引用
-
-> **Joshua Bell** (Chrome, IndexedDB 规范编辑):
-> "IndexedDB was designed to be the database for the web platform. It supports transactions, indexes, and cursors—everything you need for complex client-side data."
-
-> **WHATWG File System Standard**:
-> "The Origin Private File System provides access to a special kind of file system that is highly optimized for performance and offers in-place write access to its content."
-
-> **Ilya Grigorik** ("High Performance Browser Networking"):
-> "The browser is not just a document viewer; it's a full-fledged operating system with its own storage, networking, and rendering stack."
-
----
-
-## 五、工程实践与代码示例
+## 四、工程实践与代码示例
 
 ### 5.1 IndexedDB 结构化数据管理
 
@@ -207,29 +194,29 @@ const frontendDocs = await db.getAllFromIndex(
 self.onmessage = async (event) => {
   const { action, fileName, offset, data } = event.data;
   const root = await navigator.storage.getDirectory();
-  
+
   if (action === 'write') {
     const fileHandle = await root.getFileHandle(fileName, { create: true });
-    
+
     // 同步访问句柄 (仅 Worker 可用)
     const syncHandle = await fileHandle.createSyncAccessHandle();
-    
+
     // 定位并写入
     const written = syncHandle.write(data, { at: offset });
     syncHandle.flush();
     syncHandle.close();
-    
+
     self.postMessage({ written });
   }
-  
+
   if (action === 'read') {
     const fileHandle = await root.getFileHandle(fileName);
     const syncHandle = await fileHandle.createSyncAccessHandle();
-    
+
     const buffer = new Uint8Array(data.length); // data.length = 读取大小
     const read = syncHandle.read(buffer, { at: offset });
     syncHandle.close();
-    
+
     self.postMessage({ read, buffer });
   }
 };
@@ -243,14 +230,14 @@ async function monitorStorage() {
   const usedGB = (estimate.usage / 1e9).toFixed(2);
   const quotaGB = (estimate.quota / 1e9).toFixed(2);
   const percent = ((estimate.usage / estimate.quota) * 100).toFixed(1);
-  
+
   console.log(`Storage: ${usedGB} GB / ${quotaGB} GB (${percent}%)`);
-  
+
   // 超过 80% 时触发清理
   if (percent > 80) {
     await cleanupOldCache();
   }
-  
+
   // 请求持久化 (避免被浏览器自动清理)
   if (navigator.storage.persist) {
     const isPersistent = await navigator.storage.persist();
@@ -263,18 +250,30 @@ async function cleanupOldCache() {
   const tx = db.transaction('documents', 'readwrite');
   const store = tx.objectStore('documents');
   const index = store.index('by-date');
-  
+
   // 删除 30 天前的文档
   const cutoff = Date.now() - 30 * 86400000;
   const oldKeys = await index.getAllKeys(IDBKeyRange.upperBound(cutoff));
-  
+
   for (const key of oldKeys) {
     await store.delete(key);
   }
-  
+
   await tx.done;
 }
 ```
+
+---
+
+## 权威引用
+
+> **Joshua Bell** (2015): "IndexedDB was designed to be the database for the web platform. It supports transactions, indexes, and cursors—everything you need for complex client-side data."
+
+> **Ilya Grigorik** (2013): "The browser is not just a document viewer; it's a full-fledged operating system with its own storage, networking, and rendering stack."
+
+> **Jim Gray** (1981): "A transaction is a transformation of state that preserves the consistency constraints of a database. Atomicity, consistency, isolation, and durability are the fundamental properties."
+
+> **Douglas Engelbart** (1962): "The complexity of our problems is growing faster than our ability to solve them. We must augment human intellect with new conceptual tools."
 
 ---
 

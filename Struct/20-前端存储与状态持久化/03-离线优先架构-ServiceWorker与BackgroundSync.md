@@ -52,7 +52,7 @@
 ```text
 定义 (Service Worker 状态机):
   状态集 S = {parsed, installing, installed, activating, activated, redundant}
-  
+
   转移函数 δ: S × Event → S
     parsed --install--> installing
     installing --install_success--> installed
@@ -60,12 +60,12 @@
     activating --activate_success--> activated
     activated --new_version--> redundant (旧 SW)
     installing --install_failure--> redundant
-    
+
   关键性质:
     - 同时最多一个 activated SW 控制页面
     - 新 SW 进入 waiting 直到所有受控页面关闭
     - skipWaiting() 可强制激活，但可能导致版本不一致
-    
+
   事件驱动执行模型:
     SW 没有持久运行的线程
     浏览器在事件 (fetch, push, sync, periodicSync) 发生时唤醒 SW
@@ -77,24 +77,24 @@
 ```text
 定义 (缓存策略):
   设请求 req，缓存 C，网络 N
-  
+
   策略为函数 strategy: req → Response
-  
+
   Cache-First:
     strategy(req) = C.lookup(req) 若命中
                   = N.fetch(req)   否则
     适用: 静态资源 (JS/CSS/图片)，不变内容
-    
+
   Network-First:
     strategy(req) = N.fetch(req) 若成功
                   = C.lookup(req) 否则
     适用: API 请求，实时数据
-    
+
   Stale-While-Revalidate:
     strategy(req) = C.lookup(req) 立即返回 (可能过期)
                   ∧ N.fetch(req) 后台更新缓存
     适用: 首页内容，允许短暂过期
-    
+
   形式化权衡:
      freshness × availability = constant
     Cache-First: 高可用，低新鲜度
@@ -107,24 +107,24 @@
 ```text
 定义 (离线优先的系统模型):
   将前端视为分布式系统的一个副本节点
-  
+
   CAP 定理在前端的映射:
     Consistency (一致性):
       强一致: 所有用户同时看到相同状态 (需要在线)
       最终一致: 离线修改最终同步到所有副本
-      
+
     Availability (可用性):
       离线优先 = 高可用性: 无论网络状态，UI 始终可交互
-      
+
     Partition Tolerance (分区容错):
       网络断开是常态，必须容忍
-      
+
   离线优先的选择:
     AP + 最终一致性:
       本地状态为权威源 (Single Source of Truth)
       网络恢复时执行后台同步
       冲突解决策略决定最终状态
-      
+
   可靠性边界:
     Background Sync 不保证执行:
       - 浏览器可能因电量、网络类型拒绝同步
@@ -148,20 +148,7 @@
 
 ---
 
-## 四、权威引用
-
-> **Jake Archibald** (Google Chrome, Service Worker 规范编辑):
-> "Service Workers are event-driven. The browser starts them up when there's work to do, and terminates them when they're idle. This means they don't consume resources when not in use."
-
-> **Tal Ater** ("Building Progressive Web Apps"):
-> "Offline-first is not just about caching assets; it's about designing your application to work without a network connection, and then enhancing it when the network is available."
-
-> **Alex Russell** (PWA 概念提出者):
-> "The network is a liability. Every request you make is a chance for failure. Offline-first architecture inverts this: assume failure, succeed locally, synchronize opportunistically."
-
----
-
-## 五、工程实践与代码示例
+## 四、工程实践与代码示例
 
 ### 5.1 Service Worker 缓存策略实现
 
@@ -197,13 +184,13 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.open(CACHE_NAME).then(async (cache) => {
       const cached = await cache.match(event.request);
-      
+
       // 后台网络请求更新缓存
       const fetchPromise = fetch(event.request).then((networkResponse) => {
         cache.put(event.request, networkResponse.clone());
         return networkResponse;
       });
-      
+
       // 立即返回缓存（如有），否则等待网络
       return cached || fetchPromise;
     })
@@ -218,7 +205,7 @@ self.addEventListener('fetch', (event) => {
 async function submitFormWithSync(data) {
   // 1. 本地持久化到 IndexedDB (确保不丢失)
   await db.outbox.add({ data, status: 'pending', createdAt: Date.now() });
-  
+
   // 2. 注册后台同步
   const registration = await navigator.serviceWorker.ready;
   try {
@@ -239,7 +226,7 @@ self.addEventListener('sync', (event) => {
 
 async function processOutbox() {
   const pending = await db.outbox.where('status').equals('pending').toArray();
-  
+
   for (const item of pending) {
     try {
       await fetch('/api/submit', {
@@ -256,6 +243,18 @@ async function processOutbox() {
   }
 }
 ```
+
+---
+
+## 权威引用
+
+> **Eric A. Brewer** (2000): "In any distributed system, you can only guarantee two of the three: Consistency, Availability, and Partition Tolerance."
+
+> **Jake Archibald** (2014): "Service Workers are event-driven. The browser starts them up when there's work to do, and terminates them when they're idle. This means they don't consume resources when not in use."
+
+> **Alex Russell** (2015): "The network is a liability. Every request you make is a chance for failure. Progressive Web Apps invert this assumption: work offline first, enhance with connectivity."
+
+> **Tal Ater** (2017): "Offline-first is not just about caching assets; it's about designing your application to work without a network connection, and then enhancing it when the network is available."
 
 ---
 

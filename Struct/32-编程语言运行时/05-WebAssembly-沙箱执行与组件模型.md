@@ -147,25 +147,9 @@ WebAssembly (WASM)
 
 ---
 
-## 四、权威引用
+## 四、工程实践与代码示例
 
-> **Andreas Rossberg** (WebAssembly 联合设计负责人):
-> "WebAssembly is not just a compile target for the web; it's a universal, safe, and efficient binary format for any platform."
-
-> **Luke Wagner** (WebAssembly 核心设计者, Fastly):
-> "The Component Model is to WebAssembly what the module system is to JavaScript — it enables composition at scale."
-
-> **Bytecode Alliance**:
-> "WebAssembly's sandbox is not an afterthought; it's the foundational property that makes everything else possible."
-
-> **Lin Clark** (Mozilla/Bytecode Alliance):
-> "With the Component Model, we're not just running code in the browser or the server — we're building a new kind of software Lego."
-
----
-
-## 五、工程实践与代码示例
-
-### 5.1 Rust → WASM 组件开发
+### 4.1 Rust → WASM 组件开发
 
 ```rust
 // WIT 接口定义 (world.wit)
@@ -194,7 +178,7 @@ export!(Calculator);
 // 输出: target/wasm32-wasi/release/calculator.wasm
 ```
 
-### 5.2 Wasmtime 运行时嵌入
+### 4.2 Wasmtime 运行时嵌入
 
 ```rust
 use wasmtime::{Engine, Module, Store, Instance};
@@ -221,7 +205,7 @@ fn main() -> wasmtime::Result<()> {
 }
 ```
 
-### 5.3 WASM 边界安全模型
+### 4.3 WASM 边界安全模型
 
 ```text
 WASM 沙箱 vs 容器沙箱 vs VM 沙箱:
@@ -242,6 +226,18 @@ WASM 沙箱 vs 容器沙箱 vs VM 沙箱:
 │  - 资源耗尽: 宿主需限制内存/CPU时间                             │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 五、权威引用
+
+> **Andreas Rossberg** (2017): "WebAssembly is not just a compile target for the web; it's a universal, safe, and efficient binary format for any platform."
+
+> **Andreas Haas** (2017): "WebAssembly brings high-performance, low-level code to the web while maintaining the safety guarantees of a sandboxed execution environment."
+
+> **Luke Wagner** (2018): "The Component Model is to WebAssembly what the module system is to JavaScript — it enables composition at scale."
+
+> **Lin Clark** (2019): "With the Component Model, we're not just running code in the browser or the server — we're building a new kind of software Lego.
 
 ---
 

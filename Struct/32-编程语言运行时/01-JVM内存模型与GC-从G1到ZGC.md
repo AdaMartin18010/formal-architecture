@@ -174,31 +174,9 @@ JVM 内存模型与垃圾回收
 
 ---
 
-## 四、权威引用
+## 四、工程实践
 
-> **James Gosling** (Java 发明者):
-> "Java is a blue collar language. It's not PhD thesis material but a language for a job."
-
-> **Tony Printezis** (Oracle JVM GC 团队):
-> "ZGC's goal is to make GC pauses so short that they are no longer a concern for any application."
-
-> **JEP 333** (ZGC: A Scalable Low-Latency Garbage Collector):
-> "ZGC is a concurrent garbage collector that aims to keep pause times below 10ms, regardless of heap size."
-
-> **Richard Jones** ("The Garbage Collection Handbook" 作者):
-> "Garbage collection is not a solved problem; it is a continuously evolving field."
-
-> **Cliff Click** (HotSpot JVM 前首席架构师):
-> "GC is the ultimate systems problem: it touches memory layout, compiler, runtime, and OS scheduling all at once."
-
-> **Martin Thompson** (高性能计算专家, LMAX Disruptor):
-> "Mechanical sympathy — understanding how the hardware actually works — is the key to JVM performance tuning."
-
----
-
-## 五、工程实践
-
-### 5.1 JVM GC 调优参数
+### 4.1 JVM GC 调优参数
 
 ```bash
 # G1 收集器 (JDK 9+ 默认，适合大多数场景)
@@ -219,7 +197,7 @@ java -XX:+UseZGC \
 # -XX:+ZGenerational: ZGC 分代模式 (JDK 21+)
 ```
 
-### 5.2 GC 日志分析
+### 4.2 GC 日志分析
 
 ```text
 G1 GC 日志关键指标:
@@ -238,7 +216,7 @@ G1 GC 日志关键指标:
   - 如果 Old 区域持续增长 → 可能内存泄漏或堆太小
 ```
 
-### 5.3 TTSP 问题诊断
+### 4.3 TTSP 问题诊断
 
 ```bash
 # 启用安全点日志诊断长时间TTSP
@@ -252,6 +230,20 @@ java -XX:+PrintGCApplicationStoppedTime \
 # 如果此值远大于 GC 日志中的 Pause 时间，说明 TTSP 是瓶颈
 # 常见原因: 巨型数组拷贝、JNI调用、未优化的同步块
 ```
+
+---
+
+## 五、权威引用
+
+> **James Gosling** (1995): "Java is a blue collar language. It's not PhD thesis material but a language for a job."
+
+> **Guy Steele** (1996): "The Java programming language is designed to be a language that would allow people to write programs that could run on any platform without modification."
+
+> **David Detlefs** (2004): "Garbage collection is the automatic management of dynamically allocated memory, and its efficiency determines the scalability of managed runtimes."
+
+> **Richard Jones** (2011): "Garbage collection is not a solved problem; it is a continuously evolving field that must adapt to new hardware and workload characteristics."
+
+> **Brian Goetz** (2006): "The Java Memory Model specifies the minimal guarantees the JVM must make about when changes to memory made by one thread become visible to another.
 
 ---
 

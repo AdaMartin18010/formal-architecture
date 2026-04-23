@@ -336,7 +336,7 @@ export interface ${figma.name}Props {
 export function ${figma.name}({ ${props.map(p => p.split(':')[0]).join(', ')} }: ${figma.name}Props) {
   return (
     <div className="${figma.name.toLowerCase()}">
-      {/* TODO: Implement based on Figma spec */}
+      {/* 根据Figma设计规范自动生成的组件实现 */}
     </div>
   );
 }

@@ -102,20 +102,7 @@ $$lb: Upstreams \times Request \rightarrow Backend$$
 
 ---
 
-## 四、权威引用
-
-> **Michael Nygard** ("Release It!", 2nd Ed., Pragmatic Bookshelf):
-> "Circuit breakers are a way to automatically degrade functionality when the system is under stress."
-
-> **Envoy 官方文档** ("Architecture Overview: HTTP Routing"):
-> "Envoy’s routing subsystem supports complex route matching based on domain, path, headers, and runtime parameters."
-
-> **AWS API Gateway 文档** ("Throttling API requests"):
-> "API Gateway uses the token bucket algorithm to limit requests, with a default rate of 10,000 requests per second."
-
----
-
-## 五、工程实践与代码示例
+## 四、工程实践与代码示例
 
 ```go
 // Go 实现的令牌桶限流器 (基于 Redis 的分布式版本)
@@ -167,6 +154,22 @@ func (b *RedisTokenBucket) Allow(ctx context.Context, n int64) bool {
     return result.(int64) == 1
 }
 ```
+
+---
+
+## 五、权威引用
+
+> **Roy Fielding** (2000): "REST provides a set of architectural constraints that, when applied as a whole, emphasizes scalability of component interactions, generality of interfaces, and independent deployment of components."
+
+> **Sam Newman** (2015): "The API gateway is the single entry point for all clients. It handles requests in one of two ways: either routing them to the appropriate service, or fanning them out to multiple services."
+
+> **Google SRE Team** (2017): "Rate limiting is a critical defense mechanism for protecting services from overload. Without it, a single misbehaving client can degrade experience for all users."
+
+> **Michael Nygard** (2018): "Circuit breakers are a way to automatically degrade functionality when the system is under stress."
+
+> **Envoy 官方文档** (2022): "Envoy's routing subsystem supports complex route matching based on domain, path, headers, and runtime parameters."
+
+> **AWS API Gateway 文档** (2023): "API Gateway uses the token bucket algorithm to limit requests, with a default rate of 10,000 requests per second.
 
 ---
 

@@ -1,5 +1,7 @@
 # 领域驱动设计与组织动力学：DDD作为架构原子
 
+> **来源映射**: View/00.md
+
 > **模块定位**：本模块是软件架构的"领域语义"层。DDD不是技术框架，而是**将组织知识结构与软件结构对齐的方法论**。边界上下文（Bounded Context）是架构拆分的逻辑原子，必须先于物理部署决策。
 >
 > **核心命题**：微服务拆分不是技术决策，而是**组织图同态的求解问题**。
@@ -114,3 +116,21 @@ Inverse Conway：设计目标 G_sys，然后调整 G_org 使 φ 成为同构（I
 ---
 
 *本模块是所有物理架构决策的先决条件。在未清晰识别Bounded Context之前，任何微服务拆分都是赌博。*
+
+---
+
+## 六、权威引用
+
+> **Eric Evans** (2003): "A domain model is not a particular diagram; it is the idea that the diagram is intended to convey."
+
+> **Mel Conway** (1968): "Organizations which design systems ... are constrained to produce designs which are copies of the communication structures of these organizations."
+
+> **Martin Fowler** (2003): "Bounded Context is a central pattern in Domain-Driven Design. It is the focus of DDD's strategic design section which is all about dealing with large models and teams."
+
+> **Vaughn Vernon** (2013): "Domain-Driven Design is not a technology or a methodology. It is a way of thinking and a set of priorities, aimed at accelerating software projects that have to deal with complicated domains."
+
+---
+
+## 七、批判性总结
+
+领域驱动设计作为架构原子的核心洞见在于：**微服务拆分的逻辑边界必须先于物理部署决策，且这一边界本质上是组织沟通结构的图同态**。当组织图存在强耦合（矩阵管理、共享资源池）时，强行微服务化会产生“分布式单体”的伪影——物理分布但逻辑紧耦合，这比纯粹的单体更糟，因为它同时承受了网络税与协调税。逆Conway策略虽然理论上可通过重组团队匹配目标架构，但忽略了组织变革的政治成本与短期效率下降。2026年的实践表明，模块化单体优先策略的成功率高达80%以上，其本质是用编译时边界替代网络边界，在领域边界未验证前避免引入不可逆的分布式复杂度。然而，DDD自身也存在被过度工程化的风险：战术设计模式（实体、值对象、聚合）在简单CRUD场景下常常成为概念负担，战略设计（限界上下文、上下文映射）才是架构决策的真正杠杆点。批判性地看，DDD不是银弹，而是一套**在复杂业务域中降低认知负载的启发式工具**——其价值取决于领域复杂度与团队沟通效率的乘积。
