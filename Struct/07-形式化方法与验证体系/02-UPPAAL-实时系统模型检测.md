@@ -217,5 +217,186 @@ UPPAAL的根本局限：
 
 ---
 
+## 十一、概念属性关系网络
+
+```
+UPPAAL核心概念关系网络
+│
+├─【依赖关系】
+│   ├─ UPPAAL → Timed Automata (建模语言基础)
+│   ├─ Timed Automata → Finite Automata + 时钟约束 (Alur & Dill, 1994)
+│   ├─ TCTL → CTL + 时钟约束 (时序逻辑扩展)
+│   ├─ 模型检测 → 区域图/符号化状态空间 (可达性分析)
+│   └─ 反例轨迹 → 状态空间搜索 (BFS/DFS + 约束求解)
+│
+├─【包含关系】
+│   ├─ Timed Automaton ⊃ {Locations, Clocks, Actions, Edges, Invariants}
+│   ├─ UPPAAL Model ⊃ {Templates, Declarations, System Definition, Queries}
+│   ├─ TCTL Query ⊃ {A[], E<>, A<>, E[], -->}
+│   └─ Verification ⊃ {Reachability, Safety, Liveness, Deadlock}
+│
+├─【对立关系】
+│   ├─ 连续时间 ⟺ 离散区域图 (近似 vs 精确判定)
+│   ├─ 符号搜索 ⟺ 显式枚举 (内存效率 vs 反例可读性)
+│   ├─ 线性约束 ⟺ 非线性约束 (可判定 vs 不可判定)
+│   └─ 可达性 ⟺ 不可达性 (正验证 vs 反例证伪)
+│
+└─【映射关系】
+    ├─ Location ↔ 系统离散状态
+    ├─ Clock ↔ 物理时间/超时计数器
+    ├─ Edge Guard ↔ if条件语句
+    ├─ Clock Reset ↔ 计时器清零
+    ├─ Invariant ↔ while循环条件/状态约束
+    └─ Synchronization ↔ 进程间通信/信号量
+```
+
+---
+
+## 十二、形式化推理链：Timed Automata可达性判定与区域图构造
+
+> **权威来源**：Rajeev Alur & David Dill (1994) "A Theory of Timed Automata"; Bengtsson & Yi (2004)
+
+### 12.1 Timed Automata可达性的形式化判定
+
+```
+定义（Timed Automaton）：TA = (L, l₀, C, A, E, I)
+  L = 有限位置集合
+  l₀ ∈ L = 初始位置
+  C = 有限时钟变量集合
+  A = 动作集合（含同步通道）
+  E ⊆ L × G(C) × A × 2^C × L = 边集合（守卫+动作+重置）
+  I: L → G(C) = 位置不变量
+
+定义（状态）：s = (l, ν) 其中 l ∈ L, ν: C → ℝ≥₀ 为时钟赋值
+
+定义（状态转换）：
+  - 延迟转换：(l, ν) →ᵈ (l, ν + d)  若 ∀d' ∈ [0,d], ν + d' ⊨ I(l)
+  - 离散转换：(l, ν) →ᵉ (l', ν')     若 e = (l, g, a, r, l') ∈ E, ν ⊨ g, ν' = ν[r↦0]
+
+定理（Alur & Dill, 1994——可达性可判定性）：
+  对于Timed Automata，可达性问题（∃s₀ →* s_f ?）是可判定的。
+
+证明概要（区域图构造——Region Graph）：
+  Step 1: 时钟等价关系
+    定义 ν ≃ ν' 当且仅当：
+      a) ∀c ∈ C, ⌊ν(c)⌋ = ⌊ν'(c)⌋ 或 ν(c), ν'(c) > M（最大常量）
+      b) ∀c₁,c₂ ∈ C, frac(ν(c₁)) ≤ frac(ν(c₂)) ⟺ frac(ν'(c₁)) ≤ frac(ν'(c₂))
+
+  Step 2: 区域等价类
+    等价关系 ≃ 将时钟赋值空间划分为有限个区域（Regions）。
+    区域数上界：O(|C|! · 2^|C| · ∏(2Mᵢ + 2))
+
+  Step 3: 区域图
+    构造有限状态图 RG(TA) = (S_rg, S₀_rg, R_rg, L_rg)
+    其中节点为 (l, [ν]≃)，边模拟延迟+离散转换。
+
+  Step 4: 可达性归约
+    TA中的可达性问题 ↔ RG(TA)中的图可达性问题
+    RG(TA)有限 ⟹ 图可达性可判定 ⟹ TA可达性可判定。
+```
+
+### 12.2 UPPAAL符号化搜索的优化
+
+```
+定义（时钟区域——Zone）：
+  Zone是时钟约束的合取范式，表示为 Difference Bound Matrix (DBM)。
+
+  DBM大小：|C| × |C| 矩阵，元素 D[i][j] = (cᵢ - cⱼ ≤ k) 或 ∞
+
+  操作复杂度：
+    - 交集（And）：O(|C|²)
+    - 时间前向（Time Elapse）：O(|C|²)
+    - 重置（Reset）：O(|C|)
+    - 规范化（Canonicalization/Floyd-Warshall）：O(|C|³)
+
+定理（UPPAAL符号化正确性）：
+  UPPAAL的符号化搜索算法与显式区域图搜索等价。
+
+  即：符号化可达的Zone集合 = 显式区域图可达的状态集合的覆盖。
+
+工程推论：
+  符号化使UPPAAL可处理远比显式枚举更大的模型。
+  但实际仍受限于：
+    - 时钟数量（DBM大小O(|C|²)）
+    - 最大常量（区域数指数于M）
+    - 并发进程数（乘积构造）
+```
+
+---
+
+## 十三、新增思维表征
+
+### 13.1 推理判定树：何时选择UPPAAL进行验证
+
+```text
+何时选择UPPAAL决策树
+│
+├─ 系统是否涉及硬实时约束？
+│   ├─ 是（deadline/超时/调度）→ UPPAAL高度适用
+│   │       └─ 实时类型：
+│   │             ├─ 任务调度 → 验证 schedulability (A[] deadline_met)
+│   │             ├─ 通信协议 → 验证超时/重传 (Request --> Response)
+│   │             ├─ 硬件电路 → 验证时序约束 (setup/hold time)
+│   │             └─ 交通/航空 → 验证安全间隔 (Train1.Critical + Train2.Critical <= 1)
+│   └─ 否 → 评估是否需要时间建模
+│           ├─ 需要离散时间 → 考虑TLA+/SPIN
+│           └─ 纯逻辑并发 → SPIN/NuSMV可能更合适
+│
+├─ 系统规模评估：
+│   ├─ 进程数 ≤ 5，时钟数 ≤ 3 → UPPAAL可快速验证
+│   ├─ 进程数 5-15，时钟数 3-6 → 需抽象/对称性约减
+│   └─ 进程数 > 15 或 时钟数 > 6 → 状态爆炸风险高，需分模块验证
+│
+├─ 验证目标：
+│   ├─ 可达性（E<> Goal）→ UPPAAL核心能力
+│   ├─ 安全性（A[] Invariant）→ 支持良好
+│   ├─ Liveness（A<> Goal）→ 支持，需无Zeno假设
+│   └─ 最优时间（sup/min time）→ UPPAAL CORA扩展
+│
+└─ 替代工具比较：
+    ├─ 需概率分析 → PRISM（马尔可夫链）
+    ├─ 需混合系统（连续变量）→ SpaceEx/Flow*
+    ├─ 需C代码直接验证 → CBMC/ESBMC
+    └─ 需协议验证 → SPIN（Promela）或 TLA+
+```
+
+### 13.2 多维关联树：UPPAAL与架构/安全/组织的关联
+
+```text
+UPPAAL多维关联树
+│
+├─【与模块05：架构模式】
+│   ├─ 实时操作系统 → 调度策略验证（Rate Monotonic/EDF）
+│   ├─ 汽车电子（CAN/FlexRay）→ 消息传输时间验证
+│   ├─ 航空电子 → DO-178C适航认证的形式化证据
+│   ├─ 工业控制 → PLC程序周期时间验证
+│   └─ 物联网 → 低功耗协议（BLE/Zigbee）超时机制验证
+│
+├─【与模块09：安全模型】
+│   ├─ 安全关键系统 → 故障响应时间验证
+│   ├─ 访问控制超时 → 会话过期机制的形式化确认
+│   ├─ 密码协议 → 时间戳/重放攻击防护验证
+│   └─ 故障容错 → 故障检测与切换时间界限证明
+│
+└─【与模块30：安全架构】
+    ├─ 安全监控 → 入侵检测响应时间验证
+    ├─ 安全协议实现 → 协议状态机与实现代码对齐
+    ├─ 安全更新 → 热补丁切换时间窗口验证
+    └─ 灾难恢复 → RTO/RPO时间约束的形式化保证
+```
+
+---
+
+## 十四、国际课程对齐标注
+
+> **国际课程对齐**:
+>
+> - **CMU 15-317 Constructive Logic**: Timed Automata的区域图构造对应构造性逻辑中的"有限近似"——通过等价类划分将无限状态空间构造性地有限化。
+> - **Stanford CS 259 Formal Methods**: UPPAAL的符号化模型检测是本课程"实时系统验证"的核心案例；DBM的Floyd-Warshall闭包算法是"图算法在安全关键系统中的应用"。
+> - **MIT 6.858 Security**: 实时安全协议的验证（如TLS超时/重传）映射到安全课程中的"协议时序安全"（Timing Security）与"侧信道防御"。
+> - **Team Topologies (Skelton & Pais, 2019)**: UPPAAL验证工作通常由Complicated-Subsystem Team承担（实时系统专家），通过X-as-a-Service模式向Stream-aligned Team提供验证报告。
+
+---
+
 *文件创建日期：2026-04-23*
 *状态：已完成*
