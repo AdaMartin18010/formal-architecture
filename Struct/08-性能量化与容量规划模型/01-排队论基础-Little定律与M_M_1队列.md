@@ -327,6 +327,7 @@ W_service  W_total                |
 | 稳态分布推导 | **CMU 15-745** | Birth-death processes and equilibrium | 对齐生灭过程理论，本文件补全几何级数推导细节 |
 
 > **权威学者引用**：
+>
 > - **John D.C. Little** (1961): *Operations Research* — "A Proof for the Queuing Formula: L = λW."
 > - **D.G. Kendall** (1953): "Stochastic Processes Occurring in the Theory of Queues and their Analysis by the Method of the Imbedded Markov Chain." *Annals of Mathematical Statistics*.
 > - **Leonard Kleinrock** (1975): *Queueing Systems, Volume 1: Theory*. Wiley. — "The power of queueing theory lies in its ability to predict system behavior before it is built."

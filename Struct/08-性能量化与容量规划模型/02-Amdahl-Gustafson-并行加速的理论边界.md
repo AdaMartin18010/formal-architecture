@@ -371,6 +371,7 @@ Amdahl定律与Gustafson定律的辩论本质上是对"问题规模是否固定"
 | 并行收益判定 | **Stanford CS 240** | Lab: Measuring parallel speedup | 对齐实验测量方法，本文件提供决策树工具 |
 
 > **权威学者引用**：
+>
 > - **Gene M. Amdahl** (1967): "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities." *AFIPS Conference Proceedings*.
 > - **John L. Gustafson** (1988): "Reevaluating Amdahl's Law." *Communications of the ACM*, 31(5).
 > - **Neil J. Gunther** (2007): *Guerrilla Capacity Planning*. Springer. — "The USL is equivalent to the synchronous queueing bound on throughput for a linear load-dependent machine repairman model."

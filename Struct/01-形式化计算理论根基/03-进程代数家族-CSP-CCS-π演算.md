@@ -228,13 +228,13 @@ ServiceA现在可以：
 
 **公理/前提**: 设CSP进程语法为 $P ::= \text{STOP} \mid \text{SKIP} \mid a \to P \mid P \square Q \mid P \sqcap Q \mid P \parallel Q \mid P \setminus A \mid P[R]$（Hoare, 1978; Roscoe, 1997）。设迹（trace）为进程执行的动作序列，失效（failure）为进程在某一状态下拒绝的动作集合。
 
-**引理1**（CSP迹精炼）: 进程 $P$ 迹精炼 $Q$（记为 $P \sqsubseteq_T Q$）当且仅当 $Q$ 的每个迹都是 $P$ 的迹：$\text{traces}(Q) \subseteq \text{traces}(P)$。  
+**引理1**（CSP迹精炼）: 进程 $P$ 迹精炼 $Q$（记为 $P \sqsubseteq_T Q$）当且仅当 $Q$ 的每个迹都是 $P$ 的迹：$\text{traces}(Q) \subseteq \text{traces}(P)$。
 *证明*: 迹精炼要求 $Q$ 不表现出 $P$ 不允许的外部行为。由迹集合的包含关系直接定义。∎
 
-**引理2**（CSP失效-发散精炼）: 进程 $P$ 失效-发散精炼 $Q$（记为 $P \sqsubseteq_{FD} Q$）当且仅当 $(\text{failures}(Q) \subseteq \text{failures}(P)) \land (\text{divergences}(Q) \subseteq \text{divergences}(P))$。  
+**引理2**（CSP失效-发散精炼）: 进程 $P$ 失效-发散精炼 $Q$（记为 $P \sqsubseteq_{FD} Q$）当且仅当 $(\text{failures}(Q) \subseteq \text{failures}(P)) \land (\text{divergences}(Q) \subseteq \text{divergences}(P))$。
 *证明*: 失效集合捕获进程在特定状态下拒绝的交互，用于检测死锁；发散集合捕获无限内部计算（活锁）。$Q$ 的失效和发散必须在 $P$ 的允许范围内。∎
 
-**定理**（CSP死锁可判定性）: 对有限状态CSP进程（有限进程数、有限通道容量、有限数据域），死锁检测可通过FDR（Failures-Divergences Refinement）模型检测判定。形式化地，$P$ 无死锁当且仅当 $(\emptyset, \Sigma) \notin \text{failures}(P)$，其中 $\Sigma$ 为全部可见动作集合。  
+**定理**（CSP死锁可判定性）: 对有限状态CSP进程（有限进程数、有限通道容量、有限数据域），死锁检测可通过FDR（Failures-Divergences Refinement）模型检测判定。形式化地，$P$ 无死锁当且仅当 $(\emptyset, \Sigma) \notin \text{failures}(P)$，其中 $\Sigma$ 为全部可见动作集合。
 *证明*: 死锁状态的特征是进程拒绝所有外部交互（包括终止），即失效对包含 $(\emptyset, \Sigma)$。FDR通过状态空间穷尽搜索检查该条件。由于状态空间有限，搜索保证终止。∎
 
 **推论**: Go语言的channel程序若限制为有限缓冲、有限goroutine数和有限数据域，则其死锁/活锁属性可被抽象为CSP进程并通过FDR检测；这是从学术进程代数到工业代码的形式化桥梁。

@@ -223,6 +223,7 @@ LLM 推荐函数 Rec: C → 2^D
 > **前提 2**（模式匹配偏差）：P(d | C, D_train) 与 P(d | D_train) 高度相关，即推荐受训练分布的边际分布强烈影响。
 >
 > **推理步骤**：
+>
 > 1. 设真实最优架构为 d_opt = argmax_d Utility(d, C, Context)；
 > 2. LLM 推荐 d_LLM = argmax_d P(d | C, D_train)；
 > 3. 偏差量：Bias = Utility(d_opt) - Utility(d_LLM)；
@@ -232,6 +233,7 @@ LLM 推荐函数 Rec: C → 2^D
 >    - AI 推荐已弃用的云服务 → 架构基于过时知识；
 >    - AI 遗漏安全纵深防御 → 训练数据中安全最佳实践不足；
 > 6. 形式化结论：
+>
 > $$
 > \mathbb{E}[\text{Bias}] = \int_{\text{Context} \notin D_{\text{train}}} (U(d_{\text{opt}}) - U(d_{\text{LLM}})) \cdot P(\text{Context}) \, d\text{Context}
 > $$
@@ -244,6 +246,7 @@ LLM 推荐函数 Rec: C → 2^D
 > **前提 2**：LLM 的训练数据包含大量开源项目，但开源项目的组织语境与使用者的组织语境不同。
 >
 > **推理步骤**：
+>
 > 1. 设组织沟通结构为 Org = (Teams, CommunicationGraph)；
 > 2. 由 Conway 定律，最优架构应适配 Org：d_opt = f(Org)；
 > 3. LLM 训练数据中的项目对应 Org_train，通常来自大型开源社区；
@@ -317,6 +320,7 @@ LLM 推荐函数 Rec: C → 2^D
 | 形式化验证与架构保证 | **Stanford CS 221** 研讨 | Reliable AI, Formal Methods | 高可靠性 AI 需要形式化架构验证 |
 
 **权威文献索引**：
+
 - **Conway, M. E.** (1968). "How Do Committees Invent?" *Datamation* 14(4): 28–31.
 - **Parnas, D. L.** (1972). "On the Criteria To Be Used in Decomposing Systems into Modules." *CACM* 15(12): 1053–1058.
 - **Booch, G.** (1995). *Object-Oriented Analysis and Design with Applications* (2nd ed.). Addison-Wesley.

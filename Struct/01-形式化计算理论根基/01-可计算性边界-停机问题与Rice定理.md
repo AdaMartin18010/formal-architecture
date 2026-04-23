@@ -194,13 +194,13 @@ Rice定理：
 
 **公理/前提**: 设程序集合为 $\mathcal{P}$，程序语义由部分可计算函数 $\llbracket P \rrbracket: \Sigma^* \to \Sigma^*$ 表示。定义通用图灵机 $U$ 使得 $U(\langle P \rangle, w) = \llbracket P \rrbracket(w)$（Turing, 1936）。设语义属性为 $A \subseteq \{\llbracket P \rrbracket \mid P \in \mathcal{P}\}$。
 
-**引理1**（对角线构造）: 不存在程序 $H$ 使得 $\forall P \in \mathcal{P}, \forall w \in \Sigma^*$: $H(\langle P \rangle, w) = 1 \iff P(w)\downarrow$。  
+**引理1**（对角线构造）: 不存在程序 $H$ 使得 $\forall P \in \mathcal{P}, \forall w \in \Sigma^*$: $H(\langle P \rangle, w) = 1 \iff P(w)\downarrow$。
 *证明*: 假设 $H$ 存在。构造 $D(\langle P \rangle)$ = "若 $H(\langle P \rangle, \langle P \rangle) = 1$ 则无限循环，否则停机"。则 $D(\langle D \rangle)\downarrow \iff H(\langle D \rangle, \langle D \rangle) = 0 \iff D(\langle D \rangle)\uparrow$，矛盾。∎
 
-**引理2**（Rice定理的归约核心）: 设 $A$ 为非平凡语义属性。固定 $P_0, P_1$ 使得 $\llbracket P_0 \rrbracket \in A$ 且 $\llbracket P_1 \rrbracket \notin A$。对任意程序 $P$ 和输入 $w$，构造 $P'(x)$ = "模拟 $P(w)$；若停机则模拟 $P_0(x)$"。则 $P(w)\downarrow \iff \llbracket P' \rrbracket = \llbracket P_0 \rrbracket \iff \llbracket P' \rrbracket \in A$。  
+**引理2**（Rice定理的归约核心）: 设 $A$ 为非平凡语义属性。固定 $P_0, P_1$ 使得 $\llbracket P_0 \rrbracket \in A$ 且 $\llbracket P_1 \rrbracket \notin A$。对任意程序 $P$ 和输入 $w$，构造 $P'(x)$ = "模拟 $P(w)$；若停机则模拟 $P_0(x)$"。则 $P(w)\downarrow \iff \llbracket P' \rrbracket = \llbracket P_0 \rrbracket \iff \llbracket P' \rrbracket \in A$。
 *证明*: 若 $P(w)\downarrow$，则 $P'$ 对所有 $x$ 模拟 $P_0(x)$，故 $\llbracket P' \rrbracket = \llbracket P_0 \rrbracket \in A$。若 $P(w)\uparrow$，则 $P'$ 对所有 $x$ 无定义，故 $\llbracket P' \rrbracket = \lambda x.\uparrow \notin A$（因 $A$ 非平凡且 $\llbracket P_0 \rrbracket \in A$）。∎
 
-**定理**（静态分析根本限制定理）: 设静态分析工具 $T$ 声称能检测程序语义属性 $\phi$（如"无空指针解引用"）。则：（1）若 $\phi$ 非平凡，$T$ 必有误报或漏报（Rice定理直接推论）；（2）即使限制到可判定语法属性，$T$ 的精确性仍受停机问题约束（如指针分析需近似）。形式化地，$\forall T, \exists P: T(P) = \text{Bug} \land \neg \phi(P)$ 或 $T(P) = \text{Clean} \land \phi(P)$。  
+**定理**（静态分析根本限制定理）: 设静态分析工具 $T$ 声称能检测程序语义属性 $\phi$（如"无空指针解引用"）。则：（1）若 $\phi$ 非平凡，$T$ 必有误报或漏报（Rice定理直接推论）；（2）即使限制到可判定语法属性，$T$ 的精确性仍受停机问题约束（如指针分析需近似）。形式化地，$\forall T, \exists P: T(P) = \text{Bug} \land \neg \phi(P)$ 或 $T(P) = \text{Clean} \land \phi(P)$。
 *证明*: 由引理2，若 $T$ 对非平凡语义属性完美判定，则可构造 $H$ 判定停机，与引理1矛盾。对指针分析等近似问题，即使语法层面可定义，精确分析通常需模拟程序运行，本质上逼近停机问题。∎
 
 **推论**: 类型系统（如Hindley-Milner）通过将语言限制为Turing不完备子集（如排除无界递归或动态代码生成），使"类型安全"成为可判定属性；这是工程上处理Rice定理边界的经典策略。

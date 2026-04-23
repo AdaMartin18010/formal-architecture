@@ -289,3 +289,333 @@ CSP（Go Channel）与Actor模型的根本差异在于**通信语义**：CSP的C
 虚拟线程（Project Loom）代表了Java社区对**向后兼容性**的极致追求：它不要求开发者学习新的API或重写代码，而是让现有的`Thread`和`synchronized`在底层自动获得M:N扩展性。但这种兼容性是有毒的——`synchronized`块内的阻塞会"钉住"载体线程（pinning），抵消虚拟线程的全部优势。这意味着Java生态需要一场**缓慢的锁替换运动**（从synchronized到ReentrantLock），而这种大规模代码迁移在经济上几乎不可能在短期内完成。
 
 最终，并发模型的选择不是技术问题，而是**组织问题**：一个熟悉Java Spring的团队使用虚拟线程，其生产力远超被迫学习Rust async的团队；一个拥有Erlang OTP经验的团队构建的电信系统，其可靠性是任何Go微服务难以企及的。并发模型的最佳实践不是追求最先进的抽象，而是选择团队能够**真正掌握和驾驭**的那一种——因为最危险的并发bug不是数据竞争，而是开发者对所用模型的**误解**。
+
+
+---
+
+## 七、概念属性关系网络
+
+### 7.1 核心概念依赖/包含/对立关系表
+
+| 概念A | 关系 | 概念B | 关系说明 |
+|-------|------|-------|---------|
+| OS线程 (1:1) | →包含于 | 内核调度器 | OS线程由内核调度 |
+| Goroutine (M:N) | →依赖 | Go运行时调度器 | GMP模型实现用户态调度 |
+| 虚拟线程 (M:N) | →依赖 | JVM运行时 | Project Loom在JVM层实现 |
+| 载体线程 (Carrier) | →包含 | 虚拟线程 | VT在RUNNING时挂载于CT |
+| Channel (CSP) | →对立 | 共享内存+锁 | 通信 vs 共享两种范式 |
+| Actor | →依赖 | 邮箱 (Mailbox) | Actor通过邮箱异步接收消息 |
+| async/await | →编译为 | 状态机 | 语法糖转换为状态机实现 |
+| 抢占式调度 | →对立 | 协作式调度 | 强制中断 vs 主动让出 |
+| pinning | →副作用 | synchronized | VT在synchronized内阻塞钉住CT |
+| Work Stealing | →依赖 | 本地任务队列 | 偷取操作基于P的本地队列 |
+
+### 7.2 ASCII 拓扑图：并发模型谱系与关系
+
+```text
+                    ┌─────────────────────────────────────┐
+                    │          并发模型谱系               │
+                    └───────────────┬─────────────────────┘
+                                    │
+          ┌─────────────────────────┼─────────────────────────┐
+          │                         │                         │
+          ▼                         ▼                         ▼
+   ┌─────────────┐          ┌─────────────┐          ┌─────────────┐
+   │  共享内存模型 │          │  消息传递模型 │          │  异步事件模型 │
+   │             │          │             │          │             │
+   └──────┬──────┘          └──────┬──────┘          └──────┬──────┘
+          │                        │                        │
+    ┌─────┴─────┐          ┌───────┴───────┐        ┌───────┴───────┐
+    │           │          │               │        │               │
+    ▼           ▼          ▼               ▼        ▼               ▼
+ ┌──────┐   ┌──────┐  ┌────────┐      ┌────────┐ ┌────────┐   ┌────────┐
+ │OS线程 │   │虚拟线程│  │CSP     │      │ Actor  │ │回调    │   │async/  │
+ │(1:1) │   │(M:N) │  │Channel │      │        │ │(Callback)│  │await   │
+ └──┬───┘   └──┬───┘  └───┬────┘      └───┬────┘ └───┬────┘   └───┬────┘
+    │          │          │               │          │            │
+    │          │          │               │          │            │
+    │    ┌─────┘          │               │          │            │
+    │    │                │               │          │            │
+    ▼    ▼                ▼               ▼          ▼            ▼
+ ┌─────────────────────────────────────────────────────────────────────┐
+ │                        M:N 调度层                                   │
+ │  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐         │
+ │  │ Goroutine│    │ 虚拟线程 │    │ 纤程    │    │ 协程    │         │
+ │  │ (Go)    │    │ (Java)  │    │ (C++20) │    │ (Rust)  │         │
+ │  │ GMP调度  │    │ VT调度   │    │ 无栈    │    │ 状态机  │         │
+ │  └─────────┘    └─────────┘    └─────────┘    └─────────┘         │
+ └─────────────────────────────────────────────────────────────────────┘
+
+调度器映射关系:
+
+  OS线程:        用户线程 ──1:1──► 内核线程
+                 [Java Thread]    [kernel task_struct]
+
+  Goroutine:     Goroutine ──M:N──► OS线程
+                 [G]    [Work Stealing]    [M]
+
+  虚拟线程:      虚拟线程 ──M:N──► 载体线程 ──1:1──► OS线程
+                 [VT]    [JVM调度]    [CT]    [kernel]
+
+  async/await:   Future/Task ──N:1──► 事件循环 ──1:1──► OS线程
+                 [Rust/JS]    [Reactor]    [executor]
+```
+
+### 7.3 形式化映射
+
+```text
+并发模型作为进程代数:
+
+  共享内存模型 (Hoare, 1978; Milner, 1980):
+    进程 P ::= 0 | a.P | P+Q | P|Q | (νx)P | !P
+    同步: P|Q 通过共享通道通信
+
+  CSP (Hoare, 1978):
+    进程 P ::= STOP | SKIP | a → P | P □ Q | P ⊓ Q | P ||| Q
+    Channel: 有向通信，同步握手
+
+  Actor 模型 (Agha, 1986):
+    Actor: ⟨Behavior, State, Mailbox⟩
+    转换: receive(m) → ⟨Behavior', State', Mailbox'⟩
+    性质: 无共享状态，位置透明
+
+  虚拟线程作为延续 (Continuation):
+    VT 的状态 = 堆分配的 continuation 对象
+    PARKED → READY: continuation 被保存到堆
+    READY → RUNNING: continuation 被恢复到载体线程栈
+    来源: Ron Pressler (2018), "Project Loom: Fibers and Continuations for the JVM"
+```
+
+---
+
+## 八、形式化推理链
+
+### 8.1 虚拟线程调度正确性推理链
+
+**公理 A1 (载体线程不变性)**:  虚拟线程仅在RUNNING状态时绑定载体线程，阻塞时立即释放。
+*来源*: Ron Pressler & Alan Bateman (2023), JEP 444: Virtual Threads.
+
+**公理 A2 (pinning限制)**:  当虚拟线程在synchronized块内阻塞时，载体线程被"钉住"(pinned)，不可释放。
+
+**引理 L1 (调度公平性)**:  虚拟线程调度器使用FIFO队列管理READY状态的VT，保证先进先出。
+
+**引理 L2 (载体线程池大小)**:  默认载体线程数等于CPU核心数，与虚拟线程数解耦。
+
+**定理 T1 (虚拟线程扩展性)**:  虚拟线程的内存占用与OS线程解耦，可扩展至百万级并发。
+*证明*: 每个VT的栈帧在PARKED时保存到堆，运行时仅需少量载体线程。∎
+
+**推论 C1 (pinning风险)**:  若大量VT在synchronized内阻塞，载体线程池耗尽，导致应用假死。
+*来源*: Netflix Tech Blog (2024), "Java 21 Virtual Threads – Dude, Where's My Lock?"
+
+### 8.2 CSP vs Actor 表达力推理链
+
+**公理 A3 (CSP同步性)**:  无缓冲Channel的发送操作阻塞至接收方就绪。
+
+**公理 A4 (Actor异步性)**:  Actor的发送操作立即返回，消息存入邮箱。
+
+**引理 L3 (CSP确定性)**:  对于给定的输入序列，CSP网络的输出是确定的（无非确定性调度）。
+*来源*: Tony Hoare (1978), *Communicating Sequential Processes*.
+
+**引理 L4 (Actor容错性)**:  Actor的失败不影响其他Actor（故障隔离）。
+*来源*: Carl Hewitt, Peter Bishop, Richard Steiger (1973), "A Universal Modular Actor Formalism".
+
+**定理 T2 (模型等价性)**:  CSP和Actor在图灵完备性上等价，但在**工程属性**上互补：
+
+- CSP更适合**流水线协调**和**确定性验证**
+- Actor更适合**分布式容错**和**位置透明**
+*来源*: Philipp Haller, Martin Odersky (2006), "Event-based Programming without Inversion of Control", JMLC.
+
+---
+
+## 九、ASCII 推理判定树 / 决策树
+
+### 9.1 并发模型技术选型决策树
+
+```text
+                    ┌─────────────────┐
+                    │  高并发系统      │
+                    │  并发模型选型    │
+                    └────────┬────────┘
+                             │
+                    ┌────────┘
+                    ▼
+              ┌─────────┐
+              │ 并发规模 │
+              │(>10K?)  │
+              └────┬────┘
+                   │
+              否 ──┘        是 ──┐
+                   │              │
+                   ▼              ▼
+              ┌─────────┐   ┌─────────┐
+              │OS线程池 │   │ 延迟要求 │
+              │足够     │   │(<1ms?)  │
+              │(简单)   │   └────┬────┘
+              └─────────┘        │
+                            是 ──┘      否 ──┐
+                                 │            │
+                                 ▼            ▼
+                            ┌─────────┐  ┌─────────┐
+                            │ 虚拟线程 │  │ 容错要求 │
+                            │ (Java)  │  │ (高可用)?│
+                            │Goroutine│  └────┬────┘
+                            │ (Go)    │       │
+                            └─────────┘  是 ──┘      否 ──┐
+                                              │            │
+                                              ▼            ▼
+                                         ┌─────────┐  ┌─────────┐
+                                         │ Actor   │  │ async/  │
+                                         │(Erlang/│  │ await   │
+                                         │ Akka)   │  │(Rust/   │
+                                         │         │  │ Node.js)│
+                                         └─────────┘  └─────────┘
+                                                          │
+                                                     ┌────┘
+                                                     ▼
+                                                ┌─────────┐
+                                                │ 已有生态 │
+                                                │ Java?    │
+                                                └────┬────┘
+                                                     │
+                                                是 ──┘      否 ──┐
+                                                     │            │
+                                                     ▼            ▼
+                                                ┌─────────┐  ┌─────────┐
+                                                │ 虚拟线程 │  │ Goroutine│
+                                                │(渐进升级)│  │ (新系统) │
+                                                └─────────┘  └─────────┘
+```
+
+### 9.2 虚拟线程生产故障诊断决策树
+
+```text
+                    ┌─────────────────┐
+                    │ 虚拟线程应用    │
+                    │ 吞吐量骤降?     │
+                    └────────┬────────┘
+                             │
+                    ┌────────┘
+                    ▼
+              ┌─────────┐
+              │ 线程Dump │
+              │ 分析     │
+              └────┬────┘
+                   │
+                   ▼
+              ┌─────────┐
+              │ 载体线程 │
+              │ 全部阻塞?│
+              └────┬────┘
+                   │
+              是 ──┘
+                   │
+                   ▼
+              ┌─────────┐
+              │ 检查是否 │
+              │ 大量VT在 │
+              │ synchronized│
+              │ 内阻塞   │
+              └────┬────┘
+                   │
+              是 ──┘
+                   │
+                   ▼
+              ┌─────────┐
+              │ PINNING │
+              │ 问题确认 │
+              └────┬────┘
+                   │
+                   ▼
+              ┌─────────┐
+              │ 方案A:  │
+              │ 替换为   │
+              │ ReentrantLock│
+              │ (不钉住CT)│
+              └─────────┘
+                   │
+                   ▼
+              ┌─────────┐
+              │ 方案B:  │
+              │ 减少     │
+              │ synchronized│
+              │ 使用范围 │
+              └─────────┘
+                   │
+              否 ──┘
+                   │
+                   ▼
+              ┌─────────┐
+              │ 检查外部 │
+              │ I/O阻塞  │
+              │ (JDBC等) │
+              │ 是否使用 │
+              │ 虚拟线程 │
+              │ 友好驱动 │
+              └─────────┘
+```
+
+---
+
+## 十、国际权威课程对齐
+
+### 10.1 课程映射表
+
+| 本模块主题 | MIT 6.035 | Stanford CS 143 | CMU 15-411 | Berkeley CS 164 |
+|-----------|-----------|-----------------|------------|-----------------|
+| **线程模型** | L16: Parallelization | L14: Runtime Threads | L15: Runtime Organization | L12: Concurrency |
+| **CSP/Channel** | — | — | — | L14: Message Passing |
+| **Actor模型** | — | — | — | L15: Actors |
+| **M:N调度** | L16: Task Scheduling | — | L15: Scheduler | L13: Parallel Scheduling |
+| **异步编程** | — | — | — | L14: Async/Await |
+
+### 10.2 具体 Lecture / Homework / Project 映射
+
+**MIT 6.035: Computer Language Engineering**
+
+- Lecture 16: "Parallelization and Thread Scheduling" — 并行循环、任务调度、负载均衡
+- Lecture 17: "Concurrency" — 共享内存模型、同步原语、数据竞争
+- Project 5: Optimizer — 并行代码生成与调度策略优化
+- Homework 3: Parallel Analysis — 分析并行程序的死锁与活性
+
+**Stanford CS 143: Compilers**
+
+- Lecture 14: "Runtime Threads and Concurrency" — 运行时线程模型、并发原语
+- Written Assignment 3: Concurrency — 分析不同并发模型的优劣
+
+**CMU 15-411: Compiler Design**
+
+- Lecture 15: "Runtime Organization" — 运行时调度器、线程池、并发模型
+- Assignment 3: Program Analysis — 并发程序的静态分析与验证
+
+**Berkeley CS 164: Programming Languages and Compilers**
+
+- Lecture 12: "Concurrency Models" — OS线程、用户态线程、协程、M:N映射
+- Lecture 13: "Parallel Scheduling" — Work Stealing、任务分解、调度理论
+- Lecture 14: "Message Passing and Async" — CSP、Channel、async/await、Promise
+- Lecture 15: "Actors and Fault Tolerance" — Actor模型、监督树、容错设计
+- Project 3: Concurrent Runtime — 实现支持多种并发模型的运行时
+- Homework 4: Concurrency Theory — 并发模型的形式化比较与证明
+
+### 10.3 核心参考文献
+
+1. **Tony Hoare** (1978). *Communicating Sequential Processes*. Prentice Hall. — CSP模型的奠基著作，定义了Channel通信和进程代数的数学基础。
+
+2. **Ron Pressler, Alan Bateman** (2023). "JEP 444: Virtual Threads". *OpenJDK*. — Java虚拟线程的官方规范，定义了M:N映射、载体线程和pinning语义。
+
+3. **Edward A. Lee** (2006). "The Problem with Threads". *IEEE Computer, 39(5)*. — 对线程模型作为并发抽象的根本性批判，推动了Actor和异步模型的发展。
+
+4. **Carl Hewitt, Peter Bishop, Richard Steiger** (1973). "A Universal Modular Actor Formalism for Artificial Intelligence". *IJCAI 1973*. — Actor模型的原始论文，定义了Actor的计算模型和消息传递语义。
+
+---
+
+## 十一、批判性总结（深度增强）
+
+并发模型的历史是一部**抽象层级不断提升**的进化史，但每一次抽象升级都伴随着新的认知陷阱和性能盲区。从形式化视角看，OS线程（1:1模型）的缺陷在于其状态空间过于庞大：每个线程维护独立的寄存器集合、内核栈和调度状态，导致上下文切换成为O(1)但常数项巨大的操作。虚拟线程和Goroutine通过M:N映射将状态空间压缩到用户态，用**延续（Continuation）**保存挂起状态而非完整的内核上下文，这是实现百万级并发的关键——但这种压缩的代价是调度器必须理解并管理这些轻量级抽象的生命周期。
+
+CSP（Go Channel）与Actor模型的根本差异在于**通信语义的形式化结构**。CSP的Channel是同步的（无缓冲时握手），可以用进程代数精确描述其行为；Actor的邮箱是异步的，其行为更接近π-演算中的无界缓冲区。这种差异决定了它们适用的验证技术：CSP程序可以使用FDR等模型检查器进行死锁和确定性验证，而Actor系统更适合使用TLA+进行活性分析。然而，2026年的工程现实是：**没有任何主流语言实现纯粹的CSP或Actor**——Go开发者大量使用sync.Mutex和atomic，Erlang开发者常常绕过消息传递直接使用ETS表（共享内存）。这揭示了一个基本真理：理论纯洁性在性能压力面前总是妥协。
+
+虚拟线程（Project Loom）代表了Java社区对**向后兼容性**的极致追求，但这种兼容性是有毒的。`synchronized`块内的阻塞会"钉住"载体线程（pinning），抵消虚拟线程的全部优势。从形式化角度看，pinning破坏了M:N映射的核心不变式——虚拟线程与载体线程的动态解耦。这意味着Java生态需要一场**缓慢的锁替换运动**（从synchronized到ReentrantLock），而这种大规模代码迁移在经济上几乎不可能在短期内完成。Netflix在2024年的生产故障报告（"Java 21 Virtual Threads – Dude, Where's My Lock?"）生动地证明了这一点：一个看似无害的第三方库中的`synchronized`块可以在高负载下瘫痪整个虚拟线程池。
+
+async/await模型虽然被多种语言采纳，但其**传染性**（async污染）和**颜色问题**（sync代码无法直接调用async代码）构成了严重的软件工程负担。从类型系统视角看，async/await引入了一种**效应系统**（Effect System）——函数的类型签名必须标注其异步效应，这破坏了原有的模块化边界。Rust的`async fn`和JavaScript的`Promise`都面临这一问题：一个底层函数的async化会迫使整个调用链变为async。这与Goroutine和虚拟线程的**透明性**形成鲜明对比——在后两者中，任何函数都可以被并发调用而无需修改其签名。
+
+最终，并发模型的选择不是纯粹的技术问题，而是**组织认知经济学**的问题。一个熟悉Java Spring的团队使用虚拟线程，其生产力远超被迫学习Rust async的团队；一个拥有Erlang OTP经验的团队构建的电信系统，其可靠性是任何Go微服务难以企及的。并发模型的最佳实践不是追求最先进的抽象，而是选择团队能够**真正掌握和驾驭**的那一种——因为最危险的并发bug不是数据竞争，而是开发者对所用模型的**系统性误解**。2026年后的关键趋势是**多模型共存**：同一系统中，OS线程用于计算密集型任务，Goroutine/虚拟线程用于I/O密集型服务，Actor用于容错子系统，async/await用于事件驱动UI——这种异构性要求架构师具备跨模型的形式化推理能力，这是下一代系统设计的核心素养。

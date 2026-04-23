@@ -243,12 +243,14 @@ StatefulSet 有状态部署拓扑
 ### 7.3 形式化映射
 
 设 Pod 为四元组 **P = (C, N, V, L)**，其中：
+
 - **C** = 容器集合 {c1, c2, ..., cn}
 - **N** = 共享命名空间集合 {Network, IPC, UTS}
 - **V** = 挂载卷集合 {emptyDir, hostPath, PVC, ConfigMap, Secret}
 - **L** = 标签集合 {(k1, v1), (k2, v2), ...}
 
 Deployment 形式化为状态转换系统 **D = (RS, strategy, rollout)**：
+
 - **RS** = ReplicaSet 集合 {rs_old, rs_new}
 - **strategy** = 更新策略 {RollingUpdate(maxSurge, maxUnavailable), Recreate}
 - **rollout** = 渐进替换函数：Pod_new_ratio(t) = f(t, maxSurge, maxUnavailable)
@@ -364,20 +366,24 @@ Pod 内容器组织模式
 ### 10.1 课程映射
 
 **MIT 6.824: Distributed Systems**
+
 - **Lecture 5**: Raft -> 对应 etcd 的共识机制与 StatefulSet 的存储一致性
 - **Lecture 7**: Spanner -> 对应分布式事务与有状态服务的全局一致性
 - **Project 3**: KV Raft -> 对应 StatefulSet 的副本管理与领导者选举
 
 **Stanford CS 140: Operating Systems**
+
 - **Lecture 6**: Scheduling -> 对应 Pod 调度与资源请求/限制
 - **Lecture 11**: File Systems -> 对应 PVC 与持久化存储抽象
 - **Project**: PintOS -> 对应进程创建与销毁的生命周期管理
 
 **CMU 15-440: Distributed Systems**
+
 - **Lecture 6**: Replication -> 对应 ReplicaSet 的副本维护策略
 - **Lecture 12**: Cloud Storage -> 对应动态存储供应与 Volume 管理
 
 **Berkeley CS 162: Operating Systems**
+
 - **Lecture 7**: Concurrency -> 对应多容器 Pod 的进程同步
 - **Lecture 13**: Distributed Systems -> 对应控制器模式与状态协调
 

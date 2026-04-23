@@ -62,20 +62,20 @@
 ```text
 定义 (Petri 网):
   N = (P, T, F, M₀)
-  
+
   P: 有限库所集合
   T: 有限变迁集合 (P ∩ T = ∅)
   F: (P × T) ∪ (T × P) → ℕ (弧的权重)
   M₀: P → ℕ (初始标记)
-  
+
   变迁 t ∈ T 在标记 M 下使能:
     enabled(M, t) ⟺ ∀p ∈ •t: M(p) ≥ F(p, t)
     其中 •t = {p | F(p, t) > 0} 是 t 的输入库所
-    
+
   触发规则:
     M' = M - F(•t, t) + F(t, t•)
     即: 从输入库所消耗 Token，向输出库所产生 Token
-    
+
   可达性:
     R(N, M₀) = {M | M₀ →* M}
     其中 →* 是触发关系的自反传递闭包
@@ -86,20 +86,20 @@
 ```text
 定义 (工作流引擎):
   工作流 W = (S, s₀, A, T, C)
-  
+
   S: 状态集合
   s₀ ∈ S: 初始状态
   A: 活动 (Activity) 集合
   T: S × A → S (状态转换)
   C: A → (S → Bool) (活动补偿函数)
-  
+
   执行语义:
     编排式 (Orchestration):
       中央协调器按预定义顺序触发活动
-      
+
     编舞式 (Choreography):
       各服务通过事件自主响应，无中央协调
-      
+
   Saga 模式:
     长事务分解为子事务序列
     每个子事务有对应的补偿操作
@@ -153,7 +153,7 @@
 
 Petri 网是**并发系统的几何学**：它用图的拓扑结构精确描述系统的状态空间和并发行为，使死锁、活性和有界性从"偶发神秘"变为"可形式化证明"。但 Petri 网的**状态空间爆炸**问题限制了其在大型系统中的应用——一个包含 100 个库所的 Petri 网，其可达状态集可能是天文数字，使得自动化分析不可行。
 
-Temporal 的**代码即工作流**范式是工作流引擎的**范式革命**：传统 BPMN 引擎要求开发者学习图形化建模语言，而 Temporal 让开发者用熟悉的编程语言（Go/Java/TypeScript）编写工作流逻辑，引擎自动处理持久化、重试、超时和补偿。这不是语法糖的改进，而是**抽象层次的跃迁**——从"描述工作流"到"编写工作流"。但这也带来了** Vendor Lock-in**风险：一旦深度使用 Temporal 的特定语义，迁移到其他引擎的成本极高。
+Temporal 的**代码即工作流**范式是工作流引擎的**范式革命**：传统 BPMN 引擎要求开发者学习图形化建模语言，而 Temporal 让开发者用熟悉的编程语言（Go/Java/TypeScript）编写工作流逻辑，引擎自动处理持久化、重试、超时和补偿。这不是语法糖的改进，而是**抽象层次的跃迁**——从"描述工作流"到"编写工作流"。但这也带来了**Vendor Lock-in**风险：一旦深度使用 Temporal 的特定语义，迁移到其他引擎的成本极高。
 
 2026 年的工作流趋势是**事件驱动编排**（Event-Driven Orchestration）：将 Saga 模式与事件溯源（Event Sourcing）结合，每个工作流步骤产生领域事件，这些事件既驱动工作流前进，又成为系统审计和数据分析的源头。这是**命令与查询职责分离**（CQRS）在工作流领域的延伸——工作流引擎处理命令（编排），事件流处理查询（分析）。
 
@@ -209,6 +209,7 @@ Petri 网正确性 ⟹ 工作流设计正确性 ⟹ 引擎实现正确性
 > **前提 2**（Rice 定理的 Petri 网版本）：一般 Petri 网的可达性问题是可判定的（Mayr, 1981; Kosaraju, 1982），但算法复杂度为非初等的（non-elementary）。
 >
 > **推理步骤**：
+>
 > 1. 设工作流 W 的 Petri 网模型为 N_W，初始标记为 M₀；
 > 2. 死锁定义：∃ M ∈ R(N_W, M₀), ∀ t ∈ T, ¬enabled(M, t)；
 > 3. 由 Petri 网理论，死锁检测 = 检查可达标记集 R(N_W, M₀) 中是否存在 deadlock marking；
@@ -226,6 +227,7 @@ Petri 网正确性 ⟹ 工作流设计正确性 ⟹ 引擎实现正确性
 > **前提 2**（BPMN 2.0 语义间隙）：BPMN 标准声称"执行语义已完全形式化"，但存在歧义、间隙和不一致（Hildebrandt et al., 2011）。
 >
 > **推理步骤**：
+>
 > 1. 设模式 P 的形式化语义为 [[P]]_formal（如 Petri 网片段）；
 > 2. 设引擎 E 对模式 P 的实现语义为 [[P]]_E；
 > 3. 语义保持条件：[[P]]_formal ≈ [[P]]_E（双模拟或精化关系）；
@@ -306,6 +308,7 @@ if κ_workflow = Low（内部工具、数据管道）：
 | BPMN 2.0 形式化语义 | **MIT 6.005** 高级研讨 | Formal Semantics | BPMN 的形式化是规格精确性的工业级案例 |
 
 **权威文献索引**：
+
 - **Petri, C. A.** (1962). *Kommunikation mit Automaten*. PhD Thesis, Bonn.
 - **Murata, T.** (1989). "Petri Nets: Properties, Analysis and Applications." *Proc. IEEE* 77(4): 541–580.
 - **van der Aalst, W. M. P., et al.** (2003). "Workflow Patterns." *Distributed and Parallel Databases* 14(3): 5–51.

@@ -185,13 +185,13 @@ Curry-Howard同构：
 
 **公理/前提**: 设λ项的集合为 $\Lambda$，由变量 $x \in \text{Var}$、抽象 $\lambda x.M$ 和应用 $(M\ N)$ 归纳生成（Church, 1936; Barendregt, 1984）。定义单步β归约为 $(\lambda x.M)N \to_\beta M[x := N]$，其中替换 $[x := N]$ 满足捕获避免条件。
 
-**引理1**（Church-Rosser定理 / 合流性）: 若 $M \to_\beta^* M_1$ 且 $M \to_\beta^* M_2$，则存在 $M_3$ 使得 $M_1 \to_\beta^* M_3$ 且 $M_2 \to_\beta^* M_3$。形式化地，$\to_\beta$ 具有diamond property。  
+**引理1**（Church-Rosser定理 / 合流性）: 若 $M \to_\beta^* M_1$ 且 $M \to_\beta^* M_2$，则存在 $M_3$ 使得 $M_1 \to_\beta^* M_3$ 且 $M_2 \to_\beta^* M_3$。形式化地，$\to_\beta$ 具有diamond property。
 *证明*: （概要）由Tait和Martin-Löf的立方体法（cube method）或Takahashi的并行归约法。核心在于证明单步并行归约 $\Rightarrow$ 满足diamond property，然后通过归纳得到传递闭包的合流性。∎
 
-**引理2**（规范形式唯一性）: 若 $M$ 有规范形式（normal form）$N$（即 $N$ 不可进一步β归约），则该规范形式在α等价下唯一。  
+**引理2**（规范形式唯一性）: 若 $M$ 有规范形式（normal form）$N$（即 $N$ 不可进一步β归约），则该规范形式在α等价下唯一。
 *证明*: 设 $M \to_\beta^* N_1$ 且 $M \to_\beta^* N_2$，其中 $N_1, N_2$ 均为规范形式。由引理1（Church-Rosser），存在 $N_3$ 使得 $N_1 \to_\beta^* N_3$ 且 $N_2 \to_\beta^* N_3$。但规范形式不可归约，故 $N_1 =_\alpha N_3 =_\alpha N_2$。∎
 
-**定理**（λ演算的计算完备性与一致性）: （1）λ演算可定义所有部分递归函数，故图灵完备（Church, 1936; Kleene, 1936）；（2）由引理1和引理2，λ演算的等式理论 $\lambda \vdash M = N$ 在规范形式项上是一致的（不会推出 $x = y$ 对不同变量成立）。  
+**定理**（λ演算的计算完备性与一致性）: （1）λ演算可定义所有部分递归函数，故图灵完备（Church, 1936; Kleene, 1936）；（2）由引理1和引理2，λ演算的等式理论 $\lambda \vdash M = N$ 在规范形式项上是一致的（不会推出 $x = y$ 对不同变量成立）。
 *证明*: （1）通过Church编码自然数，并定义后继、加法、乘法及Y组合子实现原始递归与一般递归。（2）一致性由规范形式唯一性保证：若 $\lambda \vdash M = N$，则存在共同归约目标 $P$，若 $M, N$ 为不同变量则不可能归约到同一目标。∎
 
 **推论**: Curry-Howard同构将λ演算的类型推导 $\\Gamma \\vdash M : \\tau$ 映射为逻辑证明 $\\Gamma \\vdash \\tau$。由定理（2），类型系统的一致性对应逻辑系统的一致性；这使得λ演算成为构造性数学与程序验证的统一基础。

@@ -272,19 +272,19 @@ Amdahl定律 (基础)
 
 最优服务数推导（N较大近似）：
   当 N 较大时，N(N-1)/2 ≈ N²/2
-  
+
   T(N) ≈ (1-p) + p/N + c×N²/2
-  
+
   对T(N)关于N求导：
     dT/dN = -p/N² + c×N
-  
+
   令 dT/dN = 0（求最小值）：
     -p/N² + c×N = 0
     c×N = p/N²
     c×N³ = p
     N³ = p/c
     N_opt ≈ ³√(p/c)
-  
+
   另一种推导（平衡串行部分与协调成本）：
     令 (1-p) ≈ c×N²/2
     N² ≈ 2(1-p)/c
@@ -298,7 +298,7 @@ Amdahl定律 (基础)
   │ p=0.9,c=0.001│ ³√900 ≈ 9.7  │ √200 ≈ 14.1      │
   │ p=0.6,c=0.05 │ ³√12 ≈ 2.3   │ √16 = 4          │
   └──────────┴──────────────────┴──────────────────┘
-  
+
   ³√(p/c) 更强调并行收益p对最优服务数的正向影响。
   √(2(1-p)/c) 更强调串行成本(1-p)与协调成本c的平衡。
   工程实践中，取两者中间值或保守估计。
@@ -307,15 +307,15 @@ Amdahl定律 (基础)
   (1) c → 0（零协调成本）：
       N_opt → ∞，Speedup → 1/(1-p)
       即Amdahl原始极限
-  
+
   (2) c → ∞（极高协调成本）：
       N_opt → 1，Speedup → 1
       单体最优
-  
+
   (3) p → 1（完全可并行）：
       N_opt → ∞，但T(N) ≈ 1/N + c×N²/2
       仍存在最优值（协调成本主导）
-  
+
   (4) p → 0（完全串行）：
       N_opt → 1
       单体最优
@@ -333,11 +333,11 @@ Amdahl定律 (基础)
 估算方法：
   步骤1：测量本地处理时间
     T_local = 同进程函数调用完成相同业务逻辑的时间
-    
+
   步骤2：测量远程调用时间
     T_remote = 跨服务调用完成相同业务逻辑的时间
     （包含网络往返、序列化、认证等全部开销）
-  
+
   步骤3：计算c
     c = T_remote / T_local
 
@@ -379,10 +379,10 @@ Amdahl定律 (基础)
 其中：
   ParallelBenefit(N) = p × (1 - 1/N) × BusinessValue
     （并行化带来的业务价值提升）
-  
+
   CoordinationCost(N) = c × N × (N-1)/2 × CallFrequency × CallValue
     （跨服务调用的总成本）
-  
+
   OpsCost(N) = α × N + β × N²
     （运维成本：α为单服务基础运维，β为服务间交互复杂度）
 
@@ -394,18 +394,18 @@ Amdahl定律 (基础)
 
 案例计算：
   p = 0.8, c = 0.01, BusinessValue = 100, CallFrequency = 10, α = 1, β = 0.1
-  
+
   N=1:  NetBenefit = 0
   N=5:  ParallelBenefit = 0.8×0.8×100 = 64
         CoordinationCost = 0.01×5×4/2×10 = 1
         OpsCost = 1×5 + 0.1×25 = 7.5
         NetBenefit = 64 - 1 - 7.5 = 55.5 ✓
-  
+
   N=10: ParallelBenefit = 0.8×0.9×100 = 72
         CoordinationCost = 0.01×10×9/2×10 = 4.5
         OpsCost = 1×10 + 0.1×100 = 20
         NetBenefit = 72 - 4.5 - 20 = 47.5 （仍正但下降）
-  
+
   N=20: ParallelBenefit = 0.8×0.95×100 = 76
         CoordinationCost = 0.01×20×19/2×10 = 19
         OpsCost = 1×20 + 0.1×400 = 60
@@ -508,6 +508,7 @@ Amdahl定律 (基础)
 ## 十四、深度增强：国际课程对齐
 
 > **国际课程对齐**:
+>
 > - **Berkeley CS 186 Database Systems** (2023) — Module 18: Performance Modeling; 数据库系统性能建模中的Amdahl定律应用
 > - **MIT 6.830 Advanced Database** (2022) — Lecture 20: Distributed System Performance; 分布式系统性能的量化分析与协调成本
 > - **CMU 17-313 Software Engineering** (2024) — Unit 13: System Performance Engineering; 系统工程中的Amdahl-Gustafson权衡
@@ -518,6 +519,7 @@ Amdahl定律 (基础)
 ## 十五、深度增强：权威来源与批判性总结
 
 > **权威来源**：
+>
 > - **Gene Amdahl** (1967): "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities", AFIPS. Amdahl定律的原始论文，定义了并行加速的理论边界。
 > - **John Ousterhout** (2008): "The Role of Distributed State", LADIS Keynote. 分布式系统复杂性的根源分析，协调成本的早期洞察。
 > - **Sam Newman** (2015/2021): *Building Microservices*, O'Reilly. 微服务工程的系统性指南，涵盖拆分粒度、通信模式和团队组织。

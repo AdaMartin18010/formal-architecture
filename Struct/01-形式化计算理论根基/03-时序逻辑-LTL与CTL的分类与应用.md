@@ -197,17 +197,19 @@ CTL公式语法：
 **公理/前提**: 设Kripke结构为 $M = (S, S_0, R, L)$，其中 $S$ 为状态集，$S_0 \subseteq S$ 为初始状态，$R \subseteq S \times S$ 为转移关系，$L: S \to 2^{AP}$ 为标签函数（Pnueli, 1977; Clarke & Emerson, 1981）。设路径 $\pi = s_0 s_1 s_2 \dots$ 为 $R$ 上的无限序列。
 
 **引理1**（LTL语义的基础定义）: 对原子命题 $p \in AP$：
+
 - $M, \pi \models X\phi \iff M, \pi^1 \models \phi$（下一状态）
 - $M, \pi \models F\phi \iff \exists k \geq 0: M, \pi^k \models \phi$（最终）
 - $M, \pi \models G\phi \iff \forall k \geq 0: M, \pi^k \models \phi$（永远）
 - $M, \pi \models \phi U \psi \iff \exists k \geq 0: M, \pi^k \models \psi \land \forall 0 \leq j < k: M, \pi^j \models \phi$（直到）
 
-**引理2**（CTL路径量词语义）: 
+**引理2**（CTL路径量词语义）:
+
 - $M, s \models A\phi \iff \forall \pi \text{ starting from } s: M, \pi \models \phi$（所有路径）
 - $M, s \models E\phi \iff \exists \pi \text{ starting from } s: M, \pi \models \phi$（存在路径）
 - CTL要求每个时序算子（X/F/G/U）必须立即由路径量词（A/E）限定
 
-**定理**（表达力不可比定理）: （1）存在CTL可表达但LTL不可表达的公式（如 $EF(\text{reset})$：存在路径可到达复位状态）；（2）存在LTL可表达但CTL不可表达的公式（如 $GF\phi$：无限频繁成立）；（3）CTL* 同时包含两者，是LTL与CTL的表达力超集。  
+**定理**（表达力不可比定理）: （1）存在CTL可表达但LTL不可表达的公式（如 $EF(\text{reset})$：存在路径可到达复位状态）；（2）存在LTL可表达但CTL不可表达的公式（如 $GF\phi$：无限频繁成立）；（3）CTL*同时包含两者，是LTL与CTL的表达力超集。
 *证明*: （1）LTL沿单一路径求值，无法量化"是否存在某条路径"；（2）CTL的 $AF\phi$ 要求所有路径最终满足，强于LTL的 $F\phi$；CTL无法直接表达"无限频繁"，因为嵌套量词 $A(GF\phi)$ 在纯CTL语法中不可直接构造（需CTL*）。（3）由定义，CTL* 允许路径公式与状态公式的任意组合。∎
 
 **推论**: 工程中选择LTL还是CTL取决于验证目标的本质：若需证明"所有执行都满足某性质"（如互斥），LTL足够；若需分析"是否存在某种可能执行"（如可达性、复位能力），则必须选用CTL或CTL*。
