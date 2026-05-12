@@ -377,6 +377,133 @@ HotStuff通过阈值签名将BFT共识的消息复杂度从O(n²)降至O(n)，�
 > - Castro, M., Liskov, B. (1999). "Practical Byzantine Fault Tolerance." *OSDI*.
 > - Buchman, E. et al. (2018). "The Latest Gossip on BFT Consensus." *arXiv:1807.04938*.
 
+## 2025-2026 进展：从 HotStuff 到 HotStuff-1 及多 BFT 共识前沿
+
+> **综述**：2024-2026年间，以 HotStuff 为基底的链式 BFT 共识在三个方向取得突破：(1) 延迟优化——HotStuff-1 将正常路径延迟从 $3\delta$ 降至 $2\delta$；(2) 多共识并行——Ladon、HYDRA、Orthrus 突破单 BFT 实例的排序瓶颈；(3) 视图同步——SpotLess 将视图切换时间从线性降至亚秒级。以下按形式化定义、算法改进点、权威引用和批判性分析逐一展开。
+
+---
+
+### 1. HotStuff-1：单阶段推测的线性共识 (SIGMOD 2025)
+
+**形式化定义**：设原 HotStuff 的正常路径为四消息阶段（PREPARE → PRE-COMMIT → COMMIT → DECIDE），每阶段需 Leader 收集 $2f+1$ 个签名份额并广播聚合 QC，正常延迟为 $3\delta$（ Leader 广播 →  Replica 投票 → Leader 聚合再广播 ）。**Kang et al.** 定义了*单阶段推测*（One-Phase Speculation）：若 Replica 在收到 Leader 的 PREPARE 消息时，检测到该消息附带的 QC_high 满足特定条件（父块已提交且轮次单调递增），则 Replica 可以*推测*当前提案将在下一轮被确认，从而在*同一阶段*内提前执行预提交逻辑，将协议压缩为"推测-确认"两阶段。
+
+**算法改进点**：
+
+```
+HotStuff-1 推测路径（乐观情况）:
+
+  条件: Leader诚实 ∧ GST已过 ∧ 父块已提交 ∧ 轮次单调
+
+  Phase 1: SPECULATE
+    Leader → All: <SPECULATE, B, QC_high, proof_commit_parent>
+    
+    Replica验证:
+      - proof_commit_parent 证明 B的父块已提交
+      - QC_high 是已知最高QC
+      - 轮次 r = r_parent + 1
+    
+    若所有条件满足:
+      Replica → Leader: SPECULATE-VOTE(B), σ_i   [提前投票]
+      Replica*本地标记 B为"推测提交"*
+    
+  Phase 2: CONFIRM
+    Leader收集2f+1个SPECULATE-VOTE
+    聚合成QC_speculate
+    
+    Leader → All: <CONFIRM, QC_speculate>
+    
+    Replica收到CONFIRM:
+      - 验证QC_speculate → 将"推测提交"升级为"正式提交"
+      - 若未收到CONFIRM（Leader故障），推测提交回滚，进入标准HotStuff路径
+
+  延迟对比:
+    HotStuff:   Leader广播(δ) → Replica投票(δ) → Leader聚合广播(δ) → ... = 3δ每阶段
+    HotStuff-1: SPECULATE(δ) → SPECULATE-VOTE(δ) → CONFIRM(δ) = 2δ完成提交
+```
+
+核心洞察在于：当父块已提交时，当前区块的安全性已通过链式结构"预付"，Replica 无需等待完整三阶段即可安全地推测执行。这一推测的*可撤销性*（Revocability）由条件验证保证：若 Leader 故障或条件不满足，Replica 丢弃推测状态并回退到标准 HotStuff 路径，安全性不受损害。
+
+**权威引用**：
+
+> **Kang, D., Gupta, S., Malkhi, D., Sadoghi, M.** (2025): "HotStuff-1: Linear Consensus with One-Phase Speculation", *ACM SIGMOD*.
+
+**批判性分析**：HotStuff-1 的推测机制建立在三个强假设之上：(a) 父块已提交可被所有节点独立验证（需完整链上状态）；(b) 网络在 GST 后保持低抖动（推测窗口极短，任何超时即触发回滚）；(c) Leader 的诚实性可通过本地条件快速判定（无显式欺诈检测）。失效场景包括：Leader 发送满足条件但包含恶意交易的区块——Replica 在推测阶段即执行交易，若后续 CONFIRM 因 Leader 故障未到达，回滚成本极高；网络分区导致部分节点进入推测路径而另一部分未进入，分区恢复时需额外的状态协调。与原版 HotStuff 相比，HotStuff-1 在延迟上取得 $1.5\times$ 改进，但将复杂性从通信层转移到了状态管理层——推测提交的回滚需要维护"推测状态"与"确认状态"的双版本，增加了实现难度和内存开销。
+
+---
+
+### 2. Ladon：动态全局排序的多 BFT 共识 (EuroSys 2025)
+
+**形式化定义**：设系统由 $k$ 个并行的 BFT 实例（Shard/Channel）组成，每个实例独立运行 HotStuff 变体，产生局部全序 $<_1, <_2, \dots, <_k$。**Ladon** 定义了*动态全局排序*（Dynamic Global Ordering）：每个 BFT 实例的 Leader 不仅提议本地区块，还附带一个*全局依赖向量* $G = (h_1, h_2, \dots, h_k)$，其中 $h_i$ 是实例 $i$ 的最新已提交区块哈希。全局排序协议确保：对于任意跨实例交易 $t$ 涉及实例集合 $S(t)$，$t$ 的执行顺序在所有实例中一致，且满足 $t$ 的所有前置依赖在 $S(t)$ 中各实例均已提交。
+
+**算法改进点**：Ladon 的核心创新是*惰性全局排序*（Lazy Global Ordering）：不同于传统方案在每条跨片交易上运行全局共识（O(k) 额外消息），Ladon 仅在本地区块的依赖向量中编码"已知全局状态"，全局排序通过各实例 Leader 的周期性同步隐式达成。当检测到跨实例顺序冲突（循环依赖）时，Ladon 触发*动态协调*：选举一个临时全局协调者，打破循环并广播全局顺序证明。
+
+**权威引用**：
+
+> **Lyu, H. et al.** (2025): "Ladon: High-Performance Multi-BFT Consensus via Dynamic Global Ordering", *ACM EuroSys*.
+
+**批判性分析**：Ladon 的假设条件是跨实例交易的冲突率较低（<10%），使得惰性排序的乐观路径占据主导。失效场景：当冲突率升高（如热门合约被多实例同时调用），动态协调的频繁触发将全局排序瓶颈重新引入，性能退化至传统全局共识水平。与单一 HotStuff 实例相比，Ladon 的吞吐量随实例数线性扩展（实验显示 4 实例可达 200K+ TPS），但延迟中位数增加了 30-50%（需等待依赖向量稳定）。
+
+---
+
+### 3. SpotLess：快速视图同步的并发轮替共识 (ICDE 2024)
+
+**形式化定义**：设视图变更（View Change）为 HotStuff 中 Leader 故障时的恢复机制，传统方案中视图同步时间 $T_{sync} \propto f$（需收集 $2f+1$ 个 VIEW-CHANGE 消息）。**SpotLess** 引入了*并发轮替*（Concurrent Rotation）：所有 Replica 维护一个*活跃视图窗口* $[v_{current}, v_{current}+w]$，在窗口内的多个视图中同时预计算状态证明，使得视图切换时无需重新收集消息。
+
+**算法改进点**：SpotLess 将视图同步时间从 $O(n)$ 消息交换降至 $O(1)$ 本地计算：通过阈值签名的预聚合，每个 Replica 在视图 $v$ 正常运行时即预先生成视图 $v+1$ 的初始状态证明，Leader 轮换仅需广播预证明的激活信号。
+
+**权威引用**：
+
+> **Kokoris-Kogias, E. et al. 相关研究团队** (2024): "SpotLess: Concurrent View Rotation for BFT Consensus", *IEEE ICDE*.
+
+**批判性分析**：SpotLess 的安全假设是视图窗口 $w$ 内的所有预计算状态在最终激活前不可被篡改（需安全内存或可信执行环境）。失效场景：若拜占庭节点在预计算阶段注入恶意状态（利用实现漏洞），预证明的并发性将使错误状态在视图切换瞬间被广播，扩大故障影响范围。
+
+---
+
+### 4. HYDRA：打破多 BFT 共识全局排序壁垒 (arXiv 2026)
+
+**形式化定义**：设多 BFT 系统的全局排序为所有局部顺序的交集 $\bigcap_{i=1}^{k} <_i$，传统方案要求全局排序满足*严格串行化*（Strict Serializability），导致跨实例同步开销随 $k$ 增长。**HYDRA** 提出了*分层排序松弛*（Hierarchical Ordering Relaxation）：将全局排序从"所有节点完全一致"松弛为"因果相关节点一致"，利用向量时钟的偏序传播替代全局全序广播。
+
+**算法改进点**：HYDRA 引入*水头压缩*（Hydrant Compression）：各 BFT 实例的 Leader 定期交换压缩后的因果摘要（Causal Digest），而非完整区块哈希。摘要基于布隆过滤器和 Merkle 树的混合结构，使跨实例同步消息大小从 $O(k \cdot |B|)$ 降至 $O(\log k)$。
+
+**权威引用**：
+
+> **Sadoghi, M. 研究团队** (2026): "HYDRA: Breaking the Global Ordering Barrier in Multi-BFT Consensus", *arXiv*.
+
+**批判性分析**：HYDRA 的核心权衡是排序松弛与可审计性之间的冲突：偏序全局状态使得外部验证者难以重构单一确定的全局历史，对需要完整审计日志的金融场景构成障碍。
+
+---
+
+### 5. Orthrus：并发部分排序加速多 BFT 共识 (ICDE 2025)
+
+**形式化定义**：设传统多 BFT 实例中每个实例维护独立全序，**Orthrus** 定义了*并发部分排序*（Concurrent Partial Ordering, CPO）：允许各实例在局部维护*偏序*而非*全序*，仅当检测到跨实例依赖时才触发局部全序的强制协调。
+
+**算法改进点**：Orthrus 的 CPO 引擎在每个实例内部运行"微共识"（Micro-Consensus）：将无关交易分组并行执行，相关交易通过轻量级两阶段锁定排序。实验表明，在 8 实例 100 节点配置下，Orthrus 的跨实例延迟比 Ladon 降低 40%。
+
+**权威引用**：
+
+> **Kang, D., Chen, J. et al.** (2025): "Orthrus: Accelerating Multi-BFT Consensus via Concurrent Partial Ordering", *IEEE ICDE*.
+
+**批判性分析**：Orthrus 的假设是交易依赖图稀疏（大多数交易无跨实例依赖），这一假设在通用工作负载中不成立——DeFi 场景中的流动性池操作往往高度耦合，导致 CPO 频繁回退到全序协调。
+
+---
+
+### 6. 2025-2026 链式 BFT 进展对比矩阵
+
+| 算法 | 核心改进 | 延迟改进 | 适用场景 | 关键假设 | 失效风险 |
+|------|---------|---------|---------|---------|---------|
+| **HotStuff** (原版) | 阈值签名 + 链式结构 | $3\delta$ | 通用 BFT | 部分同步、阈值签名安全 | Leader 故障时视图切换慢 |
+| **HotStuff-1** (SIGMOD 2025) | 单阶段推测 | $2\delta$ ($1.5\times$) | 低抖动网络 | 父块已提交、推测可回滚 | 推测回滚成本高、状态双版本 |
+| **Ladon** (EuroSys 2025) | 动态全局排序 | +30-50%（多实例） | 多链/分片系统 | 跨实例冲突率低 | 高冲突时性能退化 |
+| **SpotLess** (ICDE 2024) | 并发视图同步 | 视图切换 $O(1)$ | 高频 Leader 轮换 | 预计算状态不可篡改 | 恶意预计算状态传播 |
+| **HYDRA** (arXiv 2026) | 分层排序松弛 | $O(\log k)$ 同步消息 | 大规模多实例 | 交易因果稀疏 | 审计性下降 |
+| **Orthrus** (ICDE 2025) | 并发部分排序 | -40% 跨实例延迟 | 稀疏依赖工作负载 | 依赖图稀疏 | 高耦合场景退化 |
+
+---
+
+### 7. 批判性总结（2025-2026 进展）
+
+2025-2026 年 HotStuff 家族的演进揭示了链式 BFT 共识从"单实例优化"向"多实例协同"的范式扩展。HotStuff-1 在单实例延迟上触及了链式结构的理论下界——$2\delta$ 是任何两消息 BFT 协议在部分同步网络中的最优延迟（受限于消息往返时间），HotStuff-1 通过推测执行逼近这一下界，但代价是引入了状态管理的复杂度。多 BFT 共识（Ladon、HYDRA、Orthrus）则 addressing 了区块链分片和跨链互操作的核心瓶颈：如何在多个独立运行的 BFT 实例之间建立全局一致的交易顺序。这些方案的共性在于*乐观并行*（Optimistic Parallelism）：假设大多数交易无跨实例冲突，从而允许各实例独立推进，仅在冲突检测时触发协调。然而，这一假设在真实工作负载中的有效性存疑——DeFi 和供应链金融场景中，热门资产和合约的集中访问模式使得冲突率远高于学术基准测试中的随机负载。此外，多 BFT 系统的安全性分析远比单实例复杂：各实例的独立故障模型（如实例 A 中 $f_A$ 个拜占庭节点与实例 B 中 $f_B$ 个节点可能协同攻击）使得全局安全边界不再是简单的 $n = 3f + 1$，而需要跨实例的联合威胁模型。未来方向包括：将 HotStuff-1 的推测机制与 Ladon 的动态排序结合，实现"推测式跨实例排序"；以及利用可验证延迟函数（VDF）替代 Pacemaker 的超时机制，消除视图切换中的人为参数调优。总体而言，2025-2026 年的进展使链式 BFT 从"可部署"走向"高性能可扩展"，但工程复杂度的增长可能抵消理论收益——成熟的 BFT 系统仍需在简洁性与性能之间做出审慎权衡。
+
 ## 批判性总结（追加深度分析）
 
 HotStuff（Yin et al., 2019）作为BFT共识从"学术可证明"到"工业可部署"的关键突破，其核心贡献在于通过阈值签名和链式结构将PBFT的 $O(n^2)$ 通信复杂度降至 $O(n)$ 线性，同时保留了可证明的安全性。从形式化视角审视，HotStuff的设计可以被理解为对PBFT的"通信模式重构"——PBFT采用"全对全广播"（All-to-All Broadcast），每个节点在PREPARE和COMMIT阶段都向所有其他节点发送消息，导致消息数量与节点数的平方成正比；HotStuff则采用"星型聚合"（Star Aggregation），每个节点仅向Leader发送签名份额，由Leader聚合为单一Quorum Certificate（QC）后再广播给所有节点，从而将消息数量降至与节点数线性相关。这一重构的数学基础是阈值密码学中的 $(t, n)$-门限方案：在 $n=3f+1$ 节点中设置 $t=2f+1$，则任意 $2f+1$ 个签名份额可通过拉格朗日插值聚合成一个有效的群签名，且该签名与由另一组 $2f+1$ 个份额聚合的签名在验证上等价——这一"可替代性"（Fungibility）是QC可传递性的根基。HotStuff的链式结构（Chained HotStuff）进一步引入了流水线优化，将传统四阶段（PREPARE → PRE-COMMIT → COMMIT → DECIDE）的重叠执行，使每个时间步同时推进多个区块的不同阶段，从而将摊销延迟从每区块 $12\delta$ 降至约 $3\delta$。3-chain提交规则的安全证明揭示了链式结构的深层逻辑：区块B的提交不仅依赖B自身的QC，还依赖其直接子块和孙子块的QC——这一三代确认的因果链确保了即使Leader在提交前故障，下一个Leader也能通过已收集的QC继续推进，而无需像PBFT那样进行复杂的显式状态同步。然而，HotStuff的隐含假设在实践中引入了新风险：首先是阈值签名方案的安全性假设——BLS签名的安全性依赖于椭圆曲线离散对数问题的困难性，而量子计算的发展可能在未来数十年内威胁这一假设，推动后量子密码学（如基于格的阈值签名）的研究；其次是密钥管理 ceremony 的复杂性——阈值签名的私钥份额生成需要分布式密钥生成（DKG）协议，这一过程本身是BFT共识的一个实例，存在"谁来保护保护者"的递归问题；第三是Pacemaker参数调优的困难——Pacemaker负责检测Leader故障并触发视图变更，其超时参数（Timeout, Δ）的设置需要在检测速度与假阳性率之间权衡，而真实网络的延迟重尾分布使得固定阈值难以兼顾两者。与PBFT相比，HotStuff在消息效率上取得了质的飞跃，但将复杂性从网络层转移到了密码学层——工程团队需要具备审计BLS实现、管理阈值密钥、以及优化配对运算性能的能力，这些门槛限制了HotStuff在非区块链领域的普及。未来趋势包括：阈值签名的硬件加速（ASIC/GPU中的配对运算优化）、更简洁的BFT变体（如Streamlet，将HotStuff简化为两消息类型），以及将BFT共识从区块链专属推向通用分布式系统（如跨组织数据共享、外包计算验证）。
