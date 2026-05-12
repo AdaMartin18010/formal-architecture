@@ -133,7 +133,7 @@ RSC 下的组合分析:
 
 ---
 
-## 八、权威引用
+## 三、权威引用
 
 > **Dan Abramov** (2023): "Server Components allows the server and the client to collaborate in rendering your React application. This is not just about performance — it's about expanding the React model to allow each component to fetch the data it needs."
 
@@ -143,7 +143,7 @@ RSC 下的组合分析:
 
 > **Kent C. Dodds** (2023): "The primary benefit of React Server Components is not bundle size reduction — it's the ability to access server-side resources directly from your components."
 
-## 九、批判性总结
+## 四、批判性总结
 
 React Server Components (RSC) 代表了前端架构的一次根本性范式转变，但其形式化边界仍存在显著争议。从理论层面审视，RSC 打破了传统组件代数的封闭性公理——服务端组件 (SC) 与客户端组件 (CC) 的异构组合不再保持同态映射，而是形成一种"粘合层"(Glue Layer) 的临时性结构。这种异构性引入了新的心智模型熵：开发者必须在编译时和运行时同时维护两套类型系统和执行语义，这在形式上违背了代数简洁性原则。
 
@@ -153,7 +153,7 @@ React Server Components (RSC) 代表了前端架构的一次根本性范式转�
 
 ---
 
-## 三、多维矩阵对比
+## 五、多维矩阵对比
 
 | 维度 | RSC (Next.js App Router) | SSR (Next.js Pages) | Islands (Astro) | SPA (React Client) |
 |------|-------------------------|---------------------|-----------------|-------------------|
@@ -169,7 +169,7 @@ React Server Components (RSC) 代表了前端架构的一次根本性范式转�
 
 ---
 
-## 七、概念属性关系网络
+## 六、概念属性关系网络
 
 | 概念A | 关系 | 概念B | 关系说明 |
 |-------|------|-------|----------|
@@ -186,7 +186,7 @@ React Server Components (RSC) 代表了前端架构的一次根本性范式转�
 
 ---
 
-## 八、形式化推理链
+## 七、形式化推理链
 
 ```text
 公理 A4 (边界隔离): Server ∩ Client = ∅ (计算资源层面)
@@ -220,7 +220,7 @@ React Server Components (RSC) 代表了前端架构的一次根本性范式转�
 
 ---
 
-## 九、推理判定树：何时使用 RSC vs SSR vs Islands？
+## 八、推理判定树：何时使用 RSC vs SSR vs Islands？
 
 ```text
                     [开始: 服务端渲染选型]
@@ -254,7 +254,7 @@ React Server Components (RSC) 代表了前端架构的一次根本性范式转�
 
 ---
 
-## 十、国际课程对齐标注
+## 九、国际课程对齐标注
 
 | 课程代码 | 课程名称 | 对齐章节 | 映射内容 |
 |----------|----------|----------|----------|
@@ -266,10 +266,69 @@ React Server Components (RSC) 代表了前端架构的一次根本性范式转�
 
 ---
 
-## 十一、深度批判性形式化总结（增强版）
+## 十、深度批判性形式化总结（增强版）
 
 React Server Components (RSC) 代表了前端架构的一次根本性范式转变，但其形式化边界仍存在显著争议。Dan Abramov (2023) 将 RSC 定义为「server and client collaborate in rendering」，这一定义的形式化内涵在于：RSC 将组件代数的封闭性公理 A7 从单一执行环境扩展到跨网络边界的异构环境。然而，正如本模块定理 T2 所证明的，这种扩展并非同态映射，而是对 A7 的**结构性破坏**。从理论层面审视，RSC 将传统组件代数的封闭性公理——`∀c₁,c₂ ∈ Component, c₁ ∘ c₂ ∈ Component`——转化为一个环境依赖的偏函数：组合 `c_SC ∘ c_CC` 在服务端执行时产生「部分序列化 + JS 引用」的结果，而在客户端执行时产生「反序列化 + 组件挂载」的结果。这两种结果在值语义上不等价，因此在严格的代数意义上，RSC 引入的不是一个良定义的运算，而是一个**上下文敏感的转换规则集合**。
 
 从工程实践角度，RSC 的概念泄漏问题尤为突出。服务端代码（如数据库查询、文件系统访问）通过 props 隐式传递到客户端边界，导致类型系统的完整性在跨运行时传输中被破坏。Sebastian Markbåge (2021) 虽然关注到 Server Components 带来的性能影响，但并未解决类型边界的根本问题。Next.js App Router 的实现进一步放大了这一问题——其流式传输协议虽提升了感知性能（TTFB 不受慢查询阻塞），却将网络延迟的不确定性注入了组件渲染的确定性模型中。这种「异步渲染」在理论上对应于将组件的求值语义从「全有或全无」转变为「部分可用」，但它缺乏形式化语义来精确定义「部分渲染」的中间状态意味着什么。
 
 更深层的问题在于生态锁定。RSC 的协议设计与 React 内部实现深度耦合，其 Payload 格式（行分隔指令、模块引用表、懒加载占位符）并非开放标准，使得其他框架（如 Vue、Svelte）难以实现互操作。这种「框架即平台」的倾向与 Web 标准的开放性原则存在张力。Kent C. Dodds (2023) 正确指出 RSC 的核心优势在于「直接从组件访问服务端资源」，但这一优势是以牺牲组件组合的形式化封闭性为代价的。未来发展方向应聚焦于：标准化 RSC 传输协议（类似 JSON-RPC 但针对 React 元素树优化）、建立跨框架的服务端组件互操作规范、以及开发形式化验证工具来证明 SC/CC 边界的类型安全性。只有在这些理论工作完成后，RSC 才能从「工程实验」晋升为「形式化正确的架构范式」。
+
+
+---
+
+## 十一、核心概念完整六要素详析
+
+### 11.1 Server Component (SC)
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | SC: 服务端执行，输出 RSC Payload，零客户端 JS，不可使用 Hooks |
+| **属性 (Properties)** | 可直接访问 DB/FS/内网 API、 Props 必须可序列化、无生命周期 |
+| **关系 (Relations)** | 向 CC 输出序列化元素树；通过 Server Actions 接收反向调用 |
+| **示例 (Examples)** | `async function PostList() { const posts = await db.posts.findAll(); return <ul>{...}</ul> }` |
+| **反例 (Counter-examples)** | ❌ SC 中使用 `window.location` → 运行时报错；❌ SC 向 CC 传递函数 props → 序列化失败 |
+| **实例 (Instances)** | Next.js App Router Server Component、React Server Components Demo |
+
+### 11.2 Client Component (CC)
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | CC: 客户端执行，完整生命周期，可访问浏览器 API，不可直接导入 SC |
+| **属性 (Properties)** | 需 "use client" 指令标记、输出标准 JS bundle、支持所有 Hooks |
+| **关系 (Relations)** | 接收 SC 序列化输出作为 children；通过 Server Actions 与服务端通信 |
+| **示例 (Examples)** | `"use client"; function LikeButton() { const [liked, setLiked] = useState(false); ... }` |
+| **反例 (Counter-examples)** | ❌ CC 直接 `import ServerComponent` → 编译时错误；❌ CC 尝试直接访问数据库 → 安全违规 |
+| **实例 (Instances)** | Next.js App Router Client Component、Remix 的 `clientOnly` 导出 |
+
+### 11.3 RSC Payload
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | 自定义行分隔序列化协议，非 JSON，含模块引用 / 懒加载占位 |
+| **属性 (Properties)** | 行分隔解析、引用表共享、$L 占位符支持流式填充 |
+| **关系 (Relations)** | SC → CC 的通信载体；Streaming 的传输单元 |
+| **示例 (Examples)** | `M{...} // 模块引用, J{...} // JSON, L{...} // Suspense 占位` |
+| **反例 (Counter-examples)** | ❌ Payload 中传递循环引用 → 序列化栈溢出；❌ 非序列化数据（如 Date 对象）未经特殊处理 → 客户端收到空对象 |
+| **实例 (Instances)** | Next.js App Router 流式 RSC Payload、React Flight 序列化器 |
+
+### 11.4 概念泄漏
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | 同一文件扩展名 (.tsx) 承载两种执行语义，类型系统无法区分 Server-only |
+| **属性 (Properties)** | import 隐式触发网络边界、堆栈跨越双运行时、调试困难 |
+| **关系 (Relations)** | 破坏 A7 组合封闭性；与类型系统完整性冲突 |
+| **示例 (Examples)** | 开发者误将 SC 放入 CC 目录，编译器无警告但运行时行为异常 |
+| **反例 (Counter-examples)** | ❌ 假设所有 .tsx 都是 CC → 在 App Router 中导致不必要的客户端 bundle；❌ 将所有组件标记为 SC → 交互功能失效 |
+| **实例 (Instances)** | Next.js App Router 的 "use client" 指令、Remix 的 `.server` / `.client` 文件约定 |
+
+---
+
+## 十二、待完善内容
+
+- [ ] RSC Payload 协议的开放标准提案（脱离 React 内部耦合）
+- [ ] TypeScript 依赖类型扩展以表达 Server-only / Client-capable 边界
+- [ ] SC/CC 边界的组合封闭性恢复方案（同态映射而非 Glue Layer）
+- [ ] 跨框架 RSC 互操作规范（Vue / Svelte 的 RSC 等价实现）
+- [ ] RSC Streaming 与 HTTP/3 Server Push 的融合性能模型

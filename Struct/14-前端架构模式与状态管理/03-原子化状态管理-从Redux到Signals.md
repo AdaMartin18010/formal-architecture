@@ -300,3 +300,62 @@ Jotai 代表了更理论化的尝试：它将状态管理重新建模为**图范
 Zustand 的破局之道在于将状态管理的「接口面积」压缩到极限——`create` 一个函数即定义完整的 Store——但其代价是牺牲了 Redux DevTools 原生提供的时间旅行与状态快照能力。Jotai 代表了更理论化的尝试：它将状态管理重新建模为**图范畴上的组合问题**。**Daishi Kato** (2020) 将 Jotai 定位为「自底向上的全局状态管理」，Atom 作为最小可观测单元，其派生关系构成有向无环图，状态变更沿图的拓扑序传播。这一模型在数学上与电子电路的「节点电压分析」同构：原始 Atom 是独立电压源，Derived Atom 是依赖节点的电压，而组件则是「测量仪器」——仅在其连接的节点电压变化时重新读数。Signals 则将这一思想推向框架内核，彻底消除了「状态管理库」作为外部依赖的必要性。
 
 批判性审视，原子化管理的潜在风险在于「图复杂性失控」。当数百个 Atom 构成复杂的派生网络时，开发者可能面临与 MVVM 时代相似的「隐式依赖黑洞」——变更的级联路径难以在代码层面直观追踪。**Rich Hickey** (2012) 的警告在此依然有效：「如果我们使用不可变值，程序会简单得多」——但「简单」不等于「没有结构」。2026 年的最佳实践倾向于「领域边界内的原子自由组合 + 领域边界间的显式契约」，这正是 FSD 架构方法论与原子化状态管理的天然交汇点。未来研究应聚焦于：超大规模原子图的静态可验证子集、跨框架原子互操作的标准化协议，以及编译时原子依赖分析的自动化工具。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 Redux 集中式原子
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Store = fold(reducer, initState, actions)，单一不可变状态树 |
+| **属性 (Properties)** | 纯函数 reducer、Action 可序列化、时间旅行调试 |
+| **关系 (Relations)** | combineReducers 笛卡尔积分解；中间件生态扩展 |
+| **示例 (Examples)** | `dispatch({ type: 'increment' }) → reducer(state, action) → newState` |
+| **反例 (Counter-examples)** | ❌ 大型状态树中单一字段更新触发全树 listeners → O(n) 通知开销；❌ 无规范化的嵌套数据 → 冗余存储与更新困难 |
+| **实例 (Instances)** | Redux Toolkit、NgRx Store、Rematch |
+
+### 12.2 Zustand 分布式 Store
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | create(set => ({ ... }))，无 Provider、无 Action/Reducer 的微型 Store |
+| **属性 (Properties)** | 选择器靶向订阅、不可变性推荐、极简 API 面积 |
+| **关系 (Relations)** | Redux 的仪式削减版；与 Jotai 原子图模型互补 |
+| **示例 (Examples)** | `const useStore = create(set => ({ count: 0, inc: () => set(s => ({ count: s.count + 1 })) }))` |
+| **反例 (Counter-examples)** | ❌ 选择器函数内联定义导致引用变化 → 每渲染都触发订阅；❌ 多个 Zustand Store 间无显式关系 → 跨 Store 同步手动处理 |
+| **实例 (Instances)** | Zustand 官方示例、BearStore 模式、中小型 React/Vue 项目 |
+
+### 12.3 Jotai 原子依赖图
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | G = (V, E), V = PrimitiveAtoms ∪ DerivedAtoms, 写传播沿 DAG 局部传播 |
+| **属性 (Properties)** | 原子级订阅、惰性求值、动态依赖重建 |
+| **关系 (Relations)** | 与 Redux 单一树对立；与 Signals 运行时图模型等价 |
+| **示例 (Examples)** | `const doubledAtom = atom(get => get(countAtom) * 2)` |
+| **反例 (Counter-examples)** | ❌ 循环原子依赖（a 依赖 b，b 依赖 a）→ 死锁或栈溢出；❌ 派生原子中执行写操作 → 派生原子应为纯函数 |
+| **实例 (Instances)** | Jotai 官方文档示例、Poimandres 生态项目、React 状态管理库组合方案 |
+
+### 12.4 Signals 框架内置
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | 框架级细粒度响应式原语，自动依赖追踪 + O(1) 靶向更新 |
+| **属性 (Properties)** | 编译时/运行时集成、与组件实例解耦、跨框架趋势 |
+| **关系 (Relations)** | Svelte Runes 编译时映射；Angular/Vue/Preact 运行时集成 |
+| **示例 (Examples)** | Angular `count = signal(0); count.set(1)` → 仅更新订阅该 signal 的 DOM 节点 |
+| **反例 (Counter-examples)** | ❌ 在 signal setter 中同步读取自身新值 → 可能读到中间状态；❌ effect 中忘记清理副作用 → 内存泄漏 |
+| **实例 (Instances)** | Angular 16+ Signals、Vue Vapor 响应式、Preact Signals、SolidJS |
+
+---
+
+## 十三、待完善内容
+
+- [ ] 跨框架 Signals 互操作标准（TC39 Signals Proposal 状态跟踪）
+- [ ] Jotai 原子图与 SolidJS 所有者树的形式化等价证明
+- [ ] Zustand 选择器函数的记忆化自动优化（编译器辅助）
+- [ ] 超大规模原子图（>10k 节点）的可视化调试工具
+- [ ] 原子化状态管理与后端事件溯源 (Event Sourcing) 的双向同步协议

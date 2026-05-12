@@ -229,7 +229,150 @@ ws.onclose = (event) => {
 
 ---
 
-## 六、批判性总结
+## 六、反例与边界案例
+
+### 6.1 反例：WebSocket掩码的无效性论证
+
+```text
+RFC 6455声称掩码目的:
+  "防止缓存投毒攻击——恶意JavaScript构造可被HTTP代理误缓存的帧"
+
+反例论证:
+  1. 现代HTTP代理已正确实现Upgrade握手
+  2. WebSocket帧的FIN/opcode/rsv位与HTTP响应格式差异巨大
+  3. 任何能处理Upgrade的代理都能区分WebSocket流量
+
+形式化: 设代理正确实现了RFC 6455握手协议。
+        则代理状态机:
+          READ_REQUEST → PARSE_UPGRADE → WS_MODE / HTTP_MODE
+        一旦进入WS_MODE，后续数据不再经过HTTP缓存逻辑。
+        ∴ 掩码防御的 threat model 在合规代理下不成立。
+
+成本:
+  每发送帧需 XOR payload (客户端→服务端)
+  10Gbps下: 1.25GB/s / 4 = 312.5M 32-bit XOR/s
+  现代CPU可承受，但嵌入式/Mobile有感知开销
+
+遗留原因:
+  掩码是协议制定时期 (2008-2011) 的保守设计，
+  针对当时尚未成熟的代理生态。
+  2026年已成为"无害但冗余"的历史包袱。
+```
+
+### 6.2 边界案例：permessage-deflate的压缩炸弹
+
+```text
+WebSocket扩展: permessage-deflate (RFC 7692)
+  对WebSocket消息启用zlib压缩
+
+攻击向量:
+  攻击者发送高度可压缩的重复模式 (如全0)
+  压缩前: 10MB 全0 → 压缩后: ~100 bytes
+  服务端解压时分配10MB内存
+
+形式化: 设压缩比为r (decompressed / compressed)。
+        zlib最大r ≈ 1000x。
+        攻击者发送1KB压缩数据 → 服务端分配1GB内存。
+        若并发1000连接 → 1TB内存压力。
+
+缓解:
+  - 设置解压上限 (max_message_size)
+  - 限制压缩窗口大小 (client_max_window_bits)
+  - 禁用上下文接管 (client_no_context_takeover)
+
+ws库配置 (Node.js):
+  const wss = new WebSocket.Server({
+      perMessageDeflate: {
+          zlibDeflateOptions: { chunkSize: 1024, memLevel: 7 },
+          zlibInflateOptions: { chunkSize: 10 * 1024 },
+          clientMaxWindowBits: 10,
+          serverMaxWindowBits: 10,
+          threshold: 1024  // 仅压缩>1KB的消息
+      }
+  });
+```
+
+### 6.3 边界案例：WebSocket在移动网络中的保活困境
+
+```text
+场景: 移动App使用WebSocket接收实时通知。
+
+操作系统行为:
+  - iOS: App后台运行约30秒后，网络连接被冻结
+  - Android: Doze模式限制后台网络访问
+
+结果:
+  - WebSocket连接在App后台时"假死"
+  - 服务端Ping发送后无Pong回复
+  - 服务端超时关闭连接 → 客户端醒来后发现已断开
+
+形式化: 设操作系统后台网络冻结概率为P_freeze(t)。
+        当 t > T_background_limit 时，P_freeze → 1。
+        心跳间隔 T_heartbeat 必须满足:
+          T_heartbeat < min(T_nat_timeout, T_proxy_timeout)
+        但操作系统限制使有效心跳无法维持。
+
+工程妥协:
+  - 移动端使用FCM/APNs推送作为唤醒机制
+  - WebSocket仅在前台维持
+  - 或使用专用推送服务 (Pusher, Ably) 处理后台逻辑
+```
+
+### 6.4 反例：WebSocket over HTTP/2的语义冗余
+
+```text
+RFC 8441: WebSocket over HTTP/2
+  将WebSocket帧封装在HTTP/2 DATA帧中
+  利用HTTP/2的多路复用减少TCP连接数
+
+失效条件:
+  1. WebSocket本身就是全双工流，与HTTP/2 Stream语义重叠
+  2. 增加一层分帧间接性，CPU开销上升
+  3. HTTP/2的TCP HoL阻塞仍影响WebSocket流
+
+形式化: 设直接TCP WebSocket延迟为T_direct。
+        HTTP/2映射延迟为T_h2 = T_direct + T_framing_overhead。
+        优势: 减少连接数 (N_ws → 1)
+        劣势: 增加延迟、增加CPU、继承TCP HoL
+
+2026年现状:
+  主流实现 (ws库、Socket.IO、Gorilla) 仍直接基于TCP。
+  HTTP/2 WebSocket仅在某些企业代理场景中使用。
+  未来趋势: 直接迁移到WebTransport over HTTP/3。
+```
+
+### 6.5 2025-2026动态：WebTransport与WebSocket的未来
+
+```text
+WebTransport (基于HTTP/3):
+  - 浏览器原生API (Chrome/Firefox支持)
+  - 基于QUIC数据报和双向流
+  - 无TCP HoL，支持连接迁移
+  - 无WebSocket的掩码开销
+
+与WebSocket对比:
+  | 特性 | WebSocket | WebTransport |
+  |------|-----------|--------------|
+  | 传输层 | TCP | QUIC/UDP |
+  | 连接迁移 | ❌ | ✅ |
+  | 0-RTT | ❌ | ✅ |
+  | 无连接数据报 | ❌ | ✅ |
+  | 浏览器支持 | 全部 | 现代浏览器 |
+
+2025年采用率:
+  - 游戏行业开始采用WebTransport (低延迟需求)
+  - 视频会议 (WebRTC数据通道竞争)
+  - 大多数现有WebSocket系统暂无迁移动力
+
+Socket.IO v4演进:
+  - 支持WebTransport作为传输层之一
+  - 自动降级: WebTransport → WebSocket → HTTP长轮询
+  - 向后兼容现有Socket.IO生态
+```
+
+---
+
+## 七、批判性总结
 
 WebSocket 的**掩码机制 (Masking)** 是一个饱受争议的设计：它强制客户端发送的所有数据经过 XOR 掩码，增加了客户端和服务端的计算开销，却仅为了防御一种理论上的**缓存投毒攻击**（即恶意 JavaScript 构造可被 HTTP 代理误缓存的帧）。在实际部署中，现代代理已能正确处理 Upgrade 握手，掩码的边际安全收益与其持续性能成本之间的比例值得质疑。
 

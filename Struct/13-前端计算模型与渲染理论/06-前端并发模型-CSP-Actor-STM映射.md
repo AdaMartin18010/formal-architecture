@@ -350,3 +350,62 @@ Service Worker 的 Actor 映射则受困于浏览器安全模型的根本约束�
 React Concurrent 与 STM 的类比是最为牵强却也最具工程价值的映射。**Nir Shavit & Dan Touitou** (1995) 提出的软件事务内存旨在「提供细粒度锁定的性能，同时保持粗粒度锁定的简单性」。React 的 useTransition 确实在隐喻层面呼应了事务的原子性与隔离性——将状态更新标记为 "非紧急"，允许更高优先级更新中断，丢弃 WorkInProgress 树以「回滚」到一致状态。但React 的实现完全抛弃了 STM 的形式化基础：没有 read/write set 的显式追踪，没有冲突检测的严格语义，没有可配置的隔离级别，甚至不存在真正的「回滚」——它只是丢弃了尚未提交的 WIP 树。Lane 位掩码优先级调度是一种实用的启发式工程方案，但若以数据库事务的理论标准审视，它连最宽松的「读取已提交」(Read Committed) 隔离级别都无法保证。
 
 SharedArrayBuffer 与 Atomics API 代表了前端并发向系统编程靠拢的最激进尝试，但 **Spectre** 安全漏洞引发的「站点隔离」政策使其在跨域场景中几乎被废黜。ECMAScript Shared Memory and Atomics Model (ES2017) 在形式化层面是严谨的——`Atomics.wait` 与 `Atomics.notify` 等价于基于内存地址的「条件变量」——但浏览器安全策略对其使用的限制揭示了前端运行时的一个深层真理：**安全模型与并发模型的演进是同一枚硬币的两面**。2026 年的共识是：前端并发不应追求「通用计算框架」的野心，而应在「CSP 风格的任务卸载」「Actor 风格的生命周期管理」与「同线程协作式调度」之间根据场景做出理性选择。WebGPU Compute Shader 的兴起标志着数据并行路径的独立成熟——它不与任何经典并发模型直接映射，却在前端高性能计算领域开辟了新大陆，这是前端计算语义从「隐喻驱动」走向「原语驱动」的重要标志。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 CSP 进程（Web Workers）
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | P = ⟨state, channel_in, channel_out, behavior⟩，无共享内存，显式消息通道 |
+| **属性 (Properties)** | 进程隔离、确定性执行、Structured Clone 消息协议 |
+| **关系 (Relations)** | 映射到 Web Workers；与 Actor 模型的显式通道 vs 隐式邮箱对立 |
+| **示例 (Examples)** | `const worker = new Worker("worker.js"); worker.postMessage(data)` |
+| **反例 (Counter-examples)** | ❌ Worker 中直接操作 DOM → 无权访问报错；❌ postMessage 传递函数 → Structured Clone 报错 |
+| **实例 (Instances)** | Figma 的 WebAssembly 计算 Worker、Photopea 图像处理 Worker |
+
+### 12.2 Actor（Service Worker）
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Actor = ⟨state, mailbox, behavior, address⟩，异步消息邮箱，无共享状态 |
+| **属性 (Properties)** | install → activate → fetch 生命周期、单例约束、event.waitUntil |
+| **关系 (Relations)** | 映射到 Service Worker；与 CSP 显式通道对立 |
+| **示例 (Examples)** | `self.addEventListener('fetch', e => e.respondWith(caches.match(e.request)))` |
+| **反例 (Counter-examples)** | ❌ 试图在 Service Worker 中创建多个实例 → 浏览器拒绝；❌ 同步阻塞 fetch 事件 → 请求超时 |
+| **实例 (Instances)** | Twitter Lite 离线缓存、Pinterest PWA 的 Service Worker 预缓存 |
+
+### 12.3 STM 隐喻（React Concurrent）
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | useTransition / startTransition 将更新标记为非紧急，可中断、可丢弃 WIP |
+| **属性 (Properties)** | TransitionPriority、Lane 位掩码调度、丢弃 WorkInProgress 树 |
+| **关系 (Relations)** | 隐喻映射 STM（非形式化实现）；与经典 STM 的 read/write set 追踪差距显著 |
+| **示例 (Examples)** | `startTransition(() => setSearchQuery(input))` 使输入响应优先于搜索结果 |
+| **反例 (Counter-examples)** | ❌ 在 startTransition 中执行同步阻塞操作 → 无法真正中断；❌ 高优先级更新饥饿低优先级 → 优先级翻转 |
+| **实例 (Instances)** | React 18 Concurrent Mode、React 19 useDeferredValue |
+
+### 12.4 SharedArrayBuffer + Atomics
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | SharedArrayBuffer: 多 Worker 共享线性内存；Atomics: 原子操作与基于内存的条件变量 |
+| **属性 (Properties)** | 直接内存共享、无数据竞争要求（至少一个写必须用 Atomics） |
+| **关系 (Relations)** | ES2017 内存模型；与 CSP/Actor 的消息传递无共享对立 |
+| **示例 (Examples)** | `Atomics.wait(int32, 0, 0); Atomics.notify(int32, 0, 1)` |
+| **反例 (Counter-examples)** | ❌ 跨域场景未设置 COOP/COEP → SharedArrayBuffer 被浏览器禁用；❌ 非 Atomics 访问共享内存 → 未定义行为 |
+| **实例 (Instances)** | FFmpeg.wasm 视频编解码、Photoshop Web 版的多线程图像处理 |
+
+---
+
+## 十三、待完善内容
+
+- [ ] Web Workers 的 alt/select 原语的形式化补偿方案（Promise.race 完备性证明）
+- [ ] React Lane 位掩码与形式化调度算法（Rate-Monotonic / EDF）的等价性分析
+- [ ] SharedArrayBuffer 在 Spectre 后时代的安全恢复路径
+- [ ] WebGPU Compute Shader 与经典并发模型的独立语义体系构建
+- [ ] 前端并发模型向 WASI 线程模型的标准化映射

@@ -309,3 +309,51 @@ Flux 的核心贡献不在于其技术实现，而在于它确立了「单向数
 Flux 的核心贡献不在于其技术实现，而在于它确立了「单向数据流」作为前端架构的**不可约公理**：任何状态变更都必须通过显式的 Action 描述，经 Dispatcher 路由到 Store，最终反映到 View。这一约束将状态空间的历史演化从「隐式图遍历」转化为「显式折叠序列」，从而赋予了时间旅行调试与确定性重放的理论基础。**Dan Abramov** (2015) 将 Redux 推向极致：单一不可变 Store 与纯函数 Reducer 的组合，使前端状态管理首次具备了函数式编程的引用透明性。然而，Redux 的严格性也成为了其阿喀琉斯之踵——`combineReducers` 的笛卡尔积状态空间在大型应用中导致「样板代码爆炸」，每一个字段变更都需要穿越 Action → Reducer → Selector 的三重仪式。Zustand 与 Jotai 的崛起正是对这一痛点的回应：它们保留了单向数据流的可预测性，却将状态从「单一集中式 Store」解放为「分布式原子」。
 
 2026 年的共识已然清晰：**数据流的方向性（单向）比其拓扑结构（集中/分散）更为根本**。只要状态变更保持显式与可追踪，原子化分散同样是 Flux 精神的有效继承。这一认知在数学上对应于有向图与无向图的本质差异：单向数据流保证了状态演化图的方向性，从而消除了 MVVM 双向绑定中「环导致无限循环」的理论风险。**Erik Meijer** (2012) 在 «Your Mouse is a Database» 中将 Observables 定义为「对象导向与函数式编程之间缺失的桥梁」——这一洞见预言了现代前端数据流从「命令式事件处理」向「响应式数据流」的范式迁移。未来数据流理论的进化方向，可能不是更复杂的中间件链，而是与编译时静态分析（如 React Compiler 的自动 memoization）的深度融合，从而在构建阶段就消除运行时数据流的冗余传播。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 MVC / MVVM
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | MVC: Model ↔ View ↔ Controller 三角通信；MVVM: bind: View ↔ ViewModel 双向态射 |
+| **属性 (Properties)** | 双向绑定、Observer 模式通知、级联更新隐式依赖 |
+| **关系 (Relations)** | MVVM 是 MVC 的视图层细化；与 Flux 单向流对立 |
+| **示例 (Examples)** | Vue 2 `v-model` 实现 Input ↔ Data 双向同步 |
+| **反例 (Counter-examples)** | ❌ computed 中修改自身依赖 → 无限循环；❌ watch 中反向修改 data → 级联爆炸 |
+| **实例 (Instances)** | AngularJS (1.x) 脏检查、Vue 2 Object.defineProperty 响应式、Knockout.js |
+
+### 12.2 Flux 单向数据流
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Action → Dispatcher → Store → View，∀s_{t+1}, ∃!a: s_{t+1} = reduce(s_t, a) |
+| **属性 (Properties)** | 可序列化 Action、中央分发、状态历史可追溯 |
+| **关系 (Relations)** | Redux 的直接前身；与 MVVM 双向绑定对立 |
+| **示例 (Examples)** | `dispatch({ type: 'ADD_TODO', payload: { text: 'Learn Flux' } })` |
+| **反例 (Counter-examples)** | ❌ Store 直接修改另一个 Store → 绕过 Dispatcher 破坏单向性；❌ Action 中携带不可序列化数据 → 时间旅行调试失效 |
+| **实例 (Instances)** | Facebook 原始 Flux 架构、Alt.js、Fluxible |
+
+### 12.3 Redux Store
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Store = ⟨S, A, reducer: (S, A) → S, subscribers⟩, reducer 纯函数 + 引用透明 + 不可变 |
+| **属性 (Properties)** | 单一真理源、时间旅行调试、combineReducers 笛卡尔积分解 |
+| **关系 (Relations)** | combineReducers 组合子；中间件链 (applyMiddleware) |
+| **示例 (Examples)** | `const store = createStore(rootReducer, initialState)` |
+| **反例 (Counter-examples)** | ❌ reducer 中执行 API 调用 → 副作用破坏纯函数性；❌ 直接修改 state 对象 → 不可变性破坏导致无法比较 |
+| **实例 (Instances)** | Redux Toolkit (RTK)、NgRx (Angular)、Vuex (Vue 2/3 历史) |
+
+---
+
+## 十三、待完善内容
+
+- [ ] Flux 单向数据流与范畴论「自由幺半群」的严格形式化对应
+- [ ] Redux 中间件链与函数式编程 Monad 变换的等价性证明
+- [ ] Zustand 分布式 Store 与 CRDT 最终一致性的融合模型
+- [ ] 时间旅行调试在服务端渲染场景下的状态快照一致性
+- [ ] 数据流方向性公理在边缘计算 (Edge Functions) 中的保持性验证

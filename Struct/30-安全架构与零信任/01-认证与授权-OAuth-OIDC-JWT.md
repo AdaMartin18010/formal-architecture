@@ -254,7 +254,166 @@ authUrl.searchParams.set('code_challenge_method', 'S256');
 
 ---
 
-## 六、批判性总结
+## 六、反例与边界案例
+
+### 6.1 反例：JWT alg="none"攻击的 exploit 链
+
+```text
+攻击向量 (2015-2019年广泛利用):
+  服务端JWT验证代码:
+    header, payload, signature = jwt.split('.')
+    decoded_header = json_decode(base64url_decode(header))
+    if decoded_header.alg == 'HS256':
+        verify_hmac(signature, secret)
+    elif decoded_header.alg == 'RS256':
+        verify_rsa(signature, public_key)
+    elif decoded_header.alg == 'none':
+        // 某些库的默认分支: 不验证签名!
+        pass
+
+攻击步骤:
+  1. 攻击者获取公开JWT (如从浏览器LocalStorage)
+  2. 修改Payload (如将role改为"admin")
+  3. 将Header的alg改为"none"
+  4. 发送修改后的JWT (无签名)
+  5. 服务端不验证签名 → 攻击成功
+
+形式化: 设JWT验证函数为V(token, key)。
+        安全条件: ∀ token, V(token, key) = true → signature_valid(token, key)
+        漏洞: alg="none" ⟹ signature_valid 被跳过
+        ∴ ∃ forged_token: V(forged_token, any_key) = true
+
+缓解:
+  - 强制白名单算法: 仅允许 {RS256, ES256, HS256}
+  - 使用成熟库 (如python-jose, jose2) 并配置algorithms参数
+  - 彻底拒绝alg字段缺失或值为"none"的JWT
+```
+
+### 6.2 边界案例：Refresh Token在SPA中的存储困境
+
+```text
+场景: 单页应用 (SPA) 使用OAuth 2.0 + PKCE。
+
+存储选择:
+  localStorage:
+    - 优势: 持久化，刷新页面不丢失
+    - 风险: XSS攻击可读取全部内容 → Token泄露
+
+  httpOnly Cookie:
+    - 优势: JavaScript不可读取，防XSS
+    - 风险: 跨站请求伪造 (CSRF) 可利用Cookie自动发送
+    - 限制: 跨域场景下SameSite策略复杂
+
+  Memory (JavaScript变量):
+    - 优势: XSS无法直接读取 (需运行时注入)
+    - 风险: 刷新页面即丢失 → 用户频繁重新登录
+
+形式化: 设攻击者能力为A ∈ {XSS, CSRF, NetworkSniffing}。
+        不存在存储机制S使得 ∀A, resistant(S, A)。
+        即: 在浏览器环境中，Refresh Token无法被完全保护。
+
+业界妥协 (2025):
+  - Backend-for-Frontend (BFF) 模式:
+    SPA → BFF (同域Cookie) → OAuth Server
+    Token保存在BFF服务端会话中
+  - 短期Access Token (5-15分钟) + 无Refresh Token
+    频繁重定向到授权服务器
+  - 使用Passkeys/WebAuthn减少Token依赖
+```
+
+### 6.3 边界案例：OAuth Scope降级被忽略
+
+```text
+OAuth 2.0规范要求:
+  客户端请求scope = "read write admin"
+  用户仅同意 "read write"
+  授权服务器返回的scope应反映实际授权: "read write"
+
+问题:
+  多数客户端实现忽略返回的scope，
+  假设用户授予了所有请求的权限。
+
+形式化: 设请求scope为R = {r₁, r₂, r₃}，
+        授权scope为G = {g₁, g₂} ⊆ R。
+        安全客户端行为: 后续操作仅使用权限 ⊆ G
+        漏洞客户端行为: 假设G = R，尝试使用r₃
+        结果: 操作被拒绝 (最佳) 或错误地成功 (若服务端也忽略)
+
+实例:
+  某些API网关仅验证Token有效性，不检查scope。
+  攻击者获取"read" scope的Token，
+  尝试调用write API → 网关放行 → 数据被篡改。
+
+缓解:
+  - 客户端严格校验返回scope
+  - 每个API端点显式声明所需scope
+  - 网关/服务端双重验证scope
+```
+
+### 6.4 反例：RBAC的角色爆炸与治理噩梦
+
+```text
+场景: 大型企业SaaS平台，多租户 + 多产品线。
+
+角色增长:
+  产品线A: admin, editor, viewer
+  产品线B: admin, editor, viewer
+  租户隔离: tenant-X-admin, tenant-Y-admin
+  组合: tenant-X-productA-admin, tenant-X-productB-editor, ...
+
+形式化: 设产品线数为P，租户数为T，基础角色数为R。
+        笛卡尔积角色数 = T × P × R
+        当T=100, P=5, R=3 → 1500个角色
+
+后果:
+  - 角色管理UI无法使用
+  - 权限审计变成NP难问题
+  - 新员工入职: 无法确定应分配哪个角色
+
+从RBAC到ABAC的触发点:
+  当角色数量 > 50-100 时，RBAC的管理成本超过其简单性收益。
+  应迁移到ABAC/PBAC: 策略 = f(用户属性, 资源属性, 环境属性)
+
+Google Zanzibar的启示:
+  不预定义角色，而是定义关系元组 (用户, 关系, 资源)。
+  权限查询转化为图遍历问题。
+  适用于超大规模 (数十亿关系)。
+```
+
+### 6.5 2025-2026动态：身份认证前沿
+
+```text
+Passkeys / WebAuthn 2 (FIDO2):
+  - 2025年: 苹果/谷歌/微软全面支持
+  - 跨平台同步: iCloud Keychain / Google Password Manager
+  - 企业场景: 共享Passkeys (团队账户)
+  - 趋势: 逐步替代SMS OTP和TOTP
+
+OAuth 2.1 (标准化中):
+  - 强制PKCE (所有客户端类型)
+  - 废除Implicit Flow和Password Grant
+  - 更严格的Redirect URI匹配
+  - 预计2026年发布正式RFC
+
+FAPI 2.0 (金融行业):
+  - 高安全性OAuth配置配置
+  - 强制签名请求 (JWT Secured Authorization Request)
+  - 细粒度 consent 管理
+  - 开放银行 (Open Banking) 强制要求
+
+身份联邦新标准:
+  - OIDC Federation 1.0: 多组织间信任链
+  - 适用: 跨境身份验证、教育联盟、政府间数据共享
+
+AI与身份安全:
+  - 深度伪造 (Deepfake) 攻击生物识别认证
+  - 实时活体检测 (liveness detection) 成为必需
+  - 2025年: 语音合成攻击成功率 > 30% (部分系统)
+```
+
+---
+
+## 七、批判性总结
 
 JWT 的广泛滥用是 2020 年代应用安全领域最深刻的教训之一。开发者被"无状态认证"的便利性诱惑，将 JWT 用于长时间会话（设置数小时甚至数天的过期时间），却忽视了**JWT 无法服务端撤销**的本质。一旦令牌泄露（通过 XSS、日志泄露或网络嗅探），攻击者在令牌过期前拥有完全权限。Refresh Token 模式虽然缩短了 Access Token 的有效期，但 Refresh Token 本身仍是长期凭证——其安全存储在浏览器端几乎不可能（localStorage 易受 XSS，httpOnly Cookie 无法用于跨域 SPA）。
 

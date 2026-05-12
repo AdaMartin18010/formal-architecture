@@ -294,3 +294,62 @@ Signals 响应式图模型代表了前端计算语义从「时间维度（函数
 然而，这一模型并非没有代价。首先，依赖图的 DAG 约束在工程实践中常被忽视——动态依赖追踪与条件分支的组合可能导致难以调试的「幽灵依赖」或「丢失依赖」问题。当 effect 函数的执行路径在运行时变化时，依赖边 E 的集合也随之动态演化，这使得静态分析工具难以预先验证图的拓扑性质。其次，Signals 的「单执行组件」模型要求开发者彻底抛弃「渲染 = 重新执行函数」的心智惯性，这对从 React 生态迁移的团队构成了显著的认知迁移成本。Ryan Carniato (2023) 指出，Signals 的答案在于「fine-grained rendering」，但这种细粒度本身也增加了图结构的认知负荷。
 
 更深层的理论争议在于：Signals 的依赖图本质上是**命令式数据流**的隐式表达，其图结构在运行时动态演化，缺乏编译时的静态可预测性。这与 Svelte 编译时确定的依赖边形成鲜明对比——前者提供灵活性但牺牲可验证性，后者提供可验证性但牺牲动态适应能力。最后，Signals 的 O(1) 更新复杂度建立在「图规模与组件规模解耦」的前提上，但在超大规模应用中（如数万个 Signal 节点），图的内存占用与遍历开销仍不可忽视。尽管如此，Signals 在 2023-2026 年间已成为 Angular、Vue、Preact、Solid 等主流框架的共识方向，Angular Team (Signals RFC, 2023) 明确将其定位为「框架无关的响应式原语」，这标志着前端响应式理论从「虚拟树比对」到「图传播」的历史性范式转移。未来研究应聚焦于：Signals 图的静态可验证子集、超大规模图的内存压缩策略，以及跨框架 Signals 互操作的标准化协议。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 Signal<T>
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Signal<T> = ⟨value: T, observers: Set<Subscriber>, version: ℕ⟩ |
+| **属性 (Properties)** | 读写分离（read/write）、版本号递增驱动通知、observers 懒注册 |
+| **关系 (Relations)** | 被 Computed 依赖、触发 Effect 执行；与 VDOM 的 render 函数对立 |
+| **示例 (Examples)** | `const [count, setCount] = createSignal(0); setCount(1)` |
+| **反例 (Counter-examples)** | ❌ 在 effect 中写入自己依赖的 signal → 无限循环；❌ signal 值未变但引用变化触发冗余更新 |
+| **实例 (Instances)** | SolidJS `createSignal`、Angular `signal()`、Vue `@vue/reactivity` `ref()` |
+
+### 12.2 Computed / Memo
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Computed<T> = ⟨fn: ()→T, cache: T\|∅, dirty: bool⟩ |
+| **属性 (Properties)** | 惰性求值、缓存一致性、自动依赖追踪 |
+| **关系 (Relations)** | 依赖上游 Signal/Computed；被下游 Effect/Computed 订阅 |
+| **示例 (Examples)** | `const double = createMemo(() => count() * 2)` |
+| **反例 (Counter-examples)** | ❌ computed 内部产生副作用（应纯函数）；❌ 循环 computed 依赖导致死锁 |
+| **实例 (Instances)** | SolidJS `createMemo`、Angular `computed()`、Vue `computed()` |
+
+### 12.3 Effect
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Effect = ⟨fn: ()→void, deps: Set<Signal\|Computed>, cleanup: ()→void⟩ |
+| **属性 (Properties)** | 初始化执行一次、依赖变更后调度、支持清理函数 |
+| **关系 (Relations)** | 订阅 Signal/Computed；与 React useEffect 语义不同（非生命周期钩） |
+| **示例 (Examples)** | `createEffect(() => console.log(count()));` |
+| **反例 (Counter-examples)** | ❌ effect 内部未读取 signal 但期望响应 → 依赖丢失；❌ 异步创建 effect 在追踪上下文外 |
+| **实例 (Instances)** | SolidJS `createEffect`、Svelte `$effect`、Angular `effect()` |
+
+### 12.4 依赖图 G
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | G = (V, E), V = S ∪ C ∪ X, E ⊆ (S×C) ∪ (S×X) ∪ (C×C) ∪ (C×X) |
+| **属性 (Properties)** | DAG 无环性、动态边重建、Push-Pull 混合传播 |
+| **关系 (Relations)** | 包含于 Signals 系统；与电子电路节点电压分析同构 |
+| **示例 (Examples)** | 条件分支导致动态依赖边：showDetails ? details : summary |
+| **反例 (Counter-examples)** | ❌ 两个 signal 互写形成环 → 栈溢出；❌ 忘记 batch() 导致级联闪烁 |
+| **实例 (Instances)** | MobX 依赖追踪图、Vue 3 响应式图、SolidJS 所有者树 |
+
+---
+
+## 十三、待完善内容
+
+- [ ] Signals 跨框架互操作标准化协议（TC39 Signals Proposal 进展跟踪）
+- [ ] 超大规模依赖图（10k+ 节点）的内存压缩与 GC 策略
+- [ ] Signals 与 React Compiler 的融合路径分析
+- [ ] 编译时静态依赖分析对 Signals 动态依赖的补全方案
+- [ ] 前端状态图与后端事件溯源 (Event Sourcing) 的双向映射

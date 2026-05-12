@@ -189,7 +189,120 @@ alt-svc: h3=":443"; ma=2592000; quic=":443"
 
 ---
 
-## 六、批判性总结
+## 六、反例与边界案例
+
+### 6.1 反例：HTTP/1.1 Pipelining的致命缺陷
+
+```text
+HTTP/1.1 Pipelining设计:
+  客户端可在收到响应前连续发送多个请求
+  例: GET /a → GET /b → GET /c (不等待响应)
+
+失效条件:
+  服务端必须按请求顺序返回响应 (FIFO)。
+  若第一个请求处理缓慢 (如数据库查询)，
+  后续所有响应被阻塞——即使它们已经处理完毕。
+
+形式化: 设请求序列为 [req₁, req₂, ..., reqₙ]，
+        响应序列为 [res₁, res₂, ..., resₙ]。
+        约束: resᵢ 必须在 resᵢ₊₁ 之前发送。
+        若 process(req₁) ≫ process(req₂)，
+        则 res₂ 被 req₁ 的处理时间阻塞。
+
+结果: Pipelining在浏览器中几乎从未正确实现。
+      Firefox曾支持但默认关闭；Chrome从未支持。
+      HTTP/2的Stream多路复用才是真正的解决方案。
+```
+
+### 6.2 边界案例：HPACK动态表的大小攻击
+
+```text
+攻击向量 (HPACK Bomb):
+  攻击者发送大量不同头部字段，填充动态表至上限 (默认4KB)。
+  然后发送请求引用这些动态表条目，使服务端内存持续增长。
+
+形式化: 设动态表大小为D，攻击者发送N个唯一头部。
+        若N > D / 平均条目大小，则LRU淘汰开始。
+        但攻击者可利用"重复引用+小幅更新"策略，
+        使服务端在解码时消耗大量CPU。
+
+HTTP/2规范缓解:
+  SETTINGS_HEADER_TABLE_SIZE 限制动态表大小。
+  但SETTINGS_MAX_CONCURRENT_STREAMS限制不足时，
+  攻击者可开多个流分别构建独立动态表。
+
+实际影响: 2019年多家HTTP/2服务器遭受HPACK Bomb攻击，
+          导致内存耗尽和CPU飙高。
+```
+
+### 6.3 边界案例：HTTP/3的UDP中间件兼容性灾难
+
+```text
+场景: 企业网络、酒店WiFi、某些国家ISP。
+
+问题:
+  - 防火墙默认阻止UDP 443 (仅允许TCP 80/443)
+  - QoS策略对UDP限速 (认为UDP用于P2P/视频)
+  - NAT映射超时短 (UDP无连接状态，NAT表项更快过期)
+
+回退机制:
+  HTTP/3客户端通过HTTP/2的 alt-svc 发现HTTP/3支持。
+  若HTTP/3连接失败，客户端必须回退到HTTP/2或HTTP/1.1。
+
+形式化: 设HTTP/3连接成功概率为 p (p < 1 在某些网络中)。
+        首次请求延迟 = p × T_h3 + (1-p) × (T_h3_fail + T_fallback)
+        若 T_h3_fail 包含超时等待 (如3-5秒)，
+        则回退总延迟可能超过纯HTTP/2。
+
+2025年数据: 全球HTTP/3连接成功率约85-92%，
+            但某些企业网络中低于50%。
+```
+
+### 6.4 反例：103 Early Hints vs Server Push
+
+```text
+HTTP/2 Server Push的失败教训:
+  假设: 服务端能准确预测客户端需要的资源
+  现实: 服务端无客户端缓存状态，推送命中率 < 15%
+
+HTTP/3的替代方案——103 Early Hints:
+  服务端先返回 103 状态码 + Link 头部 (预加载提示)
+  客户端自行决定是否请求这些资源 (参考缓存状态)
+
+对比:
+  Server Push: 服务端强制推送，客户端无法拒绝
+  Early Hints: 服务端建议，客户端决策
+
+形式化: 设推送/提示命中率为H，客户端缓存命中率为C。
+        Server Push 净带宽 = H × resource_size (浪费当 H < C)
+        Early Hints 净带宽 = 0 (仅头部建议，无强制推送)
+        客户端决策优势: 避免缓存已存在资源的重复传输。
+```
+
+### 6.5 2025-2026动态：HTTP/3规模化与ECH
+
+```text
+HTTP/3部署里程碑 (2025):
+  - Cloudflare: 90%+ 流量通过HTTP/3
+  - Google: 默认启用，YouTube/Gmail全面QUIC化
+  - 浏览器: Chrome/Firefox/Safari 默认优先HTTP/3
+
+Encrypted Client Hello (ECH, RFC 9446):
+  - 问题: TLS握手中的SNI (Server Name Indication) 明文传输
+  - ECH: 加密SNI，防止中间商/审查机构识别访问目标
+  - HTTP/3 + ECH: 将隐私保护下沉到传输层
+  - 2025年状态: Cloudflare/Google大规模部署，
+                中国以外地区覆盖率快速提升
+
+HTTP/2 Rapid Reset (CVE-2023-44487) 后遗症:
+  - 攻击者利用HTTP/2的RST_STREAM快速取消大量流
+  - 2023年导致史上最大DDoS攻击 (峰值3.9Tbps)
+  - 2025年缓解: 服务端实施并发流限制和RST速率限制
+```
+
+---
+
+## 七、批判性总结
 
 HTTP/2 多路复用解决了 HTTP/1.1 的**应用层队头阻塞**，却继承了 TCP 的**传输层队头阻塞**——这是一个典型的**抽象泄漏**：应用层协议假设传输层提供独立的字节流，但 TCP 的单序列号机制使所有流共享同一个可靠性管道。当 HTTP/2 的一个流对应的 TCP 包丢失时，整个连接的所有流都必须等待重传。
 

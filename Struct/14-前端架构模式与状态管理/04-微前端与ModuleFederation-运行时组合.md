@@ -328,3 +328,51 @@ const forbiddenGlobals = [".button", ".container", ".wrapper"];
 更深层的批判指向微前端的「分解合理性」问题。微服务在后端的分解依据通常是「有界上下文」与「独立发布节奏」，但前端的特殊性在于用户体验的「视觉连续性」与「交互一致性」要求。共享依赖的版本协商机制（singleton / strictVersion）虽然在技术上优雅，却无法解决「语义版本兼容但视觉风格断裂」的产品级问题。设 FrameworkRuntimeᵢ 为第 i 个微前端的框架体积，则总运行时开销为 Σ FrameworkRuntimeᵢ，在异构框架场景下这一求和可能远超单一 SPA 的 FrameworkRuntime。
 
 从数据库理论的视角审视，微前端与数据库分片（Sharding）存在深刻的同构性：两者都将全局状态空间划分为局部管理的子集，都面临跨分区查询（跨微前端通信）的性能与一致性挑战，都需要一个「编排层」（Shell / Query Router）来协调分布式单元。**Michael Stonebraker** (2010) 在分析 NoSQL 数据库时指出，分布式数据管理的核心矛盾在于「一致性、可用性、分区容忍性」的三元权衡——这一 CAP 定理的隐喻同样适用于微前端：「体验一致性」（Consistency）、「独立部署可用性」（Availability）、「团队自治分区」（Partition Tolerance）三者不可兼得。然而，前端比数据库多出一个维度——**用户体验的实时一致性**。用户不会在 300ms 内容忍「购物车微前端已更新但导航栏微前端仍显示旧数量」的最终一致窗口。这意味着微前端的 decomposition 边界必须比后端微服务更加谨慎地贴近「用户心智模型中的自然分区」，而非单纯的「团队组织结构映射」。Module Federation 是工具层面的卓越创新，但微前端架构的成功与否，最终取决于组织是否具备定义清晰、稳定、以用户为中心的业务边界的能力。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 微前端系统
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | 𝓜 = {M₁, ..., Mₙ}, Mᵢ = ⟨UIᵢ, Stateᵢ, Routerᵢ, Buildᵢ, Deployᵢ⟩, 独立构建/部署/运行 |
+| **属性 (Properties)** | 业务域分解、团队自治、运行时组合、独立发布节奏 |
+| **关系 (Relations)** | Shell 编排层组合；与单体 SPA 对立；映射数据库分片 |
+| **示例 (Examples)** | 电商系统：product 微前端 + checkout 微前端 + user 微前端 |
+| **反例 (Counter-examples)** | ❌ 两个微前端共享 90% UI 组件 → 分解过度导致运行时重复；❌ 微前端间无业务边界 → 本质上是分布式单体 |
+| **实例 (Instances)** | IKEA 微前端架构、Spotify 桌面端、Amazon 卖家平台 |
+
+### 12.2 Module Federation
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Host 运行时动态加载 Remote 暴露的模块，共享依赖版本协商 |
+| **属性 (Properties)** | singleton / strictVersion / eager 共享策略、延迟绑定 |
+| **关系 (Relations)** | Webpack 5 插件体系；与构建时静态链接对立 |
+| **示例 (Examples)** | `remotes: { checkout: "checkout@https://cdn.example.com/remoteEntry.js" }` |
+| **反例 (Counter-examples)** | ❌ Remote 未声明 shared react → Host 与 Remote 各加载一份 React → 上下文断裂 Hooks 报错；❌ 版本协商成功但语义不兼容（如 React 18 新特性在 17 Host 中崩溃） |
+| **实例 (Instances)** | Webpack Module Federation、Native Federation (Nx)、Module Federation 2.0 (Zephyr) |
+
+### 12.3 集成模式谱系
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | iframe / Web Components / Module Federation / Single-SPA / import-map 五种运行时集成策略 |
+| **属性 (Properties)** | 隔离强度递减、体验一致性递增、共享能力递增 |
+| **关系 (Relations)** | 与微服务集成模式（API Gateway、Service Mesh）类比 |
+| **示例 (Examples)** | iframe 用于遗留系统集成；Module Federation 用于同技术栈大型应用分解 |
+| **反例 (Counter-examples)** | ❌ 强隔离 iframe 中弹窗无法覆盖宿主页面 → 体验断裂；❌ Web Components 封装 React 组件丢失事件系统 → 交互失效 |
+| **实例 (Instances)** | Qiankun (Single-SPA 封装)、Bit.dev 组件共享、Podium (Nordic 微前端编排) |
+
+---
+
+## 十三、待完善内容
+
+- [ ] Module Federation 运行时类型安全的形式化方案（TypeScript 远程类型声明同步）
+- [ ] 微前端与后端 BFF 层的联合边界划分标准
+- [ ] 共享依赖版本协商的 SAT 求解器形式化模型
+- [ ] 跨微前端路由状态同步的一致性协议
+- [ ] 微前端在边缘计算 (Edge Side Includes) 中的运行时组合方案

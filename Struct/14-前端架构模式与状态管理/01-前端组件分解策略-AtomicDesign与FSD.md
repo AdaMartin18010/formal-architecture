@@ -283,3 +283,51 @@ Atomic Design 与 FSD 的对立并非简单的技术选型之争，而是两种�
 FSD 的革命性在于将分解维度从「视觉形态」转向「业务能力」，其 DAG 导入规则本质上是 **Melvin Conway** (1968) 定律的技术编码——「设计系统的架构受制于产生这些设计的组织的沟通结构」。通过强制上层模块只能依赖下层，FSD 将全局的网状依赖转化为局部的有向无环图，从而在数学上保证了模块间不存在循环耦合。**David Parnas** (1972) 的「信息隐藏」原则在 FSD 中获得了最纯粹的结构化表达：每个 Feature 切片不仅隐藏了实现细节，还通过同层隔离禁止了横向耦合，使局部上下文的认知边界最小化。然而，FSD 并非万能药方：对于 5 人以下的小型团队，严格的六层结构引入的仪式成本可能超过其边界收益；对于没有清晰业务域划分的工具型应用，FSD 的「按功能切片」可能退化为无意义的文件搬家。
 
 更深层的批判指向 DDD 向前端的映射难题。**Eric Evans** (2003) 的「聚合不变量」与「边界上下文」概念在后端具有严谨的 transactions 与进程边界支撑，但在前端——一个本质上无持久化状态、无事务隔离的运行时环境——这些概念的落地往往沦为「文件夹命名游戏」。真正成熟的前端架构应当是 FSD 的结构性约束、DDD 的语义洞察与 Atomic Design 的可视化直觉的三元融合，而非任何单一方法的教条式应用。2026 年的技术共识倾向于：小型项目（<5 人月）使用 Atomic Design 构建设计系统，中型项目（5-20 人月）渐进采用 FSD，大型项目（20+ 人月或多团队）强制 FSD + DDD 语义映射。AI 代码生成工具的崛起进一步强化了这一分层——FSD 的显式边界为 LLM 提供了可预测的上下文窗口，使 `corr(AI_Gen(C_slice)) > corr(AI_Gen(C_global))` 从理论命题转化为工程现实。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 Atomic Design 层次
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | decompose: UI → ℘(UI)，五层粒度函数 atom → molecule → organism → template → page |
+| **属性 (Properties)** | 形态学分解、自底向上组合、设计系统构建权威 |
+| **关系 (Relations)** | 映射化学分子结构；与 FSD 功能语义分解对立 |
+| **示例 (Examples)** | Atom(Button) + Atom(Input) → Molecule(SearchBar) |
+| **反例 (Counter-examples)** | ❌ 将业务逻辑放入 Atom 层 → 破坏可复用性；❌ Organism 过度嵌套导致 props drilling 地狱 |
+| **实例 (Instances)** | Material Design 组件库、Chakra UI、Ant Design 的组件层级 |
+
+### 12.2 FSD 层次与 DAG 规则
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Layer = {Shared, Entities, Features, Widgets, Pages, App}, 偏序 ⪯, 同层隔离 |
+| **属性 (Properties)** | DAG 导入保证、业务域边界显式、AI 上下文可预测 |
+| **关系 (Relations)** | 映射 DDD Bounded Context；康威定律的技术编码 |
+| **示例 (Examples)** | `features/auth` 可导入 `entities/user` 和 `shared/ui`，反之不可 |
+| **反例 (Counter-examples)** | ❌ Widgets 层导入 Pages 层 → 循环依赖；❌ Features 间横向导入 → 同层隔离破坏 |
+| **实例 (Instances)** | Feature-Sliced Design 官方示例、大型电商前端（Ozon、Samokat） |
+
+### 12.3 DDD 前端映射
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | φ: DDD → Frontend, Bounded Context → Features, Aggregate → Entity + Feature |
+| **属性 (Properties)** | 语义对齐、边界上下文保持、防腐层隔离 |
+| **关系 (Relations)** | FSD 的结构性约束 + DDD 语义洞察 + Atomic Design 可视化直觉的三元融合 |
+| **示例 (Examples)** | `entities/order` 对应 Order Aggregate，`features/checkout` 对应 Checkout Bounded Context |
+| **反例 (Counter-examples)** | ❌ 前端强行套用后端聚合不变量 → 无事务支撑导致语义空洞；❌ 边界上下文划分过细 → 前端 bundle 碎片化 |
+| **实例 (Instances)** | 领域驱动设计的微前端拆分、BFF (Backend for Frontend) 与 FSD 的联合设计 |
+
+---
+
+## 十三、待完善内容
+
+- [ ] FSD 导入规则的 ESLint 静态验证完备性证明
+- [ ] FSD 六层结构在微前端场景下的跨容器映射
+- [ ] Atomic Design 与 FSD 的自动化转换工具（AI 辅助组件重分类）
+- [ ] DDD 聚合不变量在前端无事务环境中的形式化弱化语义
+- [ ] 设计令牌 (Design Tokens) 在 Atomic Design/FSD 边界中的归属问题

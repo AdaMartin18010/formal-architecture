@@ -260,3 +260,51 @@ Virtual DOM 及其 Reconciliation 机制自 Pete Hunt (JSConf 2013) 提出以来
 双缓冲机制是 VDOM 另一项关键设计，Current Tree 与 WorkInProgress Tree 通过 alternate 指针交叉切换，保证了渲染一致性。然而，这一机制在数学上引入了 2× 的内存冗余——`Space(VDOM) = O(2n)`，其中 n 为 VDOM 节点数。在移动端低端设备上，这一冗余可能成为显著瓶颈，甚至触发垃圾回收导致的掉帧。更为根本的是，VDOM 将「状态变更」映射为「整树重建」的语义模型，与 A3（最小变更公理）存在结构性偏差。Ryan Carniato (2023) 的论断「Virtual DOM is pure overhead」在形式化层面成立：当细粒度响应式（Signals）或编译时优化（AOT）存在时，VDOM 的中间层不贡献任何额外的语义表达能力，仅作为历史兼容的过渡层存在。
 
 Fiber 架构通过时间切片缓解了主线程阻塞，却将问题从「同步阻塞」转化为「异步优先级翻转」。React Concurrent 的 Lane 位掩码模型本质上是调度理论的工程近似——它为不同更新分配 31 个优先级位，但优先级的可组合性与可预测性远未达到形式化调度算法（如 Rate-Monotonic 或 EDF）的标准。2026 年的技术共识已然清晰：VDOM 仍将在大规模生态系统中长期存在，但其存在理由已从「技术必要性」转变为「生态锁定惯性」。对于性能敏感场景，细粒度响应式（SolidJS、Vue Vapor）或编译时优化（Svelte 5）已成为更优的理论选择。VDOM 的真正遗产不在于其技术本身，而在于它证明了「声明式 UI = 可推导的 UI」这一核心命题的工业可行性——这是它对前端理论最不可磨灭的贡献。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 Virtual DOM
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | VDOM = ⟨N, E, label, order⟩，有限有序标记树空间，render: State → VDOM |
+| **属性 (Properties)** | 不可变性（新旧树不共享节点）、快照一致性、双缓冲冗余 |
+| **关系 (Relations)** | 包含 Render/Diff/Patch 三元组；与 Signals 对立；映射到自由范畴 |
+| **示例 (Examples)** | `<ul>{items.map(i => <li key={i.id}>{i.name}</li>)}</ul>` |
+| **反例 (Counter-examples)** | ❌ 无 key 的列表渲染导致全量重建；❌ `Math.random()` 作为 key 引发每次全树 diff |
+| **实例 (Instances)** | React 18 Fiber 双缓冲树、Vue 3 编译优化后的 VDOM、Preact 10 轻量化 VDOM |
+
+### 12.2 Reconciliation
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | diff: VDOM_old × VDOM_new → Patch，启发式线性扫描 O(n) |
+| **属性 (Properties)** | H1 类型差异假设、H2 key 稳定假设、LIS 匹配 O(n·log n) |
+| **关系 (Relations)** | 依赖 Diff 算法 + Commit Phase；Render Phase 纯计算可中断 |
+| **示例 (Examples)** | 同类型组件 props 更新仅 patch 属性；不同类型整子树卸载+重建 |
+| **反例 (Counter-examples)** | ❌ 组件 A 内部条件渲染切换导致子树全重建，尽管子树未变；❌ 逆序列表无 key 时 O(n²) 实际开销 |
+| **实例 (Instances)** | React 15 栈协调器（同步阻塞）、React 18 Fiber 协调器（可中断） |
+
+### 12.3 Fiber 架构
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | Fiber = ⟨type, key, stateNode, child, sibling, return, alternate, effectTag, lanes⟩ |
+| **属性 (Properties)** | 可中断渲染（Time Slicing）、优先级调度（Lane 位掩码）、双缓冲 |
+| **关系 (Relations)** | Current Tree ↔ WorkInProgress Tree 通过 alternate 交叉连接 |
+| **示例 (Examples)** | `shouldYield()` 为 true 时保存 WIP，下次从断点恢复 |
+| **反例 (Counter-examples)** | ❌ 高优先级更新饥饿低优先级更新（优先级翻转）；❌ 长时间运行的 effect 阻塞 commit phase |
+| **实例 (Instances)** | React 18 Concurrent Mode、React Native 新架构 (Fabric) |
+
+---
+
+## 十三、待完善内容
+
+- [ ] VDOM 与 DOM 之间形式化同态证明的完整推导链
+- [ ] React Compiler (Forget) 与 VDOM 兼容性分析
+- [ ] Vue Vapor Mode 无 VDOM 路径的内存开销实测数据
+- [ ] SolidJS 细粒度更新在超大规模列表场景下的性能基准
+- [ ] 多端渲染（React Native / Taro）中 VDOM 中间层的跨平台语义保持性证明

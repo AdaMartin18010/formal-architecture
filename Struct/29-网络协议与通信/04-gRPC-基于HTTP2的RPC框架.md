@@ -213,7 +213,151 @@ server := grpc.NewServer(grpc.UnaryInterceptor(authInterceptor))
 
 ---
 
-## 六、批判性总结
+## 六、反例与边界案例
+
+### 6.1 反例：gRPC错误码的语义陷阱
+
+```text
+gRPC状态码 vs HTTP状态码:
+  gRPC: NOT_FOUND (5) — 资源不存在
+  HTTP: 404 — 路径不存在
+
+陷阱:
+  当API Gateway将gRPC映射为HTTP时:
+    gRPC NOT_FOUND → HTTP 404
+    gRPC UNAVAILABLE (14) → HTTP 503
+    gRPC DEADLINE_EXCEEDED (4) → HTTP 504?
+
+问题: HTTP客户端收到404时，无法区分:
+       (a) 路径拼写错误 (应修正请求)
+       (b) 资源确实不存在 (正常业务逻辑)
+       (c) gRPC服务未注册 (基础设施问题)
+
+形式化: 设HTTP状态码空间为S_http = {200, 404, 500, ...}。
+        gRPC状态码空间为S_grpc = {0, 1, 2, ..., 16}。
+        映射函数 f: S_grpc → S_http 是满射但非单射。
+        ∴ 信息丢失: |S_grpc| = 17 > |S_http| 的有效语义分区。
+
+最佳实践:
+  - 在HTTP响应体中嵌入原始gRPC状态码和消息
+  - 使用 gRPC-Web 专用代理 (Envoy) 保留完整状态
+```
+
+### 6.2 边界案例：gRPC流式调用的内存泄漏
+
+```text
+场景: Server Streaming RPC，服务端持续发送大量消息。
+
+客户端代码 (Go):
+  stream, _ := client.ListOrders(ctx, req)
+  for {
+      order, err := stream.Recv()
+      if err == io.EOF { break }
+      // 处理order...
+      // 忘记检查ctx.Done()
+  }
+
+问题:
+  - 若服务端无限流 (如日志订阅)，客户端缓冲区持续增长
+  - HTTP/2流控窗口被填满，但客户端未消费
+  - 最终OOM或被流控阻塞
+
+形式化: 设客户端接收缓冲区大小为B，消息到达速率为λ_in，
+        客户端处理速率为λ_out。
+        稳定条件: λ_out ≥ λ_in
+        若 λ_out < λ_in，则缓冲区占用率 B(t) = B₀ + (λ_in - λ_out)·t
+        当 B(t) > B_max 时，流控阻塞或OOM。
+
+防御:
+  - 设置合理的Deadline/Timeout
+  - 客户端主动取消 (ctx.Cancel) 当处理速度跟不上
+  - 服务端实施背压感知的发送速率限制
+```
+
+### 6.3 边界案例：gRPC负载均衡的幂等性假设
+
+```text
+gRPC客户端负载均衡:
+  - 解析服务名 → 获取后端地址列表
+  - 按策略 (round_robin/pick_first) 选择连接
+
+问题 (长连接 + 有状态服务):
+  设后端为缓存服务，每个节点持有不同数据分片。
+  gRPC客户端LB将请求均匀分发到所有节点。
+  若请求key不在目标节点的分片内 → 缓存未命中。
+
+形式化: 设后端集合 B = {b₁, b₂, ..., bₙ}，每个bᵢ负责分片Sᵢ。
+        请求req(key)应路由到 bⱼ 使得 key ∈ Sⱼ。
+        轮询LB: route(req) = b_{(i mod n)}，与key无关。
+        ∴ 命中概率 = 1/n (而非1)。
+
+解决方案:
+  - 使用一致性哈希负载均衡 (consistent hashing)
+  - 或让服务端返回 "key不在本节点" 重定向到正确节点
+  - gRPC自定义NameResolver + LB策略实现
+```
+
+### 6.4 反例：Protobuf默认值导致的静默数据丢失
+
+```text
+proto3默认值规则:
+  bool: false
+  int32: 0
+  string: ""
+  enum: 第一个值 (通常为0)
+
+场景:
+  message Config {
+      int32 retry_count = 1;  // 默认0
+      bool enabled = 2;       // 默认false
+  }
+
+问题:
+  旧客户端发送 {} (未设置retry_count和enabled)
+  新服务端解析: retry_count=0, enabled=false
+  服务端无法区分:
+    (a) 客户端显式设置为0/false
+    (b) 客户端未设置 (使用默认值)
+
+形式化: 设消息空间为M，传输编码为E: M → Bytes。
+        proto3中，默认值字段被省略 (wire size = 0)。
+        ∴ E(m₁) = E(m₂) 当 m₁和m₂仅在默认值字段不同。
+        解码时丢失 "是否显式设置" 的信息。
+
+缓解:
+  - 使用 proto3_optional (生成has_field()方法)
+  - 或使用Wrapper类型 (google.protobuf.Int32Value)
+  - 或避免0/false作为业务语义值
+```
+
+### 6.5 2025-2026动态：gRPC生态演进
+
+```text
+gRPC over HTTP/3 (实验性):
+  - 核心库支持QUIC传输 (C++/Java/Go)
+  - 优势: 0-RTT连接建立、连接迁移、无TCP HoL
+  - 挑战: HTTP/3的流控语义与HTTP/2不同
+  - 2025年状态: 实验性，生产环境不建议
+
+gRPC-Gateway v2:
+  - 自动生成RESTful JSON API (从.proto)
+  - 支持OpenAPI v3生成
+  - 减少gRPC-Web代理层的运维负担
+
+Protobuf Editions (2023-2025):
+  - 取代proto2/proto3二分法
+  - 更细粒度的语法控制 (字段存在性、默认值行为)
+  - 2025年: Edition 2023成为新项目的推荐选择
+
+服务网格集成:
+  - Istio对gRPC的Envoy原生过滤支持
+  - gRPC Metadata自动映射为Istio属性
+  - 细粒度的gRPC方法级授权策略
+```
+
+---
+
+## 七、批判性总结
 
 gRPC 的核心设计决策是将 HTTP/2 的流语义暴露为编程语言的**方法调用抽象**，这带来了极大的开发效率提升，但也隐藏了分布式系统的根本复杂性：**远程调用不是本地调用**。网络分区、超时、重试、幂等性——这些问题在 gRPC 的存根层被封装得过于干净，导致开发者容易编写出假设网络可靠的代码。
 

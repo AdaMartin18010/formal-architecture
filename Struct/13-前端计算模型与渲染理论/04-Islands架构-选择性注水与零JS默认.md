@@ -308,3 +308,51 @@ Islands 架构是前端渲染理论中「渐进增强」哲学的当代极致表
 其次是**状态共享的边界困境**：Islands 之间的通信被设计为松耦合（事件总线或 Nano Stores），但在实际工程中，「购物车状态跨越三个 Island」的场景要求开发者手动管理跨边界状态同步，这在某种程度上复刻了微前端的状态碎片化难题。从范畴论语义审视，Islands 的静态 HTML 与动态 Island 之间缺乏自然的态射定义——StaticHTML 无法直接「提升」为 Island 的输入，而 Island 的输出也无法「沉降」为静态内容，这种范畴间断裂迫使开发者依赖外部通信机制来弥补。
 
 更深层的理论批判指向 Islands 的**适用域边界**。该架构对「内容驱动」站点（博客、文档、营销页）是近乎完美的匹配，但对于「应用驱动」场景（SaaS 后台、实时协作工具、数据可视化仪表盘），交互密度之高使得几乎所有组件都成为 Island，此时 Islands 退化为「带有复杂构建步骤的 SPA」。Ryan Dahl (Deno / Fresh) 承认 Fresh 的「无构建步骤」设计在应用级场景中仍需权衡。2026 年的技术共识是：Islands 不是 SPA 的替代者，而是前端架构光谱上的一个重要节点——它与 SSR、RSC、SPA 共同构成了「按交互密度选择渲染策略」的连续体，而非非此即彼的排他选项。未来研究应聚焦于：Islands 间框架运行时的形式化共享协议、跨 Island 状态同步的一致性模型，以及 Islands 与 RSC 的融合架构（如 Server Islands）。
+
+
+---
+
+## 十二、核心概念完整六要素详析
+
+### 12.1 Islands 页面模型
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | P = StaticHTML ∪ Hydrate(Islands), ¬interactive(c) ⟹ JS(c) = ∅ |
+| **属性 (Properties)** | 零 JS 默认、组件级 hydration、策略偏序 urgency |
+| **关系 (Relations)** | 与 SSR 整页注水对立；与 SPA 全量 JS 对立；映射到 DDD bounded context |
+| **示例 (Examples)** | `<Counter client:load initial={0} />` 仅该组件注水 |
+| **反例 (Counter-examples)** | ❌ 页面几乎所有组件均为 Island → 退化为复杂构建的 SPA；❌ 异构框架 Island 导致多份运行时重复加载 |
+| **实例 (Instances)** | Astro Islands、Deno Fresh、Marko 组件级 hydration |
+
+### 12.2 Hydration 策略
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | strategy ∈ {load, visible, idle, media, client:only}, urgency: Strategy → ℕ |
+| **属性 (Properties)** | load(0) 最高优先级、idle 后台执行、visible 视口触发 |
+| **关系 (Relations)** | 依赖 IntersectionObserver / requestIdleCallback / matchMedia |
+| **示例 (Examples)** | `<CommentSection client:idle />` 浏览器空闲时注水 |
+| **反例 (Counter-examples)** | ❌ client:visible 在快速滚动场景下连续触发多个 Island 注水导致主线程阻塞；❌ client:idle 在低端设备上永不触发（无空闲时间） |
+| **实例 (Instances)** | Astro `client:*` 指令集、Fresh 自动 Island 识别、Next.js 部分 hydration 实验 |
+
+### 12.3 零 JS 默认公理
+
+| 维度 | 内容 |
+|------|------|
+| **定义 (Definition)** | 默认条件: ¬interactive(c) ⟹ JS(c) = ∅ |
+| **属性 (Properties)** | 理论最小 JS 传输量、内容-行为正交分离 |
+| **关系 (Relations)** | 与渐进增强哲学一致；与 SPA 范式冲突 |
+| **示例 (Examples)** | 纯静态博客文章页 JS 体积趋近 0 |
+| **反例 (Counter-examples)** | ❌ 全局分析脚本 (Google Analytics) 破坏零 JS；❌ CSS-in-JS 运行时注入使静态页携带 JS |
+| **实例 (Instances)** | Astro 文档站点、Fresh 官网、静态营销着陆页 |
+
+---
+
+## 十三、待完善内容
+
+- [ ] Islands 与 RSC 的融合架构形式化模型（Server Islands 提案）
+- [ ] 多框架运行时共享的精确版本协商算法
+- [ ] 跨 Island 状态同步的一致性协议（类似 CRDT 的有界收敛）
+- [ ] Islands 架构在交互密度 ρ ∈ [0,1] 连续谱上的最优策略函数
+- [ ] 零 JS 页面对 Web Core Vitals 的量化影响大规模实测
