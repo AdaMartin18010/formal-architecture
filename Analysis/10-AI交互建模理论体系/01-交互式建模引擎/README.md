@@ -129,9 +129,9 @@ graph TD
 
 ## 相关资源
 
-- [形式化架构理论统一计划](../形式化架构理论统一计划-v69.md)
-- [FormalUnified统一知识体系](../FormalUnified/README.md)
-- [Analysis分析文档](../Analysis/README.md)
+- 形式化架构理论统一计划（见 Analysis/00-形式化架构理论统一计划.md）
+- FormalUnified统一知识体系（见 FormalUnified 目录）
+- Analysis分析文档（见 Analysis 目录）
 
 ---
 

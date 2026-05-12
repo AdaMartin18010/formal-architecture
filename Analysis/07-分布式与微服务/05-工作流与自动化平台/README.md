@@ -37,11 +37,11 @@
 
 | 文档 | 内容 |
 |---|---|
-| [工作流理论基础](./01-工作流理论基础.md) | WfMC 参考模型、工作流模式 |
-| [BPMN 与建模语言](./02-BPMN与建模语言.md) | BPMN 2.0 符号、BPEL 规范 |
-| [Saga 与长事务模式](./03-Saga与长事务模式.md) | 编排式/协调式 Saga、补偿事务 |
-| [主流平台对比](./04-主流平台对比.md) | Airflow、Temporal、Camunda、Conductor |
-| [微服务集成实践](./05-微服务集成实践.md) | 与 gRPC/Kafka/事件总线的集成模式 |
+| 工作流理论基础 | WfMC 参考模型、工作流模式 |
+| BPMN 与建模语言 | BPMN 2.0 符号、BPEL 规范 |
+| Saga 与长事务模式 | 编排式/协调式 Saga、补偿事务 |
+| 主流平台对比 | Airflow、Temporal、Camunda、Conductor |
+| 微服务集成实践 | 与 gRPC/Kafka/事件总线的集成模式 |
 
 ## 与相关理论体系的关系
 
