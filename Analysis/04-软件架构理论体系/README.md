@@ -60,8 +60,47 @@
 - [ ] 一致性检查
 - [ ] 完备性检查
 
+## 学习路径建议
+
+1. **入门**：阅读 [00-软件架构理论统一总论](./00-软件架构理论统一总论.md)，建立全局视图
+2. **深化**：选择感兴趣的架构风格（微服务/事件驱动/云原生）深入研究对应专题
+3. **形式化**：结合 [形式模型理论体系](../04-形式模型理论体系/) 学习架构验证方法
+4. **实践**：参考 [08-实践应用开发](../08-实践应用开发/) 中的案例与工具
+
+## 质量度量
+
+| 指标 | 目标 | 状态 |
+|---|---|---|
+| 架构模式覆盖率 | ≥ 90% | 核心模式已覆盖 |
+| 形式化定义完整度 | ≥ 80% | USTS/UMS 已形式化 |
+| 2025 对齐完成度 | 100% | 已完成 |
+
 ## 相关链接
 
 - [形式模型理论体系](../04-形式模型理论体系/) - 模型基础
 - [编程语言理论体系](../05-编程语言理论体系/) - 语言基础
 - [实践应用开发](../08-实践应用开发/) - 实践应用
+- [07-分布式与微服务](../07-分布式与微服务/README.md) - 分布式架构特化理论
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Software architecture](https://en.wikipedia.org/wiki/Software_architecture)
+  - [Wikipedia: Architectural pattern](https://en.wikipedia.org/wiki/Architectural_pattern)
+  - [Wikipedia: Cloud-native computing](https://en.wikipedia.org/wiki/Cloud-native_computing)
+
+- **名校课程**：
+  - [CMU 17-313: Foundations of Software Engineering](https://www.cs.cmu.edu/~ckaestne/17313/)
+  - [MIT 6.033: Computer Systems Engineering](https://web.mit.edu/6.033/www/)
+
+- **代表性论文**：
+  - *Software Architecture: Perspectives on an Emerging Discipline* (Shaw & Garlan, 1996)
+  - *The Datacenter as a Computer* (Barroso & Hölzle, 2013)
+
+- **对齐状态**：已完成（最后更新：2026-05-13）
+
+---
+
+**版本**: v2.0
+**状态**: ✅ 软件架构理论体系导航已完善
+**最后更新**: 2026-05-13

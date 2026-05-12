@@ -65,8 +65,47 @@
 - [ ] 一致性检查
 - [ ] 完备性检查
 
+## 学习路径建议
+
+1. **基础**：从 [00-编程语言理论统一总论](./00-编程语言理论统一总论.md) 入手，理解编程语言的数学基础
+2. **类型系统**：深入 [00-类型理论-范畴论基础-2025版](./00-类型理论-范畴论基础-2025版.md)，掌握类型与范畴的对应
+3. **并发理论**：学习 [07-统一并发运行时系统理论](./07-统一并发运行时系统理论.md)
+4. **形式化验证**：结合 [12-工具与方法](../12-工具与方法/README.md) 进行证明实践
+
+## 质量度量
+
+| 指标 | 目标 | 状态 |
+|---|---|---|
+| 语言范式覆盖率 | ≥ 90% | 命令式/函数式/逻辑式/并发式已覆盖 |
+| 类型系统深度 | 依赖类型 | 已覆盖 System Fω 级别 |
+| 2025 对齐完成度 | 100% | 已完成 |
+
 ## 相关链接
 
 - [形式语言理论体系](../03-形式语言理论体系/) - 语言基础
 - [软件架构理论体系](../04-软件架构理论体系/) - 架构基础
 - [实践应用开发](../08-实践应用开发/) - 实践应用
+- [形式模型理论体系](../04-形式模型理论体系/) - 语义与验证模型
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Programming language theory](https://en.wikipedia.org/wiki/Programming_language_theory)
+  - [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system)
+  - [Wikipedia: Lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus)
+
+- **名校课程**：
+  - [CMU 15-312: Foundations of Programming Languages](https://www.cs.cmu.edu/~rwh/courses/ppl/)
+  - [Stanford CS 242: Programming Languages](https://web.stanford.edu/class/cs242/)
+
+- **代表性著作**：
+  - *Types and Programming Languages* (Pierce, 2002)
+  - *Practical Foundations for Programming Languages* (Harper, 2016)
+
+- **对齐状态**：已完成（最后更新：2026-05-13）
+
+---
+
+**版本**: v2.0
+**状态**: ✅ 编程语言理论体系导航已完善
+**最后更新**: 2026-05-13

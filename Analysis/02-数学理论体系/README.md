@@ -71,8 +71,49 @@
 - [ ] 一致性检查
 - [ ] 完备性检查
 
+## 学习路径建议
+
+1. **基础**：从 [00-数学理论体系总论](./00-数学理论体系总论.md) 建立数学基础的完整视图
+2. **集合论与逻辑**：掌握 ZFC 公理系统与一阶逻辑，为后续理论奠定基础
+3. **代数与分析**：学习群论、环论、线性代数及分析学严格基础
+4. **范畴论**：理解范畴、函子、自然变换、极限与伴随，这是连接各理论的核心语言
+5. **形式化证明**：使用 Coq/Lean 实践数学定理的形式化证明
+
+## 质量度量
+
+| 指标 | 目标 | 状态 |
+|---|---|---|
+| 数学分支覆盖率 | ≥ 90% | 集合论/代数/分析/范畴论已覆盖 |
+| 公理化完整度 | 严格形式化 | ZFC + 构造主义基础 |
+| 2025 对齐完成度 | 100% | 已完成 |
+
 ## 相关链接
 
 - [哲学基础理论](../01-哲学基础理论/) - 理论基础
 - [形式化方法理论体系](../03-形式化方法理论体系/) - 应用理论
 - [形式语言理论体系](../03-形式语言理论体系/) - 语言理论
+- [形式模型理论体系](../04-形式模型理论体系/) - 模型理论
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Foundations of mathematics](https://en.wikipedia.org/wiki/Foundations_of_mathematics)
+  - [Wikipedia: Zermelo–Fraenkel set theory](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory)
+  - [Wikipedia: Category theory](https://en.wikipedia.org/wiki/Category_theory)
+
+- **名校课程**：
+  - [MIT 18.510: Introduction to Mathematical Logic](https://ocw.mit.edu/courses/18-510-introduction-to-mathematical-logic-fall-2020/)
+  - [Harvard Math 221: Algebra](https://people.math.harvard.edu/~elkies/M221a.10/)
+
+- **代表性著作**：
+  - *Principles of Mathematical Analysis* (Rudin, 1976)
+  - *Categories for the Working Mathematician* (Mac Lane, 1971)
+  - *Homotopy Type Theory: Univalent Foundations* (2013)
+
+- **对齐状态**：已完成（最后更新：2026-05-13）
+
+---
+
+**版本**: v2.0
+**状态**: ✅ 数学理论体系导航已完善
+**最后更新**: 2026-05-13

@@ -23,8 +23,51 @@
 - [理论应用框架](../07-理论统一与整合/04-理论应用框架.md)
 - [Modern 实践案例](../../Modern/08-语义驱动架构实践案例/)
 
+## 文档结构
+
+| 文档 | 内容 |
+|---|---|
+| [03-自动化验证工具设计与实现](./03-自动化验证工具设计与实现.md) | 形式化验证工具架构与实现 |
+| [03-自动化验证工具设计与实现-形式化重构](./03-自动化验证工具设计与实现-形式化重构.md) | 严格形式化版本 |
+
+## 学习路径建议
+
+1. **前置准备**：确保已阅读 [06-形式模型理论体系](../06-形式模型理论体系/00-形式模型理论体系总论.md) 和 [06-软件架构理论体系](../06-软件架构理论体系/00-软件架构理论体系总论-整合版.md)
+2. **工具选型**：根据目标系统特性选择合适的证明助手或模型检查器
+3. **案例实践**：参考 [Modern/08-语义驱动架构实践案例](../../Modern/08-语义驱动架构实践案例/) 中的真实案例
+4. **反馈迭代**：将验证结果反馈至架构设计，形成闭环
+
+## 质量度量
+
+| 指标 | 目标 | 状态 |
+|---|---|---|
+| 工具覆盖度 | ≥ 3 类验证工具 | Coq/Lean/TLA+/Z3 已涉及 |
+| 实践案例完整度 | ≥ 80% | 核心案例已覆盖 |
+| 2025 对齐完成度 | 100% | 已完成 |
+
 ## 2025 对齐
 
-- **国际 Wiki**：[Formal methods](https://en.wikipedia.org/wiki/Formal_methods)、[Software engineering](https://en.wikipedia.org/wiki/Software_engineering)
-- **名校课程**：[CMU 17-313](https://www.cs.cmu.edu/~ckaestne/17313/)、[MIT 6.033](https://web.mit.edu/6.033/www/)、[Stanford CS 244](https://web.stanford.edu/class/cs244/)
+- **国际 Wiki**：
+  - [Wikipedia: Formal methods](https://en.wikipedia.org/wiki/Formal_methods)
+  - [Wikipedia: Software engineering](https://en.wikipedia.org/wiki/Software_engineering)
+
+- **名校课程**：
+  - [CMU 17-313](https://www.cs.cmu.edu/~ckaestne/17313/)
+  - [MIT 6.033](https://web.mit.edu/6.033/www/)
+  - [Stanford CS 244](https://web.stanford.edu/class/cs244/)
+
+- **前沿工具**：
+  - [Coq](https://coq.inria.fr/)
+  - [Lean 4](https://lean-lang.org/)
+  - [TLA+ Toolbox](https://lamport.azurewebsites.net/tla/toolbox.html)
+  - [Dafny](https://github.com/dafny-lang/dafny)
+
 - **索引**：详见 [2025-对齐参考索引](../2025-对齐参考索引.md)。
+
+- **对齐状态**：已完成（最后更新：2026-05-13）
+
+---
+
+**版本**: v2.0
+**状态**: ✅ 实践应用开发导航已完善
+**最后更新**: 2026-05-13

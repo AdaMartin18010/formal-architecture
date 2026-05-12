@@ -1,3 +1,8 @@
+> **⚠️ 去重标记**: 本文件内容已合并至 `Analysis/`。请以主目录文件为准。本文件保留仅作历史参考。
+>
+> 迁移验证报告: [FormalUnified到Analysis内容迁移完整性验证报告](../00-总览与导航/FormalUnified到Analysis内容迁移完整性验证报告.md)
+
+---
 # FormalUnified
 
 FormalUnified 是"形式化架构理论统一项目"的知识梳理与形式论证平台，专注于**形式论证和证明的知识梳理**，而非编程实现。

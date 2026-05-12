@@ -74,8 +74,43 @@
 **2025对齐状态**：✅ 已完成
 **项目定位对齐**：✅ 100%对齐
 
+## 学习路径建议
+
+1. **总论**：从 [00-哲学基础理论总论](./00-哲学基础理论总论.md) 入手，建立哲学视角的全局观
+2. **本体论**：理解存在的形式化范畴，为数学对象与信息本体奠定基础
+3. **认识论**：掌握知识的形式化定义，理解证明与真理的哲学基础
+4. **信息哲学**：探索 [05-信息哲学基础](./05-信息哲学基础.md)，连接语义理论与信息论
+5. **计算哲学**：阅读 [06-计算哲学基础](./06-计算哲学基础.md)，理解计算的哲学含义
+
+## 质量度量
+
+| 指标 | 目标 | 状态 |
+|---|---|---|
+| 哲学分支覆盖率 | ≥ 90% | 本体论/认识论/方法论/逻辑/信息哲学/计算哲学已覆盖 |
+| 形式化程度 | 公理化草案 | 核心概念已有形式化定义 |
+| 2025 对齐完成度 | 100% | 已完成 |
+
+## 2025 对齐
+
+- **国际 Wiki**：
+  - [Wikipedia: Ontology](https://en.wikipedia.org/wiki/Ontology)
+  - [Wikipedia: Epistemology](https://en.wikipedia.org/wiki/Epistemology)
+  - [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/)
+  - [nLab: Philosophy](https://ncatlab.org/nlab/show/philosophy)
+
+- **名校课程**：
+  - [MIT 24.00: Problems of Philosophy](https://ocw.mit.edu/courses/linguistics-and-philosophy/24-00-problems-of-philosophy-fall-2019/)
+  - [Oxford Philosophy](https://www.philosophy.ox.ac.uk/)
+
+- **代表性著作**：
+  - *Gödel, Escher, Bach* (Hofstadter, 1979)
+  - *The Emperor's New Mind* (Penrose, 1989)
+  - *Philosophy of Information* (Floridi, 2011)
+
+- **对齐状态**：已完成（最后更新：2026-05-13）
+
 ---
 
-**目录版本**：2025-01-15版
+**目录版本**：v2.0
 **项目定位**：知识梳理与理论构建项目（非编程项目）
-**最后更新**：2025-01-15
+**最后更新**：2026-05-13

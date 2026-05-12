@@ -1,3 +1,8 @@
+> **⚠️ 去重标记**: 本文件内容已合并至 `Analysis/`。请以主目录文件为准。本文件保留仅作历史参考。
+>
+> 迁移验证报告: [FormalUnified到Analysis内容迁移完整性验证报告](../00-总览与导航/FormalUnified到Analysis内容迁移完整性验证报告.md)
+
+---
 ﻿# README
 
 该文件为自动生成的占位 README，用于修复目录链接。
