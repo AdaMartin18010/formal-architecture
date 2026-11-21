@@ -103,7 +103,7 @@ UPPAAL验证查询：
       = "若请求，则最终会有响应"
 
   带时间约束：
-    A[] (Request --> Response within 10)
+    A[] (Request --> Response within 10)  # ⚠️T1.2-F(2026-11-21): 与 ASW 370-02 逐字家族拷贝; `within` 杜撰 本行不可运行
       = "所有请求的响应时间 ≤ 10个时间单位"
 ```
 
@@ -400,3 +400,10 @@ UPPAAL多维关联树
 
 *文件创建日期：2026-04-23*
 *状态：已完成*
+
+
+---
+
+## 勘误（T1.2-F 家族轮 · 2026-11-21 主会话注入 · 源卡 C16-BMC与实时模型检测跨库剖面）
+
+`A[] (Request --> Response within 10)  # ⚠️T1.2-F(2026-11-21): 与 ASW 370-02 逐字家族拷贝; `within` 杜撰 本行不可运行` 及 `... within 5min/10min` 系**捏造语法**（本文件与 ASW 370-02 / formal-architecture 02-UPPAAL 逐字家族拷贝，机械 auto-merge 盲区）：`-->` 是 UPPAAL 官方有界响应缩写✓，但 `within` 关键字在官方语法面（查询/声明/模板）**零命中**——本节查询示例不可运行，禁作语法范例引用。权威表达：时钟声明+guard/invariant（如 `x <= 10`）配合 `A[] (Request imply Response)` 系查询约束表达有界性（UPPAAL 官方 Getting Started / 语法文档口径）。
